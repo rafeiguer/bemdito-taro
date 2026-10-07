@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bem Dito Tarot — Tarô e oráculos com Tryv Tuath</title>
+<meta name="description" content="Leituras de tarô e oráculos, mentoria, rituais, Reiki e regressão com Tryv Tuath. Atendimento remoto ou presencial.">
+<meta name="theme-color" content="#120e2e">
+<!-- Prévia ao compartilhar no WhatsApp/redes: quando o site tiver endereço, troque por URL absoluta -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bem Dito Tarot">
+<meta property="og:description" content="Toda pergunta merece ser bem dita. Tarô e oráculos com Tryv Tuath.">
+<meta property="og:image" content="assets/og.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   TOKENS
+   Cinzel: capitulares romanas, para títulos (o "requinte" de conto de fadas).
+   Cormorant Garamond: itálico de livro antigo, para frases e citações.
+   Jost: texto e interface; limpa e legível no celular.
+   Ouro e magenta saem do logo; o resto é céu de noite encantada.
+   ========================================================================= */
+:root {
+  --noite: #120e2e;
+  --noite-2: #1b1546;
+  --veludo: #2b1a5e;
+  --ouro: #f2c14e;
+  --ouro-escuro: #b27a1e;
+  --ouro-claro: #ffe6a3;
+  --rosa: #ff2d87;
+  --rosa-claro: #ff8cc0;
+  --lilas: #b9a3ff;
+  --texto: #f6f0ff;
+  --texto-2: #c9bfe6;
+  --linha: rgba(242, 193, 78, .28);
+  --vidro: rgba(255, 255, 255, .045);
+  --raio: 20px;
+  --titulo: "Cinzel", "Trajan Pro", Georgia, serif;
+  --livro: "Cormorant Garamond", Garamond, Georgia, serif;
+  --corpo: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --simbolo: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols", "Noto Sans Symbols 2", serif;
+  --largura: 1180px;
+  --dourado: linear-gradient(180deg, #fff6d2 0%, #f6cd62 42%, #d39a2c 70%, #fbe39a 100%);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  scroll-behavior: smooth; -webkit-text-size-adjust: 100%;
+  background: var(--noite);
+}
+body {
+  margin: 0; color: var(--texto); background: transparent;
+  font: 400 1.0625rem/1.65 var(--corpo);
+  overflow-x: hidden;
+}
+body.travado { overflow: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--ouro-claro); outline-offset: 4px; border-radius: 8px; }
+.envelope { width: min(100% - 2.5rem, var(--largura)); margin-inline: auto; }
+.so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+h1, h2, h3 { margin: 0; font-weight: 600; }
+
+/* Céu de fundo: gradiente fixo + canvas de estrelas por cima dele */
+.fundo-ceu {
+  position: fixed; inset: 0; z-index: -2;
+  background:
+    radial-gradient(120% 70% at 80% 0%, rgba(255, 45, 135, .14), transparent 60%),
+    radial-gradient(90% 60% at 10% 30%, rgba(120, 90, 255, .16), transparent 65%),
+    linear-gradient(180deg, #0b0822 0%, #151040 45%, #23104c 80%, #140b30 100%);
+}
+#ceu { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+#magia { position: fixed; inset: 0; z-index: 90; width: 100%; height: 100%; pointer-events: none; }
+
+/* ---------- Títulos de seção ---------- */
+.chamada {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font: 500 .8rem/1 var(--corpo); letter-spacing: .32em; text-transform: uppercase; color: var(--ouro);
+}
+.chamada::before, .chamada::after { content: "✦"; font-size: .7rem; color: var(--rosa-claro); letter-spacing: 0; }
+.titulo {
+  font-family: var(--titulo); font-weight: 600; line-height: 1.08;
+  font-size: clamp(2rem, 5.4vw, 3.4rem); margin-top: .7rem;
+  background: var(--dourado); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(242, 193, 78, .25));
+}
+.intro { font: italic 500 clamp(1.2rem, 2.4vw, 1.45rem)/1.45 var(--livro); color: var(--texto-2); max-width: 46ch; margin: 1rem auto 0; }
+.cabeca { text-align: center; margin-bottom: clamp(2rem, 5vw, 3.2rem); }
+.secao { position: relative; padding: clamp(4.5rem, 10vw, 7.5rem) 0; }
+
+/* ---------- Botões ---------- */
+.botao {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+  padding: .95rem 1.6rem; border-radius: 999px; border: 0; text-decoration: none;
+  font: 600 1rem/1 var(--corpo); letter-spacing: .02em; isolation: isolate; overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+}
+.botao--ouro {
+  color: #2a1606; background: var(--dourado);
+  box-shadow: 0 0 0 1px rgba(255, 240, 200, .6) inset, 0 8px 28px rgba(242, 193, 78, .35);
+}
+.botao--rosa { color: #fff; background: linear-gradient(180deg, #ff5aa5, #e0136d); box-shadow: 0 8px 28px rgba(255, 45, 135, .4); }
+.botao--vidro { color: var(--texto); background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; backdrop-filter: blur(6px); }
+.botao:hover { transform: translateY(-2px); }
+.botao--ouro:hover { box-shadow: 0 0 0 1px rgba(255, 240, 200, .8) inset, 0 10px 40px rgba(242, 193, 78, .6); }
+/* Reflexo que atravessa o botão, como luz batendo em ouro */
+.botao::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .55) 48%, transparent 66%);
+  transform: translateX(-120%); transition: transform .7s;
+}
+.botao--vidro::after { background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .14) 48%, transparent 66%); }
+.botao:hover::after { transform: translateX(120%); }
+.botao svg { width: 1.15em; height: 1.15em; flex: none; }
+
+/* ---------- Abertura "Era uma vez" ---------- */
+.abertura {
+  position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; cursor: pointer;
+  background: radial-gradient(80% 60% at 50% 45%, #241a5c 0%, #0c0824 70%, #05030f 100%);
+  transition: opacity .9s ease, visibility .9s;
+}
+.abertura.saindo { opacity: 0; visibility: hidden; }
+.abertura__palco { position: relative; width: min(92vw, 640px); text-align: center; }
+.abertura__arco { position: absolute; left: 0; top: -6%; width: 100%; overflow: visible; }
+.abertura__arco path { fill: none; stroke: url(#arco-ouro); stroke-width: 2.4; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(255, 220, 140, .9)); }
+.abertura__logo { width: min(64vw, 340px); margin: 14% auto 0; opacity: 0; transform: scale(.92); animation: surgir 1.6s 1.5s cubic-bezier(.2, .7, .2, 1) forwards; filter: drop-shadow(0 0 30px rgba(255, 45, 135, .35)); }
+.abertura__era { font: italic 500 clamp(1.3rem, 4vw, 1.9rem)/1.3 var(--livro); color: var(--ouro-claro); margin: 1.2rem 0 0; opacity: 0; animation: surgir 1.2s .3s forwards; }
+.abertura__pular { margin-top: 1.4rem; opacity: 0; animation: surgir 1s 2.8s forwards; }
+@keyframes surgir { to { opacity: 1; transform: none; } }
+
+/* ---------- Cabeçalho ---------- */
+.topo {
+  position: fixed; inset: 0 0 auto; z-index: 30; padding-top: env(safe-area-inset-top, 0px);
+  transition: background .4s, box-shadow .4s, backdrop-filter .4s;
+}
+.topo--rolou { background: rgba(14, 10, 38, .72); backdrop-filter: blur(14px) saturate(1.3); box-shadow: 0 1px 0 var(--linha); }
+.topo__linha { display: flex; align-items: center; gap: 1rem; min-height: 72px; }
+.marca { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
+.marca img { width: 44px; height: auto; filter: drop-shadow(0 0 8px rgba(255, 45, 135, .4)); }
+.marca span { font: 600 1.1rem/1 var(--titulo); letter-spacing: .06em; background: var(--dourado); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.menu { margin-left: auto; display: flex; gap: .15rem; }
+.menu a {
+  position: relative; text-decoration: none; font-weight: 500; font-size: .95rem; letter-spacing: .04em;
+  padding: .5rem .85rem; border-radius: 999px; color: var(--texto-2); transition: color .25s;
+}
+.menu a::after {
+  content: "✦"; position: absolute; left: 50%; bottom: -.35rem; transform: translateX(-50%) scale(0);
+  font-size: .6rem; color: var(--ouro); transition: transform .3s;
+}
+.menu a:hover, .menu a[aria-current="true"] { color: var(--ouro-claro); }
+.menu a:hover::after, .menu a[aria-current="true"]::after { transform: translateX(-50%) scale(1); }
+.icone-botao {
+  display: grid; place-items: center; width: 42px; height: 42px; flex: none;
+  border-radius: 50%; border: 0; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; color: var(--ouro-claro);
+}
+.icone-botao svg { width: 20px; height: 20px; }
+.icone-botao[aria-pressed="true"] { background: rgba(242, 193, 78, .18); box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 16px rgba(242, 193, 78, .4); }
+.som__desligado { display: block; } .som__ligado { display: none; }
+.icone-botao[aria-pressed="true"] .som__desligado { display: none; }
+.icone-botao[aria-pressed="true"] .som__ligado { display: block; }
+.abre-menu { display: none; }
+@media (max-width: 860px) {
+  .abre-menu { display: grid; }
+  .menu {
+    position: fixed; inset: 0; z-index: -1; flex-direction: column; align-items: center; justify-content: center; gap: .6rem;
+    background: radial-gradient(90% 70% at 50% 40%, rgba(43, 26, 94, .97), rgba(10, 7, 28, .98));
+    opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s;
+  }
+  .menu.aberto { opacity: 1; visibility: visible; }
+  .menu a { font: 600 1.5rem/1.2 var(--titulo); color: var(--ouro-claro); padding: .6rem 1.2rem; }
+  .som { margin-left: auto; }
+}
+
+/* ---------- Abertura do site (herói) ---------- */
+.heroi {
+  position: relative; min-height: 100svh; display: grid; place-items: center; text-align: center;
+  padding: calc(84px + env(safe-area-inset-top, 0px)) 0 clamp(9rem, 22vh, 13rem); overflow: hidden;
+}
+.heroi__conteudo { position: relative; z-index: 2; }
+.heroi__lema { display: block; font: 500 .78rem/1.5 var(--corpo); letter-spacing: .3em; text-transform: uppercase; color: var(--texto-2); }
+.heroi__lema b { color: var(--ouro); font-weight: 600; }
+.heroi__logo-caixa { position: relative; width: min(78vw, 400px); margin: 1.2rem auto .6rem; }
+.heroi__logo-caixa::before {
+  content: ""; position: absolute; inset: 8% 6%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 45, 135, .38), rgba(242, 193, 78, .15) 55%, transparent 75%);
+  filter: blur(14px); animation: pulsar 5s ease-in-out infinite;
+}
+.heroi__logo { position: relative; width: 100%; height: auto; border: 0; padding: 0; background: none; animation: flutuar 7s ease-in-out infinite; }
+.heroi__logo img { width: 100%; filter: drop-shadow(0 12px 30px rgba(0, 0, 0, .45)); }
+@keyframes flutuar { 0%, 100% { transform: translateY(0) rotate(-.6deg); } 50% { transform: translateY(-12px) rotate(.6deg); } }
+@keyframes pulsar { 0%, 100% { opacity: .75; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.05); } }
+.heroi h1 {
+  font: italic 600 clamp(1.9rem, 5.6vw, 3.3rem)/1.1 var(--livro); color: var(--texto); letter-spacing: .005em;
+  text-shadow: 0 0 30px rgba(185, 163, 255, .35);
+}
+.heroi h1 em { font-style: italic; background: var(--dourado); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.heroi__texto { max-width: 40ch; margin: .9rem auto 0; color: var(--texto-2); font-size: 1.1rem; }
+.heroi__acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: 1.8rem; }
+.heroi__dica { margin: 1.6rem 0 0; font: italic 500 1.05rem/1.4 var(--livro); color: var(--lilas); opacity: .9; }
+.lua {
+  --l: clamp(54px, 9vw, 96px);
+  position: absolute; z-index: 1; top: calc(100px + 4vh); right: max(5vw, 1.5rem); width: var(--l); aspect-ratio: 1; border-radius: 50%;
+  box-shadow: calc(var(--l) * .2) calc(var(--l) * -.07) 0 0 #ffe9b0;
+  filter: drop-shadow(0 0 18px rgba(255, 230, 163, .55));
+  transform: rotate(-18deg);
+}
+.floresta { position: absolute; inset: auto 0 -1px; z-index: 1; width: 100%; height: clamp(150px, 26vh, 260px); pointer-events: none; }
+.janela { animation: luzinha 3.2s ease-in-out infinite; }
+@keyframes luzinha { 0%, 100% { opacity: 1; } 45% { opacity: .78; } 55% { opacity: .95; } }
+
+/* ---------- Revelar ao rolar ---------- */
+.js .surge { opacity: 0; transform: translateY(26px); filter: blur(6px); transition: opacity 1s, transform 1s cubic-bezier(.2, .7, .2, 1), filter 1s; }
+.js .surge.visivel { opacity: 1; transform: none; filter: none; }
+
+/* ---------- Cartas (o oráculo interativo) ---------- */
+.modos { display: inline-flex; padding: 5px; gap: 4px; border-radius: 999px; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; }
+.modos button { border: 0; background: none; padding: .6rem 1.15rem; border-radius: 999px; font-weight: 500; color: var(--texto-2); transition: background .3s, color .3s; }
+.modos button[aria-pressed="true"] { background: var(--dourado); color: #2a1606; }
+.mesa__instrucao { margin: 1.1rem 0 0; color: var(--texto-2); }
+.vagas { display: flex; justify-content: center; gap: clamp(.55rem, 3vw, 2rem); margin-top: 2.2rem; }
+.vaga { width: var(--vg, clamp(150px, 44vw, 210px)); text-align: center; }
+.mesa--tres .vaga { --vg: clamp(92px, 27vw, 180px); }
+.vaga__rotulo { margin: .7rem 0 0; font: 500 .78rem/1.3 var(--corpo); letter-spacing: .18em; text-transform: uppercase; color: var(--ouro); }
+
+.carta { position: relative; width: 100%; aspect-ratio: 5 / 8.4; perspective: 1100px; container-type: inline-size; }
+.carta::before { /* lugar vazio, esperando a carta */
+  content: "✦"; position: absolute; inset: 0; display: grid; place-items: center; border-radius: 6cqw;
+  border: 1.5px dashed rgba(242, 193, 78, .45); color: rgba(242, 193, 78, .5); font-size: 12cqw;
+  background: rgba(255, 255, 255, .02); transition: opacity .4s;
+}
+.carta[data-estado="vazia"] .carta__dentro { opacity: 0; }
+.carta:not([data-estado="vazia"])::before { opacity: 0; }
+.carta__dentro { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 1s cubic-bezier(.3, .7, .2, 1); }
+.carta[data-estado="virada"] .carta__dentro { transform: rotateY(180deg); }
+.carta__verso, .carta__frente { position: absolute; inset: 0; border-radius: 6cqw; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+.verso, .carta__verso {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 17%, rgba(242, 193, 78, .9) 17.5% 18.5%, transparent 19%),
+    repeating-conic-gradient(from 0deg at 50% 50%, rgba(242, 193, 78, .16) 0 4deg, transparent 4deg 15deg),
+    radial-gradient(120% 90% at 50% 50%, #5a1a6e 0%, #2b1259 55%, #160a35 100%);
+  box-shadow: inset 0 0 0 3px #160a35, inset 0 0 0 4.5px rgba(242, 193, 78, .85), inset 0 0 0 8px #160a35, inset 0 0 0 9px rgba(242, 193, 78, .45);
+}
+.verso::after, .carta__verso::after {
+  content: "♥\FE0E"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -54%);
+  font-family: var(--simbolo); color: var(--rosa); font-size: var(--coracao, 20cqw); text-shadow: 0 0 10px rgba(255, 45, 135, .8);
+}
+.carta__frente {
+  transform: rotateY(180deg); display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  padding: 9cqw 6cqw 8cqw; text-align: center;
+  background:
+    radial-gradient(70% 45% at 50% 46%, rgba(255, 220, 140, .3), transparent 70%),
+    linear-gradient(180deg, #1d1650 0%, #2b1a5e 55%, #3b1458 100%);
+  box-shadow: inset 0 0 0 3px #120e2e, inset 0 0 0 4.5px var(--ouro), inset 0 0 0 9px #120e2e, inset 0 0 0 10px rgba(242, 193, 78, .5);
+}
+.carta__num { font: 600 9cqw/1 var(--titulo); color: var(--ouro-claro); letter-spacing: .08em; }
+.carta__glifo {
+  display: grid; place-items: center; width: 52cqw; aspect-ratio: 1; border-radius: 50%;
+  font: 30cqw/1 var(--simbolo); color: var(--ouro-claro);
+  background: radial-gradient(circle, rgba(255, 230, 163, .2), transparent 70%);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .6), 0 0 0 5cqw rgba(242, 193, 78, .06), 0 0 30px rgba(255, 220, 140, .35);
+  text-shadow: 0 0 14px rgba(255, 220, 140, .9);
+}
+.carta__nome { font: 600 8.6cqw/1.15 var(--titulo); color: var(--texto); letter-spacing: .03em; }
+
+#cartas { overflow-x: clip; }
+.leque { position: relative; margin: 2.6rem auto 0; max-width: 960px; height: 240px; }
+.leque__carta {
+  position: absolute; left: 50%; bottom: var(--base, 0px); width: var(--lw); height: var(--lh); margin-left: calc(var(--lw) / -2);
+  padding: 0; border: 0; border-radius: 9px; container-type: inline-size; --coracao: 26cqw;
+  transform-origin: 50% var(--pivo); transform: rotate(var(--a));
+  transition: transform .45s cubic-bezier(.2, .7, .2, 1), filter .3s, opacity .3s;
+  transition-delay: calc(var(--i) * 16ms);
+}
+.leque__carta:hover, .leque__carta:focus-visible { transform: rotate(var(--a)) translateY(-24px); filter: drop-shadow(0 0 14px rgba(242, 193, 78, .8)); transition-delay: 0s; z-index: 2; }
+.leque.junto .leque__carta { transform: rotate(0deg); }
+.leque__carta.usada { opacity: 0; pointer-events: none; transition-delay: 0s; }
+.leque.fechado .leque__carta { pointer-events: none; filter: saturate(.6) brightness(.7); }
+.voo { position: fixed; z-index: 70; pointer-events: none; border-radius: 9px; container-type: inline-size; --coracao: 22cqw; }
+
+.leitura {
+  margin: 2.6rem auto 0; max-width: 760px; padding: clamp(1.4rem, 4vw, 2.2rem); border-radius: var(--raio);
+  background: linear-gradient(180deg, rgba(43, 26, 94, .55), rgba(18, 14, 46, .55)); box-shadow: 0 0 0 1px var(--linha) inset, 0 20px 60px rgba(0, 0, 0, .35);
+  backdrop-filter: blur(8px);
+}
+.leitura[hidden] { display: none; }
+.leitura__item + .leitura__item { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid rgba(242, 193, 78, .15); }
+.leitura__pos { font: 500 .75rem/1 var(--corpo); letter-spacing: .2em; text-transform: uppercase; color: var(--rosa-claro); }
+.leitura__nome { margin: .35rem 0 0; font: 600 1.35rem/1.2 var(--titulo); color: var(--ouro-claro); }
+.leitura__msg { margin: .35rem 0 0; font: italic 500 1.3rem/1.45 var(--livro); color: var(--texto); }
+.leitura__acoes { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+.aviso { margin: 1.2rem 0 0; font-size: .88rem; color: var(--texto-2); opacity: .85; }
+
+/* ---------- Consultas ---------- */
+.grade-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.3rem; perspective: 1200px; }
+.servico {
+  --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 0%;
+  position: relative; display: flex; flex-direction: column; padding: 1.9rem 1.6rem 1.6rem; border-radius: var(--raio);
+  background: linear-gradient(180deg, rgba(43, 26, 94, .6), rgba(22, 14, 54, .6));
+  box-shadow: 0 0 0 1px var(--linha) inset, 0 18px 50px rgba(0, 0, 0, .3);
+  transform: rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .5s cubic-bezier(.2, .7, .2, 1), box-shadow .4s;
+  overflow: hidden; isolation: isolate;
+}
+.servico::before { /* brilho que segue a varinha */
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .4s;
+  background: radial-gradient(380px circle at var(--mx) var(--my), rgba(255, 220, 140, .18), transparent 60%);
+}
+.servico:hover { box-shadow: 0 0 0 1px rgba(242, 193, 78, .6) inset, 0 24px 60px rgba(0, 0, 0, .4), 0 0 40px rgba(255, 45, 135, .15); }
+.servico:hover::before { opacity: 1; }
+.servico__icone {
+  width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%; color: var(--ouro-claro);
+  background: radial-gradient(circle, rgba(255, 45, 135, .25), rgba(255, 45, 135, 0) 70%); box-shadow: 0 0 0 1px rgba(242, 193, 78, .5);
+}
+.servico__icone svg { width: 30px; height: 30px; }
+.servico h3 { margin-top: 1.1rem; font: 600 1.28rem/1.2 var(--titulo); color: var(--ouro-claro); letter-spacing: .02em; }
+.servico p { margin: .6rem 0 0; color: var(--texto-2); }
+.servico__etiquetas { display: flex; flex-wrap: wrap; gap: .35rem; margin: .9rem 0 0; padding: 0; list-style: none; }
+.servico__etiquetas li { font-size: .8rem; padding: .2rem .65rem; border-radius: 999px; background: rgba(255, 45, 135, .12); color: var(--rosa-claro); box-shadow: 0 0 0 1px rgba(255, 140, 192, .25) inset; }
+.servico .botao { margin-top: auto; align-self: flex-start; padding: .75rem 1.2rem; font-size: .95rem; }
+.servico__corpo { flex: 1; margin-bottom: 1.3rem; }
+
+/* ---------- Tryv ---------- */
+.tryv { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+@media (max-width: 860px) { .tryv { grid-template-columns: 1fr; } }
+.espelho { text-align: center; }
+.espelho__moldura {
+  position: relative; width: min(100%, 380px); aspect-ratio: 3 / 4; margin-inline: auto; padding: 14px; border-radius: 50%;
+  background: conic-gradient(from 210deg, #fff3c4, #d39a2c, #fbe39a, #9a6416, #f6cd62, #fff3c4, #c78b25, #fbe39a, #fff3c4);
+  box-shadow: 0 0 0 2px rgba(255, 240, 200, .4), 0 0 50px rgba(242, 193, 78, .35), 0 0 120px rgba(255, 45, 135, .2);
+}
+.espelho__moldura::before, .espelho__moldura::after {
+  content: "✦"; position: absolute; left: 50%; transform: translateX(-50%); z-index: 3;
+  font-size: 1.8rem; color: var(--ouro-claro); text-shadow: 0 0 14px rgba(255, 220, 140, .9);
+}
+.espelho__moldura::before { top: -1.2rem; } .espelho__moldura::after { bottom: -1.2rem; }
+.espelho__vidro { position: relative; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: #0d0a26; box-shadow: inset 0 0 0 3px rgba(80, 50, 10, .55); }
+.espelho__vidro::after { /* reflexo do vidro */
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(130deg, rgba(255, 255, 255, .22) 0%, transparent 28%, transparent 70%, rgba(185, 163, 255, .15) 100%);
+}
+.espelho__foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.08); filter: blur(10px) brightness(1.4); transition: opacity 1.1s, transform 1.4s, filter 1.1s; }
+.espelho__foto.ativa { opacity: 1; transform: none; filter: none; }
+.espelho__botao { margin-top: 1.9rem; }
+.espelho__pontos { display: flex; justify-content: center; gap: .5rem; margin-top: 1rem; }
+.espelho__pontos button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: rgba(242, 193, 78, .3); transition: background .3s, transform .3s; }
+.espelho__pontos button[aria-current="true"] { background: var(--ouro); transform: scale(1.3); }
+.tryv__texto p { margin: 1rem 0 0; color: var(--texto-2); }
+.tryv__texto .destaque { font: italic 500 clamp(1.35rem, 2.6vw, 1.7rem)/1.4 var(--livro); color: var(--texto); }
+.personas { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1.4rem 0 0; padding: 0; list-style: none; }
+.personas li {
+  padding: .4rem .9rem; border-radius: 999px; font-size: .92rem; color: var(--ouro-claro);
+  background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; transition: background .3s, box-shadow .3s, transform .3s;
+}
+.personas li:hover { background: rgba(255, 45, 135, .16); box-shadow: 0 0 0 1px var(--rosa-claro) inset, 0 0 18px rgba(255, 45, 135, .3); transform: translateY(-2px); }
+
+/* ---------- Citação ---------- */
+.citacao { text-align: center; padding: clamp(4rem, 9vw, 6.5rem) 0; }
+.citacao blockquote { margin: 0 auto; max-width: 24ch; font: italic 500 clamp(1.8rem, 4.6vw, 3rem)/1.3 var(--livro); }
+.citacao .palavra { color: rgba(201, 191, 230, .35); transition: color .6s, text-shadow .6s; }
+.citacao .palavra.acesa { color: var(--ouro-claro); text-shadow: 0 0 18px rgba(255, 220, 140, .55); }
+.citacao cite { display: block; margin-top: 1.2rem; font: 500 .85rem/1 var(--corpo); font-style: normal; letter-spacing: .3em; text-transform: uppercase; color: var(--rosa-claro); }
+
+/* ---------- Livro ---------- */
+.livro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+@media (max-width: 860px) { .livro { grid-template-columns: 1fr; } .livro__palco { order: -1; } }
+.livro__palco { display: grid; place-items: center; perspective: 1800px; min-height: 380px; }
+.livro3d {
+  --lw: min(240px, 44vw);
+  position: relative; width: var(--lw); aspect-ratio: 689 / 1100; border: 0; padding: 0; background: none;
+  transform-style: preserve-3d; transform: rotateY(-14deg) rotateX(4deg); transition: transform 1.1s cubic-bezier(.3, .7, .2, 1);
+}
+.livro3d:hover { transform: rotateY(-6deg) rotateX(2deg); }
+.livro3d.aberto { transform: translateX(48%) rotateY(0) rotateX(0); }
+.livro3d__miolo {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: .5rem; padding: 8% 9%;
+  border-radius: 3px 10px 10px 3px; text-align: left; color: #3a2510;
+  background: linear-gradient(90deg, #d9c9a3 0%, #f7eed7 6%, #fbf4e2 100%);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .5);
+  font: 500 clamp(.72rem, 2.4vw, .95rem)/1.45 var(--livro);
+}
+.livro3d__miolo strong { font: 600 1.05em/1.2 var(--titulo); color: #7a3e10; }
+.livro3d__capa {
+  position: absolute; inset: 0; transform-origin: left center; transform-style: preserve-3d;
+  transition: transform 1.3s cubic-bezier(.3, .7, .2, 1);
+}
+.livro3d.aberto .livro3d__capa { transform: rotateY(-168deg); }
+.livro3d__capa img, .livro3d__capa-dentro { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 3px 10px 10px 3px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.livro3d__capa img { object-fit: cover; box-shadow: inset 4px 0 10px rgba(0, 0, 0, .4), 0 30px 60px rgba(0, 0, 0, .55); }
+.livro3d__capa-dentro {
+  transform: rotateY(180deg); display: grid; place-items: center; border-radius: 10px 3px 3px 10px;
+  background: radial-gradient(circle, #5a1d10, #2a0c06); box-shadow: inset 0 0 0 6px #2a0c06, inset 0 0 0 7px rgba(242, 193, 78, .6);
+  font: italic 500 1.1rem/1.3 var(--livro); color: var(--ouro-claro); text-align: center; padding: 15%;
+}
+.livro__texto p { color: var(--texto-2); margin: 1rem 0 0; }
+.livro__texto .botao { margin-top: 1.6rem; }
+
+/* ---------- Contato ---------- */
+.contato { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+@media (max-width: 860px) { .contato { grid-template-columns: 1fr; } }
+.passos { margin: 0; padding: 0; list-style: none; counter-reset: passo; }
+.passos li { position: relative; padding: 0 0 1.4rem 3.6rem; counter-increment: passo; color: var(--texto-2); }
+.passos li::before {
+  content: counter(passo); position: absolute; left: 0; top: -.15rem; width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 50%;
+  font: 600 1.05rem/1 var(--titulo); color: #2a1606; background: var(--dourado); box-shadow: 0 0 16px rgba(242, 193, 78, .4);
+}
+.passos li:not(:last-child)::after { content: ""; position: absolute; left: 1.22rem; top: 2.5rem; bottom: .1rem; width: 1px; background: linear-gradient(var(--ouro), transparent); }
+.passos strong { display: block; color: var(--texto); font-weight: 600; }
+.cartao-contato {
+  padding: clamp(1.6rem, 4vw, 2.4rem); border-radius: var(--raio); text-align: center;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(255, 45, 135, .2), transparent 60%), linear-gradient(180deg, rgba(43, 26, 94, .7), rgba(18, 14, 46, .7));
+  box-shadow: 0 0 0 1px var(--linha) inset, 0 24px 60px rgba(0, 0, 0, .35);
+}
+.cartao-contato img { width: 150px; margin: 0 auto 1rem; filter: drop-shadow(0 0 20px rgba(255, 45, 135, .35)); }
+.cartao-contato .botao { width: 100%; font-size: 1.05rem; }
+.cartao-contato__linha { margin: 1.1rem 0 0; color: var(--texto-2); }
+.cartao-contato__linha a { color: var(--ouro-claro); }
+.redes { display: flex; justify-content: center; gap: .6rem; margin-top: 1.3rem; }
+.redes a { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; color: var(--ouro-claro); transition: transform .3s, box-shadow .3s; }
+.redes a:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 18px rgba(242, 193, 78, .45); }
+.redes svg { width: 20px; height: 20px; }
+
+/* ---------- Rodapé e botão flutuante ---------- */
+.rodape { padding: 3rem 0 calc(3rem + env(safe-area-inset-bottom, 0px)); text-align: center; color: var(--texto-2); font-size: .9rem; border-top: 1px solid rgba(242, 193, 78, .15); }
+.rodape p { margin: .3rem 0; }
+.rodape__assinatura { font: italic 500 1.15rem/1.4 var(--livro); color: var(--lilas); }
+.zap-flutuante {
+  position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 40;
+  display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; color: #fff;
+  background: linear-gradient(180deg, #ff5aa5, #e0136d); box-shadow: 0 0 0 3px rgba(242, 193, 78, .7), 0 10px 30px rgba(255, 45, 135, .5);
+  transition: transform .3s;
+}
+.zap-flutuante::before { content: ""; position: absolute; inset: -3px; border-radius: 50%; box-shadow: 0 0 0 2px var(--ouro); animation: onda 2.6s ease-out infinite; }
+@keyframes onda { from { transform: scale(1); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
+.zap-flutuante:hover { transform: scale(1.08); }
+.zap-flutuante svg { width: 28px; height: 28px; }
+
+/* ---------- Varinha (mouse) e fada (celular) ---------- */
+.com-varinha, .com-varinha * { cursor: none !important; }
+#varinha {
+  position: fixed; left: 0; top: 0; z-index: 100; width: 64px; height: 64px; pointer-events: none;
+  opacity: 0; transition: opacity .3s; will-change: transform;
+}
+#varinha.visivel { opacity: 1; }
+#varinha svg { width: 100%; height: 100%; overflow: visible; transform-origin: 10px 10px; transition: transform .25s; }
+#varinha .ponta { transform-origin: 10px 10px; transition: transform .25s, filter .25s; }
+#varinha.ativa .ponta { transform: scale(1.45) rotate(18deg); filter: drop-shadow(0 0 8px #fff3c4); }
+#varinha.clique svg { transform: rotate(-14deg); }
+#fada { position: fixed; left: 0; top: 0; z-index: 95; width: 46px; height: 46px; margin: -23px 0 0 -23px; pointer-events: none; will-change: transform; display: none; }
+.com-fada #fada { display: block; }
+.fada__corpo { position: absolute; inset: 0; transition: transform .3s; }
+.fada__virada .fada__corpo { transform: scaleX(-1); }
+.fada__luz { position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px; border-radius: 50%; background: radial-gradient(circle, #fff 0 30%, #ffe6a3 55%, rgba(242, 193, 78, 0) 72%); box-shadow: 0 0 18px 8px rgba(255, 220, 140, .55), 0 0 40px 14px rgba(255, 45, 135, .25); }
+.fada__asa { position: absolute; top: 4px; width: 20px; height: 15px; border-radius: 60% 60% 50% 50%; background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, .85), rgba(200, 220, 255, .35) 60%, rgba(185, 163, 255, .15)); box-shadow: 0 0 8px rgba(220, 230, 255, .7); transform-origin: right bottom; animation: bater .16s ease-in-out infinite alternate; }
+.fada__asa--b { top: 17px; width: 15px; height: 11px; opacity: .8; animation-delay: .05s; }
+.fada__asa--esq { left: 4px; }
+.fada__asa--dir { right: 4px; transform-origin: left bottom; animation-name: bater-dir; }
+@keyframes bater { from { transform: rotate(10deg) scaleY(1); } to { transform: rotate(-26deg) scaleY(.55); } }
+@keyframes bater-dir { from { transform: rotate(-10deg) scaleY(1); } to { transform: rotate(26deg) scaleY(.55); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
+  .js .surge { opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+<div class="fundo-ceu" aria-hidden="true"></div>
+<canvas id="ceu" aria-hidden="true"></canvas>
+
+<!-- Abertura: arco dourado que se desenha sobre o logo, como no começo dos filmes de conto de fadas -->
+<div class="abertura" id="abertura" role="dialog" aria-label="Abertura">
+  <div class="abertura__palco">
+    <svg class="abertura__arco" viewBox="0 0 600 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="arco-ouro" x1="0" x2="1">
+          <stop offset="0" stop-color="#ffe6a3" stop-opacity="0"/>
+          <stop offset=".25" stop-color="#ffe6a3"/>
+          <stop offset=".75" stop-color="#fff"/>
+          <stop offset="1" stop-color="#f2c14e"/>
+        </linearGradient>
+      </defs>
+      <path id="arco" d="M30 300 C 120 40, 480 40, 570 300"/>
+    </svg>
+    <img class="abertura__logo" src="assets/logo.webp" alt="Bem Dito Tarot" width="1197" height="1097">
+    <p class="abertura__era">Era uma vez uma pergunta…</p>
+    <div class="abertura__pular"><button class="botao botao--vidro" type="button">Entrar ✨</button></div>
+  </div>
+</div>
+
+<header class="topo" id="topo">
+  <div class="envelope topo__linha">
+    <a class="marca" href="#inicio"><img src="assets/logo-pequeno.webp" alt="" width="240" height="220"><span>Bem Dito</span></a>
+    <nav class="menu" id="menu" aria-label="Seções">
+      <a href="#cartas">Cartas</a>
+      <a href="#consultas">Consultas</a>
+      <a href="#tryv">Tryv</a>
+      <a href="#livro">Livro</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <button class="icone-botao som" id="som" type="button" aria-pressed="false" aria-label="Som mágico">
+      <svg class="som__desligado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
+      <svg class="som__ligado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+    </button>
+    <button class="icone-botao abre-menu" id="abre-menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERÓI ================= -->
+  <section class="heroi" id="inicio">
+    <div class="lua" aria-hidden="true"></div>
+    <div class="envelope heroi__conteudo">
+      <span class="heroi__lema">Do macro ao micro · <b>espiritualidade</b> · <b>autoconhecimento</b> · <b>empoderamento</b></span>
+      <div class="heroi__logo-caixa">
+        <button class="heroi__logo" id="logo-heroi" type="button" aria-label="Bem Dito Tarot (toque para um pouco de magia)">
+          <img src="assets/logo.webp" alt="Bem Dito Tarot" width="1197" height="1097" fetchpriority="high">
+        </button>
+      </div>
+      <h1>Toda pergunta merece ser <em>bem dita</em>.</h1>
+      <p class="heroi__texto">Tarô, oráculos e terapias com Tryv Tuath. Com amor, verdade e um pouco de magia.</p>
+      <div class="heroi__acoes">
+        <a class="botao botao--ouro" href="#cartas">✦ Tirar minha carta</a>
+        <a class="botao botao--vidro" data-zap="Olá, Tryv! Vim pelo site Bem Dito Tarot e quero agendar uma consulta ✨" href="#contato" target="_blank" rel="noopener">Agendar consulta</a>
+      </div>
+      <p class="heroi__dica" id="dica">Passe a varinha pela página…</p>
+    </div>
+    <svg class="floresta" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="brilho-janela"><stop offset="0" stop-color="#ffe6a3" stop-opacity=".9"/><stop offset="1" stop-color="#ffe6a3" stop-opacity="0"/></radialGradient>
+      </defs>
+      <path fill="#221a5c" opacity=".85" d="M0 150 C 180 105 360 140 540 118 C 740 92 900 140 1080 112 C 1240 90 1350 116 1440 104 V260 H0Z"/>
+      <g id="arvores-fundo" fill="#170f42"></g>
+      <path fill="#0f0a2c" d="M0 205 C 220 178 420 200 640 190 C 860 180 1040 205 1240 192 C 1340 186 1400 190 1440 188 V260 H0Z"/>
+      <!-- casinha na floresta -->
+      <g transform="translate(1060 150)">
+        <circle cx="34" cy="34" r="60" fill="url(#brilho-janela)" class="janela"/>
+        <path fill="#0f0a2c" d="M0 46 L34 14 L68 46 V78 H0Z"/>
+        <rect x="48" y="12" width="9" height="22" fill="#0f0a2c"/>
+        <rect class="janela" x="24" y="44" width="18" height="16" rx="2" fill="#ffd36e"/>
+        <path d="M33 44v16M24 52h18" stroke="#0f0a2c" stroke-width="2"/>
+      </g>
+      <g id="arvores-frente" fill="#0b0722"></g>
+    </svg>
+  </section>
+
+  <!-- ================= CARTAS ================= -->
+  <section class="secao" id="cartas">
+    <div class="envelope">
+      <div class="cabeca surge">
+        <span class="chamada">Oráculo encantado</span>
+        <h2 class="titulo">Escolha a sua carta</h2>
+        <p class="intro">Respire, pense na sua pergunta e deixe a mão escolher. O baralho sabe o caminho.</p>
+      </div>
+      <div class="mesa surge" id="mesa">
+        <div style="text-align:center">
+          <div class="modos" role="group" aria-label="Tipo de tiragem">
+            <button type="button" data-modo="dia" aria-pressed="true">Carta do dia</button>
+            <button type="button" data-modo="tres" aria-pressed="false">Três cartas</button>
+          </div>
+          <p class="mesa__instrucao" id="instrucao">Toque em uma carta do leque.</p>
+        </div>
+        <div class="leque" id="leque" aria-label="Baralho embaralhado"></div>
+        <div class="vagas" id="vagas"></div>
+        <div class="leitura" id="leitura" hidden aria-live="polite">
+          <div id="leitura-itens"></div>
+          <div class="leitura__acoes">
+            <a class="botao botao--rosa" id="leitura-zap" href="#contato" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.1Z"/></svg>
+              Levar para uma consulta
+            </a>
+            <button class="botao botao--vidro" id="ouvir" type="button">🔊 Ouvir a mensagem</button>
+            <button class="botao botao--vidro" id="de-novo" type="button">↻ Embaralhar de novo</button>
+          </div>
+          <p class="aviso">A mesa encantada é um carinho para o seu dia. A leitura completa, feita com atenção à sua história, é com a Tryv.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONSULTAS ================= -->
+  <section class="secao" id="consultas">
+    <div class="envelope">
+      <div class="cabeca surge">
+        <span class="chamada">Consultas e terapias</span>
+        <h2 class="titulo">Qual magia você procura?</h2>
+        <p class="intro">Conheça as terapias e marque uma conversa para entender em que momento você está e qual caminho pode te ajudar.</p>
+      </div>
+      <div class="grade-servicos">
+        <article class="servico surge">
+          <div class="servico__icone"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="5" y="7" width="12" height="19" rx="2" transform="rotate(-12 11 16)"/><rect x="15" y="6" width="12" height="19" rx="2" transform="rotate(10 21 15)"/><path d="m21 12 1 2.2 2.3.3-1.7 1.6.4 2.3-2-1.1-2 1.1.4-2.3-1.7-1.6 2.3-.3z"/></svg></div>
+          <div class="servico__corpo">
+            <h3>Tarô e Oráculos</h3>
+            <p>Leitura de 30, 60 ou 90 minutos, com vários baralhos à escolha. Remota, por videochamada ou foto e áudio, ou presencial com hora marcada.</p>
+            <ul class="servico__etiquetas"><li>30 min</li><li>60 min</li><li>90 min</li></ul>
+          </div>
+          <a class="botao botao--ouro" data-zap="Olá, Tryv! Quero agendar uma Consulta ao Tarô e Oráculos ✨" href="#contato" target="_blank" rel="noopener">Quero essa leitura</a>
+        </article>
+        <article class="servico surge">
+          <div class="servico__icone"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><circle cx="16" cy="16" r="11"/><path d="M16 5v22M5 16h22"/><path d="m16 9 3 7-3 7-3-7z"/></svg></div>
+          <div class="servico__corpo">
+            <h3>Mentoria Pessoal</h3>
+            <p>Um programa feito para você conquistar seus objetivos, pelo método exclusivo dos 4 elementos da natureza. Ligações semanais e tarefas para realizar.</p>
+            <ul class="servico__etiquetas"><li>Terra</li><li>Água</li><li>Fogo</li><li>Ar</li></ul>
+          </div>
+          <a class="botao botao--ouro" data-zap="Olá, Tryv! Quero saber mais sobre a Mentoria Pessoal dos 4 elementos ✨" href="#contato" target="_blank" rel="noopener">Quero a mentoria</a>
+        </article>
+        <article class="servico surge">
+          <div class="servico__icone"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M16 4c3 4 5 6.5 5 9.5a5 5 0 0 1-10 0c0-1.5.6-2.7 1.5-3.8.3 1.6 1.2 2.4 2.1 2.4C14 9.5 15 7 16 4Z"/><rect x="12" y="19" width="8" height="9" rx="1"/><path d="M9 28h14"/></svg></div>
+          <div class="servico__corpo">
+            <h3>Ritual</h3>
+            <p>Ritual presencial ou remoto para alcançar um objetivo, através da conexão com os 4 elementos da natureza.</p>
+            <ul class="servico__etiquetas"><li>Amor</li><li>Prosperidade</li><li>Espiritual</li><li>Limpeza energética</li><li>Empoderamento</li><li>Despertar</li></ul>
+          </div>
+          <a class="botao botao--ouro" data-zap="Olá, Tryv! Quero saber mais sobre os Rituais ✨" href="#contato" target="_blank" rel="noopener">Quero um ritual</a>
+        </article>
+        <article class="servico surge">
+          <div class="servico__icone"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M16 16a2 2 0 1 1 2 2 4 4 0 0 1-4-4 6 6 0 0 1 6-6 8 8 0 0 1 8 8 10 10 0 0 1-10 10A12 12 0 0 1 4 14"/></svg></div>
+          <div class="servico__corpo">
+            <h3>A Viagem da Alma</h3>
+            <p>Terapia de regressão a vidas passadas, realizada em 10 dias.</p>
+            <ul class="servico__etiquetas"><li>10 dias</li></ul>
+          </div>
+          <a class="botao botao--ouro" data-zap="Olá, Tryv! Quero saber mais sobre A Viagem da Alma (regressão) ✨" href="#contato" target="_blank" rel="noopener">Quero viajar</a>
+        </article>
+        <article class="servico surge">
+          <div class="servico__icone"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 27v-8l-3-5a1.6 1.6 0 0 1 2.7-1.7L11 15V6a1.5 1.5 0 0 1 3 0v7-9a1.5 1.5 0 0 1 3 0v9-7a1.5 1.5 0 0 1 3 0v8-5a1.5 1.5 0 0 1 3 0v9c0 4-2 7-5 8"/><path d="M27 4v3M25.5 5.5h3"/></svg></div>
+          <div class="servico__corpo">
+            <h3>Sessão de Reiki</h3>
+            <p>Envio e tratamento com Reiki, remoto ou presencial, com Mestre Reiki.</p>
+            <ul class="servico__etiquetas"><li>Remoto</li><li>Presencial</li></ul>
+          </div>
+          <a class="botao botao--ouro" data-zap="Olá, Tryv! Quero agendar uma Sessão de Reiki ✨" href="#contato" target="_blank" rel="noopener">Quero Reiki</a>
+        </article>
+        <article class="servico surge">
+          <div class="servico__icone"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M4 8c4-2 8-2 12 1 4-3 8-3 12-1v17c-4-2-8-2-12 1-4-3-8-3-12-1Z"/><path d="M16 9v17"/><path d="m24 3 .7 1.6 1.6.7-1.6.7L24 7.6l-.7-1.6-1.6-.7 1.6-.7z"/></svg></div>
+          <div class="servico__corpo">
+            <h3>Cursos</h3>
+            <p>Cursos presenciais e remotos para quem quer aprender a caminhar com as próprias mãos. Pergunte quais estão abertos.</p>
+            <ul class="servico__etiquetas"><li>Presencial</li><li>Remoto</li></ul>
+          </div>
+          <a class="botao botao--ouro" data-zap="Olá, Tryv! Quais cursos estão abertos? ✨" href="#contato" target="_blank" rel="noopener">Ver cursos</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRYV ================= -->
+  <section class="secao" id="tryv">
+    <div class="envelope tryv">
+      <div class="espelho surge">
+        <div class="espelho__moldura">
+          <div class="espelho__vidro" id="espelho">
+            <img class="espelho__foto ativa" src="assets/tryv-chapeu.webp" alt="Tryv sorrindo com chapéu de bruxa roxo, vassouras e uma vela acesa" width="1077" height="1100" loading="lazy">
+            <img class="espelho__foto" src="assets/tryv-segredo.webp" alt="Tryv com o dedo nos lábios, pedindo segredo" width="788" height="788" loading="lazy" style="object-position:50% 30%">
+            <img class="espelho__foto" src="assets/tryv-pintura.webp" alt="Tryv com pintura ritual azul e rosa no rosto" width="682" height="1100" loading="lazy">
+            <img class="espelho__foto" src="assets/tryv-fogo.webp" alt="Tryv de braços abertos diante de uma fogueira, à noite" width="959" height="960" loading="lazy">
+            <img class="espelho__foto" src="assets/tryv-natureza.webp" alt="Tryv em preto e branco, apontando para a mata" width="720" height="540" loading="lazy" style="object-position:40% 50%">
+          </div>
+        </div>
+        <button class="botao botao--vidro espelho__botao" id="espelho-botao" type="button">Espelho, espelho meu ✨</button>
+        <div class="espelho__pontos" id="espelho-pontos" aria-label="Fotos"></div>
+      </div>
+      <div class="tryv__texto surge">
+        <span class="chamada">Quem lê as cartas</span>
+        <h2 class="titulo">Tryv Tuath</h2>
+        <p class="destaque">“Definir Tryv Tuath é como tentar traduzir a magia. Tryv é uma proposta, não uma pessoa. Um pulsar de ideias e sentimentos.”</p>
+        <p>Ser a Tryv é vestir-se de estrelas no berço das nebulosas, numa casinha na floresta. Na essência wiccana, pés xamânicos, mente hermética, vibração cósmica entre todos os sagrados.</p>
+        <ul class="personas" aria-label="As muitas Tryvs">
+          <li>mãe</li><li>escritora</li><li>artista</li><li>artesã</li><li>bruxa</li><li>professora</li><li>terapeuta</li><li>amiga</li><li>Master Reiki</li><li>líder de egrégoras</li><li>aprendiz</li><li>apaixonada pela natureza</li>
+        </ul>
+        <p>Todas essas mulheres alimentam a ideia de quem é essa essência. Nenhuma definição seria possível se usada separadamente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CITAÇÃO ================= -->
+  <section class="citacao" aria-label="Citação">
+    <div class="envelope surge">
+      <blockquote id="citacao">Quando você toca uma coisa com consciência profunda, você toca em tudo.</blockquote>
+      <cite>Lao Tzu</cite>
+    </div>
+  </section>
+
+  <!-- ================= LIVRO ================= -->
+  <section class="secao" id="livro">
+    <div class="envelope livro">
+      <div class="livro__texto surge">
+        <span class="chamada">O livro</span>
+        <h2 class="titulo">O Multiverso</h2>
+        <p class="intro" style="margin-left:0">Desmistificando seu poder espiritual.</p>
+        <p>Um guia prático, com técnicas simples para levar ao dia a dia. Convida você a olhar para as próprias crenças, refletir e se descobrir, com linguagem clara e inspiradora, para aprofundar sua conexão espiritual e chegar a um estado de bem-estar.</p>
+        <p>Toque na capa para abrir o livro.</p>
+        <a class="botao botao--ouro" data-zap="Olá, Tryv! Quero o livro O Multiverso 📖✨" href="#contato" target="_blank" rel="noopener">Quero o meu exemplar</a>
+      </div>
+      <div class="livro__palco surge">
+        <button class="livro3d" id="livro3d" type="button" aria-pressed="false" aria-label="Abrir o livro O Multiverso">
+          <span class="livro3d__miolo">
+            <strong>O Multiverso</strong>
+            <span>Num universo onde as fronteiras entre a ciência e a espiritualidade se entrelaçam, surge a figura luminosa de Tryv Tuath: escritora, mentora e mestre das energias sutis.</span>
+            <span>Um convite a perceber os meandros do autoconhecimento e da cura, e a descobrir a verdadeira capacidade de realização e transformação na própria vida.</span>
+          </span>
+          <span class="livro3d__capa">
+            <img src="assets/livro-capa.webp" alt="" width="689" height="1100" loading="lazy">
+            <span class="livro3d__capa-dentro">“Everything<br>is possible.”</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTATO ================= -->
+  <section class="secao" id="contato">
+    <div class="envelope">
+      <div class="cabeca surge">
+        <span class="chamada">Seja tocado</span>
+        <h2 class="titulo">Vamos conversar?</h2>
+        <p class="intro">Atendimento remoto para qualquer lugar, ou presencial com hora marcada.</p>
+      </div>
+      <div class="contato">
+        <ol class="passos surge">
+          <li><strong>Chame no WhatsApp</strong>Conte o que está buscando e escolha a leitura ou a terapia.</li>
+          <li><strong>Escolha o horário</strong>Por videochamada, por foto e áudio, ou presencial.</li>
+          <li><strong>Envie o comprovante</strong>Os atendimentos são confirmados com o pagamento: depósito, transferência ou cartão de crédito.</li>
+          <li><strong>Receba sua leitura</strong>E leve com você o que as cartas têm a dizer.</li>
+        </ol>
+        <div class="cartao-contato surge">
+          <img src="assets/logo-pequeno.webp" alt="" width="240" height="220" loading="lazy">
+          <a class="botao botao--rosa" data-zap="Olá, Tryv! Vim pelo site Bem Dito Tarot ✨" href="https://wa.me/5551996489944" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.1Z"/></svg>
+            (51) 99648-9944
+          </a>
+          <p class="cartao-contato__linha">ou por e-mail: <a href="mailto:tryvtuath@gmail.com">tryvtuath@gmail.com</a></p>
+          <div class="redes">
+            <a href="https://www.instagram.com/tryvtuath/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+            <a href="https://www.facebook.com/tryvtuath/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21z"/></svg></a>
+            <a href="https://www.youtube.com/channel/UCKb-fBxO-9cGA5U49_9CIww" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15V9l5.2 3z"/></svg></a>
+            <a href="https://open.spotify.com/user/21tyvaoezzny5ykubpgamm26q" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7 9.5c3.5-1 7.5-.6 10.5 1M7.5 12.7c3-.8 6-.4 8.5 1M8 15.7c2.3-.6 4.6-.3 6.5.8"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="envelope">
+    <p class="rodape__assinatura">Mude-se e descobrirá novos outros para refletir-se.</p>
+    <p>© <span id="ano">2026</span> Bem Dito Tarot · Tryv Tuath</p>
+  </div>
+</footer>
+
+<a class="zap-flutuante" data-zap="Olá, Tryv! Vim pelo site Bem Dito Tarot ✨" href="https://wa.me/5551996489944" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.1Z"/></svg>
+</a>
+
+<canvas id="magia" aria-hidden="true"></canvas>
+<div id="varinha" aria-hidden="true">
+  <svg viewBox="0 0 64 64">
+    <defs>
+      <linearGradient id="cabo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d2"/><stop offset=".5" stop-color="#f6cd62"/><stop offset=".56" stop-color="#ff2d87"/><stop offset=".64" stop-color="#ff2d87"/><stop offset=".7" stop-color="#d39a2c"/><stop offset="1" stop-color="#8a5a12"/></linearGradient>
+    </defs>
+    <path d="M14 14 L58 58" stroke="#120e2e" stroke-width="7" stroke-linecap="round" opacity=".6"/>
+    <path d="M14 14 L58 58" stroke="url(#cabo)" stroke-width="4.5" stroke-linecap="round"/>
+    <g class="ponta">
+      <path d="M10 0 L12.6 7.4 L20 10 L12.6 12.6 L10 20 L7.4 12.6 L0 10 L7.4 7.4Z" fill="#fff6d2" stroke="#f2c14e" stroke-width="1"/>
+      <circle cx="10" cy="10" r="2.4" fill="#fff"/>
+    </g>
+  </svg>
+</div>
+<div id="fada" aria-hidden="true">
+  <div class="fada__corpo">
+    <span class="fada__asa fada__asa--esq"></span><span class="fada__asa fada__asa--dir"></span>
+    <span class="fada__asa fada__asa--b fada__asa--esq"></span><span class="fada__asa fada__asa--b fada__asa--dir"></span>
+    <span class="fada__luz"></span>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  document.documentElement.classList.add("js");
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const parado = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Celular/tablet: sem mouse que paire. Ali a magia é a fada; no computador, a varinha.
+  const toque = matchMedia("(hover: none)").matches || matchMedia("(pointer: coarse)").matches;
+  const guarda = {
+    ler(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    gravar(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  };
+
+  /* ---------- WhatsApp ---------- */
+  const WHATS = "5551996489944";
+  const zap = msg => `https://wa.me/${WHATS}?text=${encodeURIComponent(msg)}`;
+  $$("[data-zap]").forEach(a => { a.href = zap(a.dataset.zap); });
+  $("#ano").textContent = new Date().getFullYear();
+
+  /* ---------- Som mágico (desligado por padrão) ---------- */
+  const botaoSom = $("#som");
+  let somLigado = guarda.ler("bd-som") === "1";
+  let audio, ultimoSino = 0;
+  botaoSom.setAttribute("aria-pressed", somLigado);
+  botaoSom.addEventListener("click", () => {
+    somLigado = !somLigado;
+    botaoSom.setAttribute("aria-pressed", somLigado);
+    guarda.gravar("bd-som", somLigado ? "1" : "0");
+    if (somLigado) sino(4);
+  });
+  function sino(notas = 3) {
+    if (!somLigado) return;
+    const agora = performance.now();
+    if (agora - ultimoSino < 120) return;
+    ultimoSino = agora;
+    try {
+      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+      if (audio.state === "suspended") audio.resume();
+      const escala = [1046.5, 1174.7, 1318.5, 1568, 1760, 2093, 2349.3];
+      for (let i = 0; i < notas; i++) {
+        const o = audio.createOscillator(), g = audio.createGain();
+        const t0 = audio.currentTime + i * 0.075;
+        o.type = "sine";
+        o.frequency.value = escala[Math.random() * escala.length | 0];
+        g.gain.setValueAtTime(0, t0);
+        g.gain.linearRampToValueAtTime(0.06, t0 + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.4);
+        o.connect(g).connect(audio.destination);
+        o.start(t0); o.stop(t0 + 1.5);
+      }
+    } catch {}
+  }
+
+  /* =========================================================================
+     CÉU E MAGIA: dois canvas fixos. O de trás tem as estrelas (com parallax
+     de rolagem e do mouse/inclinação); o da frente, as faíscas.
+     ========================================================================= */
+  const ceu = $("#ceu"), cc = ceu.getContext("2d");
+  const magia = $("#magia"), mc = magia.getContext("2d");
+  let W = 0, H = 0, DPR = 1;
+  let estrelas = [], cadente = null, proximaCadente = 2500;
+  const olhar = { x: 0, y: 0, ax: 0, ay: 0 };   // deslocamento do parallax (alvo e atual)
+
+  function medir() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    for (const [c, ctx] of [[ceu, cc], [magia, mc]]) {
+      c.width = Math.round(W * DPR); c.height = Math.round(H * DPR);
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    const n = Math.min(280, Math.round(W * H / 4200));
+    estrelas = Array.from({ length: n }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      z: 0.25 + Math.random() * 0.75,
+      r: Math.random() < 0.08 ? 1.4 + Math.random() * 1.2 : 0.4 + Math.random() * 0.9,
+      f: Math.random() * Math.PI * 2, v: 0.6 + Math.random() * 1.6,
+      cor: Math.random() < 0.15 ? "255,200,230" : Math.random() < 0.3 ? "255,236,190" : "235,232,255",
+    }));
+    if (parado) desenharCeu(0);
+  }
+
+  function desenharCeu(t) {
+    olhar.ax += (olhar.x - olhar.ax) * 0.05;
+    olhar.ay += (olhar.y - olhar.ay) * 0.05;
+    cc.clearRect(0, 0, W, H);
+    const rolagem = scrollY;
+    for (const s of estrelas) {
+      let x = s.x + olhar.ax * s.z * 22;
+      let y = s.y - rolagem * 0.05 * s.z + olhar.ay * s.z * 22;
+      x = ((x % W) + W) % W; y = ((y % H) + H) % H;
+      const brilho = parado ? 0.75 : 0.45 + 0.55 * Math.abs(Math.sin(t * 0.001 * s.v + s.f));
+      cc.globalAlpha = brilho * (0.4 + s.z * 0.6);
+      cc.fillStyle = `rgb(${s.cor})`;
+      cc.beginPath(); cc.arc(x, y, s.r, 0, 6.283); cc.fill();
+      if (s.r > 1.4) { // as maiores ganham uma cruz de luz
+        cc.globalAlpha *= 0.5;
+        cc.fillRect(x - s.r * 3, y - 0.3, s.r * 6, 0.6);
+        cc.fillRect(x - 0.3, y - s.r * 3, 0.6, s.r * 6);
+      }
+    }
+    cc.globalAlpha = 1;
+    if (parado) return;
+    // Estrela cadente de tempos em tempos
+    if (!cadente && t > proximaCadente) {
+      cadente = { x: W * (0.3 + Math.random() * 0.7), y: H * Math.random() * 0.35, vx: -(7 + Math.random() * 5), vy: 3 + Math.random() * 2.5, vida: 1 };
+      proximaCadente = t + 5000 + Math.random() * 7000;
+    }
+    if (cadente) {
+      const c = cadente;
+      c.x += c.vx; c.y += c.vy; c.vida -= 0.014;
+      const g = cc.createLinearGradient(c.x, c.y, c.x - c.vx * 14, c.y - c.vy * 14);
+      g.addColorStop(0, `rgba(255,246,210,${c.vida})`); g.addColorStop(1, "rgba(255,246,210,0)");
+      cc.strokeStyle = g; cc.lineWidth = 2; cc.lineCap = "round";
+      cc.beginPath(); cc.moveTo(c.x, c.y); cc.lineTo(c.x - c.vx * 14, c.y - c.vy * 14); cc.stroke();
+      if (c.vida <= 0 || c.x < -200 || c.y > H + 200) cadente = null;
+    }
+  }
+
+  /* ---------- Faíscas ---------- */
+  const faiscas = [];
+  const CORES = ["255,246,210", "242,193,78", "255,140,192", "255,255,255", "199,181,255"];
+  function soltar(x, y, n, o = {}) {
+    if (parado) return;
+    const forca = o.forca ?? 1.4;
+    for (let i = 0; i < n && faiscas.length < 600; i++) {
+      const ang = Math.random() * Math.PI * 2, vel = (o.anel ? 1 : Math.random()) * forca * (0.6 + Math.random());
+      faiscas.push({
+        x, y,
+        vx: Math.cos(ang) * vel + (o.vx || 0), vy: Math.sin(ang) * vel + (o.vy || 0) - (o.subir ?? 0.25),
+        vida: 1, dec: 0.012 + Math.random() * (o.curta ? 0.035 : 0.018),
+        r: (o.tam || 1) * (1 + Math.random() * 2.6),
+        cor: o.cores ? o.cores[Math.random() * o.cores.length | 0] : CORES[Math.random() * CORES.length | 0],
+        tipo: o.coracao ? "c" : Math.random() < 0.5 ? "b" : "p",
+        giro: Math.random() * 6, gv: (Math.random() - 0.5) * 0.2,
+        peso: o.peso ?? 0.03,
+      });
+    }
+  }
+  function brilho4(ctx, x, y, r, giro) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(giro);
+    ctx.beginPath();
+    ctx.moveTo(0, -r * 2.2);
+    ctx.quadraticCurveTo(0, 0, r * 2.2, 0); ctx.quadraticCurveTo(0, 0, 0, r * 2.2);
+    ctx.quadraticCurveTo(0, 0, -r * 2.2, 0); ctx.quadraticCurveTo(0, 0, 0, -r * 2.2);
+    ctx.fill(); ctx.restore();
+  }
+  function coracao(ctx, x, y, r, giro) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(giro * 0.15); ctx.scale(r / 6, r / 6);
+    ctx.beginPath();
+    ctx.moveTo(0, 4);
+    ctx.bezierCurveTo(-8, -2, -4, -9, 0, -4);
+    ctx.bezierCurveTo(4, -9, 8, -2, 0, 4);
+    ctx.fill(); ctx.restore();
+  }
+  function desenharMagia(dt) {
+    mc.clearRect(0, 0, W, H);
+    if (!faiscas.length) return;
+    mc.globalCompositeOperation = "lighter";
+    for (let i = faiscas.length - 1; i >= 0; i--) {
+      const p = faiscas[i];
+      p.vx *= 0.975; p.vy = p.vy * 0.975 + p.peso * dt;
+      p.x += p.vx * dt; p.y += p.vy * dt; p.giro += p.gv * dt;
+      p.vida -= p.dec * dt;
+      if (p.vida <= 0) { faiscas.splice(i, 1); continue; }
+      const a = p.vida;
+      mc.fillStyle = `rgba(${p.cor},${a})`;
+      if (p.tipo === "c") coracao(mc, p.x, p.y, p.r * 2.4, p.giro);
+      else if (p.tipo === "b") brilho4(mc, p.x, p.y, p.r * (0.6 + a * 0.4), p.giro);
+      else {
+        mc.beginPath(); mc.arc(p.x, p.y, p.r * 0.7 * a + 0.3, 0, 6.283); mc.fill();
+        mc.fillStyle = `rgba(${p.cor},${a * 0.18})`;
+        mc.beginPath(); mc.arc(p.x, p.y, p.r * 2.4, 0, 6.283); mc.fill();
+      }
+    }
+    mc.globalCompositeOperation = "source-over";
+  }
+  const corações = ["255,45,135", "255,140,192", "255,90,165", "242,193,78"];
+  function chuvaDeCoracoes(x, y) {
+    soltar(x, y, 26, { coracao: true, cores: corações, forca: 3.2, subir: 1.2, peso: 0.05, tam: 1.1 });
+    soltar(x, y, 30, { forca: 4, curta: true });
+    sino(4);
+  }
+
+  /* ---------- Varinha de condão (mouse) ---------- */
+  const varinha = $("#varinha");
+  const mouse = { x: -100, y: -100, px: -100, py: -100 };
+  if (!toque && !parado) {
+    document.documentElement.classList.add("com-varinha");
+    addEventListener("pointermove", e => {
+      if (e.pointerType !== "mouse" && e.pointerType !== "pen") return;
+      mouse.x = e.clientX; mouse.y = e.clientY;
+      varinha.classList.add("visivel");
+      varinha.style.transform = `translate(${mouse.x - 10}px, ${mouse.y - 10}px)`;
+      const alvo = e.target.closest && e.target.closest("a, button, [role=button], .leque__carta, .personas li");
+      varinha.classList.toggle("ativa", !!alvo);
+      olhar.x = (mouse.x / W - 0.5) * 2; olhar.y = (mouse.y / H - 0.5) * 2;
+    }, { passive: true });
+    document.addEventListener("mouseleave", () => varinha.classList.remove("visivel"));
+    addEventListener("pointerdown", e => {
+      if (e.pointerType !== "mouse") return;
+      varinha.classList.add("clique");
+      soltar(e.clientX, e.clientY, 34, { forca: 3.2, anel: true, curta: true });
+      soltar(e.clientX, e.clientY, 14, { forca: 1.5 });
+      sino();
+    });
+    addEventListener("pointerup", () => varinha.classList.remove("clique"));
+  }
+  function rastroVarinha() {
+    const dx = mouse.x - mouse.px, dy = mouse.y - mouse.py;
+    const dist = Math.hypot(dx, dy);
+    if (dist > 1.5 && mouse.px > -50) {
+      const n = Math.min(7, Math.ceil(dist / 7));
+      for (let i = 0; i < n; i++) {
+        const k = i / n;
+        soltar(mouse.px + dx * k, mouse.py + dy * k, 1, { forca: 0.6, subir: -0.1, peso: 0.035, vx: dx * 0.04, vy: dy * 0.04 });
+      }
+    } else if (Math.random() < 0.15 && mouse.px > -50) {
+      soltar(mouse.x, mouse.y, 1, { forca: 0.4, subir: -0.2 });
+    }
+    mouse.px = mouse.x; mouse.py = mouse.y;
+  }
+
+  /* ---------- Fada (celular) ----------
+     Passeia sozinha pela tela; quando a pessoa toca, ela voa até o dedo e
+     segue o dedo enquanto ele arrasta. Depois de um tempo, volta a passear. */
+  const fada = $("#fada");
+  const fd = { x: innerWidth * 0.8, y: innerHeight * 0.3, ax: 0, ay: 0, t: Math.random() * 100, seguindo: 0, virada: false };
+  if (toque && !parado) {
+    document.documentElement.classList.add("com-fada");
+    const chamar = (x, y, explodir) => {
+      fd.ax = x; fd.ay = y; fd.seguindo = performance.now() + 2600;
+      if (explodir) { soltar(x, y, 22, { forca: 2.6, anel: true, curta: true }); sino(); }
+    };
+    addEventListener("touchstart", e => { const t = e.touches[0]; if (t) chamar(t.clientX, t.clientY, true); }, { passive: true });
+    addEventListener("touchmove", e => { const t = e.touches[0]; if (t) chamar(t.clientX, t.clientY, false); }, { passive: true });
+    // Inclinar o celular mexe o céu
+    addEventListener("deviceorientation", e => {
+      if (e.gamma == null) return;
+      olhar.x = Math.max(-1, Math.min(1, e.gamma / 30));
+      olhar.y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+    }, { passive: true });
+  }
+  function voarFada(dt, agora) {
+    fd.t += 0.006 * dt;
+    if (agora > fd.seguindo) {
+      fd.ax = W * (0.5 + 0.38 * Math.sin(fd.t * 1.3)) ;
+      fd.ay = H * (0.42 + 0.3 * Math.sin(fd.t * 1.9 + 1.2));
+    }
+    const k = agora < fd.seguindo ? 0.09 : 0.025;
+    const vx = (fd.ax - fd.x) * k, vy = (fd.ay - fd.y) * k;
+    fd.x += vx * dt; fd.y += vy * dt;
+    const flutua = Math.sin(agora * 0.006) * 4;
+    if (Math.abs(vx) > 0.3) fd.virada = vx < 0;
+    fada.classList.toggle("fada__virada", fd.virada);
+    fada.style.transform = `translate(${fd.x}px, ${fd.y + flutua}px)`;
+    // Pó de fada caindo
+    if (Math.random() < 0.55 + Math.min(0.45, Math.hypot(vx, vy) * 0.1)) {
+      soltar(fd.x + (fd.virada ? 6 : -6), fd.y + flutua + 4, 1, { forca: 0.35, subir: -0.2, peso: 0.025, tam: 0.8 });
+    }
+  }
+
+  /* ---------- Laço de animação ---------- */
+  let anterior = performance.now();
+  function quadro(agora) {
+    const dt = Math.min(3, (agora - anterior) / 16.67);
+    anterior = agora;
+    desenharCeu(agora);
+    if (!toque) rastroVarinha();
+    else voarFada(dt, agora);
+    desenharMagia(dt);
+    requestAnimationFrame(quadro);
+  }
+  medir();
+  addEventListener("resize", medir);
+  if (!parado) requestAnimationFrame(quadro);
+
+  /* =========================================================================
+     ABERTURA: o arco dourado se desenha com uma faísca na ponta, e o logo
+     aparece embaixo dele. Só uma vez por visita.
+     ========================================================================= */
+  const abertura = $("#abertura");
+  let jaViu = false;
+  try { jaViu = sessionStorage.getItem("bd-abertura") === "1"; } catch {}
+  if (parado || jaViu) abertura.remove();
+  else {
+    document.body.classList.add("travado");
+    const arco = $("#arco"), total = arco.getTotalLength();
+    arco.style.strokeDasharray = total; arco.style.strokeDashoffset = total;
+    const inicio = performance.now() + 500, dur = 2300;
+    const svg = arco.ownerSVGElement;
+    const desenhar = agora => {
+      if (!abertura.isConnected) return;
+      const k = Math.max(0, Math.min(1, (agora - inicio) / dur));
+      const e = 1 - Math.pow(1 - k, 2.2);
+      arco.style.strokeDashoffset = total * (1 - e);
+      if (k > 0 && k < 1) {
+        const p = arco.getPointAtLength(total * e).matrixTransform(svg.getScreenCTM());
+        soltar(p.x, p.y, 5, { forca: 1.2, subir: -0.3, peso: 0.04 });
+      }
+      if (k >= 1 && !abertura.dataset.fim) {
+        abertura.dataset.fim = "1";
+        const p = arco.getPointAtLength(total).matrixTransform(svg.getScreenCTM());
+        soltar(p.x, p.y, 40, { forca: 3, anel: true, curta: true });
+      }
+      requestAnimationFrame(desenhar);
+    };
+    requestAnimationFrame(desenhar);
+    const fechar = () => {
+      if (abertura.classList.contains("saindo")) return;
+      abertura.classList.add("saindo");
+      document.body.classList.remove("travado");
+      try { sessionStorage.setItem("bd-abertura", "1"); } catch {}
+      soltar(W / 2, H / 2, 70, { forca: 6, anel: true, curta: true });
+      sino(5);
+      setTimeout(() => abertura.remove(), 1000);
+    };
+    abertura.addEventListener("click", fechar);
+    addEventListener("keydown", e => { if (e.key === "Escape" || e.key === "Enter") fechar(); }, { once: true });
+    setTimeout(fechar, 6500);
+  }
+
+  /* ---------- Cabeçalho, menu e dica ---------- */
+  const topo = $("#topo");
+  const aoRolar = () => topo.classList.toggle("topo--rolou", scrollY > 40);
+  addEventListener("scroll", aoRolar, { passive: true }); aoRolar();
+  const menu = $("#menu"), abreMenu = $("#abre-menu");
+  abreMenu.addEventListener("click", () => {
+    const aberto = menu.classList.toggle("aberto");
+    abreMenu.setAttribute("aria-expanded", aberto);
+    document.body.classList.toggle("travado", aberto);
+  });
+  $$("a", menu).forEach(a => a.addEventListener("click", () => {
+    menu.classList.remove("aberto"); abreMenu.setAttribute("aria-expanded", "false"); document.body.classList.remove("travado");
+  }));
+  const secoes = $$("main section[id]");
+  const vigiaMenu = new IntersectionObserver(entradas => {
+    for (const e of entradas) if (e.isIntersecting) {
+      $$("a", menu).forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + e.target.id));
+    }
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  secoes.forEach(s => vigiaMenu.observe(s));
+  $("#dica").textContent = parado ? "Role para descobrir as cartas…"
+    : toque ? "Toque na tela: a fadinha vem até você ✨" : "Passe a varinha pela página e clique para lançar feitiços ✨";
+
+  $("#logo-heroi").addEventListener("click", e => {
+    const r = e.currentTarget.getBoundingClientRect();
+    chuvaDeCoracoes(r.left + r.width / 2, r.top + r.height * 0.45);
+  });
+
+  /* ---------- Revelar ao rolar (com um brilho nos títulos) ---------- */
+  const revelar = new IntersectionObserver(entradas => {
+    for (const e of entradas) if (e.isIntersecting) {
+      e.target.classList.add("visivel");
+      revelar.unobserve(e.target);
+      const t = e.target.querySelector(".titulo");
+      if (t) setTimeout(() => { const r = t.getBoundingClientRect(); soltar(r.left + r.width / 2, r.top + r.height / 2, 18, { forca: 2.2, curta: true }); }, 350);
+    }
+  }, { threshold: 0.18 });
+  $$(".surge").forEach((el, i) => { el.style.transitionDelay = (el.closest(".grade-servicos") ? (i % 3) * 120 : 0) + "ms"; revelar.observe(el); });
+
+  /* ---------- Citação: as palavras acendem uma a uma ---------- */
+  const cit = $("#citacao");
+  cit.innerHTML = cit.textContent.split(" ").map(p => `<span class="palavra">${p}</span>`).join(" ");
+  new IntersectionObserver((entradas, obs) => {
+    if (!entradas[0].isIntersecting) return;
+    obs.disconnect();
+    $$(".palavra", cit).forEach((p, i) => setTimeout(() => {
+      p.classList.add("acesa");
+      const r = p.getBoundingClientRect(); soltar(r.left + r.width / 2, r.top + r.height / 2, 3, { forca: 0.8 });
+    }, parado ? 0 : i * 170));
+  }, { threshold: 0.6 }).observe(cit);
+
+  /* ---------- Cartões de serviço inclinam com a varinha ---------- */
+  if (!toque && !parado) $$(".servico").forEach(card => {
+    card.addEventListener("pointermove", e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.style.setProperty("--ry", (x - 0.5) * 10 + "deg");
+      card.style.setProperty("--rx", (0.5 - y) * 10 + "deg");
+      card.style.setProperty("--mx", x * 100 + "%");
+      card.style.setProperty("--my", y * 100 + "%");
+    });
+    card.addEventListener("pointerleave", () => { card.style.setProperty("--rx", "0deg"); card.style.setProperty("--ry", "0deg"); });
+  });
+  $$(".personas li").forEach(li => li.addEventListener("pointerenter", () => {
+    const r = li.getBoundingClientRect(); soltar(r.left + r.width / 2, r.top, 8, { forca: 1.4, curta: true, cores: corações });
+  }));
+
+  /* ---------- Espelho, espelho meu ---------- */
+  const fotos = $$(".espelho__foto"), pontos = $("#espelho-pontos");
+  let fotoAtual = 0, timerEspelho;
+  fotos.forEach((f, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("aria-label", `Foto ${i + 1}`);
+    b.addEventListener("click", () => mostrarFoto(i, true));
+    pontos.appendChild(b);
+  });
+  function mostrarFoto(i, brilhar) {
+    fotoAtual = (i + fotos.length) % fotos.length;
+    fotos.forEach((f, k) => f.classList.toggle("ativa", k === fotoAtual));
+    $$("button", pontos).forEach((b, k) => b.setAttribute("aria-current", k === fotoAtual));
+    if (brilhar) {
+      const r = $("#espelho").getBoundingClientRect();
+      for (let k = 0; k < 6; k++) soltar(r.left + Math.random() * r.width, r.top + Math.random() * r.height, 6, { forca: 1.6, curta: true });
+      sino();
+    }
+    clearTimeout(timerEspelho);
+    if (!parado) timerEspelho = setTimeout(() => mostrarFoto(fotoAtual + 1, false), 6000);
+  }
+  $("#espelho-botao").addEventListener("click", () => mostrarFoto(fotoAtual + 1, true));
+  let x0 = null;
+  $("#espelho").addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+  $("#espelho").addEventListener("touchend", e => {
+    if (x0 == null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) mostrarFoto(fotoAtual + (dx < 0 ? 1 : -1), true);
+  });
+  mostrarFoto(0, false);
+
+  /* ---------- Livro que abre ---------- */
+  const livro = $("#livro3d");
+  livro.addEventListener("click", () => {
+    const aberto = livro.classList.toggle("aberto");
+    livro.setAttribute("aria-pressed", aberto);
+    livro.setAttribute("aria-label", aberto ? "Fechar o livro" : "Abrir o livro O Multiverso");
+    const r = livro.getBoundingClientRect();
+    soltar(r.left + r.width / 2, r.top + r.height / 2, 30, { forca: 2.6, curta: true });
+    sino();
+  });
+
+  /* =========================================================================
+     MESA DE TARÔ: os 22 Arcanos Maiores em leque. A pessoa toca uma carta,
+     ela voa até o lugar da tiragem e vira. As mensagens são curtas e gentis;
+     a leitura de verdade fica para a consulta.
+     ========================================================================= */
+  const T = "︎"; // força o símbolo como texto, não emoji
+  const ARCANOS = [
+    ["0", "O Louco", "✧", "Um salto de fé. Algo novo te chama: vá leve, de coração aberto e pés atentos."],
+    ["I", "O Mago", "∞", "Você já tem nas mãos tudo de que precisa. É hora de transformar intenção em ação."],
+    ["II", "A Sacerdotisa", "☽", "A resposta mora no silêncio. Escute sua intuição antes de ouvir o mundo."],
+    ["III", "A Imperatriz", "♀", "Tempo de florescer. Cuide, nutra e deixe a abundância encontrar você."],
+    ["IV", "O Imperador", "♂", "Estrutura também é amor. Organize seu reino e firme seus limites."],
+    ["V", "O Hierofante", "⚜", "Busque um conselho sábio. Há sabedoria no que veio antes de você."],
+    ["VI", "Os Enamorados", "♡", "Uma escolha do coração se aproxima. Escolha o que está alinhado com quem você é."],
+    ["VII", "O Carro", "✶", "Direção e coragem. Segure as rédeas: o caminho se abre para quem avança."],
+    ["VIII", "A Força", "❦", "Doçura que vence o medo. Sua maior força é a gentileza consigo."],
+    ["IX", "O Eremita", "✵", "Recolha-se para ouvir a própria luz. A solidão de agora é semente."],
+    ["X", "A Roda da Fortuna", "⊕", "A roda gira. O que parecia parado começa a se mover a seu favor."],
+    ["XI", "A Justiça", "⚖", "Equilíbrio e verdade. O que é justo encontra o seu lugar."],
+    ["XII", "O Enforcado", "♆", "Mude o ponto de vista. A pausa de agora revela o que a pressa escondia."],
+    ["XIII", "A Morte", "⚘", "Um ciclo se fecha para outro nascer. Deixe ir com gratidão."],
+    ["XIV", "A Temperança", "≈", "Misture com calma. A cura vem da medida certa entre os opostos."],
+    ["XV", "O Diabo", "♄", "Olhe para as correntes com coragem: muitas delas já estão abertas."],
+    ["XVI", "A Torre", "↯", "O que não era firme cai, para que você construa sobre a verdade."],
+    ["XVII", "A Estrela", "★", "O céu conspira a seu favor. A esperança volta a brilhar."],
+    ["XVIII", "A Lua", "☾", "Nem tudo é o que parece. Atravesse a névoa confiando nos seus sonhos."],
+    ["XIX", "O Sol", "☉", "Alegria, clareza e vitória. Brilhe sem pedir licença."],
+    ["XX", "O Julgamento", "✺", "Um chamado para despertar. Chegou a hora de renascer na sua melhor versão."],
+    ["XXI", "O Mundo", "♁", "Ciclo completo. Celebre o caminho e prepare-se para a próxima dança."],
+  ].map(([num, nome, glifo, msg]) => ({ num, nome, glifo: glifo + T, msg }));
+  const POSICOES = { dia: ["Carta do dia"], tres: ["O que passou", "O que é agora", "O caminho"] };
+
+  const mesaEl = $("#mesa"), leque = $("#leque"), vagasEl = $("#vagas");
+  const leitura = $("#leitura"), itens = $("#leitura-itens"), instrucao = $("#instrucao");
+  let modo = "dia", ordem = [], tiradas = [], ocupado = false;
+
+  function embaralhar() {
+    ordem = ARCANOS.map((_, i) => i);
+    for (let i = ordem.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [ordem[i], ordem[j]] = [ordem[j], ordem[i]]; }
+    tiradas = []; ocupado = false;
+    leitura.hidden = true;
+    if ("speechSynthesis" in window) speechSynthesis.cancel();
+    mesaEl.classList.toggle("mesa--tres", modo === "tres");
+    instrucao.textContent = modo === "dia" ? "Toque em uma carta do leque." : "Toque em três cartas, uma de cada vez.";
+    vagasEl.innerHTML = POSICOES[modo].map(p => `
+      <div class="vaga">
+        <div class="carta" data-estado="vazia"><div class="carta__dentro"><div class="carta__verso"></div><div class="carta__frente"></div></div></div>
+        <p class="vaga__rotulo">${p}</p>
+      </div>`).join("");
+    montarLeque();
+  }
+
+  function montarLeque() {
+    const largura = leque.clientWidth || 320;
+    const pequeno = largura < 600;
+    const lw = pequeno ? 70 : 108, lh = Math.round(lw * 1.68);
+    const raio = lh * (pequeno ? 2.4 : 3.2);
+    // Abre o leque o quanto couber na largura disponível
+    // (a carta inclinada ocupa mais que a própria largura: desconta a ponta que sobra)
+    const meia = Math.max(10, Math.min(36, Math.asin(Math.min(0.62, (largura / 2 - lw / 2 - lh * 0.3) / raio)) * 180 / Math.PI));
+    const n = ARCANOS.length, passo = (meia * 2) / (n - 1);
+    leque.style.setProperty("--lw", lw + "px");
+    leque.style.setProperty("--lh", lh + "px");
+    leque.style.setProperty("--pivo", (raio / lh * 100 + 100) + "%");
+    // As cartas das pontas descem ao girar: a base sobe esse tanto para elas caberem
+    const queda = Math.round(raio * (1 - Math.cos(meia * Math.PI / 180)));
+    leque.style.setProperty("--base", queda + 4 + "px");
+    leque.style.height = lh + queda + 30 + "px";
+    leque.classList.remove("fechado");
+    leque.classList.add("junto");
+    leque.innerHTML = "";
+    for (let i = 0; i < n; i++) {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "leque__carta verso";
+      b.style.setProperty("--i", i);
+      b.style.setProperty("--a", (-meia + passo * i).toFixed(2) + "deg");
+      b.dataset.angulo = (-meia + passo * i).toFixed(2);
+      b.setAttribute("aria-label", `Carta ${i + 1} de ${n}, virada para baixo`);
+      b.addEventListener("click", () => escolher(b, i));
+      leque.appendChild(b);
+    }
+    // Espalha o leque no próximo quadro, para a transição acontecer
+    requestAnimationFrame(() => requestAnimationFrame(() => leque.classList.remove("junto")));
+  }
+
+  function escolher(botao, pos) {
+    if (ocupado || tiradas.length >= POSICOES[modo].length) return;
+    ocupado = true;
+    const arcano = ARCANOS[ordem[pos]];
+    const k = tiradas.length;
+    tiradas.push(arcano);
+    const carta = $$(".carta", vagasEl)[k];
+    $(".carta__frente", carta).innerHTML =
+      `<span class="carta__num">${arcano.num}</span><span class="carta__glifo" aria-hidden="true">${arcano.glifo}</span><span class="carta__nome">${arcano.nome}</span>`;
+
+    const de = botao.getBoundingClientRect(), para = carta.getBoundingClientRect();
+    botao.classList.add("usada");
+    const terminar = () => {
+      carta.dataset.estado = "chegou";
+      requestAnimationFrame(() => requestAnimationFrame(() => { carta.dataset.estado = "virada"; }));
+      setTimeout(() => {
+        const r = carta.getBoundingClientRect();
+        soltar(r.left + r.width / 2, r.top + r.height / 2, 46, { forca: 3.4, anel: true, curta: true });
+        sino(3);
+        ocupado = false;
+        if (tiradas.length === POSICOES[modo].length) mostrarLeitura();
+      }, parado ? 0 : 520);
+    };
+    if (parado || !botao.animate) return terminar();
+
+    // A carta voa do leque até o lugar da tiragem
+    const voo = document.createElement("div");
+    voo.className = "voo verso";
+    Object.assign(voo.style, { left: para.left + "px", top: para.top + "px", width: para.width + "px", height: para.height + "px" });
+    document.body.appendChild(voo);
+    const dx = (de.left + de.width / 2) - (para.left + para.width / 2);
+    const dy = (de.top + de.height / 2) - (para.top + para.height / 2);
+    const esc = botao.offsetWidth / para.width;
+    const anim = voo.animate([
+      { transform: `translate(${dx}px, ${dy}px) rotate(${botao.dataset.angulo}deg) scale(${esc})` },
+      { transform: `translate(${dx * 0.45}px, ${dy * 0.45 - 60}px) rotate(${-botao.dataset.angulo * 0.5}deg) scale(${(esc + 1) / 2 * 1.08})`, offset: 0.55 },
+      { transform: "none" },
+    ], { duration: 820, easing: "cubic-bezier(.4,.1,.2,1)" });
+    let ultimo = 0;
+    const rastro = agora => {
+      if (anim.playState === "finished") return;
+      if (agora - ultimo > 30) {
+        ultimo = agora;
+        const r = voo.getBoundingClientRect();
+        soltar(r.left + r.width / 2, r.top + r.height / 2, 4, { forca: 1, subir: -0.2 });
+      }
+      requestAnimationFrame(rastro);
+    };
+    requestAnimationFrame(rastro);
+    anim.onfinish = () => { voo.remove(); terminar(); };
+  }
+
+  function mostrarLeitura() {
+    leque.classList.add("fechado");
+    instrucao.textContent = "As cartas falaram.";
+    const nomes = POSICOES[modo];
+    itens.innerHTML = tiradas.map((a, i) => `
+      <div class="leitura__item">
+        <span class="leitura__pos">${nomes[i]}</span>
+        <h3 class="leitura__nome">${a.num} · ${a.nome}</h3>
+        <p class="leitura__msg">${a.msg}</p>
+      </div>`).join("");
+    const lista = tiradas.map((a, i) => `${nomes[i]}: ${a.nome}`).join("; ");
+    $("#leitura-zap").href = zap(`Olá, Tryv! Tirei no site Bem Dito Tarot — ${lista}. Quero uma leitura completa ✨`);
+    leitura.hidden = false;
+    setTimeout(() => leitura.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "nearest" }), 300);
+  }
+
+  $$(".modos button").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.modo === modo && !tiradas.length) return;
+    modo = b.dataset.modo;
+    $$(".modos button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    embaralhar();
+  }));
+  $("#de-novo").addEventListener("click", () => {
+    embaralhar();
+    $("#mesa").scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "start" });
+  });
+  let larguraAnterior = leque.clientWidth;
+  addEventListener("resize", () => {
+    if (Math.abs(leque.clientWidth - larguraAnterior) < 40) return;
+    larguraAnterior = leque.clientWidth;
+    if (!tiradas.length) montarLeque();
+  });
+
+  /* ---------- Ouvir a mensagem em voz alta ---------- */
+  const botaoOuvir = $("#ouvir");
+  if (!("speechSynthesis" in window)) botaoOuvir.hidden = true;
+  else {
+    speechSynthesis.getVoices();
+    botaoOuvir.addEventListener("click", () => {
+      if (speechSynthesis.speaking) { speechSynthesis.cancel(); botaoOuvir.textContent = "🔊 Ouvir a mensagem"; return; }
+      const nomes = POSICOES[modo];
+      const texto = tiradas.map((a, i) => `${nomes[i]}: ${a.nome}. ${a.msg}`).join(" ");
+      const u = new SpeechSynthesisUtterance(texto);
+      u.lang = "pt-BR"; u.rate = 0.92; u.pitch = 1.05;
+      const voz = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith("pt-br"));
+      if (voz) u.voice = voz;
+      u.onend = u.onerror = () => { botaoOuvir.textContent = "🔊 Ouvir a mensagem"; };
+      botaoOuvir.textContent = "■ Parar";
+      speechSynthesis.speak(u);
+    });
+  }
+
+  embaralhar();
+
+  /* ---------- Árvores da floresta (geradas, sempre iguais) ---------- */
+  let semente = 7;
+  const aleatorio = () => (semente = (semente * 16807) % 2147483647) / 2147483647;
+  const pinheiro = (x, base, h, w) => `M${x} ${base - h} L${x + w / 2} ${base - h * 0.45} L${x + w * 0.32} ${base - h * 0.45} L${x + w * 0.6} ${base} L${x - w * 0.6} ${base} L${x - w * 0.32} ${base - h * 0.45} L${x - w / 2} ${base - h * 0.45}Z`;
+  const arvores = (base, alt, larg, passo, pular) => {
+    let d = "";
+    for (let x = -20; x < 1480; x += passo * (0.6 + aleatorio() * 0.8)) {
+      if (pular && x > pular[0] && x < pular[1]) continue;
+      const h = alt * (0.6 + aleatorio() * 0.7);
+      d += pinheiro(x, base + aleatorio() * 10, h, larg * (0.7 + aleatorio() * 0.5));
+    }
+    return d;
+  };
+  const ns = "http://www.w3.org/2000/svg";
+  const caminho = (g, d) => { const p = document.createElementNS(ns, "path"); p.setAttribute("d", d); $(g).appendChild(p); };
+  caminho("#arvores-fundo", arvores(170, 70, 34, 26, [1040, 1150]));
+  caminho("#arvores-frente", arvores(262, 110, 52, 46, [1020, 1170]));
+})();
+</script>
+</body>
+</html>
