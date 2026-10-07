@@ -586,15 +586,19 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .casinha-zoom { position: absolute; inset: 0; transition: transform 1.5s cubic-bezier(.7, 0, .85, .35), filter 1.5s; }
 .casinha-palco.entrando .casinha-zoom { transform: scale(10); filter: brightness(1.7) saturate(1.2); }
 .casinha-palco.saindo .casinha-zoom { transition: transform 1.4s cubic-bezier(.15, .65, .3, 1), filter 1.4s; }
-.camada { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; will-change: transform; }
+.camada { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; will-change: transform; transform-origin: 50% 60%; }
+.casinha-palco { cursor: pointer; touch-action: pan-y; }
 .camada--desfocada { filter: blur(2.6px); }
 .camada .ponto, .camada .ingrediente, .camada #casa { pointer-events: all; }
 .casa-neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .casinha-chamada {
-  position: absolute; left: 50%; bottom: 4%; z-index: 3; transform: translateX(-50%); width: max-content; max-width: 90%; text-align: center;
+  position: absolute; left: 50%; bottom: 2%; z-index: 3; transform: translateX(-50%); width: max-content; max-width: 90%; text-align: center;
   padding: .6rem 1.2rem; border-radius: 999px; background: rgba(18, 14, 46, .72); box-shadow: 0 0 0 1px var(--linha) inset; backdrop-filter: blur(6px);
-  font: italic 500 1.1rem/1.25 var(--livro); color: var(--ouro-claro); pointer-events: none; transition: opacity .4s;
+  font: italic 500 1.1rem/1.25 var(--livro); color: var(--ouro-claro); border: 0; cursor: pointer; transition: opacity .4s, box-shadow .3s;
+  animation: chamarPorta 2.4s ease-in-out infinite;
 }
+.casinha-chamada:hover { box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 24px rgba(242, 193, 78, .5); }
+@keyframes chamarPorta { 50% { box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 22px rgba(242, 193, 78, .45); } }
 .casinha-palco.entrando .casinha-chamada { opacity: 0; }
 #casa { cursor: pointer; }
 #casa .janela-luz { opacity: .85; transition: opacity .5s, filter .5s; }
@@ -895,7 +899,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <div class="casinha-palco surge" id="casinha-palco">
         <div class="casinha-zoom" id="casinha-zoom"></div>
         <canvas class="casa-neve" id="casa-neve" aria-hidden="true"></canvas>
-        <p class="casinha-chamada" id="casinha-chamada">✦ Passe a varinha na porta…</p>
+        <button class="casinha-chamada" id="casinha-chamada" type="button">✦ Passe a varinha na porta…</button>
       </div>
     </div>
   </section>
@@ -2870,7 +2874,9 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   mundo.style.setProperty("--liq", "#7a4fd6");
   mundo.style.setProperty("--liq-claro", "#d9c8ff");
   const casaEl = $("#casa");
-  if (toque) chamadaCasa.textContent = "✦ Toque na porta para entrar…";
+  if (toque) chamadaCasa.textContent = "✦ Toque para entrar na casinha";
+  // No celular a cena é estreita: aproxima a câmera da casinha para a porta ficar maior
+  const zoomBase = () => (palco.clientWidth < 560 ? 1.32 : 1);
   let foraVisivel = false, dentro = false, entrando = false;
   new IntersectionObserver(e => { foraVisivel = e[0].isIntersecting; }, { threshold: 0 }).observe(palco);
 
@@ -2879,14 +2885,18 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   function profundidade() {
     if (!parado && (foraVisivel || dentro)) {
       prof.x += (olhar.x - prof.x) * .06; prof.y += (olhar.y - prof.y) * .06;
+      const base = dentro ? 1 : zoomBase();
       (dentro ? camadasDentro : camadasFora).forEach(c => {
         const p = +c.dataset.p;
-        c.style.transform = `translate3d(${(-prof.x * p * 24).toFixed(2)}px, ${(-prof.y * p * 14).toFixed(2)}px, 0)${p > 1 ? " scale(1.08)" : ""}`;
+        c.style.transform = `translate3d(${(-prof.x * p * 24).toFixed(2)}px, ${(-prof.y * p * 14).toFixed(2)}px, 0) scale(${(base * (p > 1 ? 1.08 : 1)).toFixed(3)})`;
       });
     }
     requestAnimationFrame(profundidade);
   }
-  requestAnimationFrame(profundidade);
+  if (parado) {
+    const fixar = () => camadasFora.forEach(c => { c.style.transform = `scale(${zoomBase()})`; });
+    fixar(); addEventListener("resize", fixar);
+  } else requestAnimationFrame(profundidade);
 
   // Neve caindo na frente da casinha
   const neve = $("#casa-neve"), nc = neve.getContext("2d");
@@ -2920,7 +2930,19 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     if (e.pointerType === "mouse") { clearTimeout(timerPorta); timerPorta = setTimeout(entrar, 1300); }
   });
   casaEl.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") dormir(); });
-  casaEl.addEventListener("click", entrar);
+  // Clique ou toque em qualquer ponto da cena (ou no botão) também entra
+  palco.addEventListener("click", entrar);
+  // Passar o dedo de lado por cima da casinha entra; deslizar para cima ou para baixo só rola a página
+  let dedo = null;
+  palco.addEventListener("touchstart", e => { const t = e.touches[0]; dedo = { x: t.clientX, y: t.clientY }; acordar(); }, { passive: true });
+  palco.addEventListener("touchmove", e => {
+    if (!dedo) return;
+    const t = e.touches[0], dx = t.clientX - dedo.x, dy = t.clientY - dedo.y;
+    if (Math.abs(dx) < 30 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+    const r = casaEl.getBoundingClientRect();
+    if (t.clientY > r.top && t.clientY < r.bottom) { dedo = null; entrar(); }
+  }, { passive: true });
+  palco.addEventListener("touchend", () => { dedo = null; if (!entrando) dormir(); }, { passive: true });
   casaEl.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); entrar(); } });
 
   function entrar() {
