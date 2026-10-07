@@ -461,6 +461,116 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 @keyframes bater { from { transform: rotate(10deg) scaleY(1); } to { transform: rotate(-26deg) scaleY(.55); } }
 @keyframes bater-dir { from { transform: rotate(-10deg) scaleY(1); } to { transform: rotate(26deg) scaleY(.55); } }
 
+/* ---------- Descubra-se: os cinco portais ---------- */
+.nascimento {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 1rem;
+  max-width: 780px; margin: 0 auto; padding: clamp(1.1rem, 3vw, 1.6rem); border-radius: var(--raio);
+  background: linear-gradient(180deg, rgba(43, 26, 94, .55), rgba(18, 14, 46, .55)); box-shadow: 0 0 0 1px var(--linha) inset;
+}
+.nascimento .botao { flex: 0 0 auto; min-height: 52px; }
+.campo { display: flex; flex-direction: column; gap: .4rem; flex: 1 1 200px; font: 500 .74rem/1.2 var(--corpo); letter-spacing: .18em; text-transform: uppercase; color: var(--ouro); text-align: left; }
+.campo input, .campo select {
+  width: 100%; min-height: 52px; padding: .75rem .9rem; border-radius: 12px; border: 1px solid var(--linha);
+  font: 500 1.05rem/1.2 var(--corpo); letter-spacing: 0; text-transform: none; color: var(--texto);
+  background: rgba(8, 6, 26, .65); color-scheme: dark;
+}
+.campo input:focus, .campo select:focus { outline: none; border-color: var(--ouro); box-shadow: 0 0 0 3px rgba(242, 193, 78, .22); }
+.marcar { display: flex; align-items: center; gap: .55rem; font-size: .95rem; color: var(--texto-2); cursor: pointer; }
+.marcar input { width: 19px; height: 19px; accent-color: var(--ouro); }
+.tremer { animation: tremer .5s; }
+@keyframes tremer { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+
+.portais { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(.7rem, 2.4vw, 1.4rem); margin-top: 2.4rem; }
+.portal {
+  position: relative; width: clamp(138px, 42vw, 196px); aspect-ratio: 5 / 7; padding: 0; border: 0; background: none;
+  perspective: 1100px; container-type: inline-size; transition: transform .4s, filter .4s;
+}
+.portal:hover { transform: translateY(-6px); }
+.portais.travados .portal { filter: saturate(.55) brightness(.8); }
+.portal.ativo { filter: drop-shadow(0 0 18px rgba(242, 193, 78, .65)); }
+.portal__dentro { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 1s cubic-bezier(.3, .7, .2, 1); }
+.portal.virado .portal__dentro { transform: rotateY(180deg); }
+.portal__face {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4cqw;
+  padding: 10cqw 8cqw; border-radius: 7cqw; text-align: center; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden;
+}
+.portal__face--verso {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 220, 140, .22), transparent 45%),
+    repeating-conic-gradient(from 0deg at 50% 42%, rgba(242, 193, 78, .12) 0 3deg, transparent 3deg 12deg),
+    radial-gradient(120% 90% at 50% 40%, #4a1a6e 0%, #241052 60%, #140a32 100%);
+  box-shadow: inset 0 0 0 3px #140a32, inset 0 0 0 4.5px rgba(242, 193, 78, .85), inset 0 0 0 9px #140a32, inset 0 0 0 10px rgba(242, 193, 78, .4);
+}
+.portal__face--frente {
+  transform: rotateY(180deg);
+  background: radial-gradient(70% 45% at 50% 40%, rgba(255, 220, 140, .28), transparent 70%), linear-gradient(180deg, #1d1650 0%, #2b1a5e 55%, #3b1458 100%);
+  box-shadow: inset 0 0 0 3px #120e2e, inset 0 0 0 4.5px var(--ouro), inset 0 0 0 9px #120e2e, inset 0 0 0 10px rgba(242, 193, 78, .5);
+}
+.portal__icone { font: 26cqw/1 var(--simbolo); color: var(--ouro-claro); text-shadow: 0 0 16px rgba(255, 220, 140, .85); }
+.portal__icone--han { font-family: "Noto Serif SC", "Songti SC", "SimSun", serif; }
+.portal__nome { font: 600 9.6cqw/1.15 var(--titulo); color: var(--texto); }
+.portal__sub { font: 500 6.4cqw/1.3 var(--corpo); letter-spacing: .14em; text-transform: uppercase; color: var(--rosa-claro); }
+
+.revelacao {
+  margin: 2.4rem auto 0; max-width: 980px; padding: clamp(1.3rem, 4vw, 2.4rem); border-radius: var(--raio);
+  background: linear-gradient(180deg, rgba(43, 26, 94, .62), rgba(18, 14, 46, .62)); box-shadow: 0 0 0 1px var(--linha) inset, 0 24px 60px rgba(0, 0, 0, .35);
+  backdrop-filter: blur(8px); animation: abrirPainel .7s cubic-bezier(.2, .7, .2, 1);
+}
+.revelacao[hidden] { display: none; }
+.revelacao, #mapa-resultado { scroll-margin-top: 90px; }
+@media (min-width: 761px) {
+  /* A mandala fica parada ao lado da tabela enquanto o texto rola */
+  #mapa-resultado .rev__grade { align-items: start; }
+  #mapa-resultado .rev__visual { position: sticky; top: 96px; }
+}
+@keyframes abrirPainel { from { opacity: 0; transform: translateY(20px) scale(.98); } }
+.rev__topo { text-align: center; }
+.rev__titulo { margin-top: .5rem; font: 600 clamp(1.5rem, 4vw, 2.2rem)/1.15 var(--titulo); background: var(--dourado); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.rev__grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.4rem, 4vw, 2.6rem); align-items: center; margin-top: 1.8rem; }
+@media (max-width: 760px) { .rev__grade { grid-template-columns: 1fr; } }
+.rev__visual { display: grid; place-items: center; }
+.rev__visual svg { width: 100%; max-width: 420px; height: auto; overflow: visible; }
+.rev__texto p { margin: .8rem 0 0; color: var(--texto-2); }
+.rev__texto .destaque { font: italic 500 clamp(1.25rem, 2.6vw, 1.5rem)/1.45 var(--livro); color: var(--texto); }
+.rev__texto strong { color: var(--ouro-claro); font-weight: 600; }
+.rev__acoes { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+.rev__aviso { margin: 1.3rem 0 0; font-size: .9rem; color: var(--texto-2); opacity: .9; }
+.palavras { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+.palavras li { padding: .3rem .8rem; border-radius: 999px; font-size: .92rem; color: var(--ouro-claro); background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; }
+
+/* Formulário do mapa */
+.mapa-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 1rem; align-items: end; margin-top: 1.4rem; }
+.mapa-form .marcar { min-height: 52px; }
+.mapa-form .botao { min-height: 52px; }
+.mapa-form__outra { display: contents; }
+.mapa-form__outra[hidden] { display: none; }
+
+/* Roda do mapa astral */
+.mapa .anel { transform-origin: 0 0; animation: girarEntrada 1.6s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes girarEntrada { from { transform: rotate(-120deg) scale(.6); opacity: 0; } }
+.mapa .astro { opacity: 0; animation: surgirAstro .7s cubic-bezier(.2, .7, .2, 1) forwards; animation-delay: calc(1s + var(--k) * 110ms); cursor: pointer; }
+@keyframes surgirAstro { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: none; } }
+.mapa .astro circle { transition: fill .3s, stroke .3s; }
+.mapa .astro:hover circle, .mapa .astro.marcado circle { fill: rgba(255, 45, 135, .35); stroke: var(--rosa-claro); }
+.mapa .aspecto { stroke-dasharray: 400; stroke-dashoffset: 400; animation: tracar 1.4s ease forwards; animation-delay: calc(2.2s + var(--k) * 40ms); }
+@keyframes tracar { to { stroke-dashoffset: 0; } }
+.mapa-info { min-height: 1.6em; margin: .6rem 0 0; text-align: center; font: italic 500 1.15rem/1.4 var(--livro); color: var(--ouro-claro); }
+.tabela-astros { width: 100%; margin-top: 1.2rem; border-collapse: collapse; font-size: .95rem; }
+.tabela-astros td { padding: .42rem .4rem; border-bottom: 1px solid rgba(242, 193, 78, .12); color: var(--texto-2); }
+.tabela-astros td:first-child { width: 2rem; font: 1.15rem/1 var(--simbolo); color: var(--ouro-claro); text-align: center; }
+.tabela-astros tr { transition: background .3s; }
+.tabela-astros tr.marcado { background: rgba(255, 45, 135, .14); }
+.tabela-astros .grau { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Tzolkin, rodas e cartas de nascimento */
+.tzolkin rect.cel { opacity: 0; animation: acender .35s forwards; animation-delay: calc(var(--k) * 4ms); }
+@keyframes acender { to { opacity: 1; } }
+.tzolkin .meu { animation: acender .35s forwards, pulsarKin 1.6s ease-in-out infinite; animation-delay: calc(var(--k) * 4ms), calc(var(--k) * 4ms + .4s); }
+@keyframes pulsarKin { 50% { stroke-width: 3.2; filter: drop-shadow(0 0 6px #fff); } }
+.roda__giro { transition: transform 3.2s cubic-bezier(.15, .8, .2, 1); transform-origin: 0 0; }
+.duas-cartas { display: flex; justify-content: center; gap: clamp(.8rem, 3vw, 1.6rem); width: 100%; }
+.duas-cartas .vaga { --vg: clamp(120px, 34vw, 170px); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
@@ -497,6 +607,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <a class="marca" href="#inicio"><img src="assets/logo-pequeno.webp" alt="" width="240" height="220"><span>Bem Dito</span></a>
     <nav class="menu" id="menu" aria-label="Seções">
       <a href="#cartas">Cartas</a>
+      <a href="#descubra">Descubra-se</a>
       <a href="#consultas">Consultas</a>
       <a href="#tryv">Tryv</a>
       <a href="#livro">Livro</a>
@@ -581,6 +692,55 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
           <p class="aviso">A mesa encantada é um carinho para o seu dia. A leitura completa, feita com atenção à sua história, é com a Tryv.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= DESCUBRA-SE ================= -->
+  <section class="secao" id="descubra">
+    <div class="envelope">
+      <div class="cabeca surge">
+        <span class="chamada">Degustação mágica</span>
+        <h2 class="titulo">Descubra-se</h2>
+        <p class="intro">Cinco portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.</p>
+      </div>
+      <form class="nascimento surge" id="nascimento" novalidate>
+        <label class="campo">Seu nome <input id="n-nome" type="text" autocomplete="given-name" placeholder="opcional" maxlength="40"></label>
+        <label class="campo">Data de nascimento <input id="n-data" type="date" required min="1900-01-01"></label>
+        <button class="botao botao--ouro" type="submit">✦ Abrir os portais</button>
+      </form>
+      <div class="portais travados" id="portais">
+        <button class="portal" type="button" data-portal="mapa" aria-label="Mapa astral">
+          <span class="portal__dentro">
+            <span class="portal__face portal__face--verso"><span class="portal__icone">☉&#xFE0E;</span><span class="portal__nome">Mapa astral</span><span class="portal__sub">gratuito</span></span>
+            <span class="portal__face portal__face--frente"></span>
+          </span>
+        </button>
+        <button class="portal" type="button" data-portal="kin" aria-label="Kin maia">
+          <span class="portal__dentro">
+            <span class="portal__face portal__face--verso"><span class="portal__icone">⊛&#xFE0E;</span><span class="portal__nome">Kin maia</span><span class="portal__sub">Tzolkin</span></span>
+            <span class="portal__face portal__face--frente"></span>
+          </span>
+        </button>
+        <button class="portal" type="button" data-portal="anjo" aria-label="Anjo cabalístico">
+          <span class="portal__dentro">
+            <span class="portal__face portal__face--verso"><span class="portal__icone">✧&#xFE0E;</span><span class="portal__nome">Anjo cabalístico</span><span class="portal__sub">os 72 nomes</span></span>
+            <span class="portal__face portal__face--frente"></span>
+          </span>
+        </button>
+        <button class="portal" type="button" data-portal="china" aria-label="Horóscopo chinês">
+          <span class="portal__dentro">
+            <span class="portal__face portal__face--verso"><span class="portal__icone portal__icone--han">龍</span><span class="portal__nome">Horóscopo chinês</span><span class="portal__sub">animal e elemento</span></span>
+            <span class="portal__face portal__face--frente"></span>
+          </span>
+        </button>
+        <button class="portal" type="button" data-portal="arcano" aria-label="Arcano de nascimento">
+          <span class="portal__dentro">
+            <span class="portal__face portal__face--verso"><span class="portal__icone">★&#xFE0E;</span><span class="portal__nome">Arcano de nascimento</span><span class="portal__sub">tarô</span></span>
+            <span class="portal__face portal__face--frente"></span>
+          </span>
+        </button>
+      </div>
+      <div class="revelacao" id="revelacao" hidden aria-live="polite"></div>
     </div>
   </section>
 
@@ -1403,6 +1563,702 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   }
 
   embaralhar();
+
+  /* =========================================================================
+     DESCUBRA-SE: cinco portais a partir da data de nascimento (mapa astral,
+     kin maia, anjo cabalístico, horóscopo chinês e arcano de nascimento).
+     Tudo é calculado aqui no navegador; nada é enviado a lugar nenhum.
+     ========================================================================= */
+  const ASTRO = (() => {
+    /* Efemérides simplificadas (método de Paul Schlyter, precisão ~1–2′ para 1900–2100) */
+    const RAD = Math.PI / 180, GRAU = 180 / Math.PI;
+    const norm = a => ((a % 360) + 360) % 360;
+    const sen = a => Math.sin(a * RAD), cos = a => Math.cos(a * RAD);
+    // Dias desde 2000 jan 0.0 UT
+    const diaJ = (a, m, d, ut) => 367 * a - Math.floor(7 * (a + Math.floor((m + 9) / 12)) / 4) + Math.floor(275 * m / 9) + d - 730530 + ut / 24;
+
+    function kepler(M, e) {
+      let E = M + GRAU * e * sen(M) * (1 + e * cos(M));
+      for (let i = 0; i < 10; i++) {
+        const E1 = E - (E - GRAU * e * sen(E) - M) / (1 - e * cos(E));
+        if (Math.abs(E1 - E) < 1e-7) return E1;
+        E = E1;
+      }
+      return E;
+    }
+    function orbita({ N, i, w, a, e, M }) {
+      const E = kepler(norm(M), e);
+      const xv = a * (cos(E) - e), yv = a * Math.sqrt(1 - e * e) * sen(E);
+      const v = Math.atan2(yv, xv) * GRAU, r = Math.hypot(xv, yv), vw = v + w;
+      const x = r * (cos(N) * cos(vw) - sen(N) * sen(vw) * cos(i));
+      const y = r * (sen(N) * cos(vw) + cos(N) * sen(vw) * cos(i));
+      const z = r * sen(vw) * sen(i);
+      return { lon: norm(Math.atan2(y, x) * GRAU), lat: Math.atan2(z, Math.hypot(x, y)) * GRAU, r };
+    }
+    const ELEMENTOS = {
+      sol: d => ({ N: 0, i: 0, w: 282.9404 + 4.70935e-5 * d, a: 1, e: 0.016709 - 1.151e-9 * d, M: 356.0470 + 0.9856002585 * d }),
+      lua: d => ({ N: 125.1228 - 0.0529538083 * d, i: 5.1454, w: 318.0634 + 0.1643573223 * d, a: 60.2666, e: 0.0549, M: 115.3654 + 13.0649929509 * d }),
+      mercurio: d => ({ N: 48.3313 + 3.24587e-5 * d, i: 7.0047 + 5e-8 * d, w: 29.1241 + 1.01444e-5 * d, a: 0.387098, e: 0.205635 + 5.59e-10 * d, M: 168.6562 + 4.0923344368 * d }),
+      venus: d => ({ N: 76.6799 + 2.4659e-5 * d, i: 3.3946 + 2.75e-8 * d, w: 54.891 + 1.38374e-5 * d, a: 0.72333, e: 0.006773 - 1.302e-9 * d, M: 48.0052 + 1.6021302244 * d }),
+      marte: d => ({ N: 49.5574 + 2.11081e-5 * d, i: 1.8497 - 1.78e-8 * d, w: 286.5016 + 2.92961e-5 * d, a: 1.523688, e: 0.093405 + 2.516e-9 * d, M: 18.6021 + 0.5240207766 * d }),
+      jupiter: d => ({ N: 100.4542 + 2.76854e-5 * d, i: 1.303 - 1.557e-7 * d, w: 273.8777 + 1.64505e-5 * d, a: 5.20256, e: 0.048498 + 4.469e-9 * d, M: 19.895 + 0.0830853001 * d }),
+      saturno: d => ({ N: 113.6634 + 2.3898e-5 * d, i: 2.4886 - 1.081e-7 * d, w: 339.3939 + 2.97661e-5 * d, a: 9.55475, e: 0.055546 - 9.499e-9 * d, M: 316.967 + 0.0334442282 * d }),
+      urano: d => ({ N: 74.0005 + 1.3978e-5 * d, i: 0.7733 + 1.9e-8 * d, w: 96.6612 + 3.0565e-5 * d, a: 19.18171 - 1.55e-8 * d, e: 0.047318 + 7.45e-9 * d, M: 142.5905 + 0.011725806 * d }),
+      netuno: d => ({ N: 131.7806 + 3.0173e-5 * d, i: 1.77 - 2.55e-7 * d, w: 272.8461 - 6.027e-6 * d, a: 30.05826 + 3.313e-8 * d, e: 0.008606 + 2.15e-9 * d, M: 260.2471 + 0.005995147 * d }),
+    };
+    function solLon(d) { return orbita(ELEMENTOS.sol(d)); }
+    function luaLon(d) {
+      const s = ELEMENTOS.sol(d), l = ELEMENTOS.lua(d);
+      const o = orbita(l);
+      const Ms = norm(s.M), Mm = norm(l.M), Ls = norm(s.w + s.M), Lm = norm(l.N + l.w + l.M);
+      const D = Lm - Ls, F = Lm - l.N;
+      const p = -1.274 * sen(Mm - 2 * D) + 0.658 * sen(2 * D) - 0.186 * sen(Ms) - 0.059 * sen(2 * Mm - 2 * D)
+        - 0.057 * sen(Mm - 2 * D + Ms) + 0.053 * sen(Mm + 2 * D) + 0.046 * sen(2 * D - Ms) + 0.041 * sen(Mm - Ms)
+        - 0.035 * sen(D) - 0.031 * sen(Mm + Ms) - 0.015 * sen(2 * F - 2 * D) + 0.011 * sen(Mm - 4 * D);
+      return norm(o.lon + p);
+    }
+    function geocentrico(helio, sol) {
+      const x = helio.r * cos(helio.lat) * cos(helio.lon) + sol.r * cos(sol.lon);
+      const y = helio.r * cos(helio.lat) * sen(helio.lon) + sol.r * sen(sol.lon);
+      return norm(Math.atan2(y, x) * GRAU);
+    }
+    function planetaLon(nome, d) {
+      const sol = solLon(d);
+      if (nome === "sol") return sol.lon;
+      if (nome === "lua") return luaLon(d);
+      let h;
+      if (nome === "plutao") {
+        const S = 50.03 + 0.033459652 * d, P = 238.95 + 0.003968789 * d;
+        const lon = 238.9508 + 0.00400703 * d - 19.799 * sen(P) + 19.848 * cos(P) + 0.897 * sen(2 * P) - 4.956 * cos(2 * P)
+          + 0.61 * sen(3 * P) + 1.211 * cos(3 * P) - 0.341 * sen(4 * P) - 0.19 * cos(4 * P) + 0.128 * sen(5 * P) - 0.034 * cos(5 * P)
+          - 0.038 * sen(6 * P) + 0.031 * cos(6 * P) + 0.02 * sen(S - P) - 0.01 * cos(S - P);
+        const lat = -3.9082 - 5.453 * sen(P) - 14.975 * cos(P) + 3.527 * sen(2 * P) + 1.673 * cos(2 * P) - 1.051 * sen(3 * P)
+          + 0.328 * cos(3 * P) + 0.179 * sen(4 * P) - 0.292 * cos(4 * P) + 0.019 * sen(5 * P) + 0.1 * cos(5 * P)
+          - 0.031 * sen(6 * P) - 0.026 * cos(6 * P) + 0.011 * cos(S - P);
+        const r = 40.72 + 6.68 * sen(P) + 6.9 * cos(P) - 1.18 * sen(2 * P) - 0.03 * cos(2 * P) + 0.15 * sen(3 * P) - 0.14 * cos(3 * P);
+        h = { lon: lon + 3.82394e-5 * d, lat, r }; // posição J2000 levada ao equinócio da data
+      } else {
+        h = orbita(ELEMENTOS[nome](d));
+        const Mj = ELEMENTOS.jupiter(d).M, Ms = ELEMENTOS.saturno(d).M, Mu = ELEMENTOS.urano(d).M;
+        if (nome === "jupiter") h.lon += -0.332 * sen(2 * Mj - 5 * Ms - 67.6) - 0.056 * sen(2 * Mj - 2 * Ms + 21) + 0.042 * sen(3 * Mj - 5 * Ms + 21)
+          - 0.036 * sen(Mj - 2 * Ms) + 0.022 * cos(Mj - Ms) + 0.023 * sen(2 * Mj - 3 * Ms + 52) - 0.016 * sen(Mj - 5 * Ms - 69);
+        if (nome === "saturno") {
+          h.lon += 0.812 * sen(2 * Mj - 5 * Ms - 67.6) - 0.229 * cos(2 * Mj - 4 * Ms - 2) + 0.119 * sen(Mj - 2 * Ms - 3)
+            + 0.046 * sen(2 * Mj - 6 * Ms - 69) + 0.014 * sen(Mj - 3 * Ms + 32);
+          h.lat += -0.02 * cos(2 * Mj - 4 * Ms - 2) + 0.018 * sen(2 * Mj - 6 * Ms - 49);
+        }
+        if (nome === "urano") h.lon += 0.04 * sen(Ms - 2 * Mu + 6) + 0.035 * sen(Ms - 3 * Mu + 33) - 0.015 * sen(Mj - Mu + 20);
+      }
+      return geocentrico(h, sol);
+    }
+    // Ascendente e Meio do Céu (lat/lon do lugar em graus, leste positivo)
+    function angulos(d, ut, lat, lon) {
+      const s = ELEMENTOS.sol(d);
+      const ramc = norm(s.w + s.M + 180 + ut * 15 + lon);
+      const ecl = 23.4393 - 3.563e-7 * d;
+      const mc = norm(Math.atan2(sen(ramc), cos(ramc) * cos(ecl)) * GRAU);
+      const asc = norm(Math.atan2(cos(ramc), -(sen(ramc) * cos(ecl) + Math.tan(lat * RAD) * sen(ecl))) * GRAU);
+      return { asc, mc };
+    }
+    // Ano Novo Chinês: segunda lua nova depois do solstício de dezembro (datas na hora da China, UTC+8)
+    const dataChina = d => { const t = new Date(Date.UTC(1999, 11, 31) + (d + 8 / 24) * 864e5); return t.getUTCFullYear() * 1e4 + (t.getUTCMonth() + 1) * 100 + t.getUTCDate(); };
+    function luaNovaApos(d) {
+      const elong = x => norm(luaLon(x) - solLon(x).lon);
+      let ant = elong(d);
+      for (let k = 0; k < 140; k++) {
+        const d2 = d + 0.25, e2 = elong(d2);
+        if (e2 < ant) { let a = d, b = d2; for (let j = 0; j < 30; j++) { const m = (a + b) / 2; if (elong(m) > 180) a = m; else b = m; } return b; }
+        d = d2; ant = e2;
+      }
+    }
+    function anoNovoChines(ano) {
+      // solstício: o Sol cruza 270° no fim de dezembro do ano anterior
+      let a = diaJ(ano - 1, 12, 15, 0), b = diaJ(ano - 1, 12, 28, 0);
+      for (let j = 0; j < 40; j++) { const m = (a + b) / 2; if (solLon(m).lon < 270) a = m; else b = m; }
+      const diaSolsticio = dataChina(b);
+      let d = b - 2, achadas = 0;
+      while (true) {
+        d = luaNovaApos(d) + 0.01;
+        if (dataChina(d) > diaSolsticio && ++achadas === 2) {
+          const n = dataChina(d);
+          return { ano, mes: Math.floor(n / 100) % 100, dia: n % 100 };
+        }
+      }
+    }
+    // Kin do Tzolkin (Sincronário da Paz / Dreamspell): 21/12/2012 = Kin 207; o 29/fev não conta
+    function kinMaia(a, m, d) {
+      const diaDoAno = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334][m - 1] + Math.min(d, m === 2 ? 28 : d);
+      const n = a * 365 + diaDoAno - (2012 * 365 + 355);
+      return ((n + 206) % 260 + 260) % 260 + 1;
+    }
+    return { diaJ, planetaLon, angulos, anoNovoChines, kinMaia };
+  })();
+  // Os 72 anjos da Cabala, cada um regendo cinco dias a partir de 21 de março: [nome, início, fim, dons]
+  const ANJOS = [
+  ["Vehuiah","03-21","03-25","vontade, iniciativa e novos começos"],
+  ["Jeliel","03-26","03-30","amor, fidelidade e harmonia nos relacionamentos"],
+  ["Sitael","03-31","04-04","proteção, construção e superação das adversidades"],
+  ["Elemiah","04-05","04-09","sucesso no trabalho, boas viagens e tranquilidade"],
+  ["Mahasiah","04-10","04-14","paz, aprendizado e harmonia"],
+  ["Lelahel","04-15","04-20","luz, cura e amor"],
+  ["Achaiah","04-21","04-25","paciência e descoberta dos segredos da natureza"],
+  ["Cahethel","04-26","04-30","bênção, colheita e gratidão"],
+  ["Haziel","05-01","05-05","misericórdia, perdão e reconciliação"],
+  ["Aladiah","05-06","05-10","graça, cura e regeneração"],
+  ["Lauviah","05-11","05-15","vitória e reconhecimento"],
+  ["Hahaiah","05-16","05-20","refúgio, sonhos e intuição"],
+  ["Iezalel","05-21","05-25","fidelidade, união e amizade"],
+  ["Mebahel","05-26","05-31","justiça, verdade e liberdade"],
+  ["Hariel","06-01","06-05","purificação e fé"],
+  ["Hekamiah","06-06","06-10","lealdade e coragem"],
+  ["Lauviah","06-11","06-15","revelação, inspiração e sono tranquilo"],
+  ["Caliel","06-16","06-21","verdade e justiça"],
+  ["Leuviah","06-22","06-26","memória e inteligência"],
+  ["Pahaliah","06-27","07-01","redenção e espiritualidade"],
+  ["Nelchael","07-02","07-06","conhecimento e amor aos estudos"],
+  ["Ieiaiel","07-07","07-11","fortuna, renome e diplomacia"],
+  ["Melahel","07-12","07-16","cura pela natureza e proteção"],
+  ["Haheuiah","07-17","07-22","proteção e abrigo"],
+  ["Nith-Haiah","07-23","07-27","sabedoria e magia branca"],
+  ["Haaiah","07-28","08-01","ordem, contemplação e diplomacia"],
+  ["Ierathel","08-02","08-06","confiança e missão de espalhar a luz"],
+  ["Seheiah","08-07","08-12","longevidade, saúde e prevenção"],
+  ["Reiiel","08-13","08-17","libertação e oração"],
+  ["Omael","08-18","08-22","fecundidade, paciência e alegria"],
+  ["Lecabel","08-23","08-28","talento e solução de problemas"],
+  ["Vasariah","08-29","09-02","clemência, bondade e boa memória"],
+  ["Iehuiah","09-03","09-07","proteção e discernimento"],
+  ["Lehahiah","09-08","09-12","calma, ordem e obediência ao bem"],
+  ["Chavakiah","09-13","09-17","reconciliação e harmonia familiar"],
+  ["Menadel","09-18","09-23","trabalho e vocação"],
+  ["Aniel","09-24","09-28","coragem e ruptura de barreiras"],
+  ["Haamiah","09-29","10-03","ritual, verdade e proteção"],
+  ["Rehael","10-04","10-08","saúde e amor entre pais e filhos"],
+  ["Ieiazel","10-09","10-13","consolação e libertação"],
+  ["Hahahel","10-14","10-18","missão, fé e espiritualidade"],
+  ["Mikael","10-19","10-23","ordem, intuição e verdade"],
+  ["Veuliah","10-24","10-28","prosperidade e libertação"],
+  ["Ielahiah","10-29","11-02","vitória, proteção e justiça"],
+  ["Sealiah","11-03","11-07","motivação, vontade e saúde"],
+  ["Ariel","11-08","11-12","revelação, sonhos e percepção"],
+  ["Asaliah","11-13","11-17","contemplação e verdade"],
+  ["Mihael","11-18","11-22","fertilidade, amor e reconciliação"],
+  ["Vehuel","11-23","11-27","elevação e grandeza de alma"],
+  ["Daniel","11-28","12-02","eloquência, misericórdia e decisão"],
+  ["Hahasiah","12-03","12-07","medicina universal e sabedoria"],
+  ["Imamiah","12-08","12-12","superação e reparação dos erros"],
+  ["Nanael","12-13","12-16","espiritualidade e conhecimento"],
+  ["Nithael","12-17","12-21","rejuvenescimento e legitimidade"],
+  ["Mebahiah","12-22","12-26","lucidez e moral"],
+  ["Poiel","12-27","12-31","fortuna, modéstia e realização"],
+  ["Nemamiah","01-01","01-05","discernimento e prosperidade"],
+  ["Ieialel","01-06","01-10","força mental e cura"],
+  ["Harahel","01-11","01-15","riqueza intelectual e fertilidade"],
+  ["Mitzrael","01-16","01-20","reparação e cura da mente"],
+  ["Umabel","01-21","01-25","amizade e afinidade"],
+  ["Iah-Hel","01-26","01-30","sabedoria e paz interior"],
+  ["Anauel","01-31","02-04","união, prosperidade e comércio"],
+  ["Mehiel","02-05","02-09","inspiração, escrita e criatividade"],
+  ["Damabiah","02-10","02-14","sabedoria e sucesso nas empreitadas"],
+  ["Manakel","02-15","02-19","conhecimento do bem e sono tranquilo"],
+  ["Eiael","02-20","02-24","transformação e longevidade"],
+  ["Habuhiah","02-25","03-01","saúde, cura e natureza"],
+  ["Rochel","03-02","03-06","restituição e reencontro do que foi perdido"],
+  ["Jabamiah","03-07","03-11","alquimia e regeneração"],
+  ["Haiaiel","03-12","03-16","proteção, coragem e armas da luz"],
+  ["Mumiah","03-17","03-20","renascimento e encerramento de ciclos"],
+  ];
+
+  const SIGNOS = [
+    ["Áries", "♈", "fogo", "coragem, iniciativa e o fogo de quem abre caminhos", "emoções rápidas e sinceras: você sente e já age", "chega com energia, franqueza e vontade de começar"],
+    ["Touro", "♉", "terra", "constância, sensualidade e o prazer das coisas simples e bem feitas", "precisa de segurança, conforto e afeto que se pode tocar", "transmite calma, presença e firmeza"],
+    ["Gêmeos", "♊", "ar", "curiosidade, palavra e a leveza de quem aprende com tudo", "se acalma conversando, trocando e entendendo", "transmite leveza, conversa fácil e curiosidade"],
+    ["Câncer", "♋", "agua", "cuidado, memória e um coração que acolhe", "sente fundo e protege quem ama como um lar", "transmite doçura, sensibilidade e acolhimento"],
+    ["Leão", "♌", "fogo", "brilho, generosidade e a coragem de ser quem se é", "precisa ser vista e reconhecida, e retribui com calor", "entra em cena com presença, charme e luz própria"],
+    ["Virgem", "♍", "terra", "atenção aos detalhes, serviço e a magia do que é útil", "se acalma pondo ordem no mundo e na rotina", "transmite discrição, atenção e capricho"],
+    ["Libra", "♎", "ar", "harmonia, beleza e a arte das relações", "precisa de paz, equilíbrio e boa companhia", "chega com elegância, gentileza e diplomacia"],
+    ["Escorpião", "♏", "agua", "intensidade, profundidade e o poder de se transformar", "sente tudo em profundidade e não aceita meias-verdades", "tem um olhar magnético e misterioso"],
+    ["Sagitário", "♐", "fogo", "fé, aventura e a busca por sentido", "precisa de liberdade, horizonte e otimismo", "transmite entusiasmo, franqueza e alegria de viver"],
+    ["Capricórnio", "♑", "terra", "ambição serena, responsabilidade e construção a longo prazo", "sente com reserva e encontra segurança no que conquista", "transmite seriedade, maturidade e confiança"],
+    ["Aquário", "♒", "ar", "originalidade, liberdade e visão de futuro", "precisa de espaço, amizade e ideias novas", "chega com um jeito único, livre e diferente"],
+    ["Peixes", "♓", "agua", "sensibilidade, imaginação e compaixão sem fronteiras", "sente o mundo inteiro e precisa de silêncio para se recompor", "transmite doçura, mistério e um ar sonhador"],
+  ].map(([nome, glifo, elemento, sol, lua, asc]) => ({ nome, glifo: glifo + T, elemento, sol, lua, asc }));
+  const PLANETAS = [
+    ["sol", "Sol", "☉"], ["lua", "Lua", "☽"], ["mercurio", "Mercúrio", "☿"], ["venus", "Vênus", "♀"], ["marte", "Marte", "♂"],
+    ["jupiter", "Júpiter", "♃"], ["saturno", "Saturno", "♄"], ["urano", "Urano", "♅"], ["netuno", "Netuno", "♆"], ["plutao", "Plutão", "♇"],
+  ].map(([id, nome, glifo]) => ({ id, nome, glifo: glifo + T }));
+  // [nome, UF, latitude, longitude, fuso (horas em relação a UTC), teve horário de verão]
+  const CIDADES = [
+    ["Porto Alegre", "RS", -30.03, -51.23, -3, 1], ["Canoas", "RS", -29.92, -51.18, -3, 1], ["Caxias do Sul", "RS", -29.17, -51.18, -3, 1],
+    ["Gramado", "RS", -29.38, -50.88, -3, 1], ["Novo Hamburgo", "RS", -29.68, -51.13, -3, 1], ["Passo Fundo", "RS", -28.26, -52.41, -3, 1],
+    ["Pelotas", "RS", -31.77, -52.34, -3, 1], ["Santa Maria", "RS", -29.68, -53.81, -3, 1], ["Florianópolis", "SC", -27.6, -48.55, -3, 1],
+    ["Joinville", "SC", -26.3, -48.85, -3, 1], ["Curitiba", "PR", -25.43, -49.27, -3, 1], ["Londrina", "PR", -23.31, -51.16, -3, 1],
+    ["São Paulo", "SP", -23.55, -46.63, -3, 1], ["Campinas", "SP", -22.91, -47.06, -3, 1], ["Santos", "SP", -23.96, -46.33, -3, 1],
+    ["Ribeirão Preto", "SP", -21.18, -47.81, -3, 1], ["Rio de Janeiro", "RJ", -22.91, -43.17, -3, 1], ["Niterói", "RJ", -22.88, -43.1, -3, 1],
+    ["Belo Horizonte", "MG", -19.92, -43.94, -3, 1], ["Uberlândia", "MG", -18.92, -48.28, -3, 1], ["Vitória", "ES", -20.32, -40.34, -3, 1],
+    ["Brasília", "DF", -15.79, -47.88, -3, 1], ["Goiânia", "GO", -16.68, -49.25, -3, 1], ["Campo Grande", "MS", -20.47, -54.62, -4, 1],
+    ["Cuiabá", "MT", -15.6, -56.1, -4, 1], ["Salvador", "BA", -12.97, -38.51, -3, 0], ["Aracaju", "SE", -10.91, -37.07, -3, 0],
+    ["Maceió", "AL", -9.67, -35.74, -3, 0], ["Recife", "PE", -8.05, -34.88, -3, 0], ["João Pessoa", "PB", -7.12, -34.86, -3, 0],
+    ["Natal", "RN", -5.79, -35.21, -3, 0], ["Fortaleza", "CE", -3.73, -38.52, -3, 0], ["Teresina", "PI", -5.09, -42.8, -3, 0],
+    ["São Luís", "MA", -2.53, -44.3, -3, 0], ["Palmas", "TO", -10.18, -48.33, -3, 0], ["Belém", "PA", -1.46, -48.49, -3, 0],
+    ["Macapá", "AP", 0.03, -51.07, -3, 0], ["Manaus", "AM", -3.12, -60.02, -4, 0], ["Boa Vista", "RR", 2.82, -60.67, -4, 0],
+    ["Porto Velho", "RO", -8.76, -63.9, -4, 0], ["Rio Branco", "AC", -9.97, -67.81, -5, 0],
+  ];
+  // Sincronário da Paz: [selo, gênero, ação, essência, poder]
+  const SELOS = [
+    ["Dragão", "m", "nutrir", "ser", "nascimento"], ["Vento", "m", "comunicar", "respiração", "espírito"],
+    ["Noite", "f", "sonhar", "intuição", "abundância"], ["Semente", "f", "almejar", "percepção", "florescimento"],
+    ["Serpente", "f", "sobreviver", "instinto", "força vital"], ["Enlaçador de Mundos", "m", "igualar", "oportunidade", "morte e renascimento"],
+    ["Mão", "f", "conhecer", "cura", "realização"], ["Estrela", "f", "embelezar", "arte", "elegância"],
+    ["Lua", "f", "purificar", "fluxo", "água universal"], ["Cachorro", "m", "amar", "lealdade", "coração"],
+    ["Macaco", "m", "brincar", "ilusão", "magia"], ["Humano", "m", "influenciar", "sabedoria", "livre-arbítrio"],
+    ["Caminhante do Céu", "m", "explorar", "vigilância", "espaço"], ["Mago", "m", "encantar", "receptividade", "atemporalidade"],
+    ["Águia", "f", "criar", "mente", "visão"], ["Guerreiro", "m", "questionar", "destemor", "inteligência"],
+    ["Terra", "f", "evoluir", "sincronicidade", "navegação"], ["Espelho", "m", "refletir", "ordem", "infinito"],
+    ["Tormenta", "f", "catalisar", "energia", "autogeração"], ["Sol", "m", "iluminar", "vida", "fogo universal"],
+  ].map(([nome, g, acao, essencia, poder]) => ({ nome, g, acao, essencia, poder }));
+  const TONS = [
+    ["Magnético", "Magnética", "propósito", "unificar e atrair"], ["Lunar", "Lunar", "desafio", "polarizar e estabilizar"],
+    ["Elétrico", "Elétrica", "serviço", "ativar e vincular"], ["Auto-Existente", "Auto-Existente", "forma", "definir e medir"],
+    ["Harmônico", "Harmônica", "radiância", "comandar e empoderar"], ["Rítmico", "Rítmica", "igualdade", "organizar e equilibrar"],
+    ["Ressonante", "Ressonante", "sintonia", "canalizar e inspirar"], ["Galáctico", "Galáctica", "integridade", "harmonizar e modelar"],
+    ["Solar", "Solar", "intenção", "pulsar e realizar"], ["Planetário", "Planetária", "manifestação", "aperfeiçoar e produzir"],
+    ["Espectral", "Espectral", "liberação", "dissolver e divulgar"], ["Cristal", "Cristal", "cooperação", "dedicar e universalizar"],
+    ["Cósmico", "Cósmica", "presença", "perdurar e transcender"],
+  ].map(([m, f, tema, acoes]) => ({ m, f, tema, acoes }));
+  const CORES_KIN = [
+    { m: "Vermelho", f: "Vermelha", hex: "#e0473f", tinta: "#fff", papel: "inicia" },
+    { m: "Branco", f: "Branca", hex: "#f3efe6", tinta: "#2a1606", papel: "refina" },
+    { m: "Azul", f: "Azul", hex: "#3f7fe0", tinta: "#fff", papel: "transforma" },
+    { m: "Amarelo", f: "Amarela", hex: "#f2c14e", tinta: "#2a1606", papel: "amadurece" },
+  ];
+  const COROS = [
+    ["Serafins", "Metatron"], ["Querubins", "Raziel"], ["Tronos", "Tsaphkiel"], ["Dominações", "Tsadkiel"], ["Potências", "Camael"],
+    ["Virtudes", "Rafael"], ["Principados", "Haniel"], ["Arcanjos", "Miguel"], ["Anjos", "Gabriel"],
+  ];
+  const ANIMAIS = [
+    ["Rato", "鼠", "esperteza, charme e talento para encontrar oportunidades"], ["Boi", "牛", "força, paciência e determinação incansável"],
+    ["Tigre", "虎", "coragem, paixão e espírito livre"], ["Coelho", "兔", "delicadeza, diplomacia e uma sorte tranquila"],
+    ["Dragão", "龍", "poder, carisma e grandes sonhos"], ["Serpente", "蛇", "sabedoria, intuição e elegância misteriosa"],
+    ["Cavalo", "馬", "liberdade, energia e entusiasmo contagiante"], ["Cabra", "羊", "criatividade, gentileza e senso estético"],
+    ["Macaco", "猴", "inteligência, humor e versatilidade"], ["Galo", "雞", "franqueza, disciplina e brilho próprio"],
+    ["Cão", "狗", "lealdade, justiça e coração fiel"], ["Porco", "豬", "generosidade, alegria e bom coração"],
+  ];
+  const ELEMENTOS_CH = [
+    ["Madeira", "木", "crescimento, generosidade e visão"], ["Fogo", "火", "paixão, liderança e calor humano"],
+    ["Terra", "土", "estabilidade, prudência e senso prático"], ["Metal", "金", "determinação, firmeza e foco"],
+    ["Água", "水", "intuição, flexibilidade e profundidade"],
+  ];
+  const CORES_ELEMENTO = { fogo: "rgba(255,110,90,.16)", terra: "rgba(140,200,120,.13)", ar: "rgba(255,230,160,.13)", agua: "rgba(120,170,255,.16)" };
+  const ICONE_ZAP = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.1Z"/></svg>';
+
+  const FONTE_SIMBOLO = "'Segoe UI Symbol','Apple Symbols','Noto Sans Symbols','Noto Sans Symbols 2',serif";
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const dois = n => String(n).padStart(2, "0");
+  const dataBR = p => `${dois(p.d)}/${dois(p.m)}/${p.a}`;
+  const signoDe = lon => SIGNOS[Math.floor(lon / 30) % 12];
+  const grau = lon => { const g = lon % 30; return `${Math.floor(g)}°${dois(Math.floor((g % 1) * 60))}′`; };
+  const somaDigitos = n => String(n).split("").reduce((s, c) => s + +c, 0);
+
+  /* ---------- Cálculos de cada portal ---------- */
+  function calcKin(p) {
+    const kin = ASTRO.kinMaia(p.a, p.m, p.d);
+    const s = (kin - 1) % 20, t = (kin - 1) % 13;
+    const selo = SELOS[s], tom = TONS[t], cor = CORES_KIN[s % 4];
+    const fem = selo.g === "f";
+    return { kin, s, t, selo, tom, cor, oculto: 261 - kin, nome: `${selo.nome} ${fem ? tom.f : tom.m} ${fem ? cor.f : cor.m}` };
+  }
+  function calcAnjo(p) {
+    const c = p.m * 100 + p.d, cod = s => +s.replace("-", "");
+    const i = ANJOS.findIndex(([, ini, fim]) => { const a = cod(ini), b = cod(fim); return a <= b ? c >= a && c <= b : c >= a || c <= b; });
+    const [nome, ini, fim, dons] = ANJOS[i];
+    const br = s => s.split("-").reverse().join("/");
+    return { n: i + 1, nome, dons, periodo: `${br(ini)} a ${br(fim)}`, coro: COROS[Math.floor(i / 8)] };
+  }
+  function calcChina(p) {
+    const ano = ASTRO.anoNovoChines(p.a);
+    const nasc = Date.UTC(p.a, p.m - 1, p.d), virada = Date.UTC(ano.ano, ano.mes - 1, ano.dia);
+    const anoCh = nasc < virada ? p.a - 1 : p.a;
+    const tronco = ((anoCh - 4) % 10 + 10) % 10;
+    return {
+      anoCh, antes: nasc < virada, perto: Math.abs(nasc - virada) <= 864e5,
+      virada: `${dois(ano.dia)}/${dois(ano.mes)}/${ano.ano}`,
+      animal: ANIMAIS[((anoCh - 4) % 12 + 12) % 12], indice: ((anoCh - 4) % 12 + 12) % 12,
+      elemento: ELEMENTOS_CH[Math.floor(tronco / 2)], yin: tronco % 2 === 1,
+    };
+  }
+  function calcArcano(p) {
+    const soma = p.d + p.m + p.a, passos = [soma];
+    let n = soma;
+    while (n > 22) { n = somaDigitos(n); passos.push(n); }
+    let alma = n;
+    while (alma > 9) alma = somaDigitos(alma);
+    return { soma, passos, pers: ARCANOS[n === 22 ? 0 : n], alma: ARCANOS[alma] , mesma: alma === n };
+  }
+  // Brasil teve horário de verão de 1985 a 2019 no Sul, Sudeste e Centro-Oeste (datas aproximadas)
+  function sugereVerao(p, cidade) {
+    if (!cidade || !cidade[5]) return false;
+    const inicio = p.m >= 10 ? p.a : p.a - 1;
+    if (inicio < 1985 || inicio > 2018) return false;
+    return (p.m === 10 && p.d >= 15) || p.m === 11 || p.m === 12 || p.m === 1 || (p.m === 2 && p.d <= 15);
+  }
+  function calcMapa(p, f) {
+    const [hh, mm] = f.semHora ? [12, 0] : f.hora.split(":").map(Number);
+    const ut = hh + mm / 60 - (f.fuso + (f.verao ? 1 : 0));
+    const d = ASTRO.diaJ(p.a, p.m, p.d, ut);
+    const astros = PLANETAS.map(pl => {
+      const lon = ASTRO.planetaLon(pl.id, d);
+      const mov = ((ASTRO.planetaLon(pl.id, d + 0.5) - ASTRO.planetaLon(pl.id, d - 0.5)) + 540) % 360 - 180;
+      return { ...pl, lon, retro: mov < 0 && pl.id !== "sol" && pl.id !== "lua" };
+    });
+    const ang = f.semHora ? null : ASTRO.angulos(d, ut, f.lat, f.lon);
+    return { astros, asc: ang ? ang.asc : null, mc: ang ? ang.mc : null };
+  }
+
+  /* ---------- Desenhos ---------- */
+  function svgKin(k) {
+    const cel = 16.4;
+    let celulas = "";
+    for (let n = 1; n <= 260; n++) {
+      const col = Math.floor((n - 1) / 20), lin = (n - 1) % 20, c = CORES_KIN[lin % 4];
+      const meu = n === k.kin;
+      celulas += `<rect class="cel${meu ? " meu" : ""}" style="--k:${n}" x="${196 + col * cel}" y="${8 + lin * cel}" width="${cel - 2.4}" height="${cel - 2.4}" rx="3"
+        fill="${c.hex}" fill-opacity="${meu ? 1 : 0.28}" stroke="${meu ? "#fff" : "none"}" stroke-width="2"/>`;
+    }
+    const tom = k.t + 1, barras = Math.floor(tom / 5), pontos = tom % 5;
+    let notacao = "";
+    for (let i = 0; i < pontos; i++) notacao += `<circle cx="${92 - (pontos - 1) * 9 + i * 18}" cy="40" r="6" fill="#ffe6a3"/>`;
+    for (let i = 0; i < barras; i++) notacao += `<rect x="52" y="${54 + i * 13}" width="80" height="8" rx="4" fill="#ffe6a3"/>`;
+    return `<svg class="tzolkin" viewBox="0 0 420 340" role="img" aria-label="Kin ${k.kin} no Tzolkin">
+      ${notacao}
+      <circle cx="92" cy="170" r="70" fill="${k.cor.hex}" stroke="#ffe6a3" stroke-width="3" style="filter:drop-shadow(0 0 18px ${k.cor.hex})"/>
+      <text x="92" y="168" text-anchor="middle" font-family="Cinzel, serif" font-size="46" font-weight="600" fill="${k.cor.tinta}">${k.kin}</text>
+      <text x="92" y="196" text-anchor="middle" font-family="Jost, sans-serif" font-size="13" letter-spacing="3" fill="${k.cor.tinta}">KIN</text>
+      <text x="92" y="270" text-anchor="middle" font-family="Jost, sans-serif" font-size="13" fill="#c9bfe6">tom ${tom} · selo ${k.s + 1}</text>
+      <text x="92" y="292" text-anchor="middle" font-family="Jost, sans-serif" font-size="12" fill="#c9bfe6" opacity=".75">o Tzolkin tem 260 kins →</text>
+      ${celulas}
+    </svg>`;
+  }
+  function svgRoda({ n, rotulos, indice, centro, sub, raio = 148, fonte = 14, han = false }) {
+    let itens = "";
+    for (let k = 0; k < n; k++) {
+      const a = k * 360 / n, meu = k === indice;
+      const fam = han ? "'Noto Serif SC','Songti SC','SimSun',serif" : "Jost, sans-serif";
+      itens += `<g transform="rotate(${a}) translate(0 ${-raio})">
+        ${rotulos ? `<text text-anchor="middle" dominant-baseline="central" font-family="${fam}" font-size="${meu ? fonte * 1.5 : fonte}" fill="${meu ? "#fff6d2" : "#c9bfe6"}" ${meu ? 'style="filter:drop-shadow(0 0 8px #f2c14e)"' : 'opacity=".7"'}>${rotulos[k]}</text>`
+          : `<circle r="${meu ? 8 : 3.4}" fill="${meu ? "#fff6d2" : "#b9a3ff"}" ${meu ? 'style="filter:drop-shadow(0 0 8px #f2c14e)"' : 'opacity=".6"'}/>`}
+      </g>`;
+    }
+    return `<svg viewBox="-200 -200 400 400" role="img" aria-label="${esc(centro)}">
+      <circle r="${raio + 26}" fill="none" stroke="rgba(242,193,78,.35)"/>
+      <circle r="${raio - 26}" fill="rgba(18,14,46,.6)" stroke="rgba(242,193,78,.5)"/>
+      <path d="M-10 ${-raio - 44} L10 ${-raio - 44} L0 ${-raio - 28}Z" fill="#f2c14e"/>
+      <g class="roda__giro" data-final="${-indice * 360 / n - 720}">${itens}</g>
+      <text y="-6" text-anchor="middle" font-family="${han ? "'Noto Serif SC','Songti SC','SimSun',serif" : "Cinzel, serif"}" font-size="${han ? 64 : 40}" font-weight="600" fill="#ffe6a3">${esc(centro)}</text>
+      <text y="${han ? 46 : 28}" text-anchor="middle" font-family="Jost, sans-serif" font-size="14" letter-spacing="2" fill="#ff8cc0">${esc(sub)}</text>
+    </svg>`;
+  }
+  function svgMapa(r) {
+    const base = r.asc ?? 0;
+    const th = lon => (180 + lon - base) * Math.PI / 180;
+    const P = (lon, raio) => [(raio * Math.cos(th(lon))).toFixed(1), (-raio * Math.sin(th(lon))).toFixed(1)];
+    const setor = (l1, l2, r1, r2) => { const [a, b] = P(l1, r2), [c, d] = P(l2, r2), [e, f] = P(l2, r1), [g, h] = P(l1, r1);
+      return `M${a} ${b} A${r2} ${r2} 0 0 0 ${c} ${d} L${e} ${f} A${r1} ${r1} 0 0 1 ${g} ${h}Z`; };
+    let anel = "";
+    SIGNOS.forEach((s, k) => {
+      anel += `<path d="${setor(k * 30, k * 30 + 30, 158, 192)}" fill="${CORES_ELEMENTO[s.elemento]}" stroke="rgba(242,193,78,.45)" stroke-width=".8"/>`;
+      const [x, y] = P(k * 30 + 15, 175);
+      anel += `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="${FONTE_SIMBOLO}" font-size="17" fill="#ffe6a3">${s.glifo}</text>`;
+    });
+    for (let g = 0; g < 360; g += 5) { const [a, b] = P(g, 158), [c, d] = P(g, g % 10 ? 154 : 150); anel += `<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="rgba(242,193,78,.5)" stroke-width=".7"/>`; }
+    let casas = "";
+    if (r.asc != null) {
+      for (let k = 0; k < 12; k++) {
+        const c = r.asc + k * 30, [a, b] = P(c, 62), [e, f] = P(c, 150), [x, y] = P(c + 15, 74);
+        casas += `<line x1="${a}" y1="${b}" x2="${e}" y2="${f}" stroke="rgba(185,163,255,${k % 3 ? .25 : .5})" stroke-width="${k % 3 ? .7 : 1.2}"/>
+          <text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="Jost, sans-serif" font-size="9" fill="rgba(201,191,230,.7)">${k + 1}</text>`;
+      }
+      for (const [lon, rot] of [[r.asc, "AC"], [r.mc, "MC"]]) {
+        const [a, b] = P(lon, 62), [e, f] = P(lon, 200), [x, y] = P(lon, 209);
+        casas += `<line x1="${a}" y1="${b}" x2="${e}" y2="${f}" stroke="#ff8cc0" stroke-width="1.6"/>
+          <text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="Cinzel, serif" font-size="11" font-weight="600" fill="#ff8cc0">${rot}</text>`;
+      }
+    }
+    // Aspectos maiores entre os astros
+    const ASPECTOS = [[60, 5, "#b9a3ff"], [90, 6, "#ff5aa5"], [120, 6, "#7fd1ff"], [180, 8, "#ff5aa5"]];
+    let aspectos = "", k = 0;
+    for (let i = 0; i < r.astros.length; i++) for (let j = i + 1; j < r.astros.length; j++) {
+      const sep = Math.abs(((r.astros[i].lon - r.astros[j].lon) % 360 + 540) % 360 - 180);
+      const asp = ASPECTOS.find(([ang, orbe]) => Math.abs(sep - ang) <= orbe);
+      if (!asp) continue;
+      const [a, b] = P(r.astros[i].lon, 62), [c, d] = P(r.astros[j].lon, 62);
+      aspectos += `<line class="aspecto" style="--k:${k++}" x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${asp[2]}" stroke-width="1" stroke-opacity=".75"/>`;
+    }
+    // Afasta os símbolos que caem muito perto uns dos outros
+    const ord = r.astros.map((a, i) => ({ i, ang: a.lon })).sort((x, y) => x.ang - y.ang);
+    for (let it = 0; it < 60; it++) {
+      let mexeu = false;
+      for (let q = 0; q < ord.length; q++) {
+        const a = ord[q], b = ord[(q + 1) % ord.length];
+        const dif = b.ang - a.ang + (q === ord.length - 1 ? 360 : 0);
+        if (dif < 9) { const aj = (9 - dif) / 2; a.ang -= aj; b.ang += aj; mexeu = true; }
+      }
+      if (!mexeu) break;
+    }
+    const exibe = []; ord.forEach(o => { exibe[o.i] = o.ang; });
+    let astros = "";
+    r.astros.forEach((a, i) => {
+      const [x1, y1] = P(a.lon, 150), [x2, y2] = P(a.lon, 142), [x, y] = P(exibe[i], 124);
+      astros += `<g class="astro" data-i="${i}" style="--k:${i};transform-box:fill-box;transform-origin:center" tabindex="0" role="button" aria-label="${a.nome} em ${signoDe(a.lon).nome}">
+        <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#ffe6a3" stroke-width="1.4"/>
+        <circle cx="${x}" cy="${y}" r="12.5" fill="rgba(18,14,46,.92)" stroke="rgba(242,193,78,.75)"/>
+        <text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="${FONTE_SIMBOLO}" font-size="15" fill="#fff6d2">${a.glifo}</text>
+      </g>`;
+    });
+    return `<svg class="mapa" viewBox="-222 -222 444 444" role="img" aria-label="Mandala do mapa astral">
+      <g class="anel">
+        <circle r="192" fill="rgba(18,14,46,.55)" stroke="rgba(242,193,78,.7)" stroke-width="1.2"/>
+        ${anel}
+        <circle r="150" fill="none" stroke="rgba(242,193,78,.35)"/>
+        <circle r="62" fill="rgba(18,14,46,.7)" stroke="rgba(242,193,78,.5)"/>
+        ${casas}
+      </g>
+      ${aspectos}${astros}
+    </svg>`;
+  }
+
+  /* ---------- Interface dos portais ---------- */
+  const nascForm = $("#nascimento"), dataInput = $("#n-data"), nomeInput = $("#n-nome");
+  const portaisEl = $("#portais"), revelacao = $("#revelacao");
+  const portais = $$(".portal", portaisEl);
+  const hoje = new Date();
+  dataInput.max = `${hoje.getFullYear()}-${dois(hoje.getMonth() + 1)}-${dois(hoje.getDate())}`;
+  let pessoa = null, abertoAgora = null;
+  const mapaPrefs = { hora: "", semHora: false, cidade: 0, verao: null, lat: -30.03, lon: -51.23, fuso: -3 };
+  const tremer = el => { el.classList.remove("tremer"); void el.offsetWidth; el.classList.add("tremer"); };
+  const brilharEm = (el, n = 40, cores) => { const r = el.getBoundingClientRect(); soltar(r.left + r.width / 2, r.top + r.height / 2, n, { forca: 3, anel: true, curta: true, cores }); };
+
+  function frente(icone, nome, sub, han) {
+    return `<span class="portal__icone${han ? " portal__icone--han" : ""}">${icone}</span><span class="portal__nome">${esc(nome)}</span><span class="portal__sub">${esc(sub)}</span>`;
+  }
+  function prepararPortais() {
+    const sol = signoDe(ASTRO.planetaLon("sol", ASTRO.diaJ(pessoa.a, pessoa.m, pessoa.d, 15)));
+    const k = calcKin(pessoa), anj = calcAnjo(pessoa), ch = calcChina(pessoa), arc = calcArcano(pessoa);
+    const faces = {
+      mapa: frente(sol.glifo, `Sol em ${sol.nome}`, "toque para o mapa"),
+      kin: frente(String(k.kin), k.nome, "seu kin"),
+      anjo: frente(String(anj.n), anj.nome, anj.coro[0]),
+      china: frente(ch.animal[1], `${ch.animal[0]} de ${ch.elemento[0]}`, ch.yin ? "yin" : "yang", true),
+      arcano: frente(arc.pers.num, arc.pers.nome, "arcano de nascimento"),
+    };
+    portais.forEach(p => {
+      p.classList.remove("virado", "ativo");
+      $(".portal__face--frente", p).innerHTML = faces[p.dataset.portal];
+    });
+    revelacao.hidden = true; abertoAgora = null;
+  }
+
+  nascForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const [a, m, d] = (dataInput.value || "").split("-").map(Number);
+    if (!a || a < 1900 || new Date(a, m - 1, d) > hoje) {
+      tremer(nascForm); dataInput.focus();
+      dataInput.setCustomValidity("Escolha uma data de nascimento válida");
+      dataInput.reportValidity();
+      return;
+    }
+    dataInput.setCustomValidity("");
+    pessoa = { a, m, d, nome: nomeInput.value.trim() };
+    mapaPrefs.verao = null;
+    prepararPortais();
+    portaisEl.classList.remove("travados");
+    portais.forEach((p, i) => setTimeout(() => brilharEm(p, 18), i * 120));
+    sino(5);
+    setTimeout(() => portaisEl.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "center" }), 200);
+  });
+  dataInput.addEventListener("input", () => dataInput.setCustomValidity(""));
+
+  portais.forEach(p => p.addEventListener("click", () => {
+    if (!pessoa) {
+      tremer(nascForm); brilharEm(nascForm, 24);
+      nascForm.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "center" });
+      setTimeout(() => dataInput.focus({ preventScroll: true }), 400);
+      return;
+    }
+    portais.forEach(x => x.classList.toggle("ativo", x === p));
+    if (!p.classList.contains("virado")) { p.classList.add("virado"); setTimeout(() => brilharEm(p, 44), parado ? 0 : 450); sino(4); }
+    abrir(p.dataset.portal);
+  }));
+
+  function painel({ chamada, titulo, visual, texto, mensagem, extra = "" }) {
+    return `<div class="rev__topo"><span class="chamada">${chamada}</span><h3 class="rev__titulo">${titulo}</h3></div>
+      ${extra}
+      <div class="rev__grade">
+        <div class="rev__visual">${visual}</div>
+        <div class="rev__texto">${texto}
+          <div class="rev__acoes">
+            <a class="botao botao--rosa" href="${zap(mensagem)}" target="_blank" rel="noopener">${ICONE_ZAP} Aprofundar com a Tryv</a>
+            <button class="botao botao--vidro" type="button" data-fechar>Fechar</button>
+          </div>
+          <p class="rev__aviso">✦ Isto é uma degustação. A leitura completa e aprofundada é feita pela Tryv, olhando para a sua história.</p>
+        </div>
+      </div>`;
+  }
+  const quem = () => pessoa.nome ? `Sou ${pessoa.nome}, nasci em ${dataBR(pessoa)}` : `Nasci em ${dataBR(pessoa)}`;
+
+  function abrir(tipo) {
+    abertoAgora = tipo;
+    let html = "";
+    if (tipo === "kin") {
+      const k = calcKin(pessoa);
+      html = painel({
+        chamada: "Kin maia", titulo: `Kin ${k.kin} · ${k.nome}`, visual: svgKin(k),
+        texto: `<p class="destaque">Sua assinatura galáctica é ${k.nome}.</p>
+          <p><strong>Selo ${k.selo.nome}</strong>: ${k.selo.acao}, ${k.selo.essencia}, ${k.selo.poder}.</p>
+          <ul class="palavras"><li>ação: ${k.selo.acao}</li><li>essência: ${k.selo.essencia}</li><li>poder: ${k.selo.poder}</li></ul>
+          <p><strong>Tom ${k.t + 1}, ${k.tom.m}</strong>: o tom do ${k.tom.tema}, que vem para ${k.tom.acoes}.</p>
+          <p><strong>Família ${k.cor.m.toLowerCase()}</strong>: a cor que ${k.cor.papel}. Seu destino oculto é o <strong>Kin ${k.oculto}</strong>.</p>`,
+        mensagem: `Olá, Tryv! ${quem()} e descobri no site que sou o Kin ${k.kin}, ${k.nome}. Quero aprofundar ✨`,
+      });
+    }
+    if (tipo === "anjo") {
+      const a = calcAnjo(pessoa);
+      html = painel({
+        chamada: "Anjo cabalístico", titulo: `${a.nome}`,
+        visual: svgRoda({ n: 72, indice: a.n - 1, centro: `Nº ${a.n}`, sub: a.nome.toUpperCase() }),
+        texto: `<p class="destaque">Quem nasce entre ${a.periodo} é guardado por ${a.nome}, o ${a.n}º dos 72 anjos da Cabala.</p>
+          <p><strong>Dons</strong>: ${a.dons}.</p>
+          <p><strong>Coro</strong>: ${a.coro[0]}, sob a regência do arcanjo ${a.coro[1]}.</p>
+          <p>Os 72 nomes vêm do Shem HaMephorash; cada anjo rege cinco dias do ano, a partir de 21 de março.</p>`,
+        mensagem: `Olá, Tryv! ${quem()} e meu anjo cabalístico é ${a.nome} (nº ${a.n}). Quero aprofundar ✨`,
+      });
+    }
+    if (tipo === "china") {
+      const c = calcChina(pessoa);
+      const nota = c.perto ? `<p><strong>Atenção</strong>: você nasceu bem na virada do Ano Novo Chinês (${c.virada}). Vale confirmar com a Tryv.</p>`
+        : c.antes ? `<p>Como você nasceu antes do Ano Novo Chinês de ${pessoa.a} (${c.virada}), seu signo é o do ano anterior.</p>` : "";
+      html = painel({
+        chamada: "Horóscopo chinês", titulo: `${c.animal[0]} de ${c.elemento[0]}`,
+        visual: svgRoda({ n: 12, rotulos: ANIMAIS.map(x => x[1]), indice: c.indice, centro: c.elemento[1], sub: `${c.elemento[0].toUpperCase()} · ${c.yin ? "YIN" : "YANG"}`, fonte: 22, han: true }),
+        texto: `<p class="destaque">${c.animal[0]}: ${c.animal[2]}.</p>
+          <p><strong>Elemento ${c.elemento[0]}</strong>: ${c.elemento[2]}.</p>
+          <p><strong>Polaridade ${c.yin ? "yin" : "yang"}</strong>: ${c.yin ? "receptiva, intuitiva e acolhedora" : "ativa, expansiva e realizadora"}.</p>${nota}`,
+        mensagem: `Olá, Tryv! ${quem()} e no horóscopo chinês sou ${c.animal[0]} de ${c.elemento[0]}. Quero aprofundar ✨`,
+      });
+    }
+    if (tipo === "arcano") {
+      const r = calcArcano(pessoa);
+      const conta = `${pessoa.d} + ${pessoa.m} + ${pessoa.a} = ${r.passos.join(" → ")}`;
+      const cartaHTML = (a, rotulo) => `<div class="vaga"><div class="carta" data-estado="chegou"><div class="carta__dentro"><div class="carta__verso"></div>
+        <div class="carta__frente"><span class="carta__num">${a.num}</span><span class="carta__glifo" aria-hidden="true">${a.glifo}</span><span class="carta__nome">${a.nome}</span></div></div></div>
+        <p class="vaga__rotulo">${rotulo}</p></div>`;
+      html = painel({
+        chamada: "Arcano de nascimento", titulo: `${r.pers.num} · ${r.pers.nome}`,
+        visual: `<div class="duas-cartas">${cartaHTML(r.pers, "Personalidade")}${r.mesma ? "" : cartaHTML(r.alma, "Alma")}</div>`,
+        texto: `<p class="destaque">${r.pers.msg}</p>
+          <p><strong>${r.pers.nome}</strong> é a carta da sua personalidade: o tema que acompanha você pela vida.</p>
+          ${r.mesma ? "<p>Sua carta da alma é a mesma: personalidade e alma falam a mesma língua.</p>" : `<p><strong>${r.alma.nome}</strong> é a carta da sua alma: ${r.alma.msg.charAt(0).toLowerCase() + r.alma.msg.slice(1)}</p>`}
+          <p>A conta: somamos dia, mês e ano, e reduzimos até chegar a um dos 22 Arcanos Maiores. ${conta}.</p>`,
+        mensagem: `Olá, Tryv! ${quem()} e meu arcano de nascimento é ${r.pers.nome}${r.mesma ? "" : `, com ${r.alma.nome} na alma`}. Quero aprofundar ✨`,
+      });
+    }
+    if (tipo === "mapa") html = painelMapa();
+    revelacao.innerHTML = html;
+    revelacao.hidden = false;
+    depoisDeAbrir(tipo);
+    setTimeout(() => revelacao.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "start" }), 250);
+  }
+
+  function depoisDeAbrir(tipo) {
+    $$("[data-fechar]", revelacao).forEach(b => b.addEventListener("click", () => {
+      revelacao.hidden = true; abertoAgora = null;
+      portais.forEach(x => x.classList.remove("ativo"));
+      portaisEl.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "center" });
+    }));
+    const giro = $(".roda__giro", revelacao);
+    if (giro) {
+      requestAnimationFrame(() => requestAnimationFrame(() => { giro.style.transform = `rotate(${giro.dataset.final}deg)`; }));
+      setTimeout(() => { const s = giro.ownerSVGElement.getBoundingClientRect(); soltar(s.left + s.width / 2, s.top + s.height * 0.08, 40, { forca: 3, anel: true, curta: true }); sino(4); }, parado ? 0 : 3100);
+    }
+    if (tipo === "arcano") $$(".carta", revelacao).forEach((c, i) => setTimeout(() => {
+      c.dataset.estado = "virada"; setTimeout(() => brilharEm(c, 36), 500); sino(3);
+    }, parado ? 0 : 500 + i * 700));
+    if (tipo === "mapa") ligarMapa();
+  }
+
+  function painelMapa() {
+    const sol = signoDe(ASTRO.planetaLon("sol", ASTRO.diaJ(pessoa.a, pessoa.m, pessoa.d, 15)));
+    const opcoes = CIDADES.map((c, i) => `<option value="${i}"${i === mapaPrefs.cidade ? " selected" : ""}>${c[0]} (${c[1]})</option>`).join("")
+      + `<option value="outra"${mapaPrefs.cidade === "outra" ? " selected" : ""}>Outra cidade…</option>`;
+    return `<div class="rev__topo"><span class="chamada">Mapa astral gratuito</span><h3 class="rev__titulo">O céu do dia em que você nasceu</h3></div>
+      <p class="intro" style="text-align:center">Com a hora e a cidade, o mapa ganha o Ascendente e as casas. Você é de Sol em ${sol.nome}; agora vamos ver o resto do céu.</p>
+      <form class="mapa-form" id="mapa-form">
+        <label class="campo">Hora do nascimento <input type="time" id="m-hora" value="${mapaPrefs.hora}" ${mapaPrefs.semHora ? "disabled" : ""}></label>
+        <label class="marcar"><input type="checkbox" id="m-sem-hora" ${mapaPrefs.semHora ? "checked" : ""}> Não sei a hora</label>
+        <label class="campo">Cidade <select id="m-cidade">${opcoes}</select></label>
+        <div class="mapa-form__outra" id="m-outra" ${mapaPrefs.cidade === "outra" ? "" : "hidden"}>
+          <label class="campo">Latitude <input type="number" id="m-lat" step="0.01" min="-90" max="90" value="${mapaPrefs.lat}"></label>
+          <label class="campo">Longitude (oeste negativa) <input type="number" id="m-lon" step="0.01" min="-180" max="180" value="${mapaPrefs.lon}"></label>
+          <label class="campo">Fuso (UTC) <input type="number" id="m-fuso" step="0.5" min="-12" max="14" value="${mapaPrefs.fuso}"></label>
+        </div>
+        <label class="marcar"><input type="checkbox" id="m-verao"> Era horário de verão</label>
+        <button class="botao botao--ouro" type="submit">✦ Desenhar meu mapa</button>
+      </form>
+      <div id="mapa-resultado"></div>`;
+  }
+
+  function ligarMapa() {
+    const form = $("#mapa-form"), hora = $("#m-hora"), semHora = $("#m-sem-hora"), cidade = $("#m-cidade"), verao = $("#m-verao"), outra = $("#m-outra");
+    const cidadeAtual = () => cidade.value === "outra" ? null : CIDADES[+cidade.value];
+    const atualizarVerao = () => { if (mapaPrefs.verao === null) verao.checked = sugereVerao(pessoa, cidadeAtual()); else verao.checked = mapaPrefs.verao; };
+    atualizarVerao();
+    semHora.addEventListener("change", () => { hora.disabled = semHora.checked; mapaPrefs.semHora = semHora.checked; });
+    cidade.addEventListener("change", () => { outra.hidden = cidade.value !== "outra"; mapaPrefs.cidade = cidade.value === "outra" ? "outra" : +cidade.value; mapaPrefs.verao = null; atualizarVerao(); });
+    verao.addEventListener("change", () => { mapaPrefs.verao = verao.checked; });
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      if (!semHora.checked && !hora.value) { tremer(form); hora.focus(); return; }
+      const c = cidadeAtual();
+      Object.assign(mapaPrefs, { hora: hora.value, semHora: semHora.checked });
+      const f = c ? { lat: c[2], lon: c[3], fuso: c[4] } : { lat: +$("#m-lat").value, lon: +$("#m-lon").value, fuso: +$("#m-fuso").value };
+      if (!c) Object.assign(mapaPrefs, f);
+      const r = calcMapa(pessoa, { ...f, hora: hora.value, semHora: semHora.checked, verao: verao.checked });
+      mostrarMapa(r, c ? `${c[0]} (${c[1]})` : `${f.lat}, ${f.lon}`);
+    });
+  }
+
+  function mostrarMapa(r, lugar) {
+    const sol = r.astros[0], lua = r.astros[1];
+    const sS = signoDe(sol.lon), sL = signoDe(lua.lon), sA = r.asc != null ? signoDe(r.asc) : null;
+    const casa = lon => r.asc == null ? "" : Math.floor((((lon - r.asc) % 360) + 360) % 360 / 30) + 1;
+    const linhas = r.astros.map((a, i) => `<tr data-i="${i}"><td>${a.glifo}</td><td>${a.nome}${a.retro ? " ℞" : ""}</td><td>${signoDe(a.lon).nome}</td><td class="grau">${grau(a.lon)}</td>${r.asc != null ? `<td class="grau">casa ${casa(a.lon)}</td>` : ""}</tr>`).join("")
+      + (r.asc != null ? `<tr><td>AC</td><td>Ascendente</td><td>${sA.nome}</td><td class="grau">${grau(r.asc)}</td><td></td></tr><tr><td>MC</td><td>Meio do Céu</td><td>${signoDe(r.mc).nome}</td><td class="grau">${grau(r.mc)}</td><td></td></tr>` : "");
+    const texto = `<p class="destaque">☉ Sol em ${sS.nome}: ${sS.sol}.</p>
+      <p><strong>☽ Lua em ${sL.nome}</strong>: ${sL.lua}.${r.asc == null ? " (Sem a hora, a Lua pode estar alguns graus para lá ou para cá.)" : ""}</p>
+      ${sA ? `<p><strong>Ascendente em ${sA.nome}</strong>: ${sA.asc}.</p>` : "<p>Sem a hora de nascimento, não dá para calcular o Ascendente e as casas.</p>"}
+      <table class="tabela-astros">${linhas}</table>`;
+    const resumo = `Sol em ${sS.nome}, Lua em ${sL.nome}${sA ? `, Ascendente em ${sA.nome}` : ""}`;
+    $("#mapa-resultado").innerHTML = painel({
+      chamada: `${dataBR(pessoa)}${mapaPrefs.semHora ? "" : ` · ${mapaPrefs.hora}`} · ${esc(lugar)}`, titulo: resumo,
+      visual: `<div style="width:100%">${svgMapa(r)}<p class="mapa-info" id="mapa-info">Toque num planeta para ver onde ele estava.</p></div>`,
+      texto, mensagem: `Olá, Tryv! ${quem()}${mapaPrefs.semHora ? "" : ` às ${mapaPrefs.hora}`} em ${lugar}. Fiz o mapa no site: ${resumo}. Quero aprofundar meu mapa astral ✨`,
+    });
+    const res = $("#mapa-resultado");
+    $$("[data-fechar]", res).forEach(b => b.addEventListener("click", () => { revelacao.hidden = true; portais.forEach(x => x.classList.remove("ativo")); }));
+    const info = $("#mapa-info");
+    const marcar = i => {
+      $$(".astro, .tabela-astros tr", res).forEach(el => el.classList.toggle("marcado", el.dataset.i === String(i)));
+      const a = r.astros[i];
+      info.textContent = `${a.glifo} ${a.nome} em ${signoDe(a.lon).nome}, ${grau(a.lon)}${r.asc != null ? ` · casa ${casa(a.lon)}` : ""}${a.retro ? " · retrógrado" : ""}`;
+    };
+    $$(".astro", res).forEach(g => {
+      g.addEventListener("pointerenter", () => marcar(g.dataset.i));
+      g.addEventListener("click", () => { marcar(g.dataset.i); const b = g.getBoundingClientRect(); soltar(b.left + b.width / 2, b.top + b.height / 2, 16, { forca: 2, curta: true }); });
+    });
+    $$(".tabela-astros tr[data-i]", res).forEach(tr => tr.addEventListener("pointerenter", () => marcar(tr.dataset.i)));
+    setTimeout(() => { brilharEm($(".mapa", res), 60); sino(5); }, parado ? 0 : 900);
+    setTimeout(() => res.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "start" }), 150);
+  }
 
   /* ---------- Árvores da floresta (geradas, sempre iguais) ---------- */
   let semente = 7;
