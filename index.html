@@ -163,6 +163,11 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .som__desligado { display: block; } .som__ligado { display: none; }
 .icone-botao[aria-pressed="true"] .som__desligado { display: none; }
 .icone-botao[aria-pressed="true"] .som__ligado { display: block; }
+.idioma { width: auto; padding: 0 .8rem 0 .55rem; gap: .45rem; display: flex; align-items: center; border-radius: 999px; font: 600 .78rem/1 var(--corpo); letter-spacing: .08em; cursor: pointer; }
+.idioma svg { width: 22px; height: 15px; border-radius: 3px; box-shadow: 0 0 0 1px rgba(255,255,255,.25); }
+.idioma .idioma__pt, .idioma.em-ingles .idioma__en { display: none; }
+.idioma.em-ingles .idioma__pt { display: block; }
+.idioma:hover { box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 14px rgba(242, 193, 78, .35); }
 .abre-menu { display: none; }
 @media (max-width: 1020px) {
   .abre-menu { display: grid; }
@@ -173,7 +178,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   }
   .menu.aberto { opacity: 1; visibility: visible; }
   .menu a { font: 600 1.5rem/1.2 var(--titulo); color: var(--ouro-claro); padding: .6rem 1.2rem; }
-  .som { margin-left: auto; }
+  .idioma { margin-left: auto; }
 }
 
 /* ---------- Abertura do site (herói) ---------- */
@@ -603,7 +608,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 #casa { cursor: pointer; }
 #casa .janela-luz { opacity: .85; transition: opacity .5s, filter .5s; }
 #casa:hover .janela-luz, #casa.acordada .janela-luz { opacity: 1; filter: brightness(1.3); }
-#porta-casa { transform-origin: 452px 630px; transition: transform .9s cubic-bezier(.3, .7, .2, 1); }
+#porta-casa { transform-origin: 434px 585px; transition: transform .9s cubic-bezier(.3, .7, .2, 1); }
 #casa.acordada #porta-casa { transform: scaleX(.72) skewY(5deg); }
 .casinha-palco.entrando #porta-casa { transform: scaleX(.06) skewY(16deg); }
 #anel-porta { transition: stroke-dashoffset .3s; }
@@ -617,6 +622,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .vagalume { transform-box: fill-box; transform-origin: center; animation: vagalume 3s ease-in-out infinite alternate; }
 @keyframes vagalume { from { opacity: .15; transform: translate(0, 0); } to { opacity: 1; transform: translate(9px, -16px); } }
 .tremeluz { animation: tremeluz 2.4s ease-in-out infinite; }
+.pozinho { animation: pozinho 5s linear infinite; }
+@keyframes pozinho { to { stroke-dashoffset: -140; } }
 @keyframes tremeluz { 0%, 100% { opacity: .85; } 30% { opacity: 1; } 55% { opacity: .7; } 75% { opacity: .95; } }
 
 .clarao {
@@ -635,7 +642,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 @keyframes chegarSala { from { transform: scale(1.4); filter: blur(8px) brightness(1.9); } }
 .luz-lareira {
   position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
-  background: radial-gradient(60% 70% at 50% 70%, rgba(255, 150, 60, .38), rgba(255, 110, 40, .1) 55%, transparent 80%);
+  background: radial-gradient(50% 60% at 50% 72%, rgba(255, 140, 50, .26), rgba(255, 100, 30, .06) 55%, transparent 80%);
   animation: tremeluz 1.9s ease-in-out infinite;
 }
 .vinheta { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(75% 85% at 50% 55%, transparent 55%, rgba(10, 3, 1, .82) 100%); }
@@ -747,7 +754,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 
 <header class="topo" id="topo">
   <div class="envelope topo__linha">
-    <a class="marca" href="#inicio"><img src="assets/logo-pequeno.webp" alt="" width="240" height="220"><span>Bem Dito</span></a>
+    <a class="marca" translate="no" href="#inicio"><img src="assets/logo-pequeno.webp" alt="" width="240" height="220"><span>Bem Dito</span></a>
     <nav class="menu" id="menu" aria-label="Seções">
       <a href="#cartas">Cartas</a>
       <a href="#descubra">Descubra-se</a>
@@ -757,6 +764,11 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <a href="#livro">Livro</a>
       <a href="#contato">Contato</a>
     </nav>
+    <button class="icone-botao idioma" id="idioma" type="button" translate="no" aria-label="Read in English">
+      <svg class="idioma__en" viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#b22234"/><path d="M0 4.6h60M0 10.8h60M0 16.9h60M0 23.1h60M0 29.2h60M0 35.4h60" stroke="#fff" stroke-width="3.1"/><rect width="26" height="21.5" fill="#3c3b6e"/><g fill="#fff"><circle cx="4" cy="4" r="1.2"/><circle cx="10" cy="4" r="1.2"/><circle cx="16" cy="4" r="1.2"/><circle cx="22" cy="4" r="1.2"/><circle cx="7" cy="8.5" r="1.2"/><circle cx="13" cy="8.5" r="1.2"/><circle cx="19" cy="8.5" r="1.2"/><circle cx="4" cy="13" r="1.2"/><circle cx="10" cy="13" r="1.2"/><circle cx="16" cy="13" r="1.2"/><circle cx="22" cy="13" r="1.2"/><circle cx="7" cy="17.5" r="1.2"/><circle cx="13" cy="17.5" r="1.2"/><circle cx="19" cy="17.5" r="1.2"/></g></svg>
+      <svg class="idioma__pt" viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#009c3b"/><path d="M30 4 56 20 30 36 4 20z" fill="#ffdf00"/><circle cx="30" cy="20" r="8.5" fill="#002776"/><path d="M21.8 18.2c5.5-.9 11.5.3 16.2 3.4" stroke="#fff" stroke-width="1.6" fill="none"/></svg>
+      <span class="idioma__rotulo">EN</span>
+    </button>
     <button class="icone-botao som" id="som" type="button" aria-pressed="false" aria-label="Som mágico">
       <svg class="som__desligado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
       <svg class="som__ligado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
@@ -894,7 +906,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <div class="cabeca surge">
         <span class="chamada">Era uma vez, na floresta</span>
         <h2 class="titulo">A casinha da Tryv</h2>
-        <p class="intro">Uma casinha de chocolate escondida no bosque. Passe a varinha na porta e entre: tem ervas, chás, cristais, magias leves e um caldeirão fervendo.</p>
+        <p class="intro">Uma casinha de bruxa escondida no bosque. Passe a varinha na porta e entre: tem ervas, chás, cristais, magias leves e um caldeirão fervendo.</p>
       </div>
       <div class="casinha-palco surge" id="casinha-palco">
         <div class="casinha-zoom" id="casinha-zoom"></div>
@@ -1729,16 +1741,24 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   if (!("speechSynthesis" in window)) botaoOuvir.hidden = true;
   else {
     speechSynthesis.getVoices();
+    // rótulos nos dois idiomas, para o botão não piscar em português
+    const rotuloOuvir = () => document.documentElement.lang === "en" ? "🔊 Listen to the message" : "🔊 Ouvir a mensagem";
+    const rotuloParar = () => document.documentElement.lang === "en" ? "■ Stop" : "■ Parar";
     botaoOuvir.addEventListener("click", () => {
-      if (speechSynthesis.speaking) { speechSynthesis.cancel(); botaoOuvir.textContent = "🔊 Ouvir a mensagem"; return; }
+      if (speechSynthesis.speaking) { speechSynthesis.cancel(); botaoOuvir.textContent = rotuloOuvir(); return; }
       const nomes = POSICOES[modo];
-      const texto = tiradas.map((a, i) => `${nomes[i]}: ${a.nome}. ${a.msg}`).join(" ");
+      // em inglês, lê o texto já traduzido que está na tela
+      const ingles = document.documentElement.lang === "en";
+      const texto = ingles
+        ? [...document.querySelectorAll("#leitura-itens .leitura__item")].map(el => [...el.children].map(c => c.innerText.trim()).join(". ")).join(". ")
+        : tiradas.map((a, i) => `${nomes[i]}: ${a.nome}. ${a.msg}`).join(" ");
       const u = new SpeechSynthesisUtterance(texto);
-      u.lang = "pt-BR"; u.rate = 0.92; u.pitch = 1.05;
-      const voz = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith("pt-br"));
+      const lingua = ingles ? "en" : "pt-br";
+      u.lang = ingles ? "en-US" : "pt-BR"; u.rate = 0.92; u.pitch = 1.05;
+      const voz = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith(lingua));
       if (voz) u.voice = voz;
-      u.onend = u.onerror = () => { botaoOuvir.textContent = "🔊 Ouvir a mensagem"; };
-      botaoOuvir.textContent = "■ Parar";
+      u.onend = u.onerror = () => { botaoOuvir.textContent = rotuloOuvir(); };
+      botaoOuvir.textContent = rotuloParar();
       speechSynthesis.speak(u);
     });
   }
@@ -2443,7 +2463,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 
   /* =========================================================================
      A CASINHA DE CHOCOLATE
-     Fora: a casinha de João e Maria na neve. Segurar a varinha na porta (ou
+     Fora: a casa da bruxa, de frente, na floresta à noite. Segurar a varinha na porta (ou
      tocar nela no celular) faz a câmera entrar, como nos filmes de Natal.
      Dentro: ervas, chás, magias, cristais e o caldeirão, onde a pessoa pega
      as ervas e os potes da própria cena e joga lá dentro.
@@ -2559,306 +2579,617 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <path d="M${f1(x - w * .5)} ${f1(base - h * .42)} Q${f1(x)} ${f1(base - h * .35)} ${f1(x + w * .5)} ${f1(base - h * .42)} L${f1(x + w * .36)} ${f1(base - h * .4)} Q${f1(x)} ${f1(base - h * .3)} ${f1(x - w * .36)} ${f1(base - h * .4)}Z" fill="${corNeve}" opacity=".85"/>` : "";
     return `<path d="${p}" fill="${cor}"/>${capa}`;
   }
-  // Ramo de erva pendurado: amarrado em (x, y), caindo para baixo
-  function maco(x, y, comp, cor, flor, larg = .1) {
-    let s = "";
-    for (let i = -3; i <= 3; i++) {
-      const a = i * 9, rad = a * Math.PI / 180;
-      const lx = x + Math.sin(rad) * comp * .42, ly = y + Math.cos(rad) * comp * .5;
-      s += `<ellipse cx="${f1(lx)}" cy="${f1(ly)}" rx="${f1(comp * larg)}" ry="${f1(comp * .42)}" fill="${cor}" transform="rotate(${-a} ${f1(lx)} ${f1(ly)})"/>`;
-      if (flor) s += `<circle cx="${f1(x + Math.sin(rad) * comp * .85)}" cy="${f1(y + Math.cos(rad) * comp * .9)}" r="${f1(comp * .085)}" fill="${flor}"/>`;
+  const lerp = (a, b, t) => a + (b - a) * t;
+  // Estrelinha de quatro pontas (brilho mágico)
+  const estrela4 = (x, y, r, cor = "#ffe9a8", extra = "") =>
+    `<path d="M${f1(x)} ${f1(y - r)} Q${f1(x + r * .16)} ${f1(y - r * .16)} ${f1(x + r)} ${f1(y)} Q${f1(x + r * .16)} ${f1(y + r * .16)} ${f1(x)} ${f1(y + r)} Q${f1(x - r * .16)} ${f1(y + r * .16)} ${f1(x - r)} ${f1(y)} Q${f1(x - r * .16)} ${f1(y - r * .16)} ${f1(x)} ${f1(y - r)}Z" fill="${cor}" ${extra}/>`;
+
+  // Pedras irregulares assentadas em fileiras, preenchendo um retângulo (alicerce, chaminé, lareira)
+  function pedras(x, y, w, h, R, tam = 26, tons = ["#8d8780", "#77716a", "#9a9389", "#6a645e", "#827a70"], argamassa = "#2a2420") {
+    let s = `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${argamassa}"/>`;
+    let yy = y;
+    while (yy < y + h - 3) {
+      const alt = Math.min(tam * (.55 + R() * .25), y + h - yy - 2);
+      let xx = x - R() * tam * .7;
+      while (xx < x + w) {
+        const lw = tam * (.75 + R() * .95);
+        const px = Math.max(x, xx) + 1.6, pw = Math.min(x + w, xx + lw) - px - 1.6;
+        if (pw > 4 && alt > 3) {
+          const cor = tons[Math.floor(R() * tons.length)], rr = f1(Math.min(pw, alt) * (.3 + R() * .2));
+          s += `<rect x="${f1(px)}" y="${f1(yy + 1.6)}" width="${f1(pw)}" height="${f1(alt)}" rx="${rr}" fill="${cor}"/>`
+            + `<rect x="${f1(px + 2)}" y="${f1(yy + 2.6)}" width="${f1(Math.max(pw - 4, 1))}" height="${f1(alt * .32)}" rx="${f1(alt * .16)}" fill="#fff" opacity=".12"/>`
+            + `<rect x="${f1(px + 1)}" y="${f1(yy + 1.6 + alt * .66)}" width="${f1(Math.max(pw - 2, 1))}" height="${f1(alt * .34)}" rx="${f1(alt * .17)}" fill="#000" opacity=".22"/>`;
+        }
+        xx += lw;
+      }
+      yy += alt + 2.4;
     }
-    return s + `<rect x="${x - 9}" y="${y - 6}" width="18" height="10" rx="3" fill="#c0263f"/>`;
+    return s;
   }
-  function vela(x, base, h, R) {
-    const atraso = (R() * 2).toFixed(2);
+
+  // Ramo de erva seca pendurado de cabeça para baixo, amarrado em (x, y)
+  const CORES_ERVA = {
+    lavanda: ["#55704a", "#8e72c9", "#b9a2e6"], alecrim: ["#4b6a45", "#6f8f66", "#9bb38c"], arruda: ["#46705f", "#6f9c8a", "#a3c6b4"],
+    louro: ["#3a5429", "#56743a", "#86a35a"], rosa: ["#4a6238", "#9e2c49", "#d4687f"], escura: ["#1c2a1a", "#26331f", "#2f3d27"],
+  };
+  function ramo(x, y, comp, tipo, R) {
+    const P = CORES_ERVA[tipo];
+    const n = tipo === "louro" ? 5 : tipo === "rosa" ? 6 : 8;
+    let talos = "", folhas = "";
+    for (let i = 0; i < n; i++) {
+      const a = (i / (n - 1) - .5) * 36 + (R() - .5) * 8, rad = a * Math.PI / 180, L = comp * (.72 + R() * .32);
+      const y0 = y + 12, ex = x + Math.sin(rad) * L, ey = y0 + Math.cos(rad) * L;
+      const cx = x + Math.sin(rad) * L * .45 + (R() - .5) * 6, cy = y0 + Math.cos(rad) * L * .5;
+      talos += `<path d="M${x} ${y0} Q${f1(cx)} ${f1(cy)} ${f1(ex)} ${f1(ey)}" stroke="${P[0]}" stroke-width="1.7" fill="none"/>`;
+      const passos = tipo === "louro" ? 5 : 11;
+      for (let k = 1; k <= passos; k++) {
+        const t = .2 + .8 * k / passos, u = 1 - t;
+        const qx = u * u * x + 2 * u * t * cx + t * t * ex, qy = u * u * y0 + 2 * u * t * cy + t * t * ey;
+        const lado = k % 2 ? 1 : -1, cor = P[R() < .55 ? 1 : 2];
+        if (tipo === "lavanda") { if (t > .58) folhas += `<ellipse cx="${f1(qx + lado * 1.8)}" cy="${f1(qy)}" rx="2.6" ry="4.2" fill="${cor}"/>`; }
+        else if (tipo === "alecrim") folhas += `<line x1="${f1(qx)}" y1="${f1(qy)}" x2="${f1(qx + lado * 7)}" y2="${f1(qy - 3)}" stroke="${cor}" stroke-width="2" stroke-linecap="round"/>`;
+        else if (tipo === "arruda") folhas += `<circle cx="${f1(qx + lado * 3.6)}" cy="${f1(qy)}" r="${f1(2.6 + R() * 1.4)}" fill="${cor}"/>`;
+        else if (tipo === "louro") folhas += `<ellipse cx="${f1(qx + lado * 9)}" cy="${f1(qy)}" rx="11" ry="4.4" fill="${cor}" transform="rotate(${f1(lado * 38 - a)} ${f1(qx + lado * 9)} ${f1(qy)})"/>`;
+        else if (tipo === "rosa") folhas += k === passos
+          ? `<circle cx="${f1(ex)}" cy="${f1(ey + 3)}" r="6.5" fill="${P[1]}"/><path d="M${f1(ex - 5)} ${f1(ey + 2)} q5 7 10 0" fill="none" stroke="${P[2]}" stroke-width="2"/><path d="M${f1(ex - 4)} ${f1(ey - 3)} l4 3 l4 -3" fill="#4a6238"/>`
+          : (k % 3 === 0 ? `<ellipse cx="${f1(qx + lado * 5)}" cy="${f1(qy)}" rx="5" ry="2.6" fill="#5c7444" transform="rotate(${lado * 30} ${f1(qx + lado * 5)} ${f1(qy)})"/>` : "");
+        else folhas += `<ellipse cx="${f1(qx + lado * 4)}" cy="${f1(qy)}" rx="5" ry="2.4" fill="${cor}"/>`;
+      }
+    }
+    const amarra = `<path d="M${x - 8} ${y + 2} h16 l-2.5 13 h-11Z" fill="#b8925a"/><path d="M${x - 8} ${y + 6} h16 M${x - 7} ${y + 10} h14" stroke="#7d5d33" stroke-width="1.4"/>`;
+    return talos + folhas + amarra;
+  }
+
+  // Vela de cera com pingos, pavio e chama; o brilho clareia o que está em volta
+  function vela(x, base, h, R, w = 18) {
+    const atraso = (R() * 2).toFixed(2), topo = base - h;
+    let pingos = "";
+    for (let i = 0; i < 3; i++) { const px = x - w / 2 + 3 + R() * (w - 6), L = 6 + R() * h * .35; pingos += `<rect x="${f1(px - 2)}" y="${topo}" width="4.5" height="${f1(L)}" rx="2.2" fill="#f3e6c8"/>`; }
     return `<g>
-      <circle cx="${x}" cy="${base - h - 14}" r="46" fill="url(#i-vela)" class="tremeluz" style="animation-delay:-${atraso}s"/>
-      <rect x="${x - 9}" y="${base - h}" width="18" height="${h}" rx="4" fill="#fff1dc"/>
-      <path d="M${x - 9} ${base - h + 4} q4 14 2 22 q4 -6 6 -18" fill="#fff8ee"/>
-      <line x1="${x}" y1="${base - h}" x2="${x}" y2="${base - h - 6}" stroke="#2a1206" stroke-width="2"/>
-      <path class="chama" style="animation-delay:-${atraso}s" d="M${x} ${base - h - 30} C${x - 8} ${base - h - 18} ${x - 7} ${base - h - 6} ${x} ${base - h - 5} C${x + 7} ${base - h - 6} ${x + 8} ${base - h - 18} ${x} ${base - h - 30}Z" fill="url(#i-chama)"/>
+      <circle cx="${x}" cy="${topo - 12}" r="${f1(70 + h * .4)}" fill="url(#i-vela)" class="tremeluz" style="animation-delay:-${atraso}s;mix-blend-mode:screen"/>
+      <rect x="${x - w / 2}" y="${topo}" width="${w}" height="${h}" rx="3" fill="url(#i-cera)"/>
+      <ellipse cx="${x}" cy="${topo + 1}" rx="${w / 2}" ry="3" fill="#fbf1da"/>${pingos}
+      <line x1="${x}" y1="${topo}" x2="${x + .5}" y2="${topo - 7}" stroke="#1c1008" stroke-width="2"/>
+      <path class="chama" style="animation-delay:-${atraso}s" d="M${x} ${topo - 32} C${x - 8} ${topo - 19} ${x - 7} ${topo - 7} ${x} ${topo - 5} C${x + 7} ${topo - 7} ${x + 8} ${topo - 19} ${x} ${topo - 32}Z" fill="url(#i-chama)"/>
+      <ellipse cx="${x}" cy="${topo - 12}" rx="2.4" ry="5" fill="#fff" opacity=".85"/>
     </g>`;
   }
   const placa = (x, y, texto, area) => {
     const w = texto.length * 12 + 46;
     return `<g class="ponto" data-area="${area}" role="button" tabindex="0" aria-label="${texto}">
-      <g class="placa"><rect x="${x - w / 2}" y="${y - 21}" width="${w}" height="42" rx="21" fill="rgba(26,11,5,.8)" stroke="rgba(242,193,78,.75)" stroke-width="1.5"/>
+      <g class="placa"><rect x="${x - w / 2}" y="${y - 21}" width="${w}" height="42" rx="21" fill="rgba(20,9,4,.82)" stroke="rgba(242,193,78,.75)" stroke-width="1.5"/>
       <text x="${x}" y="${y + 1}" text-anchor="middle" dominant-baseline="central" font-family="Cinzel, serif" font-size="19" font-weight="600" fill="#ffe6a3">${texto} ✦</text></g></g>`;
   };
 
+  // Telhado de palha visto de frente: faixa grossa ao longo das águas, com fios, musgo e florzinhas
+  function telhado(pts, esp, R, musgo = .5) {
+    const d = `M${pts.map(p => p.map(f1).join(" ")).join(" L")}`;
+    let s = `<path d="${d}" fill="none" stroke="#3a2610" stroke-width="${esp + 8}" stroke-linejoin="round" stroke-linecap="round" transform="translate(0 5)" opacity=".7"/>
+      <path d="${d}" fill="none" stroke="#7d5c2c" stroke-width="${esp}" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const tons = ["#a8864a", "#8a6a34", "#bf9d5e", "#6a4c22", "#9a7a40", "#b39252"];
+    let fios = "", franja = "", verde = "";
+    for (let sgm = 0; sgm < pts.length - 1; sgm++) {
+      const [ax, ay] = pts[sgm], [bx, by] = pts[sgm + 1];
+      const len = Math.hypot(bx - ax, by - ay), dx = (bx - ax) / len, dy = (by - ay) / len;
+      // normal para fora (para cima) e direção "água abaixo"
+      const nx = dy, ny = -dx, desce = dy > 0 ? 1 : -1;
+      const passos = Math.round(len / 6);
+      for (let i = 0; i <= passos; i++) {
+        const t = i / passos;
+        for (let j = 0; j < 5; j++) {
+          const off = (j / 4 - .5) * esp * .9 + (R() - .5) * 4;
+          const px = ax + (bx - ax) * t + nx * off, py = ay + (by - ay) * t + ny * off, L = 14 + R() * 16;
+          fios += `<line x1="${f1(px)}" y1="${f1(py)}" x2="${f1(px + dx * desce * L)}" y2="${f1(py + dy * desce * L)}" stroke="${tons[Math.floor(R() * tons.length)]}" stroke-width="${f1(1.6 + R() * 1.4)}" stroke-linecap="round" opacity=".9"/>`;
+        }
+        // borda de baixo (do lado da parede): pontas de palha caindo
+        if (i % 2 === 0) {
+          const bxp = ax + (bx - ax) * t - nx * esp * .5, byp = ay + (by - ay) * t - ny * esp * .5;
+          franja += `<line x1="${f1(bxp)}" y1="${f1(byp - 3)}" x2="${f1(bxp + (R() - .5) * 4)}" y2="${f1(byp + 6 + R() * 7)}" stroke="${tons[Math.floor(R() * 4)]}" stroke-width="2" stroke-linecap="round"/>`;
+        }
+        // borda de cima: tufos e musgo
+        const ox = ax + (bx - ax) * t + nx * esp * .42, oy = ay + (by - ay) * t + ny * esp * .42;
+        if (i % 2 === 0) franja += `<circle cx="${f1(ox)}" cy="${f1(oy)}" r="${f1(5 + R() * 4)}" fill="${tons[Math.floor(R() * tons.length)]}"/>`;
+        if (R() < musgo) {
+          const r = 4 + R() * 8, mx = ox + (R() - .5) * 6, my = oy + (R() - .3) * 8;
+          verde += `<ellipse cx="${f1(mx)}" cy="${f1(my)}" rx="${f1(r)}" ry="${f1(r * .62)}" fill="${["#1f3f1c", "#2a5224", "#36642b", "#2c4a22"][Math.floor(R() * 4)]}" opacity=".92"/>`;
+          if (R() < .7) verde += `<circle cx="${f1(mx + (R() - .5) * r)}" cy="${f1(my - r * .2)}" r="1.4" fill="#d8ff9a" class="vagalume" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`;
+          if (R() < .35) { const fx = mx + (R() - .5) * r, fy = my - r * .3, fc = ["#ff7fb5", "#c79bff", "#ffd36e", "#ff9fc8"][Math.floor(R() * 4)];
+            verde += `<g fill="${fc}">${[0, 72, 144, 216, 288].map(g => `<circle cx="${f1(fx + Math.cos(g * Math.PI / 180) * 2.6)}" cy="${f1(fy + Math.sin(g * Math.PI / 180) * 2.6)}" r="2"/>`).join("")}</g><circle cx="${f1(fx)}" cy="${f1(fy)}" r="1.3" fill="#fff3b0"/>`; }
+        }
+      }
+    }
+    // luar frio batendo na borda de cima
+    s += fios + franja + verde + `<path d="${d}" fill="none" stroke="#bcd0ff" stroke-width="3" stroke-linejoin="round" opacity=".18" transform="translate(0 ${-esp * .45})"/>`;
+    return s;
+  }
+
   function cenaFora() {
     const R = gerador(23), VB = "0 0 1000 820";
-    const balas = ["rosa", "verde", "amarela", "azul", "roxa"];
-    const bala = (x, y, r) => `<path d="M${f1(x - r)} ${f1(y)} a${r} ${r} 0 0 1 ${2 * r} 0Z" fill="url(#c-bala-${balas[Math.floor(R() * 5)]})"/><ellipse cx="${f1(x - r * .3)}" cy="${f1(y - r * .55)}" rx="${f1(r * .28)}" ry="${f1(r * .16)}" fill="#fff" opacity=".65"/>`;
-    const gotas = (x1, y1, x2, y2, n) => {
+    const defs = `<defs>
+      <linearGradient id="c-ceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070519"/><stop offset=".55" stop-color="#171347"/><stop offset="1" stop-color="#2c2160"/></linearGradient>
+      <radialGradient id="c-halo"><stop offset="0" stop-color="#fff3c4" stop-opacity=".5"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></radialGradient>
+      <linearGradient id="c-grama" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e4a2c"/><stop offset=".5" stop-color="#143520"/><stop offset="1" stop-color="#0b2014"/></linearGradient>
+      <radialGradient id="c-luz-chao"><stop offset="0" stop-color="#ffbf5e" stop-opacity=".75"/><stop offset=".5" stop-color="#ff9a3c" stop-opacity=".28"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+      <linearGradient id="c-reboco" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c8c74"/><stop offset="1" stop-color="#7a6648"/></linearGradient>
+      <linearGradient id="c-reboco-luz" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffa040" stop-opacity=".5"/><stop offset=".7" stop-color="#ffa040" stop-opacity="0"/></linearGradient>
+      <linearGradient id="c-viga" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a3519"/><stop offset=".5" stop-color="#43260f"/><stop offset="1" stop-color="#2e1a0a"/></linearGradient>
+      <linearGradient id="c-viga-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e391b"/><stop offset="1" stop-color="#2e1a0a"/></linearGradient>
+      <radialGradient id="c-janela" cx=".5" cy=".6"><stop offset="0" stop-color="#fff2c0"/><stop offset=".45" stop-color="#ffc45c"/><stop offset="1" stop-color="#d96a1c"/></radialGradient>
+      <radialGradient id="c-brilho"><stop offset="0" stop-color="#ffbe55" stop-opacity=".7"/><stop offset="1" stop-color="#ffbe55" stop-opacity="0"/></radialGradient>
+      <linearGradient id="c-tabua" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6b3f1d"/><stop offset=".5" stop-color="#7d4c24"/><stop offset="1" stop-color="#4f2c12"/></linearGradient>
+      <linearGradient id="c-raio" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe2a0" stop-opacity=".75"/><stop offset="1" stop-color="#ffe2a0" stop-opacity="0"/></linearGradient>
+      <linearGradient id="c-ouro" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff0b8" stop-opacity="0"/><stop offset=".3" stop-color="#ffe08a"/><stop offset=".7" stop-color="#ffcf5c"/><stop offset="1" stop-color="#fff0b8" stop-opacity="0"/></linearGradient>
+      <radialGradient id="c-lanterna"><stop offset="0" stop-color="#ffd27a" stop-opacity=".8"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+      <radialGradient id="c-fumaca"><stop offset="0" stop-color="#d8d4f0" stop-opacity=".38"/><stop offset="1" stop-color="#d8d4f0" stop-opacity="0"/></radialGradient>
+      <radialGradient id="c-nevoa"><stop offset="0" stop-color="#a9b4ff" stop-opacity=".22"/><stop offset="1" stop-color="#a9b4ff" stop-opacity="0"/></radialGradient>
+      <filter id="c-grao" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .2  0 0 0 0 .12  0 0 0 0 .05  1.6 0 0 0 -.62"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+      <clipPath id="c-porta-clip"><path d="M434 615 V556 A36 36 0 0 1 506 556 V615Z"/></clipPath>
+    </defs>`;
+
+    // ---- céu, lua e estrelas ----
+    let estrelas = "";
+    for (let i = 0; i < 90; i++) estrelas += `<circle cx="${f1(R() * 1000)}" cy="${f1(20 + R() * 430)}" r="${f1(.5 + R() * 1.5)}" fill="#fff" opacity="${(.3 + R() * .7).toFixed(2)}"/>`;
+    for (let i = 0; i < 6; i++) estrelas += estrela4(60 + R() * 880, 40 + R() * 300, 4 + R() * 4, "#fff6d8", `class="vagalume" style="animation-delay:-${(R() * 3).toFixed(1)}s"`);
+    const ceu = `${defs}<rect width="1000" height="820" fill="url(#c-ceu)"/>${estrelas}
+      <circle cx="840" cy="160" r="140" fill="url(#c-halo)"/><circle cx="840" cy="160" r="42" fill="#fff3d0"/>
+      <circle cx="826" cy="150" r="8" fill="#ebdcb0" opacity=".6"/><circle cx="852" cy="174" r="6" fill="#ebdcb0" opacity=".5"/><circle cx="848" cy="140" r="4" fill="#ebdcb0" opacity=".45"/>`;
+
+    // ---- floresta ao fundo: copas redondas e pinheiros, com névoa ----
+    const copa = (x, base, r, cor) => `<rect x="${f1(x - r * .1)}" y="${f1(base - r)}" width="${f1(r * .2)}" height="${f1(r)}" fill="${cor}"/>`
+      + [[0, -r * 1.5, r], [-r * .6, -r * 1.05, r * .75], [r * .62, -r * 1.1, r * .78], [0, -r * 2.15, r * .7]].map(([dx, dy, rr]) => `<circle cx="${f1(x + dx)}" cy="${f1(base + dy)}" r="${f1(rr)}" fill="${cor}"/>`).join("");
+    let longe = `<path d="M0 520 C160 470 320 505 470 482 C640 456 820 498 1000 470 V820 H0Z" fill="#1d2152"/>`;
+    for (let x = -20; x < 1040; x += 40 + R() * 40) longe += R() < .5 ? copa(x, 590 + R() * 14, 34 + R() * 22, "#141842") : pinheiroNeve(x, 600 + R() * 12, 120 + R() * 90, 60 + R() * 20, "#121640", false);
+    longe += `<ellipse cx="500" cy="600" rx="620" ry="70" fill="url(#c-nevoa)"/>`;
+    for (let x = -30; x < 1060; x += 55 + R() * 45) longe += R() < .55 ? copa(x, 640 + R() * 10, 44 + R() * 26, "#0e1834") : pinheiroNeve(x, 650, 170 + R() * 90, 80 + R() * 26, "#0d1530", false);
+
+    // ---- a casa da bruxa, de frente ----
+    const reboco = (d) => `<path d="${d}" fill="url(#c-reboco)"/><path d="${d}" fill="#000" filter="url(#c-grao)" opacity=".55"/><path d="${d}" fill="url(#c-reboco-luz)"/>`;
+    const vigaV = (x, y1, y2, w = 13) => `<rect x="${x - w / 2}" y="${y1}" width="${w}" height="${y2 - y1}" fill="url(#c-viga)"/><line x1="${x - w * .2}" y1="${y1 + 4}" x2="${x - w * .2}" y2="${y2 - 4}" stroke="#7a4f2a" stroke-width="1" opacity=".6"/>`;
+    const vigaH = (x1, x2, y, h = 13) => `<rect x="${x1}" y="${y - h / 2}" width="${x2 - x1}" height="${h}" fill="url(#c-viga-h)"/><line x1="${x1 + 4}" y1="${y - h * .15}" x2="${x2 - 4}" y2="${y - h * .15}" stroke="#7a4f2a" stroke-width="1" opacity=".55"/>`;
+    const vigaD = (x1, y1, x2, y2, w = 11) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#3d2310" stroke-width="${w}" stroke-linecap="butt"/><line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#6b4322" stroke-width="2" opacity=".6" transform="translate(-2 -1)"/>`;
+    const flores = (x1, x2, y, n, tons = ["#ff7fb5", "#c79bff", "#ffd36e", "#ff5c8a", "#ffffff"]) => {
       let s = "";
       for (let i = 0; i < n; i++) {
-        const t = (i + .5) / n + (R() - .5) * .5 / n, x = x1 + (x2 - x1) * t, y = y1 + (y2 - y1) * t, L = 6 + R() * 20, w = 4 + R() * 3;
-        s += `<path d="M${f1(x - w)} ${f1(y)} Q${f1(x - w)} ${f1(y + L)} ${f1(x)} ${f1(y + L)} Q${f1(x + w)} ${f1(y + L)} ${f1(x + w)} ${f1(y)}Z" fill="#fff"/>`;
+        const x = x1 + R() * (x2 - x1), yy = y - R() * 10, c = tons[Math.floor(R() * tons.length)];
+        s += `<ellipse cx="${f1(x)}" cy="${f1(yy + 6)}" rx="7" ry="4" fill="${["#2e6b2c", "#3f8a36", "#24572a"][Math.floor(R() * 3)]}" transform="rotate(${Math.floor(R() * 60 - 30)} ${f1(x)} ${f1(yy + 6)})"/>`;
+        if (R() < .7) s += `<g fill="${c}">${[0, 72, 144, 216, 288].map(g => `<circle cx="${f1(x + Math.cos(g * Math.PI / 180) * 3)}" cy="${f1(yy + Math.sin(g * Math.PI / 180) * 3)}" r="2.4"/>`).join("")}</g><circle cx="${f1(x)}" cy="${f1(yy)}" r="1.5" fill="#fff3b0"/>`;
       }
       return s;
     };
-    const defs = `<defs>
-      <linearGradient id="c-ceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#090620"/><stop offset=".6" stop-color="#1d1350"/><stop offset="1" stop-color="#3b1f62"/></linearGradient>
-      <radialGradient id="c-halo"><stop offset="0" stop-color="#fff3c4" stop-opacity=".55"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></radialGradient>
-      <linearGradient id="c-neve" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f3ff"/><stop offset="1" stop-color="#8f97cf"/></linearGradient>
-      <radialGradient id="c-luz-chao"><stop offset="0" stop-color="#ffbf5e" stop-opacity=".85"/><stop offset=".5" stop-color="#ff9a3c" stop-opacity=".35"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
-      <linearGradient id="c-gengibre" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c47837"/><stop offset=".55" stop-color="#9a5224"/><stop offset="1" stop-color="#6d3415"/></linearGradient>
-      <pattern id="c-telha" width="36" height="24" patternUnits="userSpaceOnUse"><rect width="36" height="24" fill="#3d1a09"/><rect x="2" y="2" width="32" height="20" rx="6" fill="#6b3214"/><rect x="6" y="5" width="18" height="5" rx="2.5" fill="#94522a" opacity=".8"/></pattern>
-      <linearGradient id="c-sombra" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".4"/></linearGradient>
-      <radialGradient id="c-janela" cx=".45" cy=".4"><stop offset="0" stop-color="#fff6d0"/><stop offset=".45" stop-color="#ffcc66"/><stop offset="1" stop-color="#e07a26"/></radialGradient>
-      <radialGradient id="c-brilho"><stop offset="0" stop-color="#ffc35a" stop-opacity=".75"/><stop offset="1" stop-color="#ffc35a" stop-opacity="0"/></radialGradient>
-      <linearGradient id="c-porta" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5a2a12"/><stop offset="1" stop-color="#2e1308"/></linearGradient>
-      <linearGradient id="c-raio" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9b0" stop-opacity=".8"/><stop offset="1" stop-color="#ffe9b0" stop-opacity="0"/></linearGradient>
-      <pattern id="c-listra" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="14" height="14" fill="#fff"/><rect width="7" height="14" fill="#e8264f"/></pattern>
-      <radialGradient id="c-coracao" cx=".35" cy=".3"><stop offset="0" stop-color="#ffd0e6"/><stop offset=".45" stop-color="#ff3d8f"/><stop offset="1" stop-color="#b3104f"/></radialGradient>
-      ${[["rosa", "#ffd1e6", "#ff4f9a", "#c4125f"], ["verde", "#dcffd2", "#4fd06b", "#1f8a3b"], ["amarela", "#fff6c4", "#ffd23f", "#c99400"], ["azul", "#d6ecff", "#5fb0ff", "#1f62c4"], ["roxa", "#eadcff", "#a77bff", "#5b2fc4"]]
-        .map(([n, a, b, c]) => `<radialGradient id="c-bala-${n}" cx=".35" cy=".3"><stop offset="0" stop-color="${a}"/><stop offset=".5" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></radialGradient>`).join("")}
-    </defs>`;
-
-    let estrelas = "";
-    for (let i = 0; i < 80; i++) estrelas += `<circle cx="${f1(R() * 1000)}" cy="${f1(40 + R() * 420)}" r="${f1(.6 + R() * 1.6)}" fill="#fff" opacity="${(.3 + R() * .7).toFixed(2)}"/>`;
-    const ceu = `${defs}<rect width="1000" height="820" fill="url(#c-ceu)"/>${estrelas}
-      <circle cx="830" cy="190" r="130" fill="url(#c-halo)"/><circle cx="830" cy="190" r="44" fill="#fff3d0"/>
-      <circle cx="815" cy="180" r="9" fill="#efe2b8" opacity=".6"/><circle cx="844" cy="206" r="6" fill="#efe2b8" opacity=".5"/>`;
-
-    let longe = `<path d="M0 560 C150 500 300 540 450 515 C620 488 800 530 1000 500 V820 H0Z" fill="#2a1d5e"/>`;
-    for (let x = -20; x < 1030; x += 34 + R() * 26) longe += pinheiroNeve(x, 605 + R() * 12, 110 + R() * 90, 60 + R() * 20, "#1b1347", R() < .65, "#8d93c9");
-
-    // Casa
-    let pingos = "";
-    for (let i = 0; i < 46; i++) {
-      const x = 348 + R() * 304, y = 436 + R() * 214;
-      if (Math.hypot(x - 405, y - 495) < 54 || Math.hypot(x - 595, y - 495) < 54 || (x > 430 && x < 570 && y > 500)) continue;
-      pingos += `<rect x="${f1(x)}" y="${f1(y)}" width="12" height="4" rx="2" fill="${["#ff5aa5", "#ffd23f", "#5fb0ff", "#4fd06b", "#fff"][Math.floor(R() * 5)]}" transform="rotate(${Math.floor(R() * 180)} ${f1(x + 6)} ${f1(y + 2)})"/>`;
-    }
-    const zigue = x => { let d = `M${x} 432`; for (let y = 432; y < 650; y += 14) d += ` l7 7 l-7 7`; return `<path d="${d}" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>`; };
-    let balasTelhado = "";
-    for (let t = .12; t < .92; t += .13) balasTelhado += bala(285 + t * 215, 420 - t * 227 - 8, 12) + bala(715 - t * 215, 420 - t * 227 - 8, 12);
-    let arbustos = "";
-    for (let x = 300; x < 450; x += 22 + R() * 8) arbustos += bala(x, 664, 14 + R() * 7);
-    for (let x = 558; x < 705; x += 22 + R() * 8) arbustos += bala(x, 664, 14 + R() * 7);
-    const janela = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r * 1.9}" fill="url(#c-brilho)" class="janela-luz tremeluz"/>
-      <circle cx="${x}" cy="${y}" r="${r - 3}" fill="url(#c-janela)" class="janela-luz"/>
-      <path d="M${x - r + 6} ${y - 6} Q${x - r * .4} ${y - r * .2} ${x - r * .55} ${y + r - 6} L${x - r + 4} ${y + r * .5}Z" fill="#ff7fb5" opacity=".75"/>
-      <path d="M${x + r - 6} ${y - 6} Q${x + r * .4} ${y - r * .2} ${x + r * .55} ${y + r - 6} L${x + r - 4} ${y + r * .5}Z" fill="#ff7fb5" opacity=".75"/>
-      <path d="M${x} ${y - r} V${y + r} M${x - r} ${y} H${x + r}" stroke="#fff" stroke-width="5"/>
-      <circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="url(#c-listra)" stroke-width="9"/>`;
-    const pirulito = (x, y, r, cor) => {
-      let espiral = `M${x} ${y}`;
-      for (let k = 1; k <= 5; k++) espiral += ` a${f1(r * k * .17)} ${f1(r * k * .17)} 0 0 1 ${f1((k % 2 ? 2 : -2) * r * k * .17)} 0`;
-      return `<line x1="${x}" y1="${y}" x2="${x}" y2="${y + 140}" stroke="#f5efe0" stroke-width="7" stroke-linecap="round"/>
-        <circle cx="${x}" cy="${y}" r="${r}" fill="${cor}"/><path d="${espiral}" fill="none" stroke="#fff" stroke-width="${f1(r * .13)}" stroke-linecap="round"/>
-        <circle cx="${x - r * .35}" cy="${y - r * .4}" r="${f1(r * .22)}" fill="#fff" opacity=".45"/>`;
+    // janela de madeira com vidro aceso; arco = topo arredondado
+    const janela = (x, y, w, h, arco = false) => {
+      const forma = arco ? `M${x} ${y + h} V${y + w / 2} A${w / 2} ${w / 2} 0 0 1 ${x + w} ${y + w / 2} V${y + h}Z` : `M${x} ${y}H${x + w}V${y + h}H${x}Z`;
+      return `<circle cx="${x + w / 2}" cy="${y + h / 2}" r="${f1(Math.max(w, h) * 1.15)}" fill="url(#c-brilho)" class="janela-luz tremeluz" style="animation-delay:-${(R() * 2).toFixed(1)}s"/>
+        <path d="${forma}" fill="#2a170a" stroke="#2a170a" stroke-width="16" stroke-linejoin="round"/>
+        <path d="${forma}" fill="url(#c-janela)" class="janela-luz"/>
+        <path d="M${x + w * .2} ${y + h} v-${f1(h * .2)} h${f1(w * .08)} v-6 h4 v6 h${f1(w * .06)} v${f1(h * .2)}Z" fill="#7a3c14" opacity=".55"/>
+        <path d="M${x + w / 2} ${y + (arco ? 0 : 0)} V${y + h} M${x} ${y + h * .5} H${x + w}" stroke="#3a2210" stroke-width="4.5"/>
+        <path d="${forma}" fill="none" stroke="#5c3a1c" stroke-width="5" stroke-linejoin="round"/>
+        <rect x="${x - 9}" y="${y + h + 2}" width="${w + 18}" height="9" rx="2" fill="url(#c-viga-h)"/>`;
     };
+    const jardineira = (x, y, w) => `<rect x="${x}" y="${y}" width="${w}" height="16" rx="3" fill="#5a3519" stroke="#2e1a0a" stroke-width="2"/>${flores(x + 2, x + w - 2, y + 2, Math.round(w / 6))}`;
+    const janelaRedonda = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${f1(r * 2.2)}" fill="url(#c-brilho)" class="janela-luz tremeluz"/>
+      <circle cx="${x}" cy="${y}" r="${r + 7}" fill="#3a2210"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#c-janela)" class="janela-luz"/>
+      <path d="M${x} ${y - r} V${y + r} M${x - r} ${y} H${x + r}" stroke="#3a2210" stroke-width="4"/><circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#6b4322" stroke-width="3"/>`;
+
+    // chaminé de pedra com fumaça e um rastro de pó de fada
+    const chamine = `${pedras(552, 214, 52, 160, R, 20)}
+      <rect x="544" y="198" width="68" height="20" rx="4" fill="#6f6862"/><rect x="544" y="198" width="68" height="6" rx="3" fill="#fff" opacity=".12"/>
+      <ellipse cx="560" cy="250" rx="12" ry="7" fill="#3f7a31"/><ellipse cx="596" cy="300" rx="9" ry="6" fill="#2f5e2a"/>`;
+    const fumaca = [0, 1, 2, 3].map(i => `<circle class="fumaca" cx="578" cy="190" r="16" fill="url(#c-fumaca)" style="animation-delay:-${i}s"/>`).join("");
+    const redemoinho = `<g class="redemoinho">
+      <path d="M578 186 C560 120 640 96 650 140 C660 190 560 190 520 140 C470 80 380 120 350 90" fill="none" stroke="url(#c-ouro)" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+      <path d="M578 186 C560 120 640 96 650 140 C660 190 560 190 520 140 C470 80 380 120 350 90" fill="none" stroke="#fff4c8" stroke-width="2.4" stroke-dasharray="1 13" stroke-linecap="round" class="pozinho"/>
+      <path d="M600 170 C700 120 760 210 830 170 C880 140 900 190 940 170" fill="none" stroke="url(#c-ouro)" stroke-width="2" opacity=".5"/>
+      ${[[650, 140], [520, 140], [350, 90], [700, 150], [830, 170], [430, 100]].map(([x, y], i) => estrela4(x, y, 6 + (i % 3) * 2, "#fff1b8", `class="vagalume" style="animation-delay:-${i * .5}s"`)).join("")}
+    </g>`;
+
+    // ala da direita (mais baixa)
+    const ala = `${reboco("M610 500 L677 376 L745 500 V615 H610Z")}
+      ${vigaV(616, 500, 612, 12)}${vigaV(739, 500, 612, 12)}${vigaH(610, 745, 500, 13)}${vigaV(677, 390, 500, 10)}
+      ${vigaD(622, 494, 660, 420, 9)}${vigaD(733, 494, 694, 420, 9)}
+      ${janelaRedonda(677, 455, 15)}
+      ${janela(648, 528, 58, 58)}${jardineira(640, 592, 74)}
+      ${telhado([[588, 518], [677, 352], [767, 518]], 36, R, .55)}`;
+
+    // bloco principal com a porta
+    const portaLuz = `<path d="M434 615 V556 A36 36 0 0 1 506 556 V615Z" fill="#ffe2a0"/><path d="M434 615 V556 A36 36 0 0 1 506 556 V615Z" fill="url(#c-brilho)"/>`;
+    let tabuas = "";
+    for (let i = 0; i < 5; i++) tabuas += `<rect x="${434 + i * 14.4}" y="510" width="14.4" height="110" fill="url(#c-tabua)" stroke="#2e1a0a" stroke-width="1.2"/>`
+      + `<path d="M${438 + i * 14.4} 530 q3 30 0 60" stroke="#3d2310" stroke-width="1" fill="none" opacity=".6"/>`;
+    const porta = `<g id="porta-casa"><g clip-path="url(#c-porta-clip)">${tabuas}
+        <rect x="430" y="566" width="80" height="7" fill="#2b2b30"/><rect x="430" y="598" width="80" height="7" fill="#2b2b30"/>
+        ${[442, 458, 482, 498].map(x => `<circle cx="${x}" cy="569.5" r="1.8" fill="#8a8a96"/><circle cx="${x}" cy="601.5" r="1.8" fill="#8a8a96"/>`).join("")}
+        <circle cx="470" cy="545" r="9" fill="url(#c-janela)" class="janela-luz"/><path d="M470 536 V554 M461 545 H479" stroke="#2b2b30" stroke-width="2.4"/><circle cx="470" cy="545" r="9" fill="none" stroke="#2b2b30" stroke-width="2.6"/>
+      </g>
+      <circle cx="494" cy="586" r="6" fill="none" stroke="#e8b84a" stroke-width="2.6"/><circle cx="494" cy="580" r="2.6" fill="#e8b84a"/></g>`;
+    let arco = "";
+    for (let a = 180; a < 360; a += 20) {
+      const r1 = 37, r2 = 52, a1 = (a + 1) * Math.PI / 180, a2 = (a + 19) * Math.PI / 180;
+      arco += `<path d="M${f1(470 + Math.cos(a1) * r1)} ${f1(556 + Math.sin(a1) * r1)} L${f1(470 + Math.cos(a1) * r2)} ${f1(556 + Math.sin(a1) * r2)} A${r2} ${r2} 0 0 1 ${f1(470 + Math.cos(a2) * r2)} ${f1(556 + Math.sin(a2) * r2)} L${f1(470 + Math.cos(a2) * r1)} ${f1(556 + Math.sin(a2) * r1)} A${r1} ${r1} 0 0 0 ${f1(470 + Math.cos(a1) * r1)} ${f1(556 + Math.sin(a1) * r1)}Z" fill="${["#8d8780", "#77716a", "#9a9389"][a % 3]}" stroke="#2a2420" stroke-width="1.5"/>`;
+    }
+    arco += [[556, 576], [578, 597], [599, 615]].map(([y1, y2]) => `<rect x="418" y="${y1 + 1}" width="15" height="${y2 - y1 - 2}" rx="3" fill="#857e76" stroke="#2a2420"/><rect x="507" y="${y1 + 1}" width="15" height="${y2 - y1 - 2}" rx="3" fill="#7b746c" stroke="#2a2420"/>`).join("");
+    const lanterna = (x, y) => `<circle cx="${x}" cy="${y + 18}" r="60" fill="url(#c-lanterna)" class="tremeluz"/>
+      <path d="M${x - 10} ${y} h20 l-3 -7 h-14Z" fill="#1f1f24"/><rect x="${x - 9}" y="${y}" width="18" height="28" rx="2" fill="#ffd27a" class="janela-luz"/>
+      <path d="M${x - 9} ${y} h18 v28 h-18Z M${x} ${y} v28" fill="none" stroke="#1f1f24" stroke-width="2.4"/><path d="M${x - 12} ${y + 28} h24 l-4 6 h-16Z" fill="#1f1f24"/>
+      <path class="chama" d="M${x} ${y + 8} c-4 6 -4 11 0 13 c4 -2 4 -7 0 -13Z" fill="#fff2b0"/>`;
+    const vassoura = `<g transform="rotate(-8 575 610)"><rect x="572" y="470" width="6" height="140" rx="3" fill="#7a4a22"/>
+      <path d="M562 568 L588 568 L602 618 L548 618Z" fill="#c9a25a"/>${Array.from({ length: 9 }, (_, i) => `<line x1="${566 + i * 2.6}" y1="572" x2="${552 + i * 6}" y2="618" stroke="#8a6430" stroke-width="1.4"/>`).join("")}
+      <rect x="562" y="566" width="26" height="6" rx="2" fill="#8a3a2a"/></g>`;
+    const principal = `${chamine}
+      ${reboco("M330 440 L470 230 L610 440 V615 H330Z")}
+      ${vigaV(336, 440, 612, 14)}${vigaV(604, 440, 612, 14)}${vigaV(424, 446, 612, 12)}${vigaV(516, 446, 612, 12)}
+      ${vigaH(330, 610, 440, 15)}${vigaH(330, 610, 606, 12)}
+      ${vigaV(470, 246, 334, 12)}${vigaH(400, 540, 334, 12)}${vigaD(346, 432, 404, 340, 10)}${vigaD(594, 432, 536, 340, 10)}
+      ${vigaD(344, 600, 418, 520, 9)}
+      ${janelaRedonda(470, 386, 26)}
+      ${janela(352, 470, 56, 66, true)}${jardineira(344, 546, 72)}
+      ${portaLuz}${arco}${porta}
+      <path d="M516 500 h26 v4 h-22Z" fill="#1f1f24"/><line x1="538" y1="504" x2="538" y2="512" stroke="#1f1f24" stroke-width="2"/>${lanterna(538, 514)}
+      ${vassoura}
+      ${telhado([[300, 460], [470, 194], [640, 460]], 46, R, .6)}`;
+
+    // alicerce, degraus, caminho e jardim
+    const alicerce = pedras(318, 612, 440, 42, R, 24);
+    const degraus = `<rect x="424" y="652" width="92" height="12" rx="4" fill="#8d8780" stroke="#2a2420" stroke-width="1.5"/><rect x="414" y="663" width="112" height="13" rx="4" fill="#77716a" stroke="#2a2420" stroke-width="1.5"/>`;
+    let caminho = "";
+    [[470, 694, 40, 11], [455, 726, 48, 13], [482, 762, 56, 15], [462, 802, 66, 17]].forEach(([x, y, rx, ry]) => {
+      caminho += `<ellipse cx="${x}" cy="${y + 3}" rx="${rx}" ry="${ry}" fill="#0a1a10" opacity=".6"/><ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="#8a837a"/><ellipse cx="${x - rx * .15}" cy="${y - ry * .3}" rx="${rx * .7}" ry="${ry * .45}" fill="#fff" opacity=".1"/>`;
+    });
+    const cogumelo = (x, y, s) => `<rect x="${f1(x - 3 * s)}" y="${f1(y - 12 * s)}" width="${f1(6 * s)}" height="${f1(12 * s)}" rx="${f1(2 * s)}" fill="#efe4cc"/><path d="M${f1(x - 11 * s)} ${f1(y - 11 * s)} a${f1(11 * s)} ${f1(9 * s)} 0 0 1 ${f1(22 * s)} 0Z" fill="#c2273d"/>${[[-5, -15], [3, -17], [6, -13]].map(([dx, dy]) => `<circle cx="${f1(x + dx * s)}" cy="${f1(y + dy * s)}" r="${f1(1.6 * s)}" fill="#fff"/>`).join("")}`;
+    const arbusto = (x, y, r) => [[0, 0, r], [-r * .7, r * .2, r * .7], [r * .7, r * .2, r * .72]].map(([dx, dy, rr]) => `<circle cx="${f1(x + dx)}" cy="${f1(y + dy)}" r="${f1(rr)}" fill="#163f22"/><circle cx="${f1(x + dx - rr * .2)}" cy="${f1(y + dy - rr * .3)}" r="${f1(rr * .55)}" fill="#22592f"/>`).join("");
     let vagalumes = "";
-    for (let i = 0; i < 16; i++) vagalumes += `<circle class="vagalume" cx="${f1(220 + R() * 560)}" cy="${f1(360 + R() * 300)}" r="${f1(1.8 + R() * 1.8)}" fill="#ffe6a3" style="animation-delay:-${(R() * 3).toFixed(2)}s"/>`;
+    for (let i = 0; i < 22; i++) vagalumes += `<circle class="vagalume" cx="${f1(200 + R() * 600)}" cy="${f1(330 + R() * 340)}" r="${f1(1.6 + R() * 1.8)}" fill="#ffe6a3" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`;
+    const poste = `<rect x="262" y="600" width="7" height="96" fill="#2b2b30"/><path d="M265 600 q0 -14 16 -14" fill="none" stroke="#2b2b30" stroke-width="4"/>${lanterna(281, 592)}`;
 
     const casa = `
-      <path d="M0 610 C200 585 380 625 500 615 C650 605 820 580 1000 605 V820 H0Z" fill="url(#c-neve)"/>
-      <ellipse cx="500" cy="672" rx="340" ry="86" fill="url(#c-luz-chao)" class="tremeluz"/>
-      <g class="raios"><polygon points="470,640 530,640 640,820 360,820" fill="url(#c-raio)"/><polygon points="480,640 520,640 760,820 640,820" fill="url(#c-raio)" opacity=".5"/><polygon points="480,640 520,640 360,820 240,820" fill="url(#c-raio)" opacity=".5"/></g>
-      ${[[500, 690, 46, 12], [486, 724, 54, 14], [512, 764, 62, 16], [492, 806, 70, 18]].map(([x, y, rx, ry]) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="#c98a4b" stroke="#8a5226" stroke-width="3"/><circle cx="${x - rx * .3}" cy="${y - 2}" r="3" fill="#6b3a18"/><circle cx="${x + rx * .35}" cy="${y + 2}" r="3" fill="#6b3a18"/>`).join("")}
-      ${pirulito(232, 560, 34, "#ff4f9a")}${pirulito(778, 572, 30, "#5fb0ff")}
+      <path d="M0 628 C180 606 360 640 500 634 C660 626 820 604 1000 628 V820 H0Z" fill="url(#c-grama)"/>
+      <ellipse cx="470" cy="676" rx="330" ry="80" fill="url(#c-luz-chao)" class="tremeluz"/>
+      <g class="raios"><polygon points="440,615 500,615 640,820 300,820" fill="url(#c-raio)"/><polygon points="448,615 492,615 760,820 640,820" fill="url(#c-raio)" opacity=".45"/><polygon points="448,615 492,615 300,820 180,820" fill="url(#c-raio)" opacity=".45"/></g>
+      ${caminho}${poste}
       <g id="casa" role="button" tabindex="0" aria-label="Entrar na casinha">
-        <rect x="600" y="228" width="50" height="110" fill="url(#c-listra)"/>
-        <rect x="592" y="218" width="66" height="18" rx="9" fill="#fff"/>
-        <g>${[0, 1, 2, 3].map(i => `<circle class="fumaca" cx="625" cy="205" r="14" fill="rgba(230,225,255,.5)" style="animation-delay:-${i}s"/>`).join("")}</g>
-        <rect x="335" y="420" width="330" height="242" fill="url(#c-gengibre)"/>
-        ${pingos}${zigue(342)}${zigue(658)}
-        <path d="M285 420 L500 193 L715 420Z" fill="url(#c-telha)"/>
-        <path d="M500 193 L715 420 H500Z" fill="url(#c-sombra)"/>
-        <path d="M280 424 L500 186 L720 424" fill="none" stroke="#fff" stroke-width="20" stroke-linejoin="round" stroke-linecap="round"/>
-        ${gotas(292, 428, 494, 205, 9)}${gotas(506, 205, 708, 428, 9)}
-        <rect x="276" y="412" width="448" height="18" rx="9" fill="#fff"/>${gotas(282, 426, 718, 426, 18)}
-        ${balasTelhado}${bala(500, 182, 17)}
-        ${janela(500, 330, 26)}${janela(405, 495, 38)}${janela(595, 495, 38)}
-        <path d="M500 552 C482 536 470 524 478 512 C486 500 498 506 500 516 C502 506 514 500 522 512 C530 524 518 536 500 552Z" fill="url(#c-coracao)" stroke="#fff" stroke-width="3"/>
-        <path d="M452 662 V600 A48 48 0 0 1 548 600 V662Z" fill="#ffe7a8"/>
-        <g id="porta-casa">
-          <path d="M452 662 V600 A48 48 0 0 1 548 600 V662Z" fill="url(#c-porta)"/>
-          ${[600, 622, 644].map(y => `<rect x="462" y="${y}" width="34" height="18" rx="3" fill="#5a2a12" stroke="#2a1206"/><rect x="504" y="${y}" width="34" height="18" rx="3" fill="#5a2a12" stroke="#2a1206"/>`).join("")}
-          <path d="M466 594 A34 34 0 0 1 534 594Z" fill="#5a2a12" stroke="#2a1206"/>
-          <circle cx="532" cy="634" r="5" fill="#f2c14e"/>
-        </g>
-        <path d="M452 662 V600 A48 48 0 0 1 548 600 V662" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/>
-        <path d="M430 664 V582 A13 13 0 0 0 404 582" fill="none" stroke="url(#c-listra)" stroke-width="10" stroke-linecap="round"/>
-        <path d="M570 664 V582 A13 13 0 0 1 596 582" fill="none" stroke="url(#c-listra)" stroke-width="10" stroke-linecap="round"/>
-        ${arbustos}
-        <circle id="anel-porta" cx="500" cy="612" r="72" fill="none" stroke="#ffe6a3" stroke-width="3" stroke-dasharray="453" stroke-dashoffset="453" transform="rotate(-90 500 612)" style="filter:drop-shadow(0 0 6px #ffd27a)"/>
+        ${fumaca}${ala}${principal}${alicerce}${degraus}
+        ${flores(318, 410, 650, 16)}${flores(530, 760, 650, 26)}
+        ${arbusto(300, 640, 24)}${arbusto(770, 642, 26)}
+        ${cogumelo(790, 676, 1.1)}${cogumelo(808, 680, .8)}${cogumelo(296, 678, .9)}
+        <circle id="anel-porta" cx="470" cy="575" r="66" fill="none" stroke="#ffe6a3" stroke-width="3" stroke-dasharray="415" stroke-dashoffset="415" transform="rotate(-90 470 575)" style="filter:drop-shadow(0 0 6px #ffd27a)"/>
       </g>
-      ${vagalumes}`;
+      ${redemoinho}${vagalumes}`;
 
-    let flocos = "";
-    for (let i = 0; i < 26; i++) flocos += `<circle cx="${f1(R() * 1000)}" cy="${f1(R() * 820)}" r="${f1(3 + R() * 6)}" fill="#fff" opacity="${(.35 + R() * .4).toFixed(2)}"/>`;
-    const frente = pinheiroNeve(10, 880, 470, 230, "#0b0820", true, "#cfd5f5") + pinheiroNeve(120, 900, 360, 180, "#0d0a26", true, "#cfd5f5")
-      + pinheiroNeve(990, 880, 480, 230, "#0b0820", true, "#cfd5f5") + pinheiroNeve(880, 910, 360, 180, "#0d0a26", true, "#cfd5f5")
-      + `<path d="M0 795 C200 768 400 806 500 796 C650 784 820 766 1000 790 V820 H0Z" fill="#e9edff"/>${flocos}`;
+    // ---- primeiro plano (desfocado): troncos, folhagem e samambaias ----
+    const folhagem = (x, y, r, cor) => Array.from({ length: 7 }, () => `<circle cx="${f1(x + (R() - .5) * r * 2)}" cy="${f1(y + (R() - .5) * r)}" r="${f1(r * (.45 + R() * .4))}" fill="${cor}"/>`).join("");
+    const samambaia = (x, y, s, giro) => {
+      let p = "";
+      for (let i = 0; i < 9; i++) { const t = i / 9; p += `<ellipse cx="${f1(x + t * 120 * s)}" cy="${f1(y - Math.sin(t * 2.4) * 60 * s)}" rx="${f1((22 - i * 1.8) * s)}" ry="${f1(5 * s)}" fill="#0a1a10" transform="rotate(${f1(-50 + i * 6)} ${f1(x + t * 120 * s)} ${f1(y - Math.sin(t * 2.4) * 60 * s)})"/>`; }
+      return `<g transform="rotate(${giro} ${x} ${y})">${p}</g>`;
+    };
+    const frente = `<path d="M-20 820 V0 H58 C50 200 70 500 62 820Z" fill="#0b0a1c"/>${folhagem(30, 40, 90, "#0a1426")}${folhagem(120, -10, 70, "#0c1830")}
+      <path d="M1020 820 V0 H945 C955 220 935 520 948 820Z" fill="#0b0a1c"/>${folhagem(970, 30, 95, "#0a1426")}${folhagem(880, -20, 70, "#0c1830")}
+      ${samambaia(20, 830, 1.4, -10)}${samambaia(120, 840, 1.1, -30)}${samambaia(990, 830, 1.4, 190)}${samambaia(880, 845, 1.1, 210)}
+      <path d="M0 800 C200 780 400 812 500 806 C650 798 820 780 1000 800 V820 H0Z" fill="#071209"/>`;
 
     return camada(VB, .08, ceu) + camada(VB, .25, longe) + camada(VB, .6, casa) + camada(VB, 1.3, frente, "camada--desfocada");
   }
 
   function cenaDentro() {
     const R = gerador(77), VB = "0 0 1600 1000";
-    const gotas = (x1, y, x2, n) => {
-      let s = "";
-      for (let i = 0; i < n; i++) { const x = x1 + (x2 - x1) * (i + .5 + (R() - .5) * .6) / n, L = 6 + R() * 22, w = 4 + R() * 4;
-        s += `<path d="M${f1(x - w)} ${y} Q${f1(x - w)} ${f1(y + L)} ${f1(x)} ${f1(y + L)} Q${f1(x + w)} ${f1(y + L)} ${f1(x + w)} ${y}Z" fill="#fff"/>`; }
-      return s;
-    };
+    // Perspectiva de um ponto: parede do fundo, duas laterais, teto e chão convergindo para o ponto de fuga
+    const FX0 = 330, FX1 = 1270, FY0 = 150, FY1 = 720, PF = [800, 430];
+    // ponto na parede esquerda/direita: t = profundidade (0 perto, 1 fundo), v = altura (0 teto, 1 chão)
+    const pe = (t, v) => [t * FX0, lerp(lerp(0, FY0, t), lerp(1000, FY1, t), v)];
+    const pd = (t, v) => [1600 - t * (1600 - FX1), lerp(lerp(0, FY0, t), lerp(1000, FY1, t), v)];
+    const escala = t => lerp(1, (FY1 - FY0) / 1000, t);
+    const pt = p => `${f1(p[0])},${f1(p[1])}`;
+    const quad = (a, b, c, d, fill, extra = "") => `<polygon points="${pt(a)} ${pt(b)} ${pt(c)} ${pt(d)}" fill="${fill}" ${extra}/>`;
+
     const defs = `<defs>
-      <linearGradient id="i-parede" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e3418"/><stop offset="1" stop-color="#3f1c0b"/></linearGradient>
-      <radialGradient id="i-quadro" cx=".3" cy=".25" r=".9"><stop offset="0" stop-color="#94502a"/><stop offset="1" stop-color="#55260f"/></radialGradient>
-      <pattern id="i-tablete" width="120" height="90" patternUnits="userSpaceOnUse"><rect width="120" height="90" fill="#3f1c0b"/><rect x="5" y="5" width="110" height="80" rx="10" fill="url(#i-quadro)"/></pattern>
-      <linearGradient id="i-viga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d240e"/><stop offset="1" stop-color="#2a1206"/></linearGradient>
-      <linearGradient id="i-chao" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4622"/><stop offset="1" stop-color="#2e1608"/></linearGradient>
-      <linearGradient id="i-biscoito" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcA764"/><stop offset="1" stop-color="#9a5f2a"/></linearGradient>
+      <linearGradient id="i-reboco" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e160e"/><stop offset="1" stop-color="#3a2c1c"/></linearGradient>
+      <linearGradient id="i-reboco-e" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#2e2318"/><stop offset="1" stop-color="#0e0a06"/></linearGradient>
+      <linearGradient id="i-reboco-d" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2e2318"/><stop offset="1" stop-color="#0e0a06"/></linearGradient>
+      <linearGradient id="i-viga" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b2312"/><stop offset="1" stop-color="#1e1108"/></linearGradient>
+      <linearGradient id="i-viga-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40271a"/><stop offset="1" stop-color="#1c1007"/></linearGradient>
+      <linearGradient id="i-teto" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f0804"/><stop offset="1" stop-color="#2a180c"/></linearGradient>
+      <linearGradient id="i-chao" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26170b"/><stop offset="1" stop-color="#0c0703"/></linearGradient>
       <radialGradient id="i-fogo" cx=".5" cy=".8" r=".7"><stop offset="0" stop-color="#fff1a8"/><stop offset=".3" stop-color="#ffb347"/><stop offset=".6" stop-color="#ff6a1f" stop-opacity=".7"/><stop offset="1" stop-color="#ff4d00" stop-opacity="0"/></radialGradient>
       <linearGradient id="i-chama" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff3b0"/><stop offset=".35" stop-color="#ffb52e"/><stop offset=".75" stop-color="#ff6a1f"/><stop offset="1" stop-color="#e8341a" stop-opacity=".7"/></linearGradient>
-      <linearGradient id="i-ferro" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a4a58"/><stop offset=".35" stop-color="#22222a"/><stop offset="1" stop-color="#09090c"/></linearGradient>
+      <linearGradient id="i-ferro" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3a46"/><stop offset=".3" stop-color="#1c1c24"/><stop offset=".75" stop-color="#0b0b0f"/><stop offset="1" stop-color="#2a1a12"/></linearGradient>
+      <linearGradient id="i-ferro-fogo" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#ff7a2a" stop-opacity="0"/><stop offset="1" stop-color="#ff7a2a" stop-opacity=".55"/></linearGradient>
       <radialGradient id="i-liq" cx=".45" cy=".4"><stop offset="0" style="stop-color:var(--liq-claro)"/><stop offset=".75" style="stop-color:var(--liq)"/><stop offset="1" style="stop-color:var(--liq)" stop-opacity=".8"/></radialGradient>
-      <radialGradient id="i-brilho-liq"><stop offset="0" style="stop-color:var(--liq)" stop-opacity=".6"/><stop offset="1" style="stop-color:var(--liq)" stop-opacity="0"/></radialGradient>
-      <radialGradient id="i-vela"><stop offset="0" stop-color="#ffc870" stop-opacity=".55"/><stop offset="1" stop-color="#ffc870" stop-opacity="0"/></radialGradient>
-      <linearGradient id="i-noite" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0a2e"/><stop offset="1" stop-color="#2c1b60"/></linearGradient>
-      <linearGradient id="i-reflexo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/></linearGradient>
-      <pattern id="i-listra" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="16" height="16" fill="#fff"/><rect width="8" height="16" fill="#e8264f"/></pattern>
-      <radialGradient id="i-bule" cx=".35" cy=".3"><stop offset="0" stop-color="#ffe0ee"/><stop offset=".5" stop-color="#ff6fae"/><stop offset="1" stop-color="#c9286d"/></radialGradient>
-      <radialGradient id="i-mel" cx=".35" cy=".3"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#f2b02a"/><stop offset="1" stop-color="#b8740f"/></radialGradient>
+      <radialGradient id="i-brilho-liq"><stop offset="0" style="stop-color:var(--liq)" stop-opacity=".65"/><stop offset="1" style="stop-color:var(--liq)" stop-opacity="0"/></radialGradient>
+      <radialGradient id="i-vela"><stop offset="0" stop-color="#ffb860" stop-opacity=".5"/><stop offset=".4" stop-color="#ff9a3c" stop-opacity=".18"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+      <radialGradient id="i-luz-quente"><stop offset="0" stop-color="#ff8a2c" stop-opacity=".42"/><stop offset=".5" stop-color="#ff6a1a" stop-opacity=".12"/><stop offset="1" stop-color="#ff7a2a" stop-opacity="0"/></radialGradient>
+      <radialGradient id="i-escuro" cx=".5" cy=".64" r=".7"><stop offset=".18" stop-color="#000" stop-opacity="0"/><stop offset=".6" stop-color="#000" stop-opacity=".45"/><stop offset="1" stop-color="#000" stop-opacity=".88"/></radialGradient>
+      <linearGradient id="i-cera" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d9c49a"/><stop offset=".4" stop-color="#f4e6c6"/><stop offset="1" stop-color="#a88c62"/></linearGradient>
+      <linearGradient id="i-vidro" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".3"/><stop offset=".18" stop-color="#fff" stop-opacity=".06"/><stop offset=".8" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#ffb366" stop-opacity=".35"/></linearGradient>
+      <linearGradient id="i-noite" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070620"/><stop offset="1" stop-color="#1e1852"/></linearGradient>
       <radialGradient id="i-lua" cx=".4" cy=".35"><stop offset="0" stop-color="#e9f4ff"/><stop offset=".55" stop-color="#7fb6ff"/><stop offset="1" stop-color="#2f5fc4"/></radialGradient>
-      <clipPath id="i-vidro"><circle cx="1330" cy="300" r="112"/></clipPath>
+      <radialGradient id="i-mel" cx=".35" cy=".3"><stop offset="0" stop-color="#ffd27a"/><stop offset=".55" stop-color="#d48a14"/><stop offset="1" stop-color="#7a4306"/></radialGradient>
+      <radialGradient id="i-luar"><stop offset="0" stop-color="#9fb6ff" stop-opacity=".28"/><stop offset="1" stop-color="#9fb6ff" stop-opacity="0"/></radialGradient>
+      <linearGradient id="i-tapete" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a0f1c"/><stop offset="1" stop-color="#2a0710"/></linearGradient>
+      <filter id="i-grao" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="9"/><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .06  0 0 0 0 .02  1.7 0 0 0 -.66"/><feComposite in2="SourceGraphic" operator="in"/></filter>
     </defs>`;
 
-    // ---- FUNDO: parede de chocolate, janela com cristais, prateleira de ervas, chão ----
-    const pote = (x, base, w, h, cor) => `<g>
-      <rect x="${f1(x)}" y="${f1(base - h)}" width="${f1(w)}" height="${f1(h)}" rx="8" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
-      <rect x="${f1(x + 3)}" y="${f1(base - h * .62)}" width="${f1(w - 6)}" height="${f1(h * .62 - 3)}" rx="6" fill="${cor}" opacity=".85"/>
-      <rect x="${f1(x - 2)}" y="${f1(base - h - 8)}" width="${f1(w + 4)}" height="10" rx="3" fill="#8a5226"/>
-      <rect x="${f1(x + w * .18)}" y="${f1(base - h * .5)}" width="${f1(w * .64)}" height="${f1(h * .22)}" rx="3" fill="#f6ead0"/>
-      <rect x="${f1(x + 5)}" y="${f1(base - h + 6)}" width="4" height="${f1(h * .6)}" rx="2" fill="#fff" opacity=".35"/></g>`;
-    const coresPote = ["#6fae5a", "#c9a227", "#9a6bd6", "#e46a8f", "#5a8f6a", "#d9802e", "#8fb3d9", "#b54848"];
-    let prateleira = `<rect x="50" y="230" width="16" height="560" fill="#5a2a12"/><rect x="404" y="230" width="16" height="560" fill="#5a2a12"/><rect x="66" y="230" width="338" height="560" fill="rgba(30,12,4,.35)"/>`;
-    for (const py of [350, 480, 610, 740]) {
-      let x = 76;
-      while (x < 380) { const w = 34 + R() * 22, h = 48 + R() * 42; if (x + w > 398) break; prateleira += pote(x, py, w, Math.min(h, 110), coresPote[Math.floor(R() * coresPote.length)]); x += w + 8 + R() * 10; }
-      prateleira += `<rect x="44" y="${py}" width="382" height="16" rx="4" fill="#7a3d1c"/><rect x="44" y="${py - 3}" width="382" height="6" rx="3" fill="#fff" opacity=".9"/>${gotas(50, py + 2, 420, 8)}`;
+    // ---- teto com vigas convergindo ----
+    let teto = quad([0, 0], [1600, 0], [FX1, FY0], [FX0, FY0], "url(#i-teto)");
+    for (let k = 0; k <= 8; k++) {
+      const xb = FX0 + k * (FX1 - FX0) / 8, xf = PF[0] + (xb - PF[0]) * (PF[1] / (PF[1] - FY0));
+      teto += `<polygon points="${f1(xb - 7)},${FY0} ${f1(xb + 7)},${FY0} ${f1(xf + 16)},0 ${f1(xf - 16)},0" fill="url(#i-viga)"/>`;
     }
-    let macosParede = "";
-    [[95, "#6f9a4a", null], [165, "#8a6bd0", "#c6b0ff"], [235, "#5a8f6a", null], [305, "#a8894a", "#f2d27a"], [375, "#4f8f78", null]]
-      .forEach(([x, cor, flor]) => { const y = 112 + R() * 20; macosParede += `<line x1="${x}" y1="72" x2="${x}" y2="${f1(y)}" stroke="#d9c39a" stroke-width="2"/>${maco(x, y, 80, cor, flor)}`; });
-    const cristal = (x, base, h, w, cor, ang) => `<g transform="rotate(${ang} ${x} ${base})">
-      <polygon points="${x - w / 2},${base} ${x - w / 2},${base - h * .72} ${x},${base - h} ${x + w / 2},${base - h * .72} ${x + w / 2},${base}" fill="${cor}" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>
-      <polygon points="${x},${base} ${x},${base - h} ${x + w / 2},${base - h * .72} ${x + w / 2},${base}" fill="#000" opacity=".18"/>
-      <line x1="${x - w * .25}" y1="${base - h * .7}" x2="${x - w * .25}" y2="${base - 4}" stroke="#fff" stroke-opacity=".55" stroke-width="2"/></g>`;
-    let flocosJanela = "";
-    for (let i = 0; i < 30; i++) flocosJanela += `<circle class="floco" cx="${f1(1218 + R() * 224)}" cy="${f1(300 + R() * 40)}" r="${f1(1.2 + R() * 2.2)}" fill="#fff" opacity=".85" style="animation-duration:${(4 + R() * 5).toFixed(1)}s;animation-delay:-${(R() * 8).toFixed(1)}s"/>`;
-    const janela = `<g class="ponto" data-area="cristais" role="button" tabindex="0" aria-label="Cristais">
-      <circle cx="1330" cy="300" r="132" fill="#2a1206"/>
-      <g clip-path="url(#i-vidro)"><rect x="1210" y="180" width="240" height="240" fill="url(#i-noite)"/>
-        <circle cx="1380" cy="252" r="50" fill="url(#i-vela)"/><circle cx="1380" cy="252" r="22" fill="#fff3d0"/>
-        ${pinheiroNeve(1260, 420, 120, 60, "#140f3a", true, "#9aa2d8")}${pinheiroNeve(1330, 425, 90, 50, "#140f3a", true, "#9aa2d8")}${pinheiroNeve(1410, 420, 130, 64, "#140f3a", true, "#9aa2d8")}
-        <rect x="1210" y="396" width="240" height="30" fill="#dfe4ff"/>${flocosJanela}</g>
-      <circle cx="1330" cy="300" r="112" fill="url(#i-reflexo)"/>
-      <rect x="1325" y="188" width="10" height="224" fill="#f4ead8"/><rect x="1218" y="295" width="224" height="10" fill="#f4ead8"/>
-      <circle cx="1330" cy="300" r="120" fill="none" stroke="url(#i-listra)" stroke-width="16"/>
-      <rect x="1180" y="430" width="300" height="26" rx="8" fill="#6b3214"/><rect x="1180" y="426" width="300" height="10" rx="5" fill="#fff"/>
-      ${[[1228, "#9b6bd6"], [1300, "#f6a7c6"], [1372, "#f2b84b"], [1440, "#e4eeff"]].map(([x, c]) => `<circle cx="${x}" cy="400" r="46" fill="${c}" opacity=".28" class="tremeluz" style="animation-delay:-${(R() * 2).toFixed(1)}s"/>`).join("")}
-      ${cristal(1214, 428, 56, 18, "#9b6bd6", -14)}${cristal(1232, 428, 74, 22, "#8a5cd0", 4)}${cristal(1248, 428, 46, 16, "#b08ae6", 18)}
-      ${cristal(1300, 428, 60, 30, "#f6a7c6", 0)}${cristal(1360, 428, 50, 20, "#f2b84b", -10)}${cristal(1378, 428, 64, 22, "#e9a93a", 8)}
-      ${cristal(1436, 428, 80, 22, "#e4eeff", -4)}${cristal(1456, 428, 52, 16, "#d6e4ff", 16)}
-    </g>`;
-    let piso = "";
-    for (let xb = -800; xb <= 2400; xb += 160) piso += `<line x1="${f1(800 + (xb - 800) * (840 - 560) / 440)}" y1="840" x2="${xb}" y2="1000" stroke="rgba(0,0,0,.28)" stroke-width="2"/>`;
-    for (const y of [872, 916, 970]) piso += `<line x1="0" y1="${y}" x2="1600" y2="${y}" stroke="rgba(0,0,0,.22)" stroke-width="2"/>`;
-    const fundo = `${defs}
-      <rect width="1600" height="845" fill="url(#i-parede)"/><rect width="1600" height="845" fill="url(#i-tablete)" opacity=".6"/>
-      <rect width="1600" height="72" fill="url(#i-viga)"/><rect y="68" width="1600" height="10" fill="#fff"/>${gotas(0, 76, 1600, 46)}
-      <rect x="0" y="78" width="26" height="767" fill="url(#i-listra)"/><rect x="1574" y="78" width="26" height="767" fill="url(#i-listra)"/>
-      ${janela}
-      <g class="ponto" data-area="ervas" role="button" tabindex="0" aria-label="Ervas">${macosParede}${prateleira}${vela(392, 350, 34, R)}</g>
-      <rect y="840" width="1600" height="160" fill="url(#i-chao)"/>${piso}`;
+    for (const t of [.25, .62]) { const a = pe(t, 0), b = pd(t, 0), h = 26 * escala(t); teto += `<rect x="${f1(a[0])}" y="${f1(a[1])}" width="${f1(b[0] - a[0])}" height="${f1(h)}" fill="url(#i-viga-h)"/>`; }
 
-    // ---- MEIO: lareira, varal de ervas, potes (ingredientes), caldeirão, grimório, mesa de chá ----
-    let biscoito = "";
-    for (let i = 0; i < 26; i++) { const x = 615 + R() * 370, y = 420 + R() * 400; if (x > 650 && x < 950 && y > 440) continue; biscoito += `<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(3 + R() * 3)}" fill="#7a4418" opacity=".7"/>`; }
-    const chamaFogo = (x, base, h, w, lenta, atraso) => `<path class="chama${lenta ? " chama--lenta" : ""}" style="animation-delay:-${atraso}s" d="M${x} ${base} C${x - w} ${base - h * .3} ${x - w * .3} ${base - h * .62} ${x} ${base - h} C${x + w * .3} ${base - h * .62} ${x + w} ${base - h * .3} ${x} ${base}Z" fill="url(#i-chama)"/>`;
-    let bolhas = "", vapor = "";
-    for (let i = 0; i < 12; i++) bolhas += `<circle class="bolha" cx="${f1(712 + R() * 176)}" cy="${f1(656 + R() * 10)}" r="${f1(4 + R() * 7)}" style="fill:var(--liq-claro);animation-delay:-${(R() * 1.7).toFixed(2)}s"/>`;
-    for (let i = 0; i < 6; i++) vapor += `<circle class="vapor" cx="${f1(740 + R() * 120)}" cy="${f1(630)}" r="${f1(14 + R() * 10)}" fill="rgba(255,255,255,.16)" style="animation-delay:-${(R() * 3).toFixed(2)}s"/>`;
-    const ing = (id, conteudo) => `<g class="ingrediente" data-ing="${id}" role="button" tabindex="0" aria-label="${INGREDIENTES[id].nome}: jogar no caldeirão">${conteudo}</g>`;
-    const varal = `<line x1="640" y1="72" x2="640" y2="150" stroke="#d9c39a" stroke-width="2"/><line x1="960" y1="72" x2="960" y2="150" stroke="#d9c39a" stroke-width="2"/>
-      <line x1="626" y1="150" x2="974" y2="150" stroke="#6b3214" stroke-width="9" stroke-linecap="round"/>
-      ${ing("rosa", maco(672, 158, 92, "#5d8a4a", "#ff5c96", .08))}
-      ${ing("lavanda", maco(736, 158, 100, "#7f63c9", "#c6b0ff", .06))}
-      ${ing("alecrim", maco(800, 158, 96, "#6fa58a", null, .05))}
-      ${ing("arruda", maco(864, 158, 88, "#3f8a6c", null, .12))}
-      ${ing("louro", maco(928, 158, 92, "#7a9a46", null, .14))}`;
-    const potesLareira = `
-      ${ing("mel", `<ellipse cx="650" cy="350" rx="30" ry="30" fill="url(#i-mel)"/><rect x="630" y="316" width="40" height="10" rx="4" fill="#b8740f"/><line x1="664" y1="300" x2="656" y2="330" stroke="#8a5226" stroke-width="5" stroke-linecap="round"/><path d="M628 350 q4 18 0 26" stroke="#f2b02a" stroke-width="5" fill="none" stroke-linecap="round"/><text x="650" y="356" text-anchor="middle" font-family="Cinzel, serif" font-size="11" font-weight="600" fill="#5a2b0c">MEL</text>`)}
-      ${ing("canela", `<rect x="703" y="318" width="44" height="62" rx="8" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>${[710, 718, 726, 734].map(x => `<rect x="${x}" y="${300 + (x % 3) * 4}" width="7" height="76" rx="3" fill="#b5652c" stroke="#7a3d16"/>`).join("")}<rect x="700" y="346" width="50" height="14" rx="3" fill="#f6ead0"/>`)}
-      ${ing("sal", `<rect x="778" y="322" width="44" height="58" rx="9" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>${Array.from({ length: 14 }, (_, i) => `<rect x="${783 + (i % 5) * 7}" y="${352 + Math.floor(i / 5) * 8}" width="7" height="7" fill="#f4f7ff" stroke="#c9d3f0" transform="rotate(${i * 23} ${786 + (i % 5) * 7} ${355 + Math.floor(i / 5) * 8})"/>`).join("")}<rect x="775" y="314" width="50" height="10" rx="3" fill="#8a5226"/>`)}
-      ${ing("camomila", `<rect x="853" y="320" width="44" height="60" rx="8" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>${[[864, 344], [882, 350], [870, 364], [886, 368], [862, 372]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="7" fill="#fff"/><circle cx="${x}" cy="${y}" r="3" fill="#f2b84b"/>`).join("")}<rect x="850" y="312" width="50" height="10" rx="3" fill="#8a5226"/>`)}
-      ${ing("lua", `<circle cx="950" cy="300" r="40" fill="#7fb6ff" opacity=".25" class="tremeluz"/><circle cx="950" cy="352" r="27" fill="url(#i-lua)" stroke="rgba(255,255,255,.6)" stroke-width="2"/><rect x="942" y="306" width="16" height="22" rx="3" fill="rgba(255,255,255,.25)" stroke="rgba(255,255,255,.6)"/><rect x="940" y="300" width="20" height="9" rx="3" fill="#b98a55"/><path d="M956 340 a12 12 0 1 0 0 22 a9 9 0 1 1 0 -22Z" fill="#fff6d2"/>`)}`;
-    const lareira = `
-      <path d="M600 845 V420 Q600 400 620 400 H980 Q1000 400 1000 420 V845Z" fill="url(#i-biscoito)"/>${biscoito}
-      <path d="M650 845 V580 A150 150 0 0 1 950 580 V845Z" fill="#140603"/>
-      <path d="M650 845 V580 A150 150 0 0 1 950 580 V845" fill="none" stroke="#fff" stroke-width="8" stroke-dasharray="2 14" stroke-linecap="round"/>
-      <ellipse cx="800" cy="810" rx="180" ry="96" fill="url(#i-fogo)" class="tremeluz"/>
-      <rect x="700" y="806" width="200" height="22" rx="11" fill="#4a230e" transform="rotate(-6 800 817)"/><rect x="700" y="806" width="200" height="22" rx="11" fill="#3a1a09" transform="rotate(7 800 817)"/>
-      ${chamaFogo(745, 816, 110, 40, true, .1)}${chamaFogo(800, 818, 150, 48, true, .3)}${chamaFogo(855, 816, 104, 38, true, .2)}${chamaFogo(775, 818, 80, 26, false, .1)}${chamaFogo(828, 818, 86, 26, false, .15)}
-      <rect x="575" y="380" width="450" height="30" rx="8" fill="#6b3214"/><rect x="575" y="376" width="450" height="10" rx="5" fill="#fff"/>${gotas(580, 384, 1020, 14)}
-      ${vela(598, 380, 64, R)}${vela(1002, 380, 52, R)}
-      ${varal}${potesLareira}
-      <g class="ponto" data-area="caldeirao" role="button" tabindex="0" aria-label="Caldeirão" id="caldeirao">
-        <path d="M712 790 l-14 40 M888 790 l14 40" stroke="#16161c" stroke-width="12" stroke-linecap="round"/>
-        <path d="M684 660 C680 772 736 818 800 818 C864 818 920 772 916 660Z" fill="url(#i-ferro)"/>
-        <path d="M700 690 C706 760 740 792 772 802" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="8" stroke-linecap="round"/>
-        <ellipse cx="800" cy="650" rx="150" ry="70" fill="url(#i-brilho-liq)" class="tremeluz"/>
-        <ellipse cx="800" cy="660" rx="122" ry="26" fill="#24242c" stroke="#55556a" stroke-width="5"/>
-        <ellipse id="liquido" cx="800" cy="662" rx="106" ry="18" fill="url(#i-liq)"/>
-        <g id="bolhas">${bolhas}</g><g id="ondas"></g>${vapor}
-        <ellipse id="boca" cx="800" cy="690" rx="160" ry="120" fill="transparent"/>
+    // ---- parede do fundo: reboco com enxaimel em cima, pedra embaixo ----
+    let fundoParede = `<rect x="${FX0}" y="${FY0}" width="${FX1 - FX0}" height="${FY1 - FY0}" fill="url(#i-reboco)"/>
+      <rect x="${FX0}" y="${FY0}" width="${FX1 - FX0}" height="${FY1 - FY0}" fill="#000" filter="url(#i-grao)" opacity=".6"/>
+      ${pedras(FX0, 590, FX1 - FX0, FY1 - 590, R, 30, ["#3a352f", "#2f2a25", "#433c34", "#29241f"], "#0d0a08")}
+      <rect x="${FX0}" y="578" width="${FX1 - FX0}" height="16" fill="url(#i-viga-h)"/><rect x="${FX0}" y="${FY0}" width="${FX1 - FX0}" height="16" fill="url(#i-viga-h)"/>`;
+    for (const x of [FX0 + 8, 520, 1080, FX1 - 8]) fundoParede += `<rect x="${x - 8}" y="${FY0}" width="16" height="${578 - FY0}" fill="url(#i-viga)"/>`;
+    fundoParede += `<line x1="${FX0 + 16}" y1="570" x2="512" y2="300" stroke="#26160a" stroke-width="13"/><line x1="${FX1 - 16}" y1="570" x2="1088" y2="300" stroke="#26160a" stroke-width="13"/>`;
+
+    // ---- parede esquerda e direita em perspectiva (mesmo material) ----
+    const lateral = (p, grad) => {
+      let s = quad(p(0, 0), p(1, 0), p(1, 1), p(0, 1), `url(#${grad})`);
+      s += quad(p(0, 0), p(1, 0), p(1, 1), p(0, 1), "#000", `filter="url(#i-grao)" opacity=".5"`);
+      // pedras da parte de baixo, cada uma deformada pela perspectiva
+      let v = .74;
+      while (v < .995) {
+        const dv = .045 + R() * .025, v2 = Math.min(v + dv, 1);
+        let t = R() * .08;
+        while (t < 1) {
+          const dt = .06 + R() * .1, t2 = Math.min(t + dt, 1);
+          const g = .004, cor = ["#2f2a25", "#38322b", "#26221d", "#332d27"][Math.floor(R() * 4)];
+          s += quad(p(t + g, v + .004), p(t2 - g, v + .004), p(t2 - g, v2 - .004), p(t + g, v2 - .004), cor, `stroke="#1a1511" stroke-width="2" stroke-linejoin="round"`);
+          t = t2;
+        }
+        v = v2;
+      }
+      s += quad(p(0, .725), p(1, .725), p(1, .745), p(0, .745), "url(#i-viga-h)");
+      for (const t of [0, .38, .72]) s += quad(p(t, 0), p(t + .05, 0), p(t + .05, .725), p(t, .725), "#24150a");
+      s += quad(p(0, .03), p(1, .03), p(1, .05), p(0, .05), "#24150a");
+      return s;
+    };
+    const paredeEsq = lateral(pe, "i-reboco-e"), paredeDir = lateral(pd, "i-reboco-d");
+
+    // ---- chão de tábuas convergindo ----
+    let chao = quad([0, 1000], [FX0, FY1], [FX1, FY1], [1600, 1000], "url(#i-chao)");
+    const k = (1000 - PF[1]) / (FY1 - PF[1]);
+    for (let xb = FX0; xb <= FX1 + 1; xb += 47) {
+      const xf = PF[0] + (xb - PF[0]) * k;
+      chao += `<line x1="${f1(xb)}" y1="${FY1}" x2="${f1(xf)}" y2="1000" stroke="#120a04" stroke-width="2"/>`;
+      if (R() < .5) chao += `<polygon points="${f1(xb)},${FY1} ${f1(xb + 47)},${FY1} ${f1(PF[0] + (xb + 47 - PF[0]) * k)},1000 ${f1(xf)},1000" fill="#fff" opacity=".025"/>`;
+    }
+    for (let i = 0; i < 26; i++) { const y = FY1 + 10 + R() * 270, x = lerp(FX0, 0, (y - FY1) / 280) + R() * lerp(FX1 - FX0, 1600, (y - FY1) / 280); chao += `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x + 20)}" y2="${f1(y)}" stroke="#120a04" stroke-width="2"/>`; }
+
+    // ---- frascos de vidro realistas ----
+    // (x, base) = centro da base; w, h = corpo; cont = cor do conteúdo; tipo = folhas, liquido, po
+    function frasco(x, base, w, h, cont, tipo = "folhas", rotulo = true) {
+      const y = base - h, l = x - w / 2;
+      let dentro = "";
+      const hc = h * (.55 + R() * .3);
+      if (tipo === "liquido") dentro = `<rect x="${f1(l + 2)}" y="${f1(base - hc)}" width="${f1(w - 4)}" height="${f1(hc - 2)}" rx="${f1(w * .18)}" fill="${cont}" opacity=".78"/><rect x="${f1(l + 2)}" y="${f1(base - hc)}" width="${f1(w - 4)}" height="2.5" fill="#fff" opacity=".35"/>`;
+      else {
+        dentro = `<rect x="${f1(l + 2)}" y="${f1(base - hc)}" width="${f1(w - 4)}" height="${f1(hc - 2)}" rx="${f1(w * .18)}" fill="${cont}" opacity=".9"/>`;
+        for (let i = 0; i < Math.round(w * hc / 70); i++) dentro += tipo === "po"
+          ? `<circle cx="${f1(l + 4 + R() * (w - 8))}" cy="${f1(base - 3 - R() * (hc - 6))}" r="1.1" fill="#fff" opacity=".35"/>`
+          : `<ellipse cx="${f1(l + 4 + R() * (w - 8))}" cy="${f1(base - 4 - R() * (hc - 8))}" rx="3.4" ry="1.6" fill="#000" opacity=".28" transform="rotate(${Math.floor(R() * 180)} ${f1(l + 4 + R() * (w - 8))} ${f1(base - hc / 2)})"/>`;
+      }
+      const tampa = R() < .5
+        ? `<rect x="${f1(x - w * .28)}" y="${f1(y - 13)}" width="${f1(w * .56)}" height="15" rx="3" fill="#8a6038"/><rect x="${f1(x - w * .28)}" y="${f1(y - 13)}" width="${f1(w * .56)}" height="4" rx="2" fill="#b08458"/>`
+        : `<path d="M${f1(x - w * .42)} ${f1(y + 2)} Q${f1(x)} ${f1(y - 16)} ${f1(x + w * .42)} ${f1(y + 2)} L${f1(x + w * .38)} ${f1(y + 8)} L${f1(x - w * .38)} ${f1(y + 8)}Z" fill="${["#6e2a2a", "#3d4a2a", "#5a3f6e"][Math.floor(R() * 3)]}"/><line x1="${f1(x - w * .38)}" y1="${f1(y + 6)}" x2="${f1(x + w * .38)}" y2="${f1(y + 6)}" stroke="#c9a66b" stroke-width="1.6"/>`;
+      return `<g>
+        <ellipse cx="${x}" cy="${base + 1}" rx="${f1(w * .55)}" ry="3.5" fill="#000" opacity=".45"/>
+        ${dentro}
+        <rect x="${f1(l)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" rx="${f1(w * .2)}" fill="url(#i-vidro)" stroke="rgba(255,236,200,.35)" stroke-width="1.4"/>
+        <rect x="${f1(x - w * .3)}" y="${f1(y - 4)}" width="${f1(w * .6)}" height="6" rx="2" fill="none" stroke="rgba(255,236,200,.35)" stroke-width="1.2"/>
+        ${tampa}
+        ${rotulo ? `<rect x="${f1(l + w * .16)}" y="${f1(base - h * .58)}" width="${f1(w * .68)}" height="${f1(Math.min(h * .24, 22))}" rx="1.5" fill="#d9c49a" opacity=".92"/><line x1="${f1(l + w * .26)}" y1="${f1(base - h * .58 + 6)}" x2="${f1(l + w * .74)}" y2="${f1(base - h * .58 + 6)}" stroke="#5a3f22" stroke-width="1.2"/>` : ""}
+        <rect x="${f1(l + w * .14)}" y="${f1(y + 5)}" width="${f1(Math.max(w * .09, 2.5))}" height="${f1(h * .7)}" rx="2" fill="#fff" opacity=".42"/>
+        <rect x="${f1(l + w * .8)}" y="${f1(y + 8)}" width="2" height="${f1(h * .5)}" rx="1" fill="#ffc27a" opacity=".45"/>
       </g>`;
+    }
+    const coresConteudo = [["#4f6b3a", "folhas"], ["#6b4a2a", "folhas"], ["#8a3a2e", "liquido"], ["#3a6a5a", "liquido"], ["#d9c9a0", "po"], ["#5a3f6e", "liquido"], ["#7d8a4a", "folhas"], ["#2a2a2a", "po"], ["#b8862a", "liquido"], ["#9a5a7a", "folhas"]];
+
+    // ---- prateleiras na parede esquerda (área das ervas), em perspectiva ----
+    let estante = "";
+    for (const v of [.3, .45, .6]) {
+      const t0 = .12, t1 = .88;
+      const a = pe(t0, v), b = pe(t1, v), sa = escala(t0), sb = escala(t1);
+      const a2 = [a[0] + 46 * sa, a[1]], b2 = [b[0] + 46 * sb, b[1]];
+      // frascos de trás para frente (o mais perto cobre o de trás)
+      let objetos = "";
+      for (let t = t1 - .05; t > t0 + .02; t -= .07 + R() * .05) {
+        const [x, y] = pe(t, v), s = escala(t);
+        const [cor, tipo] = coresConteudo[Math.floor(R() * coresConteudo.length)];
+        const w = 26 + R() * 18, h = 40 + R() * 40;
+        objetos += `<g transform="translate(${f1(x + 26 * s)} ${f1(y - 2)}) scale(${f1(s)})">${R() < .12 ? vela(0, 0, 26 + R() * 20, R, 13) : frasco(0, 0, w, h, cor, tipo)}</g>`;
+      }
+      estante += objetos + quad(a, b, b2, a2, "#5a3a1e") + quad(a2, b2, [b2[0], b2[1] + 9 * sb], [a2[0], a2[1] + 12 * sa], "#2e1a0a");
+      for (const t of [t0 + .05, t1 - .05]) { const [x, y] = pe(t, v), s = escala(t); estante += `<path d="M${f1(x)} ${f1(y + 4 * s)} l${f1(30 * s)} 0 l${f1(-30 * s)} ${f1(30 * s)}Z" fill="#2e1a0a"/>`; }
+    }
+    // maços secando no teto, do lado esquerdo (decoração)
+    let macosEsq = "";
+    [[.22, "lavanda"], [.4, "alecrim"], [.56, "louro"], [.72, "arruda"]].forEach(([t, tipo]) => {
+      const [x, y] = pe(t, .07), s = escala(t), xx = x + 70 * s;
+      macosEsq += `<line x1="${f1(xx)}" y1="${f1(y - 40 * s)}" x2="${f1(xx)}" y2="${f1(y)}" stroke="#a8875a" stroke-width="1.5"/><g transform="translate(${f1(xx)} ${f1(y)}) scale(${f1(s)}) translate(${f1(-xx)} ${f1(-y)})">${ramo(xx, y, 90, tipo, R)}</g>`;
+    });
+    const teia = (x, y, r, giro) => {
+      let s = `<g transform="rotate(${giro} ${x} ${y})" stroke="#d8cfc0" stroke-width=".9" fill="none" opacity=".35">`;
+      for (let a = 0; a <= 90; a += 18) s += `<line x1="${x}" y1="${y}" x2="${f1(x + Math.cos(a * Math.PI / 180) * r)}" y2="${f1(y + Math.sin(a * Math.PI / 180) * r)}"/>`;
+      for (let rr = r * .25; rr <= r; rr += r * .2) { let d = ""; for (let a = 0; a <= 90; a += 18) { const px = x + Math.cos(a * Math.PI / 180) * rr, py = y + Math.sin(a * Math.PI / 180) * rr; d += (a ? " L" : "M") + f1(px) + " " + f1(py); } s += `<path d="${d}"/>`; }
+      return s + `</g>`;
+    };
+
+    // ---- janela na parede direita (área dos cristais), em perspectiva ----
+    const jt0 = .3, jt1 = .62, jv0 = .2, jv1 = .5;
+    const J = [pd(jt0, jv0), pd(jt1, jv0), pd(jt1, jv1), pd(jt0, jv1)];
+    const jm = (tt, vv) => pd(lerp(jt0, jt1, tt), lerp(jv0, jv1, vv));
+    let vista = quad(...J, "url(#i-noite)");
+    for (let i = 0; i < 18; i++) { const p = jm(R(), R() * .7); vista += `<circle cx="${f1(p[0])}" cy="${f1(p[1])}" r="${f1(.8 + R() * 1.2)}" fill="#fff" opacity=".8"/>`; }
+    const lua = jm(.55, .28);
+    vista += `<circle cx="${f1(lua[0])}" cy="${f1(lua[1])}" r="40" fill="url(#i-luar)"/><circle cx="${f1(lua[0])}" cy="${f1(lua[1])}" r="15" fill="#f6efd6"/>`;
+    vista += `<polygon points="${pt(jm(0, .78))} ${pt(jm(.2, .6))} ${pt(jm(.35, .72))} ${pt(jm(.55, .55))} ${pt(jm(.75, .7))} ${pt(jm(1, .6))} ${pt(jm(1, 1))} ${pt(jm(0, 1))}" fill="#0b1226"/>`;
+    const caixilho = `<polygon points="${J.map(pt).join(" ")}" fill="none" stroke="#24150a" stroke-width="16" stroke-linejoin="round"/>
+      <line x1="${f1(jm(.5, 0)[0])}" y1="${f1(jm(.5, 0)[1])}" x2="${f1(jm(.5, 1)[0])}" y2="${f1(jm(.5, 1)[1])}" stroke="#24150a" stroke-width="6"/>
+      <line x1="${f1(jm(0, .5)[0])}" y1="${f1(jm(0, .5)[1])}" x2="${f1(jm(1, .5)[0])}" y2="${f1(jm(1, .5)[1])}" stroke="#24150a" stroke-width="6"/>
+      ${quad(J[3], J[2], [J[2][0] - 34 * escala(jt1), J[2][1]], [J[3][0] - 34 * escala(jt0), J[3][1]], "#4a2c14")}
+      ${quad([J[3][0] - 34 * escala(jt0), J[3][1]], [J[2][0] - 34 * escala(jt1), J[2][1]], [J[2][0] - 34 * escala(jt1), J[2][1] + 8], [J[3][0] - 34 * escala(jt0), J[3][1] + 10], "#24150a")}`;
+    const cristal = (x, base, h, w, cor, ang) => `<g transform="rotate(${ang} ${x} ${base})">
+      <polygon points="${x - w / 2},${base} ${x - w / 2},${base - h * .72} ${x},${base - h} ${x + w / 2},${base - h * .72} ${x + w / 2},${base}" fill="${cor}" stroke="#fff" stroke-opacity=".4" stroke-width="1.2"/>
+      <polygon points="${x},${base} ${x},${base - h} ${x + w / 2},${base - h * .72} ${x + w / 2},${base}" fill="#000" opacity=".25"/>
+      <line x1="${x - w * .25}" y1="${base - h * .7}" x2="${x - w * .25}" y2="${base - 4}" stroke="#fff" stroke-opacity=".5" stroke-width="1.6"/></g>`;
+    let cristais = "";
+    [[.36, "#8a5cd0", 1], [.42, "#f6a7c6", .8], [.48, "#e9a93a", .9], [.55, "#d6e4ff", 1.1], [.6, "#6fd0b8", .7]].reverse().forEach(([t, cor, tm]) => {
+      const p = pd(t, jv1), s = escala(t), x = p[0] - 17 * s, y = p[1] + 1;
+      cristais += `<circle cx="${f1(x)}" cy="${f1(y - 25 * s)}" r="${f1(40 * s)}" fill="${cor}" opacity=".08" class="tremeluz" style="mix-blend-mode:screen"/>
+        <g transform="translate(${f1(x)} ${f1(y)}) scale(${f1(s * tm)})">${cristal(-10, 0, 48, 16, cor, -12)}${cristal(4, 0, 64, 20, cor, 4)}${cristal(16, 0, 38, 14, cor, 18)}</g>`;
+    });
+    const luarChao = `<polygon points="${pt(J[3])} ${pt(J[2])} ${f1(J[2][0] - 260)},${f1(FY1 + 120)} ${f1(J[3][0] - 330)},${f1(FY1 + 200)}" fill="#8fa8ff" opacity=".05"/>`;
+    const janela = `<g class="ponto" data-area="cristais" role="button" tabindex="0" aria-label="Cristais">${vista}${caixilho}${cristais}</g>`;
+
+    // ---- lareira de pedra no centro da parede do fundo ----
+    const lareira = `
+      ${pedras(630, FY0, 340, FY1 - FY0, R, 30, ["#57504a", "#4a443e", "#625a52", "#3f3a35", "#524b44"], "#120e0b")}
+      <path d="M676 ${FY1} V560 A124 100 0 0 1 924 560 V${FY1}Z" fill="#0a0503"/>
+      <path d="M690 ${FY1} V570 A110 88 0 0 1 910 570 V${FY1}Z" fill="url(#i-fogo)" opacity=".55" class="tremeluz"/>
+      ${Array.from({ length: 9 }, (_, i) => { const a1 = Math.PI + i * Math.PI / 9, a2 = Math.PI + (i + 1) * Math.PI / 9; const c = [800, 560];
+        return `<path d="M${f1(c[0] + Math.cos(a1) * 124)} ${f1(c[1] + Math.sin(a1) * 100)} L${f1(c[0] + Math.cos(a1) * 150)} ${f1(c[1] + Math.sin(a1) * 124)} L${f1(c[0] + Math.cos(a2) * 150)} ${f1(c[1] + Math.sin(a2) * 124)} L${f1(c[0] + Math.cos(a2) * 124)} ${f1(c[1] + Math.sin(a2) * 100)}Z" fill="${["#7b736a", "#6a625a", "#847b70"][i % 3]}" stroke="#1a1511" stroke-width="2"/>`; }).join("")}
+      <rect x="604" y="432" width="392" height="26" rx="3" fill="#3d2410"/><rect x="604" y="432" width="392" height="6" rx="3" fill="#6b4322"/><rect x="612" y="458" width="376" height="7" fill="#1c1007"/>`;
+
+    // ---- ingredientes: maços no varal e potes na cornija ----
+    const ing = (id, conteudo) => `<g class="ingrediente" data-ing="${id}" role="button" tabindex="0" aria-label="${INGREDIENTES[id].nome}: jogar no caldeirão">${conteudo}</g>`;
+    const varal = `<line x1="580" y1="${FY0}" x2="580" y2="236" stroke="#a8875a" stroke-width="2"/><line x1="1020" y1="${FY0}" x2="1020" y2="236" stroke="#a8875a" stroke-width="2"/>
+      <rect x="560" y="232" width="480" height="12" rx="6" fill="#4a2c14"/><rect x="560" y="232" width="480" height="4" rx="2" fill="#7a4f2a"/>
+      ${ing("rosa", ramo(640, 240, 100, "rosa", R))}
+      ${ing("lavanda", ramo(720, 240, 108, "lavanda", R))}
+      ${ing("alecrim", ramo(800, 240, 104, "alecrim", R))}
+      ${ing("arruda", ramo(880, 240, 96, "arruda", R))}
+      ${ing("louro", ramo(960, 240, 100, "louro", R))}`;
+    const B = 432; // cornija
+    const potes = `
+      ${ing("mel", `<ellipse cx="652" cy="${B + 1}" rx="30" ry="4" fill="#000" opacity=".5"/><path d="M626 ${B} C618 ${B - 30} 622 ${B - 56} 634 ${B - 62} H670 C682 ${B - 56} 686 ${B - 30} 678 ${B}Z" fill="url(#i-mel)"/><path d="M626 ${B} C618 ${B - 30} 622 ${B - 56} 634 ${B - 62} H670 C682 ${B - 56} 686 ${B - 30} 678 ${B}Z" fill="url(#i-vidro)" stroke="rgba(255,236,200,.4)" stroke-width="1.4"/>
+        <path d="M630 ${B - 60} Q652 ${B - 80} 674 ${B - 60} L670 ${B - 54} H634Z" fill="#6e2a2a"/><line x1="632" y1="${B - 56}" x2="672" y2="${B - 56}" stroke="#c9a66b" stroke-width="1.8"/>
+        <rect x="636" y="${B - 38}" width="32" height="16" rx="2" fill="#d9c49a"/><text x="652" y="${B - 26.5}" text-anchor="middle" font-family="Cinzel, serif" font-size="9.5" font-weight="700" fill="#4a2c14">MEL</text>
+        <rect x="631" y="${B - 54}" width="4" height="40" rx="2" fill="#fff" opacity=".45"/><line x1="664" y1="${B - 92}" x2="658" y2="${B - 58}" stroke="#7a4f2a" stroke-width="4" stroke-linecap="round"/>`)}
+      ${ing("canela", `<ellipse cx="728" cy="${B + 1}" rx="24" ry="3.5" fill="#000" opacity=".5"/>${[714, 721, 728, 735, 742].map((x, i) => `<rect x="${x - 3}" y="${B - 82 + (i % 2) * 6}" width="6.5" height="${78 - (i % 2) * 6}" rx="3" fill="#a8582a" stroke="#6b3214" stroke-width="1"/>`).join("")}
+        <rect x="706" y="${B - 56}" width="44" height="56" rx="8" fill="url(#i-vidro)" stroke="rgba(255,236,200,.4)" stroke-width="1.4"/><rect x="704" y="${B - 60}" width="48" height="6" rx="2" fill="none" stroke="rgba(255,236,200,.4)"/>
+        <rect x="712" y="${B - 30}" width="32" height="14" rx="2" fill="#d9c49a" opacity=".9"/><rect x="710" y="${B - 52}" width="4" height="40" rx="2" fill="#fff" opacity=".4"/>`)}
+      ${ing("sal", `<ellipse cx="800" cy="${B + 1}" rx="26" ry="3.5" fill="#000" opacity=".5"/><rect x="777" y="${B - 40}" width="46" height="38" rx="7" fill="#e9ecf4"/>${Array.from({ length: 18 }, (_, i) => `<rect x="${f1(779 + (i % 6) * 7)}" y="${f1(B - 40 + Math.floor(i / 6) * 7)}" width="6" height="6" fill="#fff" stroke="#b9c2d8" stroke-width=".8" transform="rotate(${i * 27} ${f1(782 + (i % 6) * 7)} ${f1(B - 37 + Math.floor(i / 6) * 7)})"/>`).join("")}
+        <rect x="774" y="${B - 64}" width="52" height="64" rx="9" fill="url(#i-vidro)" stroke="rgba(255,236,200,.45)" stroke-width="1.4"/><rect x="776" y="${B - 74}" width="48" height="12" rx="3" fill="#8a6038"/><rect x="776" y="${B - 74}" width="48" height="4" rx="2" fill="#b08458"/><rect x="779" y="${B - 60}" width="4" height="46" rx="2" fill="#fff" opacity=".45"/>`)}
+      ${ing("camomila", `<ellipse cx="872" cy="${B + 1}" rx="24" ry="3.5" fill="#000" opacity=".5"/><rect x="852" y="${B - 40}" width="40" height="38" rx="6" fill="#6b5a2a" opacity=".55"/>${[[860, 38], [874, 34], [884, 22], [862, 20], [876, 14], [866, 30], [882, 32]].map(([x, d]) => `<circle cx="${x}" cy="${B - d}" r="5.5" fill="#f4ecd6"/><circle cx="${x}" cy="${B - d}" r="2.4" fill="#e0a92a"/>`).join("")}
+        <rect x="849" y="${B - 60}" width="46" height="60" rx="8" fill="url(#i-vidro)" stroke="rgba(255,236,200,.4)" stroke-width="1.4"/><path d="M851 ${B - 58} Q872 ${B - 76} 893 ${B - 58} L890 ${B - 52} H854Z" fill="#3d4a2a"/><line x1="853" y1="${B - 54}" x2="891" y2="${B - 54}" stroke="#c9a66b" stroke-width="1.6"/><rect x="853" y="${B - 50}" width="4" height="40" rx="2" fill="#fff" opacity=".4"/>`)}
+      ${ing("lua", `<circle cx="946" cy="${B - 28}" r="38" fill="#7fb6ff" opacity=".12" class="tremeluz" style="mix-blend-mode:screen"/><ellipse cx="946" cy="${B + 1}" rx="26" ry="3.5" fill="#000" opacity=".5"/>
+        <circle cx="946" cy="${B - 26}" r="26" fill="url(#i-lua)" opacity=".9"/><circle cx="946" cy="${B - 26}" r="26" fill="url(#i-vidro)" stroke="rgba(220,236,255,.6)" stroke-width="1.6"/>
+        <rect x="938" y="${B - 70}" width="16" height="22" rx="2" fill="url(#i-vidro)" stroke="rgba(220,236,255,.5)"/><rect x="937" y="${B - 78}" width="18" height="10" rx="3" fill="#8a6038"/>
+        <path d="M954 ${B - 36} a11 11 0 1 0 0 20 a8 8 0 1 1 0 -20Z" fill="#fff6d2" opacity=".9"/><rect x="928" y="${B - 40}" width="4" height="24" rx="2" fill="#fff" opacity=".5"/>`)}`;
+
+    // ---- caldeirão de ferro sobre o fogo, no chão de pedra em frente à lareira ----
+    const chamaFogo = (x, base, h, w, lenta, atraso) => `<path class="chama${lenta ? " chama--lenta" : ""}" style="animation-delay:-${atraso}s" d="M${x} ${base} C${x - w} ${base - h * .3} ${x - w * .3} ${base - h * .62} ${x} ${base - h} C${x + w * .3} ${base - h * .62} ${x + w} ${base - h * .3} ${x} ${base}Z" fill="url(#i-chama)"/>`;
+    let bolhas = "", vapor = "", brasas = "";
+    for (let i = 0; i < 12; i++) bolhas += `<circle class="bolha" cx="${f1(706 + R() * 188)}" cy="${f1(636 + R() * 10)}" r="${f1(4 + R() * 7)}" style="fill:var(--liq-claro);animation-delay:-${(R() * 1.7).toFixed(2)}s"/>`;
+    for (let i = 0; i < 6; i++) vapor += `<circle class="vapor" cx="${f1(730 + R() * 140)}" cy="610" r="${f1(16 + R() * 10)}" fill="rgba(255,255,255,.14)" style="animation-delay:-${(R() * 3).toFixed(2)}s"/>`;
+    for (let i = 0; i < 16; i++) brasas += `<circle cx="${f1(720 + R() * 160)}" cy="${f1(842 + R() * 12)}" r="${f1(2 + R() * 3)}" fill="${["#ff6a1f", "#ffb347", "#ff3d0a"][Math.floor(R() * 3)]}" class="tremeluz" style="animation-delay:-${(R() * 2).toFixed(1)}s"/>`;
+    const fogoLareira = `<rect x="716" y="${FY1 - 22}" width="168" height="16" rx="8" fill="#2a1408" transform="rotate(-4 800 ${FY1 - 14})"/><rect x="716" y="${FY1 - 20}" width="168" height="16" rx="8" fill="#1f0e05" transform="rotate(5 800 ${FY1 - 12})"/>
+      ${chamaFogo(760, FY1 - 12, 80, 30, true, .2)}${chamaFogo(805, FY1 - 12, 110, 36, true, .4)}${chamaFogo(846, FY1 - 12, 76, 28, true, .1)}`;
+    const soleira = quad([640, FY1], [960, FY1], [1010, 880], [590, 880], "#24201c") + quad([590, 880], [1010, 880], [1010, 892], [590, 892], "#1a1511");
+    const caldeirao = `<g class="ponto" data-area="caldeirao" role="button" tabindex="0" aria-label="Caldeirão" id="caldeirao">
+        <ellipse cx="800" cy="850" rx="170" ry="40" fill="url(#i-fogo)" class="tremeluz"/>
+        <rect x="712" y="836" width="176" height="18" rx="9" fill="#2a1408" transform="rotate(-6 800 845)"/><rect x="712" y="836" width="176" height="18" rx="9" fill="#1f0e05" transform="rotate(7 800 845)"/>${brasas}
+        ${chamaFogo(735, 848, 90, 30, true, .1)}${chamaFogo(800, 850, 120, 40, true, .3)}${chamaFogo(865, 848, 86, 30, true, .2)}${chamaFogo(770, 850, 70, 22, false, .1)}${chamaFogo(832, 850, 74, 22, false, .15)}
+        <path d="M708 770 l-22 78 M892 770 l22 78 M800 800 v52" stroke="#121218" stroke-width="13" stroke-linecap="round"/>
+        <path d="M664 640 C658 750 720 812 800 812 C880 812 942 750 936 640Z" fill="url(#i-ferro)"/>
+        <path d="M664 640 C658 750 720 812 800 812 C880 812 942 750 936 640Z" fill="url(#i-ferro-fogo)"/>
+        <path d="M682 676 C688 744 724 782 760 796" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="8" stroke-linecap="round"/>
+        <path d="M900 690 C896 740 870 776 840 792" fill="none" stroke="#ff9a4a" stroke-opacity=".25" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="664" cy="664" r="13" fill="none" stroke="#1c1c24" stroke-width="6"/><circle cx="936" cy="664" r="13" fill="none" stroke="#1c1c24" stroke-width="6"/>
+        <ellipse cx="800" cy="626" rx="170" ry="80" fill="url(#i-brilho-liq)" class="tremeluz" style="mix-blend-mode:screen"/>
+        <ellipse cx="800" cy="640" rx="138" ry="30" fill="#1a1a22" stroke="#4a4a5c" stroke-width="6"/>
+        <ellipse cx="800" cy="636" rx="138" ry="28" fill="none" stroke="#ff9a4a" stroke-opacity=".25" stroke-width="2"/>
+        <ellipse id="liquido" cx="800" cy="642" rx="120" ry="21" fill="url(#i-liq)"/>
+        <g id="bolhas">${bolhas}</g><g id="ondas"></g>${vapor}
+        <ellipse id="boca" cx="800" cy="680" rx="175" ry="125" fill="transparent"/>
+      </g>`;
+
+    // ---- canto esquerdo do fundo: estante de livros, bola de cristal; direito: vassoura e ervas ----
+    let livros = "";
+    for (const yb of [330, 450]) {
+      let x = 356;
+      livros += `<rect x="348" y="${yb}" width="150" height="10" fill="#3d2410"/>`;
+      while (x < 480) { const w = 10 + R() * 9, h = 52 + R() * 34, inc = R() < .12 ? 10 : 0; livros += `<rect x="${f1(x)}" y="${f1(yb - h)}" width="${f1(w)}" height="${f1(h)}" fill="${["#5a1e1e", "#2a3a2a", "#3a2a4a", "#6b4a1e", "#1e2a3a", "#4a2a1a"][Math.floor(R() * 6)]}" transform="rotate(${inc} ${f1(x)} ${yb})"/><rect x="${f1(x + 2)}" y="${f1(yb - h + 8)}" width="${f1(w - 4)}" height="3" fill="#c9a24a" opacity=".6" transform="rotate(${inc} ${f1(x)} ${yb})"/>`; x += w + 1.5 + inc; }
+    }
+    const bola = `<circle cx="590" cy="530" r="34" fill="#8a7bff" opacity=".1" class="tremeluz" style="mix-blend-mode:screen"/><path d="M570 560 h40 l6 14 h-52Z" fill="#3d2410"/><circle cx="590" cy="534" r="26" fill="#2a2470" opacity=".85"/><circle cx="590" cy="534" r="26" fill="url(#i-vidro)" stroke="rgba(200,190,255,.5)" stroke-width="1.5"/><circle cx="583" cy="526" r="7" fill="#fff" opacity=".35"/>${estrela4(596, 540, 5, "#d6ccff", 'class="vagalume"')}`;
+    const vassouraIn = `<g transform="rotate(10 1180 700)"><rect x="1176" y="390" width="7" height="310" rx="3" fill="#5a3519"/><path d="M1162 612 L1198 612 L1224 712 L1136 712Z" fill="#8a6430"/>${Array.from({ length: 11 }, (_, i) => `<line x1="${1166 + i * 3}" y1="616" x2="${1142 + i * 7.6}" y2="712" stroke="#5e4220" stroke-width="1.5"/>`).join("")}<rect x="1162" y="608" width="36" height="8" rx="2" fill="#4a1e1e"/></g>`;
+    let macosDir = "";
+    [[1110, "rosa"], [1160, "lavanda"], [1210, "alecrim"]].forEach(([x, tipo]) => { macosDir += `<line x1="${x}" y1="${FY0}" x2="${x}" y2="200" stroke="#a8875a" stroke-width="1.5"/>${ramo(x, 200, 74, tipo, R)}`; });
+
+    // ---- grimório no atril (magias) ----
     const grimorio = `<g class="ponto" data-area="magias" role="button" tabindex="0" aria-label="Grimório de magias">
-      <rect x="510" y="640" width="20" height="200" fill="#5a2a12"/><ellipse cx="520" cy="840" rx="58" ry="12" fill="#3d1a09"/>
-      <polygon points="445,652 595,652 585,620 455,620" fill="#6b3214"/>
-      <ellipse cx="520" cy="590" rx="100" ry="66" fill="url(#i-vela)" class="tremeluz"/>
-      <path d="M458 618 L520 626 L520 598 L462 588Z" fill="#fbf1d6" stroke="#c9a874"/><path d="M520 626 L582 618 L578 588 L520 598Z" fill="#f2e2bd" stroke="#c9a874"/>
-      ${[0, 1, 2, 3].map(i => `<line x1="${470}" y1="${598 + i * 6}" x2="${510}" y2="${604 + i * 6}" stroke="#a88a5a" stroke-width="1.5"/><line x1="${530}" y1="${604 + i * 6}" x2="${570}" y2="${598 + i * 6}" stroke="#a88a5a" stroke-width="1.5"/>`).join("")}
-      ${Array.from({ length: 7 }, () => `<circle class="vagalume" cx="${f1(480 + R() * 80)}" cy="${f1(540 + R() * 50)}" r="${f1(1.6 + R() * 2)}" fill="#ffe6a3" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`).join("")}
+      <ellipse cx="470" cy="610" rx="120" ry="80" fill="url(#i-vela)" class="tremeluz" style="mix-blend-mode:screen"/>
+      <path d="M460 650 h20 l8 220 h-36Z" fill="#3d2410"/><ellipse cx="470" cy="872" rx="62" ry="12" fill="#1c1007"/>
+      <polygon points="392,664 548,664 536,628 404,628" fill="#4a2c14"/>
+      <path d="M404 630 L470 640 L470 604 L410 594Z" fill="#e8d8b0"/><path d="M470 640 L536 630 L530 594 L470 604Z" fill="#dccb9e"/>
+      <path d="M404 630 L470 640 L536 630" fill="none" stroke="#5a1e1e" stroke-width="4"/>
+      ${[0, 1, 2, 3, 4].map(i => `<line x1="418" y1="${604 + i * 6}" x2="462" y2="${610 + i * 6}" stroke="#7a5a3a" stroke-width="1.3"/><line x1="478" y1="${610 + i * 6}" x2="522" y2="${604 + i * 6}" stroke="#7a5a3a" stroke-width="1.3"/>`).join("")}
+      <circle cx="500" cy="614" r="8" fill="none" stroke="#8a2a2a" stroke-width="1.4"/>${estrela4(500, 614, 5, "#8a2a2a")}
+      ${vela(548, 664, 46, R, 16)}
+      ${Array.from({ length: 6 }, () => `<circle class="vagalume" cx="${f1(430 + R() * 80)}" cy="${f1(560 + R() * 40)}" r="${f1(1.4 + R() * 1.8)}" fill="#ffe6a3" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`).join("")}
     </g>`;
+
+    // ---- mesa de chá (chás), à direita, de madeira escura ----
     const mesa = `<g class="ponto" data-area="chas" role="button" tabindex="0" aria-label="Chás">
-      <rect x="1150" y="650" width="16" height="190" fill="#5a2a12"/><rect x="1494" y="650" width="16" height="190" fill="#5a2a12"/>
-      <rect x="1120" y="630" width="420" height="26" rx="8" fill="#7a3d1c"/>
-      <rect x="1135" y="618" width="390" height="16" rx="6" fill="#ffd6e8"/>${Array.from({ length: 25 }, (_, i) => `<circle cx="${1140 + i * 16}" cy="636" r="8" fill="#ffd6e8"/>`).join("")}
-      <path d="M1320 586 Q1366 572 1374 530 L1361 528 Q1352 560 1316 566Z" fill="#e0498a"/>
-      <path d="M1212 558 Q1170 580 1212 610" fill="none" stroke="#e0498a" stroke-width="11" stroke-linecap="round"/>
-      <ellipse cx="1268" cy="582" rx="62" ry="46" fill="url(#i-bule)"/>
-      ${[[1240, 566], [1290, 560], [1262, 600], [1300, 596], [1232, 598]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5" fill="#fff" opacity=".8"/>`).join("")}
-      <ellipse cx="1268" cy="538" rx="32" ry="10" fill="#e0498a"/><circle cx="1268" cy="526" r="8" fill="#ffd23f"/>
-      ${[[1404, 618], [1466, 618]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="30" ry="6" fill="#fff"/><path d="M${x - 22} ${y - 26} h44 v8 a22 18 0 0 1 -44 0Z" fill="#fff"/><ellipse cx="${x}" cy="${y - 25}" rx="20" ry="4" fill="#c97a2a"/><path d="M${x + 22} ${y - 20} q12 2 0 12" fill="none" stroke="#fff" stroke-width="4"/>`).join("")}
-      ${[[1372, 522], [1404, 586], [1466, 586]].map(([x, y], i) => `<circle class="vapor" cx="${x}" cy="${y}" r="10" fill="rgba(255,255,255,.22)" style="animation-delay:-${i}s"/>`).join("")}
-      ${vela(1520, 618, 52, R)}
+      <ellipse cx="1330" cy="640" rx="190" ry="110" fill="url(#i-vela)" class="tremeluz" style="mix-blend-mode:screen"/>
+      <rect x="1196" y="700" width="16" height="190" fill="#2e1a0a"/><rect x="1448" y="700" width="16" height="190" fill="#2e1a0a"/><rect x="1320" y="706" width="14" height="168" fill="#24150a"/>
+      <ellipse cx="1330" cy="700" rx="160" ry="30" fill="#2e1a0a"/><ellipse cx="1330" cy="694" rx="160" ry="30" fill="#5a3519"/><ellipse cx="1330" cy="692" rx="140" ry="22" fill="#6b4322" opacity=".5"/>
+      <path d="M1220 690 Q1330 676 1440 690 L1430 708 Q1330 696 1230 708Z" fill="#6e2a2a" opacity=".7"/>
+      <ellipse cx="1300" cy="690" rx="44" ry="7" fill="#000" opacity=".4"/>
+      <path d="M1258 680 C1250 640 1268 618 1300 616 C1332 618 1350 640 1342 680Z" fill="#2c3a34"/><path d="M1264 672 C1260 646 1272 628 1290 624" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="5" stroke-linecap="round"/>
+      <path d="M1340 650 Q1372 640 1380 612 L1370 610 Q1362 632 1338 636Z" fill="#2c3a34"/><path d="M1260 640 Q1232 650 1260 672" fill="none" stroke="#2c3a34" stroke-width="8" stroke-linecap="round"/>
+      <ellipse cx="1300" cy="616" rx="26" ry="7" fill="#22302a"/><circle cx="1300" cy="606" r="7" fill="#b8925a"/>
+      ${[[1400, 690], [1240, 696]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="24" ry="5" fill="#d8ccb4"/><path d="M${x - 16} ${y - 22} h32 v6 a16 14 0 0 1 -32 0Z" fill="#e4d8bf"/><ellipse cx="${x}" cy="${y - 21}" rx="15" ry="3.5" fill="#7a4a1a"/><path d="M${x + 16} ${y - 17} q10 2 0 10" fill="none" stroke="#e4d8bf" stroke-width="3"/>`).join("")}
+      <rect x="1360" y="640" width="34" height="44" rx="4" fill="#5a2a1a"/><rect x="1358" y="636" width="38" height="8" rx="2" fill="#3a1a10"/><rect x="1366" y="652" width="22" height="16" fill="#d9c49a" opacity=".85"/>
+      ${[[1380, 600], [1400, 660], [1240, 666]].map(([x, y], i) => `<circle class="vapor" cx="${x}" cy="${y}" r="10" fill="rgba(255,255,255,.18)" style="animation-delay:-${i}s"/>`).join("")}
+      ${vela(1450, 690, 40, R, 15)}${vela(1214, 692, 28, R, 13)}
     </g>`;
-    const meio = `${lareira}${grimorio}${mesa}
-      ${placa(235, 812, "Ervas", "ervas")}${placa(520, 520, "Magias", "magias")}${placa(800, 520, "Caldeirão", "caldeirao")}${placa(1330, 494, "Cristais", "cristais")}${placa(1330, 720, "Chás", "chas")}`;
 
-    // ---- PERTO: tapete e o gato dormindo ----
-    const perto = `<ellipse cx="800" cy="925" rx="350" ry="62" fill="#8c1247"/><ellipse cx="800" cy="925" rx="328" ry="54" fill="none" stroke="#ffb3d1" stroke-width="3" stroke-dasharray="12 9"/><ellipse cx="800" cy="925" rx="250" ry="38" fill="#b81c62"/>
-      <g class="gato"><path d="M1098 914 Q1140 900 1126 868 Q1118 852 1104 860" fill="none" stroke="#140b16" stroke-width="11" stroke-linecap="round"/>
-        <ellipse cx="1052" cy="910" rx="60" ry="27" fill="#140b16"/><circle cx="996" cy="898" r="24" fill="#140b16"/>
-        <path d="M978 884 L984 862 L995 880Z M1000 878 L1010 858 L1016 882Z" fill="#140b16"/>
-        <path d="M985 899 q4 3 8 0 M1000 899 q4 3 8 0" fill="none" stroke="#ffe6a3" stroke-width="2" stroke-linecap="round"/></g>`;
+    // ---- luzes: escurece as bordas e acende em volta do fogo e das velas ----
+    const luzes = `<rect width="1600" height="1000" fill="url(#i-escuro)"/>
+      <ellipse cx="800" cy="720" rx="560" ry="360" fill="url(#i-luz-quente)" class="tremeluz" style="mix-blend-mode:screen"/>
+      <ellipse cx="800" cy="460" rx="300" ry="220" fill="url(#i-luz-quente)" opacity=".6" class="tremeluz" style="mix-blend-mode:screen;animation-delay:-.7s"/>
+      ${luarChao}`;
 
-    // ---- FRENTE (desfocada): vela grande, ervas penduradas perto da câmera, poeirinha de luz ----
+    const fundo = `${defs}${teto}${fundoParede}${paredeEsq}${paredeDir}${chao}
+      ${teia(FX0 + 4, FY0 + 4, 70, 0)}${teia(FX1 - 4, FY0 + 4, 60, 90)}${teia(4, 4, 120, 0)}
+      ${livros}${bola}${vassouraIn}${macosDir}
+      <g class="ponto" data-area="ervas" role="button" tabindex="0" aria-label="Ervas">${macosEsq}${estante}</g>
+      ${janela}
+      ${lareira}${fogoLareira}
+      ${vela(616, B, 54, R, 16)}${vela(986, B, 44, R, 16)}
+      ${luzes}`;
+
+    const meio = `${soleira}${varal}${potes}${caldeirao}${grimorio}${mesa}
+      ${placa(200, 840, "Ervas", "ervas")}${placa(470, 560, "Magias", "magias")}${placa(800, 530, "Caldeirão", "caldeirao")}${placa(1380, 470, "Cristais", "cristais")}${placa(1330, 590, "Chás", "chas")}`;
+
+    // ---- perto: tapete e o gato dormindo ----
+    let franjas = "";
+    for (let x = 520; x <= 1080; x += 10) franjas += `<line x1="${x}" y1="988" x2="${x + 2}" y2="1000" stroke="#c9a24a" stroke-width="2" opacity=".6"/>`;
+    const perto = `<polygon points="560,905 1040,905 1100,988 500,988" fill="url(#i-tapete)"/>
+      <polygon points="580,915 1020,915 1074,980 526,980" fill="none" stroke="#b8862a" stroke-width="3" opacity=".7"/>
+      <polygon points="610,928 990,928 1030,968 570,968" fill="none" stroke="#7a1a2a" stroke-width="8"/>
+      ${estrela4(800, 948, 18, "#b8862a", 'opacity=".55"')}${franjas}
+      <g class="gato"><path d="M1168 924 Q1210 910 1196 878 Q1188 862 1174 870" fill="none" stroke="#0c070c" stroke-width="11" stroke-linecap="round"/>
+        <ellipse cx="1122" cy="920" rx="60" ry="27" fill="#0c070c"/><circle cx="1066" cy="908" r="24" fill="#0c070c"/>
+        <path d="M1048 894 L1054 872 L1065 890Z M1070 888 L1080 868 L1086 892Z" fill="#0c070c"/>
+        <path d="M1055 909 q4 3 8 0 M1070 909 q4 3 8 0" fill="none" stroke="#ffb860" stroke-width="2" stroke-linecap="round"/>
+        <path d="M1090 905 q24 -12 50 -4" fill="none" stroke="#ff9a4a" stroke-opacity=".3" stroke-width="3"/></g>`;
+
+    // ---- frente (desfocada): vela grande, ervas perto da câmera, poeirinha de luz ----
     let poeira = "";
-    for (let i = 0; i < 34; i++) poeira += `<circle class="vagalume" cx="${f1(R() * 1600)}" cy="${f1(120 + R() * 760)}" r="${f1(1.5 + R() * 2.5)}" fill="#ffd9a0" opacity=".6" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`;
+    for (let i = 0; i < 30; i++) poeira += `<circle class="vagalume" cx="${f1(R() * 1600)}" cy="${f1(120 + R() * 760)}" r="${f1(1.4 + R() * 2.2)}" fill="#ffc98a" opacity=".55" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`;
     const frente = `
-      <circle cx="80" cy="760" r="190" fill="url(#i-vela)" class="tremeluz"/>
-      <rect x="40" y="790" width="80" height="260" rx="10" fill="#fff0d8"/><path class="chama chama--lenta" d="M80 730 C62 760 64 786 80 790 C96 786 98 760 80 730Z" fill="url(#i-chama)"/>
-      <rect x="1460" y="790" width="150" height="230" rx="30" fill="rgba(120,180,140,.25)" stroke="rgba(255,255,255,.25)" stroke-width="3"/><rect x="1470" y="860" width="130" height="150" rx="22" fill="#2f5a3a" opacity=".7"/>
-      <path d="M0 0 Q400 70 800 20 Q1200 -30 1600 40 V0Z" fill="#1e0d05"/>
-      ${maco(120, 30, 150, "#1f3a22", null)}${maco(300, 50, 120, "#2a2448", "#4a3f7a", .06)}${maco(1300, 40, 130, "#22401f", null, .12)}${maco(1490, 24, 160, "#1f3a22", null)}
+      <circle cx="90" cy="770" r="210" fill="url(#i-vela)" class="tremeluz" style="mix-blend-mode:screen"/>
+      <rect x="44" y="796" width="92" height="260" rx="8" fill="url(#i-cera)"/><rect x="60" y="796" width="9" height="60" rx="4" fill="#f3e6c8"/>
+      <path class="chama chama--lenta" d="M90 734 C70 766 72 792 90 796 C108 792 110 766 90 734Z" fill="url(#i-chama)"/>
+      <rect x="1468" y="780" width="150" height="240" rx="34" fill="url(#i-vidro)" stroke="rgba(255,236,200,.25)" stroke-width="3"/><rect x="1478" y="850" width="130" height="160" rx="24" fill="#3a2a10" opacity=".75"/><rect x="1488" y="800" width="10" height="160" rx="5" fill="#fff" opacity=".25"/>
+      <path d="M0 0 Q400 60 800 16 Q1200 -26 1600 36 V0Z" fill="#0c0603"/>
+      <g opacity=".95">${ramo(130, 20, 170, "escura", R)}${ramo(320, 34, 130, "escura", R)}${ramo(1290, 30, 140, "escura", R)}${ramo(1480, 16, 170, "escura", R)}</g>
       ${poeira}`;
 
     return camada(VB, .2, fundo) + camada(VB, .5, meio) + camada(VB, .8, perto) + `<div class="luz-lareira"></div>` + camada(VB, 1.4, frente, "camada--desfocada") + `<div class="vinheta"></div>`;
@@ -2898,22 +3229,24 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     fixar(); addEventListener("resize", fixar);
   } else requestAnimationFrame(profundidade);
 
-  // Neve caindo na frente da casinha
+  // Pó de fada subindo na frente da casinha (o canvas ainda se chama casa-neve)
   const neve = $("#casa-neve"), nc = neve.getContext("2d");
   let flocos = [];
   function medirNeve() {
     const r = palco.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
     neve.width = r.width * d; neve.height = r.height * d; nc.setTransform(d, 0, 0, d, 0, 0);
-    flocos = Array.from({ length: Math.round(r.width / 9) }, () => ({ x: Math.random() * r.width, y: Math.random() * r.height, r: .8 + Math.random() * 2.4, v: .3 + Math.random() * .9, f: Math.random() * 6 }));
+    flocos = Array.from({ length: Math.round(r.width / 20) }, () => ({ x: Math.random() * r.width, y: Math.random() * r.height, r: .8 + Math.random() * 2.4, v: .3 + Math.random() * .9, f: Math.random() * 6 }));
   }
   function nevar(t) {
     if (foraVisivel && !parado) {
       const w = neve.width / Math.min(devicePixelRatio || 1, 2), h = neve.height / Math.min(devicePixelRatio || 1, 2);
-      nc.clearRect(0, 0, w, h); nc.fillStyle = "rgba(255,255,255,.85)";
+      nc.clearRect(0, 0, w, h);
+      // pó de fada dourado subindo devagar e piscando
       for (const f of flocos) {
-        f.y += f.v; f.x += Math.sin(t * .001 + f.f) * .4;
-        if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; }
-        nc.beginPath(); nc.arc(f.x, f.y, f.r, 0, 6.283); nc.fill();
+        f.y -= f.v * .35; f.x += Math.sin(t * .0008 + f.f) * .35;
+        if (f.y < -4) { f.y = h + 4; f.x = Math.random() * w; }
+        nc.fillStyle = `rgba(255,214,130,${(.25 + .6 * Math.abs(Math.sin(t * .002 + f.f * 3))).toFixed(2)})`;
+        nc.beginPath(); nc.arc(f.x, f.y, f.r * .7, 0, 6.283); nc.fill();
       }
     }
     requestAnimationFrame(nevar);
@@ -3135,7 +3468,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       noCaldeirao.push(id);
       // respingo: anel no líquido e faíscas da cor do ingrediente
       const onda = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
-      Object.entries({ cx: 800, cy: 662, rx: 70, ry: 12, fill: "none", stroke: rgb(ingr.cor), "stroke-width": 4, class: "onda" }).forEach(([k, v]) => onda.setAttribute(k, v));
+      const liq = $("#liquido");
+      Object.entries({ cx: liq.getAttribute("cx"), cy: liq.getAttribute("cy"), rx: 70, ry: 12, fill: "none", stroke: rgb(ingr.cor), "stroke-width": 4, class: "onda" }).forEach(([k, v]) => onda.setAttribute(k, v));
       $("#ondas").appendChild(onda); setTimeout(() => onda.remove(), 1000);
       soltar(alvo.x, alvo.y, 34, { forca: 3.4, subir: 1.6, peso: .06, cores: [ingr.cor.join(","), "255,246,210"] });
       sino(3);
@@ -3221,6 +3555,211 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   const caminho = (g, d) => { const p = document.createElementNS(ns, "path"); p.setAttribute("d", d); $(g).appendChild(p); };
   caminho("#arvores-fundo", arvores(170, 70, 34, 26, [1040, 1150]));
   caminho("#arvores-frente", arvores(262, 110, 52, 46, [1020, 1170]));
+})();
+
+/* ---------- Idioma: botão EN/PT. Textos fixos traduzidos à mão; o resto (cartas, portais, casinha) vai pelo tradutor do Google ---------- */
+(() => {
+  const botao = document.getElementById("idioma");
+  // trecho de texto em português (exato, sem espaços nas pontas) → inglês
+  const EN = {
+    "Era uma vez uma pergunta…": "Once upon a time, there was a question…",
+    "Entrar ✨": "Enter ✨",
+    "Cartas": "Cards", "Descubra-se": "Discover yourself", "Casinha": "Cottage", "Consultas": "Readings", "Livro": "Book", "Contato": "Contact",
+    "Do macro ao micro ·": "From macro to micro ·", "espiritualidade": "spirituality", "autoconhecimento": "self-knowledge", "empoderamento": "empowerment",
+    "Toda pergunta merece ser": "Every question deserves to be", "bem dita": "well said",
+    "Tarô, oráculos e terapias com Tryv Tuath. Com amor, verdade e um pouco de magia.": "Tarot, oracles and therapies with Tryv Tuath. With love, truth and a little magic.",
+    "✦ Tirar minha carta": "✦ Draw my card", "Agendar consulta": "Book a reading",
+    "Oráculo encantado": "Enchanted oracle", "Escolha a sua carta": "Choose your card",
+    "Respire, pense na sua pergunta e deixe a mão escolher. O baralho sabe o caminho.": "Breathe, think of your question and let your hand choose. The deck knows the way.",
+    "Carta do dia": "Card of the day", "Três cartas": "Three cards",
+    "Levar para uma consulta": "Take it to a reading", "↻ Embaralhar de novo": "↻ Shuffle again",
+    "A mesa encantada é um carinho para o seu dia. A leitura completa, feita com atenção à sua história, é com a Tryv.": "The enchanted table is a little gift for your day. A full reading, attentive to your own story, is with Tryv.",
+    "Degustação mágica": "A magical taste",
+    "Cinco portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.": "Five portals open from your date of birth. It is just a taste: Tryv explores each one in depth in a reading.",
+    "Seu nome": "Your name", "Data de nascimento": "Date of birth", "✦ Abrir os portais": "✦ Open the portals",
+    "Mapa astral": "Birth chart", "gratuito": "free", "Kin maia": "Mayan Kin", "Anjo cabalístico": "Kabbalistic angel", "os 72 nomes": "the 72 names",
+    "Horóscopo chinês": "Chinese horoscope", "animal e elemento": "animal and element", "Arcano de nascimento": "Birth arcana", "tarô": "tarot",
+    "Era uma vez, na floresta": "Once upon a time, in the forest", "A casinha da Tryv": "Tryv’s cottage",
+    "Uma casinha de bruxa escondida no bosque. Passe a varinha na porta e entre: tem ervas, chás, cristais, magias leves e um caldeirão fervendo.": "A little witch’s cottage hidden in the woods. Wave your wand over the door and step inside: there are herbs, teas, crystals, gentle spells and a bubbling cauldron.",
+    "Consultas e terapias": "Readings and therapies", "Qual magia você procura?": "What magic are you looking for?",
+    "Conheça as terapias e marque uma conversa para entender em que momento você está e qual caminho pode te ajudar.": "Explore the therapies and book a talk to understand where you are right now and which path can help you.",
+    "Tarô e Oráculos": "Tarot and Oracles",
+    "Leitura de 30, 60 ou 90 minutos, com vários baralhos à escolha. Remota, por videochamada ou foto e áudio, ou presencial com hora marcada.": "30, 60 or 90 minute readings, with several decks to choose from. Online, by video call or photo and audio, or in person by appointment.",
+    "Quero essa leitura": "I want this reading",
+    "Mentoria Pessoal": "Personal Mentoring",
+    "Um programa feito para você conquistar seus objetivos, pelo método exclusivo dos 4 elementos da natureza. Ligações semanais e tarefas para realizar.": "A program made for you to reach your goals, through the exclusive method of the 4 elements of nature. Weekly calls and tasks to carry out.",
+    "Terra": "Earth", "Água": "Water", "Fogo": "Fire", "Ar": "Air", "Quero a mentoria": "I want the mentoring",
+    "Ritual presencial ou remoto para alcançar um objetivo, através da conexão com os 4 elementos da natureza.": "An in-person or online ritual to reach a goal, through connection with the 4 elements of nature.",
+    "Amor": "Love", "Prosperidade": "Prosperity", "Espiritual": "Spiritual", "Limpeza energética": "Energy cleansing", "Empoderamento": "Empowerment", "Despertar": "Awakening",
+    "Quero um ritual": "I want a ritual",
+    "A Viagem da Alma": "The Soul’s Journey", "Terapia de regressão a vidas passadas, realizada em 10 dias.": "Past life regression therapy, carried out over 10 days.",
+    "10 dias": "10 days", "Quero viajar": "I want to travel",
+    "Sessão de Reiki": "Reiki Session", "Envio e tratamento com Reiki, remoto ou presencial, com Mestre Reiki.": "Distance or in-person Reiki treatment with a Reiki Master.",
+    "Remoto": "Online", "Presencial": "In person", "Quero Reiki": "I want Reiki",
+    "Cursos": "Courses", "Cursos presenciais e remotos para quem quer aprender a caminhar com as próprias mãos. Pergunte quais estão abertos.": "In-person and online courses for those who want to learn to walk their own path. Ask which ones are open.",
+    "Ver cursos": "See courses",
+    "Espelho, espelho meu ✨": "Mirror, mirror on the wall ✨", "Quem lê as cartas": "Who reads the cards",
+    "“Definir Tryv Tuath é como tentar traduzir a magia. Tryv é uma proposta, não uma pessoa. Um pulsar de ideias e sentimentos.”": "“Defining Tryv Tuath is like trying to translate magic. Tryv is a proposal, not a person. A pulse of ideas and feelings.”",
+    "Ser a Tryv é vestir-se de estrelas no berço das nebulosas, numa casinha na floresta. Na essência wiccana, pés xamânicos, mente hermética, vibração cósmica entre todos os sagrados.": "Being Tryv is dressing in stars in the cradle of nebulae, in a little cottage in the forest. Wiccan at heart, shamanic feet, hermetic mind, cosmic vibration among all that is sacred.",
+    "mãe": "mother", "escritora": "writer", "artista": "artist", "artesã": "artisan", "bruxa": "witch", "professora": "teacher", "terapeuta": "therapist", "amiga": "friend",
+    "líder de egrégoras": "leader of egregores", "aprendiz": "apprentice", "apaixonada pela natureza": "in love with nature",
+    "Todas essas mulheres alimentam a ideia de quem é essa essência. Nenhuma definição seria possível se usada separadamente.": "All these women feed the idea of who this essence is. No single definition would be possible on its own.",
+    "O livro": "The book", "O Multiverso": "The Multiverse", "Desmistificando seu poder espiritual.": "Demystifying your spiritual power.",
+    "Um guia prático, com técnicas simples para levar ao dia a dia. Convida você a olhar para as próprias crenças, refletir e se descobrir, com linguagem clara e inspiradora, para aprofundar sua conexão espiritual e chegar a um estado de bem-estar.": "A practical guide with simple techniques for everyday life. It invites you to look at your own beliefs, reflect and discover yourself, in clear and inspiring language, to deepen your spiritual connection and reach a state of well-being.",
+    "Toque na capa para abrir o livro.": "Tap the cover to open the book.", "Quero o meu exemplar": "I want my copy",
+    "Num universo onde as fronteiras entre a ciência e a espiritualidade se entrelaçam, surge a figura luminosa de Tryv Tuath: escritora, mentora e mestre das energias sutis.": "In a universe where the borders between science and spirituality intertwine, the luminous figure of Tryv Tuath arises: writer, mentor and master of subtle energies.",
+    "Um convite a perceber os meandros do autoconhecimento e da cura, e a descobrir a verdadeira capacidade de realização e transformação na própria vida.": "An invitation to perceive the winding paths of self-knowledge and healing, and to discover the true power to achieve and transform your own life.",
+    "Seja tocado": "Be touched", "Vamos conversar?": "Shall we talk?",
+    "Atendimento remoto para qualquer lugar, ou presencial com hora marcada.": "Online sessions anywhere in the world, or in person by appointment.",
+    "Chame no WhatsApp": "Message on WhatsApp", "Conte o que está buscando e escolha a leitura ou a terapia.": "Tell what you are looking for and choose the reading or therapy.",
+    "Escolha o horário": "Choose the time", "Por videochamada, por foto e áudio, ou presencial.": "By video call, by photo and audio, or in person.",
+    "Envie o comprovante": "Send the receipt", "Os atendimentos são confirmados com o pagamento: depósito, transferência ou cartão de crédito.": "Sessions are confirmed upon payment: bank deposit, transfer or credit card.",
+    "Receba sua leitura": "Receive your reading", "E leve com você o que as cartas têm a dizer.": "And take with you what the cards have to say.",
+    "ou por e-mail:": "or by email:",
+    "Mude-se e descobrirá novos outros para refletir-se.": "Change yourself and you will find new others to reflect you.",
+    "← Sair da casinha": "← Leave the cottage", "✦ Mexer": "✦ Stir", "Esvaziar": "Empty",
+  };
+  // nomes clássicos dos Arcanos em inglês (o tradutor automático erra vários)
+  [["0", "O Louco", "The Fool"], ["I", "O Mago", "The Magician"], ["II", "A Sacerdotisa", "The High Priestess"], ["III", "A Imperatriz", "The Empress"],
+   ["IV", "O Imperador", "The Emperor"], ["V", "O Hierofante", "The Hierophant"], ["VI", "Os Enamorados", "The Lovers"], ["VII", "O Carro", "The Chariot"],
+   ["VIII", "A Força", "Strength"], ["IX", "O Eremita", "The Hermit"], ["X", "A Roda da Fortuna", "Wheel of Fortune"], ["XI", "A Justiça", "Justice"],
+   ["XII", "O Enforcado", "The Hanged Man"], ["XIII", "A Morte", "Death"], ["XIV", "A Temperança", "Temperance"], ["XV", "O Diabo", "The Devil"],
+   ["XVI", "A Torre", "The Tower"], ["XVII", "A Estrela", "The Star"], ["XVIII", "A Lua", "The Moon"], ["XIX", "O Sol", "The Sun"],
+   ["XX", "O Julgamento", "Judgement"], ["XXI", "O Mundo", "The World"]
+  ].forEach(([n, pt, en]) => { EN[pt] = en; EN[`${n} · ${pt}`] = `${n} · ${en}`; });
+  Object.assign(EN, {
+    "O que passou": "What has passed", "O que é agora": "What is now", "O caminho": "The path", "As cartas falaram.": "The cards have spoken.",
+    "Toque em uma carta do leque.": "Tap a card in the fan.", "Toque em três cartas, uma de cada vez.": "Tap three cards, one at a time.",
+    "arcano de nascimento": "birth arcana", "toque para o mapa": "tap for the chart", "seu kin": "your kin",
+    "✦ Passe a varinha na porta…": "✦ Wave your wand over the door…", "✦ Toque para entrar na casinha": "✦ Tap to enter the cottage",
+    "Pegue uma erva e jogue no caldeirão ✦": "Grab an herb and drop it in the cauldron ✦",
+    "Pegue uma erva ou um pote e jogue no caldeirão ✦ ou toque nas placas": "Grab an herb or a jar and drop it in the cauldron ✦ or tap the signs",
+    "Arraste para os lados para olhar a casinha ✦ Pegue uma erva e jogue no caldeirão": "Drag sideways to look around the cottage ✦ Grab an herb and drop it in the cauldron",
+    "Pegue uma erva do varal ou um pote da lareira e jogue no caldeirão ✦ até 3 ingredientes": "Grab an herb from the line or a jar from the mantel and drop it in the cauldron ✦ up to 3 ingredients",
+    "Quase! Solte o ingrediente bem em cima do caldeirão ✦": "Almost! Drop the ingredient right over the cauldron ✦",
+    "O caldeirão já tem 3 ingredientes. Mexa! ✦": "The cauldron already has 3 ingredients. Stir! ✦",
+    "Pronto! O caldeirão vai ferver ✦": "Ready! The cauldron is about to boil ✦",
+    "Caldeirão limpinho. Pegue uma erva e jogue lá dentro ✦": "Spotless cauldron. Grab an herb and drop it in ✦",
+    "Borbulhando…": "Bubbling…",
+  });
+  const CITACAO = "When you touch one thing with deep awareness, you touch everything.";
+  const TITULO = "Bem Dito Tarot — Tarot and oracles with Tryv Tuath";
+
+  // memória das traduções: começa com as manuais e guarda as automáticas para a próxima visita
+  const MEMORIA = "bemdito-traducoes";
+  const cache = new Map(Object.entries(EN));
+  try { const salvo = JSON.parse(localStorage.getItem(MEMORIA) || "{}"); for (const k in salvo) if (!cache.has(k)) cache.set(k, salvo[k]); } catch {}
+  const guardar = () => { try { const o = {}; cache.forEach((v, k) => { if (!(k in EN)) o[k] = v; }); localStorage.setItem(MEMORIA, JSON.stringify(o)); } catch {} };
+  // o tradutor troca "carta" por "letter"; num site de tarô é sempre "card"
+  const polir = t => t.replace(/\b([Ll])etter(s?)\b/g, (_, l, s) => (l === "L" ? "C" : "c") + "ard" + s);
+  const pedir = async (textos) => {
+    const corpo = new URLSearchParams();
+    textos.forEach(t => corpo.append("q", t));
+    const r = await fetch("https://translate.googleapis.com/translate_a/t?client=gtx&sl=pt&tl=en&dt=t", { method: "POST", body: corpo });
+    if (!r.ok) throw new Error("tradutor " + r.status);
+    const j = await r.json();
+    const lista = Array.isArray(j) ? j : [j];
+    return lista.map(x => Array.isArray(x) ? x[0] : x);
+  };
+
+  let ingles = false;
+  const traduzidos = new Map(); // nó de texto → { pt, en }
+  const PULAR = "script, style, noscript, option, [translate=no], #citacao";
+  const temLetra = /\p{L}/u;
+  const aceitar = no => {
+    const reg = traduzidos.get(no);
+    if (reg && no.nodeValue === reg.en) return false;
+    const t = no.nodeValue.trim();
+    return !!t && temLetra.test(t) && !!no.parentElement && !no.parentElement.closest(PULAR);
+  };
+  const coletar = (raiz, lista) => {
+    if (raiz.nodeType === 3) { if (aceitar(raiz)) lista.push(raiz); return; }
+    if (raiz.nodeType !== 1 || raiz.closest(PULAR)) return;
+    const w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT);
+    while (w.nextNode()) if (aceitar(w.currentNode)) lista.push(w.currentNode);
+  };
+  const aplicar = (no) => {
+    const v = no.nodeValue, t = v.trim();
+    if (!cache.has(t)) return false;
+    const en = v.replace(t, () => cache.get(t));
+    traduzidos.set(no, { pt: v, en });
+    no.nodeValue = en;
+    return true;
+  };
+  // o que já está na memória troca na hora; o resto vai ao tradutor em lotes
+  const traduzirNos = async (nos) => {
+    if (traduzidos.size > 3000) traduzidos.forEach((_, no) => { if (!no.isConnected) traduzidos.delete(no); });
+    const faltam = nos.filter(no => !aplicar(no));
+    if (!faltam.length) return;
+    const textos = [...new Set(faltam.map(no => no.nodeValue.trim()))];
+    const lotes = [];
+    let lote = [], tam = 0;
+    for (const t of textos) {
+      if (lote.length && (tam + t.length > 4000 || lote.length >= 80)) { lotes.push(lote); lote = []; tam = 0; }
+      lote.push(t); tam += t.length;
+    }
+    if (lote.length) lotes.push(lote);
+    await Promise.all(lotes.map(async l => {
+      try { const r = await pedir(l); l.forEach((t, i) => { if (r[i]) cache.set(t, polir(r[i])); }); } catch {}
+    }));
+    guardar();
+    if (ingles) faltam.forEach(no => { if (no.isConnected && aceitar(no)) aplicar(no); });
+  };
+  // textos que o site escreve depois (cartas, portais, casinha) são traduzidos assim que aparecem
+  const vigia = new MutationObserver(mudancas => {
+    if (!ingles) return;
+    const nos = [];
+    for (const m of mudancas) {
+      if (m.type === "characterData") coletar(m.target, nos);
+      else m.addedNodes.forEach(n => coletar(n, nos));
+    }
+    if (nos.length) traduzirNos(nos);
+  });
+
+  const cit = document.getElementById("citacao");
+  const citacaoPt = cit ? cit.textContent.replace(/\s+/g, " ").trim() : "";
+  const escreverCitacao = (texto) => {
+    if (!cit) return;
+    const acesa = cit.querySelector(".palavra.acesa") ? " acesa" : "";
+    cit.innerHTML = texto.split(" ").map(p => `<span class="palavra${acesa}">${p}</span>`).join(" ");
+  };
+  const tituloPt = document.title;
+  const nomeInput = document.getElementById("n-nome");
+
+  const mostrar = () => {
+    botao.classList.toggle("em-ingles", ingles);
+    botao.querySelector(".idioma__rotulo").textContent = ingles ? "PT" : "EN";
+    botao.setAttribute("aria-label", ingles ? "Ver em português" : "Read in English");
+    document.documentElement.lang = ingles ? "en" : "pt-BR";
+  };
+  const paraIngles = () => {
+    ingles = true;
+    mostrar();
+    document.title = TITULO;
+    if (nomeInput) nomeInput.placeholder = "optional";
+    escreverCitacao(CITACAO);
+    const nos = [];
+    coletar(document.body, nos);
+    traduzirNos(nos);
+    vigia.observe(document.body, { subtree: true, childList: true, characterData: true });
+  };
+  const paraPortugues = () => {
+    ingles = false;
+    vigia.disconnect();
+    traduzidos.forEach((reg, no) => { if (no.nodeValue === reg.en) no.nodeValue = reg.pt; });
+    traduzidos.clear();
+    mostrar();
+    document.title = tituloPt;
+    if (nomeInput) nomeInput.placeholder = "opcional";
+    escreverCitacao(citacaoPt);
+  };
+  botao.addEventListener("click", () => {
+    if (ingles) paraPortugues(); else paraIngles();
+    try { localStorage.setItem("bemdito-idioma", ingles ? "en" : "pt"); } catch {}
+  });
+  let salvo = null;
+  try { salvo = localStorage.getItem("bemdito-idioma"); } catch {}
+  if (salvo === "en") paraIngles();
 })();
 </script>
 </body>
