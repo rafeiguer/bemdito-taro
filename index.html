@@ -164,7 +164,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .icone-botao[aria-pressed="true"] .som__desligado { display: none; }
 .icone-botao[aria-pressed="true"] .som__ligado { display: block; }
 .abre-menu { display: none; }
-@media (max-width: 860px) {
+@media (max-width: 1020px) {
   .abre-menu { display: grid; }
   .menu {
     position: fixed; inset: 0; z-index: -1; flex-direction: column; align-items: center; justify-content: center; gap: .6rem;
@@ -571,6 +571,145 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .duas-cartas { display: flex; justify-content: center; gap: clamp(.8rem, 3vw, 1.6rem); width: 100%; }
 .duas-cartas .vaga { --vg: clamp(120px, 34vw, 170px); }
 
+/* =========================================================================
+   A CASINHA DE CHOCOLATE
+   As duas cenas (fora e dentro) são várias camadas de SVG empilhadas. Cada
+   camada anda um pouco diferente com o mouse ou com a inclinação do celular,
+   e a da frente fica desfocada: é isso que dá a profundidade de cinema.
+   ========================================================================= */
+.casinha-palco {
+  position: relative; max-width: 1100px; margin: 0 auto; aspect-ratio: 16 / 10; border-radius: 28px; overflow: hidden; isolation: isolate;
+  background: #0a0722;
+  box-shadow: 0 0 0 1px var(--linha), 0 30px 80px rgba(0, 0, 0, .55), 0 0 90px rgba(255, 170, 80, .14);
+}
+@media (max-width: 700px) { .casinha-palco { aspect-ratio: 4 / 5; border-radius: 22px; } }
+.casinha-zoom { position: absolute; inset: 0; transition: transform 1.5s cubic-bezier(.7, 0, .85, .35), filter 1.5s; }
+.casinha-palco.entrando .casinha-zoom { transform: scale(10); filter: brightness(1.7) saturate(1.2); }
+.casinha-palco.saindo .casinha-zoom { transition: transform 1.4s cubic-bezier(.15, .65, .3, 1), filter 1.4s; }
+.camada { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; will-change: transform; }
+.camada--desfocada { filter: blur(2.6px); }
+.camada .ponto, .camada .ingrediente, .camada #casa { pointer-events: all; }
+.casa-neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.casinha-chamada {
+  position: absolute; left: 50%; bottom: 4%; z-index: 3; transform: translateX(-50%); width: max-content; max-width: 90%; text-align: center;
+  padding: .6rem 1.2rem; border-radius: 999px; background: rgba(18, 14, 46, .72); box-shadow: 0 0 0 1px var(--linha) inset; backdrop-filter: blur(6px);
+  font: italic 500 1.1rem/1.25 var(--livro); color: var(--ouro-claro); pointer-events: none; transition: opacity .4s;
+}
+.casinha-palco.entrando .casinha-chamada { opacity: 0; }
+#casa { cursor: pointer; }
+#casa .janela-luz { opacity: .85; transition: opacity .5s, filter .5s; }
+#casa:hover .janela-luz, #casa.acordada .janela-luz { opacity: 1; filter: brightness(1.3); }
+#porta-casa { transform-origin: 452px 630px; transition: transform .9s cubic-bezier(.3, .7, .2, 1); }
+#casa.acordada #porta-casa { transform: scaleX(.72) skewY(5deg); }
+.casinha-palco.entrando #porta-casa { transform: scaleX(.06) skewY(16deg); }
+#anel-porta { transition: stroke-dashoffset .3s; }
+#casa.acordada #anel-porta { stroke-dashoffset: 0; transition: stroke-dashoffset 1.3s linear; }
+.raios { opacity: 0; transition: opacity .8s; }
+#casa.acordada .raios { opacity: .5; }
+.casinha-palco.entrando .raios { opacity: 1; }
+.fumaca, .vapor { transform-box: fill-box; transform-origin: center; animation: fumaca 4s ease-out infinite; }
+@keyframes fumaca { 0% { transform: translate(0, 0) scale(.5); opacity: 0; } 15% { opacity: .55; } 100% { transform: translate(26px, -150px) scale(2.4); opacity: 0; } }
+.vapor { animation-duration: 3.2s; }
+.vagalume { transform-box: fill-box; transform-origin: center; animation: vagalume 3s ease-in-out infinite alternate; }
+@keyframes vagalume { from { opacity: .15; transform: translate(0, 0); } to { opacity: 1; transform: translate(9px, -16px); } }
+.tremeluz { animation: tremeluz 2.4s ease-in-out infinite; }
+@keyframes tremeluz { 0%, 100% { opacity: .85; } 30% { opacity: 1; } 55% { opacity: .7; } 75% { opacity: .95; } }
+
+.clarao {
+  position: fixed; inset: 0; z-index: 86; pointer-events: none; opacity: 0; transition: opacity .7s;
+  background: radial-gradient(circle at 50% 55%, #fffaf0 0%, #ffe3a3 35%, #ffb35a 70%, #ff8a3d 100%);
+}
+.clarao.aceso { opacity: 1; }
+
+/* ---------- Dentro ---------- */
+.interior { position: fixed; inset: 0; z-index: 60; background: #1a0b05; opacity: 0; visibility: hidden; transition: opacity .6s, visibility .6s; }
+.interior.aberto { opacity: 1; visibility: visible; }
+.interior__sala { position: absolute; inset: 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; overscroll-behavior: contain; }
+.interior__sala::-webkit-scrollbar { display: none; }
+.sala-mundo { position: relative; height: 100%; width: max(100%, calc(100dvh * 1.6)); overflow: hidden; }
+.interior.aberto .sala-mundo { animation: chegarSala 1.9s cubic-bezier(.2, .7, .2, 1); }
+@keyframes chegarSala { from { transform: scale(1.4); filter: blur(8px) brightness(1.9); } }
+.luz-lareira {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(60% 70% at 50% 70%, rgba(255, 150, 60, .38), rgba(255, 110, 40, .1) 55%, transparent 80%);
+  animation: tremeluz 1.9s ease-in-out infinite;
+}
+.vinheta { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(75% 85% at 50% 55%, transparent 55%, rgba(10, 3, 1, .82) 100%); }
+.interior__topo {
+  position: absolute; z-index: 5; top: max(14px, env(safe-area-inset-top)); left: 14px; right: 14px;
+  display: flex; flex-wrap: wrap; align-items: flex-start; gap: .6rem; pointer-events: none;
+}
+.interior__topo .botao { pointer-events: auto; padding: .7rem 1.1rem; }
+.interior__dica {
+  margin: 0; padding: .55rem 1rem; border-radius: 999px; max-width: min(520px, 100%);
+  background: rgba(26, 11, 5, .74); box-shadow: 0 0 0 1px rgba(242, 193, 78, .4) inset; backdrop-filter: blur(6px);
+  font: italic 500 1.05rem/1.25 var(--livro); color: var(--ouro-claro);
+}
+.ponto { cursor: pointer; transition: filter .35s; }
+.ponto:hover, .ponto:focus-visible { filter: brightness(1.22) drop-shadow(0 0 14px rgba(255, 210, 120, .8)); outline: none; }
+.ingrediente { cursor: grab; touch-action: none; transition: filter .3s, opacity .4s; }
+.ingrediente:hover, .ingrediente:focus-visible { filter: brightness(1.25) drop-shadow(0 0 10px rgba(255, 230, 160, .95)); outline: none; }
+.ingrediente.pego { opacity: .2; }
+.placa { transform-box: fill-box; transform-origin: center; animation: placa 2.6s ease-in-out infinite; }
+@keyframes placa { 50% { transform: translateY(-6px); } }
+.chama { transform-box: fill-box; transform-origin: 50% 100%; animation: chama .2s ease-in-out infinite alternate; }
+.chama--lenta { animation-duration: .45s; }
+@keyframes chama { from { transform: scale(1, 1) skewX(-3deg); } to { transform: scale(.9, 1.1) skewX(3deg); } }
+.bolha { transform-box: fill-box; transform-origin: center; animation: bolha 1.7s ease-in infinite; }
+@keyframes bolha { 0% { transform: translateY(0) scale(.3); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(-30px) scale(1.15); opacity: 0; } }
+.fervendo .bolha { animation-duration: .55s; }
+.floco { animation: nevar linear infinite; }
+@keyframes nevar { from { transform: translateY(-260px); } to { transform: translateY(260px); } }
+.gato { transform-box: fill-box; transform-origin: 50% 100%; animation: respirar 3.6s ease-in-out infinite; }
+@keyframes respirar { 50% { transform: scaleY(1.06); } }
+.onda { transform-box: fill-box; transform-origin: center; animation: onda-caldeirao .9s ease-out forwards; }
+@keyframes onda-caldeirao { from { transform: scale(.2); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+.fantasma { position: fixed; left: 0; top: 0; z-index: 96; pointer-events: none; overflow: visible; filter: drop-shadow(0 18px 18px rgba(0, 0, 0, .55)) drop-shadow(0 0 14px rgba(255, 220, 140, .7)); }
+
+/* Pergaminho com o conteúdo de cada canto */
+.pergaminho {
+  position: absolute; z-index: 6; top: 0; right: 0; bottom: 0; width: min(460px, 100%); overflow-y: auto; overscroll-behavior: contain;
+  padding: 4.2rem clamp(1.3rem, 4vw, 2.2rem) 2rem;
+  background: radial-gradient(120% 60% at 50% 0%, #fffaf0, transparent 70%), linear-gradient(180deg, #f8edd3, #ecdcb4);
+  color: #3a2510; box-shadow: -20px 0 60px rgba(0, 0, 0, .5), inset 0 0 0 10px #ecdcb4, inset 0 0 0 11px rgba(122, 62, 16, .45);
+  transform: translateX(105%); transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+}
+.pergaminho.aberto { transform: none; }
+@media (max-width: 700px) {
+  .pergaminho { top: auto; left: 0; width: 100%; max-height: 74dvh; border-radius: 24px 24px 0 0; transform: translateY(105%); padding-top: 3.4rem; }
+}
+.pergaminho__fechar { position: absolute; top: .9rem; right: .9rem; width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(122, 62, 16, .12); color: #7a3e10; font-size: 1.2rem; }
+.pergaminho h3 { font: 600 1.7rem/1.15 var(--titulo); color: #7a3e10; }
+.pergaminho .sub { margin: .4rem 0 0; font: italic 500 1.15rem/1.4 var(--livro); color: #6b4a2a; }
+.item-casa { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px dashed rgba(122, 62, 16, .35); }
+.item-casa h4 { margin: 0; font: 600 1.12rem/1.2 var(--titulo); color: #5a2b0c; }
+.item-casa p { margin: .35rem 0 0; font-size: .98rem; color: #4a3220; }
+.rotulo-casa { display: block; margin-top: .45rem; font: 600 .7rem/1.2 var(--corpo); letter-spacing: .16em; text-transform: uppercase; color: #b0533a; }
+.nota-casa { margin-top: 1.4rem; font-size: .9rem; font-style: italic; color: #6b4a2a; }
+.pergaminho .botao--rosa { margin-top: 1.4rem; }
+.pocao-titulo { display: flex; align-items: center; gap: .9rem; }
+.pocao-frasco { width: 64px; height: 80px; flex: none; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .3)); }
+.gemas { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: 1.2rem; }
+.gema { padding: .6rem .3rem .5rem; border: 0; border-radius: 14px; background: rgba(255, 255, 255, .4); box-shadow: 0 0 0 1px rgba(122, 62, 16, .2) inset; font: 600 .8rem/1.2 var(--corpo); color: #5a2b0c; transition: transform .3s, background .3s; }
+.gema svg { display: block; width: 46px; height: 46px; margin: 0 auto .3rem; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .25)); }
+.gema[aria-pressed="true"] { background: #fff7e0; box-shadow: 0 0 0 2px #d39a2c inset; transform: translateY(-3px); }
+.gema-detalhe { margin-top: 1rem; padding: 1rem; border-radius: 14px; background: rgba(255, 255, 255, .55); box-shadow: 0 0 0 1px rgba(122, 62, 16, .2) inset; }
+.gema-detalhe h4 { margin: 0; font: 600 1.15rem/1.2 var(--titulo); color: #5a2b0c; }
+.gema-detalhe p { margin: .35rem 0 0; color: #4a3220; }
+
+/* O que já caiu no caldeirão */
+.caldeirao-hud {
+  position: absolute; z-index: 5; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translate(-50%, 160%);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem; width: max-content; max-width: calc(100% - 24px);
+  padding: .6rem .7rem; border-radius: 999px; background: rgba(26, 11, 5, .82); box-shadow: 0 0 0 1px rgba(242, 193, 78, .45) inset, 0 14px 40px rgba(0, 0, 0, .5);
+  backdrop-filter: blur(6px); transition: transform .5s cubic-bezier(.2, .7, .2, 1);
+}
+.caldeirao-hud.visivel { transform: translate(-50%, 0); }
+.caldeirao-hud .botao { padding: .6rem 1rem; font-size: .9rem; }
+.chip-ing { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .7rem; border-radius: 999px; font-size: .85rem; color: #fff; background: rgba(255, 255, 255, .1); }
+.chip-ing i { width: 10px; height: 10px; border-radius: 50%; }
+.botao[disabled] { opacity: .45; pointer-events: none; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
@@ -608,6 +747,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <nav class="menu" id="menu" aria-label="Seções">
       <a href="#cartas">Cartas</a>
       <a href="#descubra">Descubra-se</a>
+      <a href="#casinha">Casinha</a>
       <a href="#consultas">Consultas</a>
       <a href="#tryv">Tryv</a>
       <a href="#livro">Livro</a>
@@ -741,6 +881,22 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
         </button>
       </div>
       <div class="revelacao" id="revelacao" hidden aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ================= CASINHA ================= -->
+  <section class="secao" id="casinha">
+    <div class="envelope">
+      <div class="cabeca surge">
+        <span class="chamada">Era uma vez, na floresta</span>
+        <h2 class="titulo">A casinha da Tryv</h2>
+        <p class="intro">Uma casinha de chocolate escondida no bosque. Passe a varinha na porta e entre: tem ervas, chás, cristais, magias leves e um caldeirão fervendo.</p>
+      </div>
+      <div class="casinha-palco surge" id="casinha-palco">
+        <div class="casinha-zoom" id="casinha-zoom"></div>
+        <canvas class="casa-neve" id="casa-neve" aria-hidden="true"></canvas>
+        <p class="casinha-chamada" id="casinha-chamada">✦ Passe a varinha na porta…</p>
+      </div>
     </div>
   </section>
 
@@ -915,6 +1071,27 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <p>© <span id="ano">2026</span> Bem Dito Tarot · Tryv Tuath</p>
   </div>
 </footer>
+
+<!-- Dentro da casinha: cena em tela cheia, montada pelo script -->
+<div class="interior" id="interior" role="dialog" aria-modal="true" aria-label="Dentro da casinha" aria-hidden="true">
+  <div class="interior__sala" id="sala">
+    <div class="sala-mundo" id="sala-mundo"></div>
+  </div>
+  <div class="interior__topo">
+    <button class="botao botao--vidro" id="sair-casa" type="button">← Sair da casinha</button>
+    <p class="interior__dica" id="dica-casa" aria-live="polite">Pegue uma erva e jogue no caldeirão ✦</p>
+  </div>
+  <div class="caldeirao-hud" id="caldeirao-hud">
+    <span id="hud-ings"></span>
+    <button class="botao botao--ouro" id="mexer" type="button" disabled>✦ Mexer</button>
+    <button class="botao botao--vidro" id="esvaziar" type="button">Esvaziar</button>
+  </div>
+  <aside class="pergaminho" id="pergaminho">
+    <button class="pergaminho__fechar" id="fechar-pergaminho" type="button" aria-label="Fechar">✕</button>
+    <div id="pergaminho-conteudo"></div>
+  </aside>
+</div>
+<div class="clarao" id="clarao" aria-hidden="true"></div>
 
 <a class="zap-flutuante" data-zap="Olá, Tryv! Vim pelo site Bem Dito Tarot ✨" href="https://wa.me/5551996489944" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.1Z"/></svg>
@@ -2259,6 +2436,751 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     setTimeout(() => { brilharEm($(".mapa", res), 60); sino(5); }, parado ? 0 : 900);
     setTimeout(() => res.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "start" }), 150);
   }
+
+  /* =========================================================================
+     A CASINHA DE CHOCOLATE
+     Fora: a casinha de João e Maria na neve. Segurar a varinha na porta (ou
+     tocar nela no celular) faz a câmera entrar, como nos filmes de Natal.
+     Dentro: ervas, chás, magias, cristais e o caldeirão, onde a pessoa pega
+     as ervas e os potes da própria cena e joga lá dentro.
+     ========================================================================= */
+
+  // ---- TEXTOS PROVISÓRIOS: trocar pelos textos da cliente quando chegarem ----
+  const CASA = {
+    ervas: {
+      titulo: "Prateleira das ervas", sub: "Cada erva tem um segredo. Aqui vão alguns, para começar.",
+      itens: [
+        ["Alecrim", "alegria, proteção e boa memória", "Um raminho na bolsa ou no bolso para clarear as ideias e afastar o desânimo."],
+        ["Arruda", "proteção", "Um vasinho perto da porta de entrada é a guardiã clássica da casa."],
+        ["Lavanda", "calma e sono tranquilo", "Um saquinho de flores secas no travesseiro ajuda a desacelerar."],
+        ["Manjericão", "prosperidade e limpeza", "Tenha um vaso na cozinha e, ao regar, mentalize a casa farta."],
+        ["Louro", "vitória e prosperidade", "Uma folha seca na carteira para chamar dinheiro e boas notícias."],
+        ["Sálvia", "limpeza energética", "Na defumação, passe a fumaça pelos cantos da casa com as janelas abertas."],
+        ["Camomila", "calma e doçura", "Em chá ou num banho morno, acalma o corpo e o humor."],
+        ["Hortelã", "renovação e frescor", "Folhas amassadas na água do banho trazem ânimo para recomeçar."],
+      ],
+      nota: "Ervas são aliadas antigas. Use com respeito e, na dúvida, pergunte à Tryv.",
+    },
+    chas: {
+      titulo: "Mesinha dos chás", sub: "Chás simples, para fazer em casa e tomar com intenção.",
+      itens: [
+        ["Camomila", "no fim do dia, para desacelerar", "1 colher de sopa de flores secas para 1 xícara de água quente. Abafe por 5 minutos."],
+        ["Erva-cidreira", "quando a cabeça está agitada", "Um punhado de folhas frescas em água quente, abafado por 5 a 7 minutos."],
+        ["Hibisco com canela", "nos dias frios, para aquecer", "1 colher de hibisco e 1 pau de canela em 1 xícara de água quente por 5 minutos."],
+        ["Gengibre, limão e mel", "para aquecer a garganta e o coração", "Ferva fatias de gengibre por 5 minutos; desligue e junte limão e uma colher de mel."],
+        ["Hortelã", "depois das refeições, para refrescar", "Folhas frescas em água quente, abafadas por 5 minutos."],
+        ["Lavanda", "no ritual do sono", "1 colher de chá de lavanda culinária em água quente por 4 minutos. Pouquinho, que ela é forte."],
+      ],
+      nota: "Chá é carinho, não remédio. Gestantes, lactantes, crianças e quem usa medicamentos devem conversar com um profissional de saúde antes.",
+    },
+    magias: {
+      titulo: "O grimório", sub: "Magias rápidas e leves, para o dia a dia.",
+      itens: [
+        ["Banho de louro da prosperidade", "3 folhas de louro e 1 litro de água", "Ferva as folhas por 3 minutos, espere amornar e jogue do pescoço para baixo, numa quinta-feira, mentalizando portas se abrindo."],
+        ["Saquinho de proteção", "alecrim, arruda e uma pitada de sal grosso", "Coloque tudo num saquinho de pano, dê três nós e carregue na bolsa. Troque a cada lua nova."],
+        ["Pote de mel da doçura", "um potinho, mel, canela e um papel", "Escreva no papel a situação que precisa de doçura, coloque no pote com mel e uma pitada de canela e guarde num lugar alto."],
+        ["Intenções da lua nova", "papel, caneta e uma vela branca", "Na lua nova, acenda a vela, escreva três intenções no presente (“eu tenho”, “eu sou”) e leia em voz alta."],
+        ["Limpeza da casa", "sálvia ou incenso e uma vassoura", "Abra as janelas, passe a fumaça pelos cantos e varra de dentro para fora, pedindo que saia o que não serve mais."],
+        ["Água solar", "um copo de vidro e água", "Deixe o copo ao sol da manhã por uma hora e beba com uma intenção para o dia."],
+      ],
+      nota: "Rituais mais profundos a Tryv faz com você, com cuidado e no seu tempo.",
+    },
+    cristais: {
+      titulo: "Janela dos cristais", sub: "Toque num cristal para ler o que ele guarda.",
+      itens: [
+        ["Quartzo rosa", "#f6a7c6", "amor e autoestima", "A pedra do coração: acalma, acolhe e ensina a amar a si primeiro."],
+        ["Ametista", "#9b6bd6", "intuição e calma", "Ajuda a meditar, a dormir melhor e a ouvir a voz de dentro."],
+        ["Citrino", "#f2b84b", "prosperidade e alegria", "Um pedacinho de sol: atrai abundância e devolve o otimismo."],
+        ["Cristal de quartzo", "#e4eeff", "clareza e energia", "O amplificador: potencializa intenções e outras pedras."],
+        ["Turmalina negra", "#2b2b35", "proteção", "A guardiã: absorve o que é pesado e firma os pés no chão."],
+        ["Pedra da lua", "#dfe6f6", "ciclos e intuição", "Ligada à lua e ao feminino: ajuda a fluir com as mudanças."],
+        ["Olho de tigre", "#b5762a", "coragem e foco", "Para dias de decisão: traz firmeza, foco e confiança."],
+        ["Selenita", "#f4f0e6", "limpeza e paz", "Limpa o ambiente e as outras pedras; traz uma paz branquinha."],
+        ["Aventurina", "#3fae6a", "sorte e oportunidades", "A pedra da boa sorte: abre caminhos e novas chances."],
+        ["Lápis-lazúli", "#2c4fb3", "verdade e comunicação", "Para falar o que se sente, com sabedoria e verdade."],
+        ["Cornalina", "#e0602c", "vitalidade e criatividade", "Acende a vontade de fazer, criar e se mexer."],
+        ["Obsidiana", "#1d1622", "proteção e autoconhecimento", "Um espelho escuro: mostra as sombras para que se transformem."],
+      ],
+      nota: "Para limpar seus cristais: água corrente (menos a selenita, que não gosta de água), luz da lua ou um tempinho na terra.",
+    },
+  };
+  // Ingredientes do caldeirão: cor (r,g,b) e para que puxam a magia
+  const INGREDIENTES = {
+    rosa: { nome: "Pétalas de rosa", cor: [255, 92, 150], int: { amor: 2 } },
+    lavanda: { nome: "Lavanda", cor: [170, 130, 255], int: { calma: 2 } },
+    alecrim: { nome: "Alecrim", cor: [90, 175, 120], int: { alegria: 1, protecao: 1 } },
+    arruda: { nome: "Arruda", cor: [45, 125, 90], int: { protecao: 2 } },
+    louro: { nome: "Louro", cor: [130, 165, 60], int: { prosperidade: 1, protecao: 1 } },
+    mel: { nome: "Mel", cor: [245, 176, 40], int: { amor: 1, alegria: 1 } },
+    canela: { nome: "Canela", cor: [196, 104, 52], int: { prosperidade: 2 } },
+    sal: { nome: "Sal grosso", cor: [235, 240, 255], int: { limpeza: 2 } },
+    camomila: { nome: "Camomila", cor: [255, 226, 120], int: { calma: 1, protecao: 1 } },
+    lua: { nome: "Água de lua", cor: [130, 190, 255], int: { limpeza: 1, calma: 1 } },
+  };
+  // [nome, o que a poção faz, uma magia leve para levar]
+  const POCOES = {
+    amor: ["Poção do Amor-Próprio", "Doce como mel, rosa como o coração: lembra que o primeiro amor é o seu.", "Escreva três qualidades suas num papel, dobre em direção a você e guarde no travesseiro até a lua cheia."],
+    prosperidade: ["Elixir da Abundância", "Dourado e perfumado de canela: abre portas e chama boas oportunidades.", "Coloque três folhas de louro na carteira numa quinta-feira e agradeça cada dinheiro que entrar."],
+    protecao: ["Escudo da Bruxa Boa", "Verde-escuro e firme: cria em volta de você uma bolha de luz.", "Faça um saquinho com alecrim e uma pitada de sal grosso e carregue na bolsa."],
+    calma: ["Névoa Lilás da Calma", "Cheira a lavanda e a fim de tarde: desacelera o coração e a mente.", "Antes de dormir, respire fundo sete vezes com um saquinho de lavanda perto do rosto."],
+    limpeza: ["Banho de Lua Limpa", "Clarinha e fresca: leva embora o peso dos dias.", "Deixe um copo de água sob a lua por uma noite e lave as mãos com ela pela manhã, com intenção."],
+    alegria: ["Faísca da Alegria", "Borbulha, ri e faz cócegas: devolve a leveza ao dia.", "Acenda uma vela amarela, coloque a música que você mais ama e dance de olhos fechados."],
+    caos: ["Caldo do Caos Criativo", "Você misturou de tudo um pouco, e o caldeirão riu! Às vezes a magia nasce justo da bagunça.", "Escreva uma ideia maluca e dê um pequeno passo por ela ainda hoje."],
+    "alegria+amor": ["Riso Cor-de-Rosa", "Amor leve, daquele que faz rir à toa.", "Mande uma mensagem carinhosa para alguém, sem motivo nenhum."],
+    "alegria+calma": ["Brisa de Domingo", "Alegria mansa, de rede e céu azul.", "Tome um chá devagar, sem celular, olhando pela janela."],
+    "alegria+limpeza": ["Sol da Manhã", "Abre as janelas da alma e deixa a luz entrar.", "Abra todas as janelas da casa pela manhã e diga em voz alta: “que entre o que é bom”."],
+    "alegria+prosperidade": ["Moeda que Dança", "Prosperidade que chega rindo, com leveza.", "Guarde uma moeda brilhante num potinho com canela e sorria toda vez que olhar para ele."],
+    "alegria+protecao": ["Guarda-Chuva de Estrelas", "Proteção alegre: nada pesado chega perto de quem brilha.", "Use uma peça amarela e repita: “minha luz me protege”."],
+    "amor+calma": ["Abraço de Lavanda", "O amor que acalma e acolhe, como colo.", "Passe um creme com cheiro de lavanda nos pulsos e se abrace por um minuto."],
+    "amor+limpeza": ["Água de Rosas", "Lava as mágoas para o coração recomeçar limpinho.", "Coloque pétalas de rosa num banho morno e deixe ir, com a água, o que doeu."],
+    "amor+prosperidade": ["Mel Dourado do Encontro", "Atrai o que é doce: pessoas, convites e oportunidades.", "Escreva seu desejo num papel, coloque num potinho de mel e guarde num lugar alto."],
+    "amor+protecao": ["Coração Blindado", "Amar sem medo, com o coração protegido.", "Desenhe um coração num papel, contorne com um círculo e guarde na carteira."],
+    "calma+limpeza": ["Água de Nuvem", "Silencia o barulho de dentro e lava a cabeça.", "Lave o rosto com água fria e diga: “eu solto o que não é meu”."],
+    "calma+prosperidade": ["Chá da Paciência Dourada", "O que é seu chega no tempo certo.", "Plante uma semente num vasinho e cuide dela todos os dias."],
+    "calma+protecao": ["Manto de Camomila", "Um manto macio que acalma e guarda.", "Borrife um pouquinho de chá de camomila frio no travesseiro."],
+    "limpeza+prosperidade": ["Vassoura de Ouro", "Varre o velho para abrir espaço ao novo e farto.", "Varra a casa de dentro para fora e deixe um pote de arroz com três moedas na cozinha."],
+    "limpeza+protecao": ["Vassoura Encantada", "Limpa e fecha a porta para o que não convém.", "Deixe um pratinho de sal grosso atrás da porta de entrada e troque a cada lua nova."],
+    "prosperidade+protecao": ["Cofre de Arruda", "Guarda o que é seu e multiplica com cuidado.", "Tenha um vasinho de arruda perto da porta e uma folha de louro no cofrinho."],
+  };
+
+  /* ---------- Desenho das cenas ---------- */
+  const gerador = semente => () => (semente = (semente * 16807) % 2147483647) / 2147483647;
+  const camada = (vb, p, conteudo, extra = "") =>
+    `<svg class="camada ${extra}" data-p="${p}" viewBox="${vb}" preserveAspectRatio="xMidYMid slice">${conteudo}</svg>`;
+  const f1 = n => n.toFixed(1);
+  const rgb = c => `rgb(${c.join(",")})`;
+  function pinheiroNeve(x, base, h, w, cor, neve, corNeve = "#e6eaff") {
+    const p = `M${f1(x)} ${f1(base - h)} L${f1(x + w * .5)} ${f1(base - h * .42)} L${f1(x + w * .3)} ${f1(base - h * .42)} L${f1(x + w * .62)} ${f1(base)} L${f1(x - w * .62)} ${f1(base)} L${f1(x - w * .3)} ${f1(base - h * .42)} L${f1(x - w * .5)} ${f1(base - h * .42)}Z`;
+    const capa = neve ? `<path d="M${f1(x)} ${f1(base - h)} L${f1(x + w * .26)} ${f1(base - h * .7)} Q${f1(x)} ${f1(base - h * .62)} ${f1(x - w * .26)} ${f1(base - h * .7)}Z" fill="${corNeve}"/>
+      <path d="M${f1(x - w * .5)} ${f1(base - h * .42)} Q${f1(x)} ${f1(base - h * .35)} ${f1(x + w * .5)} ${f1(base - h * .42)} L${f1(x + w * .36)} ${f1(base - h * .4)} Q${f1(x)} ${f1(base - h * .3)} ${f1(x - w * .36)} ${f1(base - h * .4)}Z" fill="${corNeve}" opacity=".85"/>` : "";
+    return `<path d="${p}" fill="${cor}"/>${capa}`;
+  }
+  // Ramo de erva pendurado: amarrado em (x, y), caindo para baixo
+  function maco(x, y, comp, cor, flor, larg = .1) {
+    let s = "";
+    for (let i = -3; i <= 3; i++) {
+      const a = i * 9, rad = a * Math.PI / 180;
+      const lx = x + Math.sin(rad) * comp * .42, ly = y + Math.cos(rad) * comp * .5;
+      s += `<ellipse cx="${f1(lx)}" cy="${f1(ly)}" rx="${f1(comp * larg)}" ry="${f1(comp * .42)}" fill="${cor}" transform="rotate(${-a} ${f1(lx)} ${f1(ly)})"/>`;
+      if (flor) s += `<circle cx="${f1(x + Math.sin(rad) * comp * .85)}" cy="${f1(y + Math.cos(rad) * comp * .9)}" r="${f1(comp * .085)}" fill="${flor}"/>`;
+    }
+    return s + `<rect x="${x - 9}" y="${y - 6}" width="18" height="10" rx="3" fill="#c0263f"/>`;
+  }
+  function vela(x, base, h, R) {
+    const atraso = (R() * 2).toFixed(2);
+    return `<g>
+      <circle cx="${x}" cy="${base - h - 14}" r="46" fill="url(#i-vela)" class="tremeluz" style="animation-delay:-${atraso}s"/>
+      <rect x="${x - 9}" y="${base - h}" width="18" height="${h}" rx="4" fill="#fff1dc"/>
+      <path d="M${x - 9} ${base - h + 4} q4 14 2 22 q4 -6 6 -18" fill="#fff8ee"/>
+      <line x1="${x}" y1="${base - h}" x2="${x}" y2="${base - h - 6}" stroke="#2a1206" stroke-width="2"/>
+      <path class="chama" style="animation-delay:-${atraso}s" d="M${x} ${base - h - 30} C${x - 8} ${base - h - 18} ${x - 7} ${base - h - 6} ${x} ${base - h - 5} C${x + 7} ${base - h - 6} ${x + 8} ${base - h - 18} ${x} ${base - h - 30}Z" fill="url(#i-chama)"/>
+    </g>`;
+  }
+  const placa = (x, y, texto, area) => {
+    const w = texto.length * 12 + 46;
+    return `<g class="ponto" data-area="${area}" role="button" tabindex="0" aria-label="${texto}">
+      <g class="placa"><rect x="${x - w / 2}" y="${y - 21}" width="${w}" height="42" rx="21" fill="rgba(26,11,5,.8)" stroke="rgba(242,193,78,.75)" stroke-width="1.5"/>
+      <text x="${x}" y="${y + 1}" text-anchor="middle" dominant-baseline="central" font-family="Cinzel, serif" font-size="19" font-weight="600" fill="#ffe6a3">${texto} ✦</text></g></g>`;
+  };
+
+  function cenaFora() {
+    const R = gerador(23), VB = "0 0 1000 820";
+    const balas = ["rosa", "verde", "amarela", "azul", "roxa"];
+    const bala = (x, y, r) => `<path d="M${f1(x - r)} ${f1(y)} a${r} ${r} 0 0 1 ${2 * r} 0Z" fill="url(#c-bala-${balas[Math.floor(R() * 5)]})"/><ellipse cx="${f1(x - r * .3)}" cy="${f1(y - r * .55)}" rx="${f1(r * .28)}" ry="${f1(r * .16)}" fill="#fff" opacity=".65"/>`;
+    const gotas = (x1, y1, x2, y2, n) => {
+      let s = "";
+      for (let i = 0; i < n; i++) {
+        const t = (i + .5) / n + (R() - .5) * .5 / n, x = x1 + (x2 - x1) * t, y = y1 + (y2 - y1) * t, L = 6 + R() * 20, w = 4 + R() * 3;
+        s += `<path d="M${f1(x - w)} ${f1(y)} Q${f1(x - w)} ${f1(y + L)} ${f1(x)} ${f1(y + L)} Q${f1(x + w)} ${f1(y + L)} ${f1(x + w)} ${f1(y)}Z" fill="#fff"/>`;
+      }
+      return s;
+    };
+    const defs = `<defs>
+      <linearGradient id="c-ceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#090620"/><stop offset=".6" stop-color="#1d1350"/><stop offset="1" stop-color="#3b1f62"/></linearGradient>
+      <radialGradient id="c-halo"><stop offset="0" stop-color="#fff3c4" stop-opacity=".55"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></radialGradient>
+      <linearGradient id="c-neve" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f3ff"/><stop offset="1" stop-color="#8f97cf"/></linearGradient>
+      <radialGradient id="c-luz-chao"><stop offset="0" stop-color="#ffbf5e" stop-opacity=".85"/><stop offset=".5" stop-color="#ff9a3c" stop-opacity=".35"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+      <linearGradient id="c-gengibre" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c47837"/><stop offset=".55" stop-color="#9a5224"/><stop offset="1" stop-color="#6d3415"/></linearGradient>
+      <pattern id="c-telha" width="36" height="24" patternUnits="userSpaceOnUse"><rect width="36" height="24" fill="#3d1a09"/><rect x="2" y="2" width="32" height="20" rx="6" fill="#6b3214"/><rect x="6" y="5" width="18" height="5" rx="2.5" fill="#94522a" opacity=".8"/></pattern>
+      <linearGradient id="c-sombra" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".4"/></linearGradient>
+      <radialGradient id="c-janela" cx=".45" cy=".4"><stop offset="0" stop-color="#fff6d0"/><stop offset=".45" stop-color="#ffcc66"/><stop offset="1" stop-color="#e07a26"/></radialGradient>
+      <radialGradient id="c-brilho"><stop offset="0" stop-color="#ffc35a" stop-opacity=".75"/><stop offset="1" stop-color="#ffc35a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="c-porta" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5a2a12"/><stop offset="1" stop-color="#2e1308"/></linearGradient>
+      <linearGradient id="c-raio" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9b0" stop-opacity=".8"/><stop offset="1" stop-color="#ffe9b0" stop-opacity="0"/></linearGradient>
+      <pattern id="c-listra" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="14" height="14" fill="#fff"/><rect width="7" height="14" fill="#e8264f"/></pattern>
+      <radialGradient id="c-coracao" cx=".35" cy=".3"><stop offset="0" stop-color="#ffd0e6"/><stop offset=".45" stop-color="#ff3d8f"/><stop offset="1" stop-color="#b3104f"/></radialGradient>
+      ${[["rosa", "#ffd1e6", "#ff4f9a", "#c4125f"], ["verde", "#dcffd2", "#4fd06b", "#1f8a3b"], ["amarela", "#fff6c4", "#ffd23f", "#c99400"], ["azul", "#d6ecff", "#5fb0ff", "#1f62c4"], ["roxa", "#eadcff", "#a77bff", "#5b2fc4"]]
+        .map(([n, a, b, c]) => `<radialGradient id="c-bala-${n}" cx=".35" cy=".3"><stop offset="0" stop-color="${a}"/><stop offset=".5" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></radialGradient>`).join("")}
+    </defs>`;
+
+    let estrelas = "";
+    for (let i = 0; i < 80; i++) estrelas += `<circle cx="${f1(R() * 1000)}" cy="${f1(40 + R() * 420)}" r="${f1(.6 + R() * 1.6)}" fill="#fff" opacity="${(.3 + R() * .7).toFixed(2)}"/>`;
+    const ceu = `${defs}<rect width="1000" height="820" fill="url(#c-ceu)"/>${estrelas}
+      <circle cx="830" cy="190" r="130" fill="url(#c-halo)"/><circle cx="830" cy="190" r="44" fill="#fff3d0"/>
+      <circle cx="815" cy="180" r="9" fill="#efe2b8" opacity=".6"/><circle cx="844" cy="206" r="6" fill="#efe2b8" opacity=".5"/>`;
+
+    let longe = `<path d="M0 560 C150 500 300 540 450 515 C620 488 800 530 1000 500 V820 H0Z" fill="#2a1d5e"/>`;
+    for (let x = -20; x < 1030; x += 34 + R() * 26) longe += pinheiroNeve(x, 605 + R() * 12, 110 + R() * 90, 60 + R() * 20, "#1b1347", R() < .65, "#8d93c9");
+
+    // Casa
+    let pingos = "";
+    for (let i = 0; i < 46; i++) {
+      const x = 348 + R() * 304, y = 436 + R() * 214;
+      if (Math.hypot(x - 405, y - 495) < 54 || Math.hypot(x - 595, y - 495) < 54 || (x > 430 && x < 570 && y > 500)) continue;
+      pingos += `<rect x="${f1(x)}" y="${f1(y)}" width="12" height="4" rx="2" fill="${["#ff5aa5", "#ffd23f", "#5fb0ff", "#4fd06b", "#fff"][Math.floor(R() * 5)]}" transform="rotate(${Math.floor(R() * 180)} ${f1(x + 6)} ${f1(y + 2)})"/>`;
+    }
+    const zigue = x => { let d = `M${x} 432`; for (let y = 432; y < 650; y += 14) d += ` l7 7 l-7 7`; return `<path d="${d}" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>`; };
+    let balasTelhado = "";
+    for (let t = .12; t < .92; t += .13) balasTelhado += bala(285 + t * 215, 420 - t * 227 - 8, 12) + bala(715 - t * 215, 420 - t * 227 - 8, 12);
+    let arbustos = "";
+    for (let x = 300; x < 450; x += 22 + R() * 8) arbustos += bala(x, 664, 14 + R() * 7);
+    for (let x = 558; x < 705; x += 22 + R() * 8) arbustos += bala(x, 664, 14 + R() * 7);
+    const janela = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r * 1.9}" fill="url(#c-brilho)" class="janela-luz tremeluz"/>
+      <circle cx="${x}" cy="${y}" r="${r - 3}" fill="url(#c-janela)" class="janela-luz"/>
+      <path d="M${x - r + 6} ${y - 6} Q${x - r * .4} ${y - r * .2} ${x - r * .55} ${y + r - 6} L${x - r + 4} ${y + r * .5}Z" fill="#ff7fb5" opacity=".75"/>
+      <path d="M${x + r - 6} ${y - 6} Q${x + r * .4} ${y - r * .2} ${x + r * .55} ${y + r - 6} L${x + r - 4} ${y + r * .5}Z" fill="#ff7fb5" opacity=".75"/>
+      <path d="M${x} ${y - r} V${y + r} M${x - r} ${y} H${x + r}" stroke="#fff" stroke-width="5"/>
+      <circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="url(#c-listra)" stroke-width="9"/>`;
+    const pirulito = (x, y, r, cor) => {
+      let espiral = `M${x} ${y}`;
+      for (let k = 1; k <= 5; k++) espiral += ` a${f1(r * k * .17)} ${f1(r * k * .17)} 0 0 1 ${f1((k % 2 ? 2 : -2) * r * k * .17)} 0`;
+      return `<line x1="${x}" y1="${y}" x2="${x}" y2="${y + 140}" stroke="#f5efe0" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="${x}" cy="${y}" r="${r}" fill="${cor}"/><path d="${espiral}" fill="none" stroke="#fff" stroke-width="${f1(r * .13)}" stroke-linecap="round"/>
+        <circle cx="${x - r * .35}" cy="${y - r * .4}" r="${f1(r * .22)}" fill="#fff" opacity=".45"/>`;
+    };
+    let vagalumes = "";
+    for (let i = 0; i < 16; i++) vagalumes += `<circle class="vagalume" cx="${f1(220 + R() * 560)}" cy="${f1(360 + R() * 300)}" r="${f1(1.8 + R() * 1.8)}" fill="#ffe6a3" style="animation-delay:-${(R() * 3).toFixed(2)}s"/>`;
+
+    const casa = `
+      <path d="M0 610 C200 585 380 625 500 615 C650 605 820 580 1000 605 V820 H0Z" fill="url(#c-neve)"/>
+      <ellipse cx="500" cy="672" rx="340" ry="86" fill="url(#c-luz-chao)" class="tremeluz"/>
+      <g class="raios"><polygon points="470,640 530,640 640,820 360,820" fill="url(#c-raio)"/><polygon points="480,640 520,640 760,820 640,820" fill="url(#c-raio)" opacity=".5"/><polygon points="480,640 520,640 360,820 240,820" fill="url(#c-raio)" opacity=".5"/></g>
+      ${[[500, 690, 46, 12], [486, 724, 54, 14], [512, 764, 62, 16], [492, 806, 70, 18]].map(([x, y, rx, ry]) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="#c98a4b" stroke="#8a5226" stroke-width="3"/><circle cx="${x - rx * .3}" cy="${y - 2}" r="3" fill="#6b3a18"/><circle cx="${x + rx * .35}" cy="${y + 2}" r="3" fill="#6b3a18"/>`).join("")}
+      ${pirulito(232, 560, 34, "#ff4f9a")}${pirulito(778, 572, 30, "#5fb0ff")}
+      <g id="casa" role="button" tabindex="0" aria-label="Entrar na casinha">
+        <rect x="600" y="228" width="50" height="110" fill="url(#c-listra)"/>
+        <rect x="592" y="218" width="66" height="18" rx="9" fill="#fff"/>
+        <g>${[0, 1, 2, 3].map(i => `<circle class="fumaca" cx="625" cy="205" r="14" fill="rgba(230,225,255,.5)" style="animation-delay:-${i}s"/>`).join("")}</g>
+        <rect x="335" y="420" width="330" height="242" fill="url(#c-gengibre)"/>
+        ${pingos}${zigue(342)}${zigue(658)}
+        <path d="M285 420 L500 193 L715 420Z" fill="url(#c-telha)"/>
+        <path d="M500 193 L715 420 H500Z" fill="url(#c-sombra)"/>
+        <path d="M280 424 L500 186 L720 424" fill="none" stroke="#fff" stroke-width="20" stroke-linejoin="round" stroke-linecap="round"/>
+        ${gotas(292, 428, 494, 205, 9)}${gotas(506, 205, 708, 428, 9)}
+        <rect x="276" y="412" width="448" height="18" rx="9" fill="#fff"/>${gotas(282, 426, 718, 426, 18)}
+        ${balasTelhado}${bala(500, 182, 17)}
+        ${janela(500, 330, 26)}${janela(405, 495, 38)}${janela(595, 495, 38)}
+        <path d="M500 552 C482 536 470 524 478 512 C486 500 498 506 500 516 C502 506 514 500 522 512 C530 524 518 536 500 552Z" fill="url(#c-coracao)" stroke="#fff" stroke-width="3"/>
+        <path d="M452 662 V600 A48 48 0 0 1 548 600 V662Z" fill="#ffe7a8"/>
+        <g id="porta-casa">
+          <path d="M452 662 V600 A48 48 0 0 1 548 600 V662Z" fill="url(#c-porta)"/>
+          ${[600, 622, 644].map(y => `<rect x="462" y="${y}" width="34" height="18" rx="3" fill="#5a2a12" stroke="#2a1206"/><rect x="504" y="${y}" width="34" height="18" rx="3" fill="#5a2a12" stroke="#2a1206"/>`).join("")}
+          <path d="M466 594 A34 34 0 0 1 534 594Z" fill="#5a2a12" stroke="#2a1206"/>
+          <circle cx="532" cy="634" r="5" fill="#f2c14e"/>
+        </g>
+        <path d="M452 662 V600 A48 48 0 0 1 548 600 V662" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/>
+        <path d="M430 664 V582 A13 13 0 0 0 404 582" fill="none" stroke="url(#c-listra)" stroke-width="10" stroke-linecap="round"/>
+        <path d="M570 664 V582 A13 13 0 0 1 596 582" fill="none" stroke="url(#c-listra)" stroke-width="10" stroke-linecap="round"/>
+        ${arbustos}
+        <circle id="anel-porta" cx="500" cy="612" r="72" fill="none" stroke="#ffe6a3" stroke-width="3" stroke-dasharray="453" stroke-dashoffset="453" transform="rotate(-90 500 612)" style="filter:drop-shadow(0 0 6px #ffd27a)"/>
+      </g>
+      ${vagalumes}`;
+
+    let flocos = "";
+    for (let i = 0; i < 26; i++) flocos += `<circle cx="${f1(R() * 1000)}" cy="${f1(R() * 820)}" r="${f1(3 + R() * 6)}" fill="#fff" opacity="${(.35 + R() * .4).toFixed(2)}"/>`;
+    const frente = pinheiroNeve(10, 880, 470, 230, "#0b0820", true, "#cfd5f5") + pinheiroNeve(120, 900, 360, 180, "#0d0a26", true, "#cfd5f5")
+      + pinheiroNeve(990, 880, 480, 230, "#0b0820", true, "#cfd5f5") + pinheiroNeve(880, 910, 360, 180, "#0d0a26", true, "#cfd5f5")
+      + `<path d="M0 795 C200 768 400 806 500 796 C650 784 820 766 1000 790 V820 H0Z" fill="#e9edff"/>${flocos}`;
+
+    return camada(VB, .08, ceu) + camada(VB, .25, longe) + camada(VB, .6, casa) + camada(VB, 1.3, frente, "camada--desfocada");
+  }
+
+  function cenaDentro() {
+    const R = gerador(77), VB = "0 0 1600 1000";
+    const gotas = (x1, y, x2, n) => {
+      let s = "";
+      for (let i = 0; i < n; i++) { const x = x1 + (x2 - x1) * (i + .5 + (R() - .5) * .6) / n, L = 6 + R() * 22, w = 4 + R() * 4;
+        s += `<path d="M${f1(x - w)} ${y} Q${f1(x - w)} ${f1(y + L)} ${f1(x)} ${f1(y + L)} Q${f1(x + w)} ${f1(y + L)} ${f1(x + w)} ${y}Z" fill="#fff"/>`; }
+      return s;
+    };
+    const defs = `<defs>
+      <linearGradient id="i-parede" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e3418"/><stop offset="1" stop-color="#3f1c0b"/></linearGradient>
+      <radialGradient id="i-quadro" cx=".3" cy=".25" r=".9"><stop offset="0" stop-color="#94502a"/><stop offset="1" stop-color="#55260f"/></radialGradient>
+      <pattern id="i-tablete" width="120" height="90" patternUnits="userSpaceOnUse"><rect width="120" height="90" fill="#3f1c0b"/><rect x="5" y="5" width="110" height="80" rx="10" fill="url(#i-quadro)"/></pattern>
+      <linearGradient id="i-viga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d240e"/><stop offset="1" stop-color="#2a1206"/></linearGradient>
+      <linearGradient id="i-chao" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4622"/><stop offset="1" stop-color="#2e1608"/></linearGradient>
+      <linearGradient id="i-biscoito" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcA764"/><stop offset="1" stop-color="#9a5f2a"/></linearGradient>
+      <radialGradient id="i-fogo" cx=".5" cy=".8" r=".7"><stop offset="0" stop-color="#fff1a8"/><stop offset=".3" stop-color="#ffb347"/><stop offset=".6" stop-color="#ff6a1f" stop-opacity=".7"/><stop offset="1" stop-color="#ff4d00" stop-opacity="0"/></radialGradient>
+      <linearGradient id="i-chama" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff3b0"/><stop offset=".35" stop-color="#ffb52e"/><stop offset=".75" stop-color="#ff6a1f"/><stop offset="1" stop-color="#e8341a" stop-opacity=".7"/></linearGradient>
+      <linearGradient id="i-ferro" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a4a58"/><stop offset=".35" stop-color="#22222a"/><stop offset="1" stop-color="#09090c"/></linearGradient>
+      <radialGradient id="i-liq" cx=".45" cy=".4"><stop offset="0" style="stop-color:var(--liq-claro)"/><stop offset=".75" style="stop-color:var(--liq)"/><stop offset="1" style="stop-color:var(--liq)" stop-opacity=".8"/></radialGradient>
+      <radialGradient id="i-brilho-liq"><stop offset="0" style="stop-color:var(--liq)" stop-opacity=".6"/><stop offset="1" style="stop-color:var(--liq)" stop-opacity="0"/></radialGradient>
+      <radialGradient id="i-vela"><stop offset="0" stop-color="#ffc870" stop-opacity=".55"/><stop offset="1" stop-color="#ffc870" stop-opacity="0"/></radialGradient>
+      <linearGradient id="i-noite" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0a2e"/><stop offset="1" stop-color="#2c1b60"/></linearGradient>
+      <linearGradient id="i-reflexo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/></linearGradient>
+      <pattern id="i-listra" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="16" height="16" fill="#fff"/><rect width="8" height="16" fill="#e8264f"/></pattern>
+      <radialGradient id="i-bule" cx=".35" cy=".3"><stop offset="0" stop-color="#ffe0ee"/><stop offset=".5" stop-color="#ff6fae"/><stop offset="1" stop-color="#c9286d"/></radialGradient>
+      <radialGradient id="i-mel" cx=".35" cy=".3"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#f2b02a"/><stop offset="1" stop-color="#b8740f"/></radialGradient>
+      <radialGradient id="i-lua" cx=".4" cy=".35"><stop offset="0" stop-color="#e9f4ff"/><stop offset=".55" stop-color="#7fb6ff"/><stop offset="1" stop-color="#2f5fc4"/></radialGradient>
+      <clipPath id="i-vidro"><circle cx="1330" cy="300" r="112"/></clipPath>
+    </defs>`;
+
+    // ---- FUNDO: parede de chocolate, janela com cristais, prateleira de ervas, chão ----
+    const pote = (x, base, w, h, cor) => `<g>
+      <rect x="${f1(x)}" y="${f1(base - h)}" width="${f1(w)}" height="${f1(h)}" rx="8" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+      <rect x="${f1(x + 3)}" y="${f1(base - h * .62)}" width="${f1(w - 6)}" height="${f1(h * .62 - 3)}" rx="6" fill="${cor}" opacity=".85"/>
+      <rect x="${f1(x - 2)}" y="${f1(base - h - 8)}" width="${f1(w + 4)}" height="10" rx="3" fill="#8a5226"/>
+      <rect x="${f1(x + w * .18)}" y="${f1(base - h * .5)}" width="${f1(w * .64)}" height="${f1(h * .22)}" rx="3" fill="#f6ead0"/>
+      <rect x="${f1(x + 5)}" y="${f1(base - h + 6)}" width="4" height="${f1(h * .6)}" rx="2" fill="#fff" opacity=".35"/></g>`;
+    const coresPote = ["#6fae5a", "#c9a227", "#9a6bd6", "#e46a8f", "#5a8f6a", "#d9802e", "#8fb3d9", "#b54848"];
+    let prateleira = `<rect x="50" y="230" width="16" height="560" fill="#5a2a12"/><rect x="404" y="230" width="16" height="560" fill="#5a2a12"/><rect x="66" y="230" width="338" height="560" fill="rgba(30,12,4,.35)"/>`;
+    for (const py of [350, 480, 610, 740]) {
+      let x = 76;
+      while (x < 380) { const w = 34 + R() * 22, h = 48 + R() * 42; if (x + w > 398) break; prateleira += pote(x, py, w, Math.min(h, 110), coresPote[Math.floor(R() * coresPote.length)]); x += w + 8 + R() * 10; }
+      prateleira += `<rect x="44" y="${py}" width="382" height="16" rx="4" fill="#7a3d1c"/><rect x="44" y="${py - 3}" width="382" height="6" rx="3" fill="#fff" opacity=".9"/>${gotas(50, py + 2, 420, 8)}`;
+    }
+    let macosParede = "";
+    [[95, "#6f9a4a", null], [165, "#8a6bd0", "#c6b0ff"], [235, "#5a8f6a", null], [305, "#a8894a", "#f2d27a"], [375, "#4f8f78", null]]
+      .forEach(([x, cor, flor]) => { const y = 112 + R() * 20; macosParede += `<line x1="${x}" y1="72" x2="${x}" y2="${f1(y)}" stroke="#d9c39a" stroke-width="2"/>${maco(x, y, 80, cor, flor)}`; });
+    const cristal = (x, base, h, w, cor, ang) => `<g transform="rotate(${ang} ${x} ${base})">
+      <polygon points="${x - w / 2},${base} ${x - w / 2},${base - h * .72} ${x},${base - h} ${x + w / 2},${base - h * .72} ${x + w / 2},${base}" fill="${cor}" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>
+      <polygon points="${x},${base} ${x},${base - h} ${x + w / 2},${base - h * .72} ${x + w / 2},${base}" fill="#000" opacity=".18"/>
+      <line x1="${x - w * .25}" y1="${base - h * .7}" x2="${x - w * .25}" y2="${base - 4}" stroke="#fff" stroke-opacity=".55" stroke-width="2"/></g>`;
+    let flocosJanela = "";
+    for (let i = 0; i < 30; i++) flocosJanela += `<circle class="floco" cx="${f1(1218 + R() * 224)}" cy="${f1(300 + R() * 40)}" r="${f1(1.2 + R() * 2.2)}" fill="#fff" opacity=".85" style="animation-duration:${(4 + R() * 5).toFixed(1)}s;animation-delay:-${(R() * 8).toFixed(1)}s"/>`;
+    const janela = `<g class="ponto" data-area="cristais" role="button" tabindex="0" aria-label="Cristais">
+      <circle cx="1330" cy="300" r="132" fill="#2a1206"/>
+      <g clip-path="url(#i-vidro)"><rect x="1210" y="180" width="240" height="240" fill="url(#i-noite)"/>
+        <circle cx="1380" cy="252" r="50" fill="url(#i-vela)"/><circle cx="1380" cy="252" r="22" fill="#fff3d0"/>
+        ${pinheiroNeve(1260, 420, 120, 60, "#140f3a", true, "#9aa2d8")}${pinheiroNeve(1330, 425, 90, 50, "#140f3a", true, "#9aa2d8")}${pinheiroNeve(1410, 420, 130, 64, "#140f3a", true, "#9aa2d8")}
+        <rect x="1210" y="396" width="240" height="30" fill="#dfe4ff"/>${flocosJanela}</g>
+      <circle cx="1330" cy="300" r="112" fill="url(#i-reflexo)"/>
+      <rect x="1325" y="188" width="10" height="224" fill="#f4ead8"/><rect x="1218" y="295" width="224" height="10" fill="#f4ead8"/>
+      <circle cx="1330" cy="300" r="120" fill="none" stroke="url(#i-listra)" stroke-width="16"/>
+      <rect x="1180" y="430" width="300" height="26" rx="8" fill="#6b3214"/><rect x="1180" y="426" width="300" height="10" rx="5" fill="#fff"/>
+      ${[[1228, "#9b6bd6"], [1300, "#f6a7c6"], [1372, "#f2b84b"], [1440, "#e4eeff"]].map(([x, c]) => `<circle cx="${x}" cy="400" r="46" fill="${c}" opacity=".28" class="tremeluz" style="animation-delay:-${(R() * 2).toFixed(1)}s"/>`).join("")}
+      ${cristal(1214, 428, 56, 18, "#9b6bd6", -14)}${cristal(1232, 428, 74, 22, "#8a5cd0", 4)}${cristal(1248, 428, 46, 16, "#b08ae6", 18)}
+      ${cristal(1300, 428, 60, 30, "#f6a7c6", 0)}${cristal(1360, 428, 50, 20, "#f2b84b", -10)}${cristal(1378, 428, 64, 22, "#e9a93a", 8)}
+      ${cristal(1436, 428, 80, 22, "#e4eeff", -4)}${cristal(1456, 428, 52, 16, "#d6e4ff", 16)}
+    </g>`;
+    let piso = "";
+    for (let xb = -800; xb <= 2400; xb += 160) piso += `<line x1="${f1(800 + (xb - 800) * (840 - 560) / 440)}" y1="840" x2="${xb}" y2="1000" stroke="rgba(0,0,0,.28)" stroke-width="2"/>`;
+    for (const y of [872, 916, 970]) piso += `<line x1="0" y1="${y}" x2="1600" y2="${y}" stroke="rgba(0,0,0,.22)" stroke-width="2"/>`;
+    const fundo = `${defs}
+      <rect width="1600" height="845" fill="url(#i-parede)"/><rect width="1600" height="845" fill="url(#i-tablete)" opacity=".6"/>
+      <rect width="1600" height="72" fill="url(#i-viga)"/><rect y="68" width="1600" height="10" fill="#fff"/>${gotas(0, 76, 1600, 46)}
+      <rect x="0" y="78" width="26" height="767" fill="url(#i-listra)"/><rect x="1574" y="78" width="26" height="767" fill="url(#i-listra)"/>
+      ${janela}
+      <g class="ponto" data-area="ervas" role="button" tabindex="0" aria-label="Ervas">${macosParede}${prateleira}${vela(392, 350, 34, R)}</g>
+      <rect y="840" width="1600" height="160" fill="url(#i-chao)"/>${piso}`;
+
+    // ---- MEIO: lareira, varal de ervas, potes (ingredientes), caldeirão, grimório, mesa de chá ----
+    let biscoito = "";
+    for (let i = 0; i < 26; i++) { const x = 615 + R() * 370, y = 420 + R() * 400; if (x > 650 && x < 950 && y > 440) continue; biscoito += `<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(3 + R() * 3)}" fill="#7a4418" opacity=".7"/>`; }
+    const chamaFogo = (x, base, h, w, lenta, atraso) => `<path class="chama${lenta ? " chama--lenta" : ""}" style="animation-delay:-${atraso}s" d="M${x} ${base} C${x - w} ${base - h * .3} ${x - w * .3} ${base - h * .62} ${x} ${base - h} C${x + w * .3} ${base - h * .62} ${x + w} ${base - h * .3} ${x} ${base}Z" fill="url(#i-chama)"/>`;
+    let bolhas = "", vapor = "";
+    for (let i = 0; i < 12; i++) bolhas += `<circle class="bolha" cx="${f1(712 + R() * 176)}" cy="${f1(656 + R() * 10)}" r="${f1(4 + R() * 7)}" style="fill:var(--liq-claro);animation-delay:-${(R() * 1.7).toFixed(2)}s"/>`;
+    for (let i = 0; i < 6; i++) vapor += `<circle class="vapor" cx="${f1(740 + R() * 120)}" cy="${f1(630)}" r="${f1(14 + R() * 10)}" fill="rgba(255,255,255,.16)" style="animation-delay:-${(R() * 3).toFixed(2)}s"/>`;
+    const ing = (id, conteudo) => `<g class="ingrediente" data-ing="${id}" role="button" tabindex="0" aria-label="${INGREDIENTES[id].nome}: jogar no caldeirão">${conteudo}</g>`;
+    const varal = `<line x1="640" y1="72" x2="640" y2="150" stroke="#d9c39a" stroke-width="2"/><line x1="960" y1="72" x2="960" y2="150" stroke="#d9c39a" stroke-width="2"/>
+      <line x1="626" y1="150" x2="974" y2="150" stroke="#6b3214" stroke-width="9" stroke-linecap="round"/>
+      ${ing("rosa", maco(672, 158, 92, "#5d8a4a", "#ff5c96", .08))}
+      ${ing("lavanda", maco(736, 158, 100, "#7f63c9", "#c6b0ff", .06))}
+      ${ing("alecrim", maco(800, 158, 96, "#6fa58a", null, .05))}
+      ${ing("arruda", maco(864, 158, 88, "#3f8a6c", null, .12))}
+      ${ing("louro", maco(928, 158, 92, "#7a9a46", null, .14))}`;
+    const potesLareira = `
+      ${ing("mel", `<ellipse cx="650" cy="350" rx="30" ry="30" fill="url(#i-mel)"/><rect x="630" y="316" width="40" height="10" rx="4" fill="#b8740f"/><line x1="664" y1="300" x2="656" y2="330" stroke="#8a5226" stroke-width="5" stroke-linecap="round"/><path d="M628 350 q4 18 0 26" stroke="#f2b02a" stroke-width="5" fill="none" stroke-linecap="round"/><text x="650" y="356" text-anchor="middle" font-family="Cinzel, serif" font-size="11" font-weight="600" fill="#5a2b0c">MEL</text>`)}
+      ${ing("canela", `<rect x="703" y="318" width="44" height="62" rx="8" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>${[710, 718, 726, 734].map(x => `<rect x="${x}" y="${300 + (x % 3) * 4}" width="7" height="76" rx="3" fill="#b5652c" stroke="#7a3d16"/>`).join("")}<rect x="700" y="346" width="50" height="14" rx="3" fill="#f6ead0"/>`)}
+      ${ing("sal", `<rect x="778" y="322" width="44" height="58" rx="9" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>${Array.from({ length: 14 }, (_, i) => `<rect x="${783 + (i % 5) * 7}" y="${352 + Math.floor(i / 5) * 8}" width="7" height="7" fill="#f4f7ff" stroke="#c9d3f0" transform="rotate(${i * 23} ${786 + (i % 5) * 7} ${355 + Math.floor(i / 5) * 8})"/>`).join("")}<rect x="775" y="314" width="50" height="10" rx="3" fill="#8a5226"/>`)}
+      ${ing("camomila", `<rect x="853" y="320" width="44" height="60" rx="8" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>${[[864, 344], [882, 350], [870, 364], [886, 368], [862, 372]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="7" fill="#fff"/><circle cx="${x}" cy="${y}" r="3" fill="#f2b84b"/>`).join("")}<rect x="850" y="312" width="50" height="10" rx="3" fill="#8a5226"/>`)}
+      ${ing("lua", `<circle cx="950" cy="300" r="40" fill="#7fb6ff" opacity=".25" class="tremeluz"/><circle cx="950" cy="352" r="27" fill="url(#i-lua)" stroke="rgba(255,255,255,.6)" stroke-width="2"/><rect x="942" y="306" width="16" height="22" rx="3" fill="rgba(255,255,255,.25)" stroke="rgba(255,255,255,.6)"/><rect x="940" y="300" width="20" height="9" rx="3" fill="#b98a55"/><path d="M956 340 a12 12 0 1 0 0 22 a9 9 0 1 1 0 -22Z" fill="#fff6d2"/>`)}`;
+    const lareira = `
+      <path d="M600 845 V420 Q600 400 620 400 H980 Q1000 400 1000 420 V845Z" fill="url(#i-biscoito)"/>${biscoito}
+      <path d="M650 845 V580 A150 150 0 0 1 950 580 V845Z" fill="#140603"/>
+      <path d="M650 845 V580 A150 150 0 0 1 950 580 V845" fill="none" stroke="#fff" stroke-width="8" stroke-dasharray="2 14" stroke-linecap="round"/>
+      <ellipse cx="800" cy="810" rx="180" ry="96" fill="url(#i-fogo)" class="tremeluz"/>
+      <rect x="700" y="806" width="200" height="22" rx="11" fill="#4a230e" transform="rotate(-6 800 817)"/><rect x="700" y="806" width="200" height="22" rx="11" fill="#3a1a09" transform="rotate(7 800 817)"/>
+      ${chamaFogo(745, 816, 110, 40, true, .1)}${chamaFogo(800, 818, 150, 48, true, .3)}${chamaFogo(855, 816, 104, 38, true, .2)}${chamaFogo(775, 818, 80, 26, false, .1)}${chamaFogo(828, 818, 86, 26, false, .15)}
+      <rect x="575" y="380" width="450" height="30" rx="8" fill="#6b3214"/><rect x="575" y="376" width="450" height="10" rx="5" fill="#fff"/>${gotas(580, 384, 1020, 14)}
+      ${vela(598, 380, 64, R)}${vela(1002, 380, 52, R)}
+      ${varal}${potesLareira}
+      <g class="ponto" data-area="caldeirao" role="button" tabindex="0" aria-label="Caldeirão" id="caldeirao">
+        <path d="M712 790 l-14 40 M888 790 l14 40" stroke="#16161c" stroke-width="12" stroke-linecap="round"/>
+        <path d="M684 660 C680 772 736 818 800 818 C864 818 920 772 916 660Z" fill="url(#i-ferro)"/>
+        <path d="M700 690 C706 760 740 792 772 802" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="8" stroke-linecap="round"/>
+        <ellipse cx="800" cy="650" rx="150" ry="70" fill="url(#i-brilho-liq)" class="tremeluz"/>
+        <ellipse cx="800" cy="660" rx="122" ry="26" fill="#24242c" stroke="#55556a" stroke-width="5"/>
+        <ellipse id="liquido" cx="800" cy="662" rx="106" ry="18" fill="url(#i-liq)"/>
+        <g id="bolhas">${bolhas}</g><g id="ondas"></g>${vapor}
+        <ellipse id="boca" cx="800" cy="690" rx="160" ry="120" fill="transparent"/>
+      </g>`;
+    const grimorio = `<g class="ponto" data-area="magias" role="button" tabindex="0" aria-label="Grimório de magias">
+      <rect x="510" y="640" width="20" height="200" fill="#5a2a12"/><ellipse cx="520" cy="840" rx="58" ry="12" fill="#3d1a09"/>
+      <polygon points="445,652 595,652 585,620 455,620" fill="#6b3214"/>
+      <ellipse cx="520" cy="590" rx="100" ry="66" fill="url(#i-vela)" class="tremeluz"/>
+      <path d="M458 618 L520 626 L520 598 L462 588Z" fill="#fbf1d6" stroke="#c9a874"/><path d="M520 626 L582 618 L578 588 L520 598Z" fill="#f2e2bd" stroke="#c9a874"/>
+      ${[0, 1, 2, 3].map(i => `<line x1="${470}" y1="${598 + i * 6}" x2="${510}" y2="${604 + i * 6}" stroke="#a88a5a" stroke-width="1.5"/><line x1="${530}" y1="${604 + i * 6}" x2="${570}" y2="${598 + i * 6}" stroke="#a88a5a" stroke-width="1.5"/>`).join("")}
+      ${Array.from({ length: 7 }, () => `<circle class="vagalume" cx="${f1(480 + R() * 80)}" cy="${f1(540 + R() * 50)}" r="${f1(1.6 + R() * 2)}" fill="#ffe6a3" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`).join("")}
+    </g>`;
+    const mesa = `<g class="ponto" data-area="chas" role="button" tabindex="0" aria-label="Chás">
+      <rect x="1150" y="650" width="16" height="190" fill="#5a2a12"/><rect x="1494" y="650" width="16" height="190" fill="#5a2a12"/>
+      <rect x="1120" y="630" width="420" height="26" rx="8" fill="#7a3d1c"/>
+      <rect x="1135" y="618" width="390" height="16" rx="6" fill="#ffd6e8"/>${Array.from({ length: 25 }, (_, i) => `<circle cx="${1140 + i * 16}" cy="636" r="8" fill="#ffd6e8"/>`).join("")}
+      <path d="M1320 586 Q1366 572 1374 530 L1361 528 Q1352 560 1316 566Z" fill="#e0498a"/>
+      <path d="M1212 558 Q1170 580 1212 610" fill="none" stroke="#e0498a" stroke-width="11" stroke-linecap="round"/>
+      <ellipse cx="1268" cy="582" rx="62" ry="46" fill="url(#i-bule)"/>
+      ${[[1240, 566], [1290, 560], [1262, 600], [1300, 596], [1232, 598]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5" fill="#fff" opacity=".8"/>`).join("")}
+      <ellipse cx="1268" cy="538" rx="32" ry="10" fill="#e0498a"/><circle cx="1268" cy="526" r="8" fill="#ffd23f"/>
+      ${[[1404, 618], [1466, 618]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="30" ry="6" fill="#fff"/><path d="M${x - 22} ${y - 26} h44 v8 a22 18 0 0 1 -44 0Z" fill="#fff"/><ellipse cx="${x}" cy="${y - 25}" rx="20" ry="4" fill="#c97a2a"/><path d="M${x + 22} ${y - 20} q12 2 0 12" fill="none" stroke="#fff" stroke-width="4"/>`).join("")}
+      ${[[1372, 522], [1404, 586], [1466, 586]].map(([x, y], i) => `<circle class="vapor" cx="${x}" cy="${y}" r="10" fill="rgba(255,255,255,.22)" style="animation-delay:-${i}s"/>`).join("")}
+      ${vela(1520, 618, 52, R)}
+    </g>`;
+    const meio = `${lareira}${grimorio}${mesa}
+      ${placa(235, 812, "Ervas", "ervas")}${placa(520, 520, "Magias", "magias")}${placa(800, 520, "Caldeirão", "caldeirao")}${placa(1330, 494, "Cristais", "cristais")}${placa(1330, 720, "Chás", "chas")}`;
+
+    // ---- PERTO: tapete e o gato dormindo ----
+    const perto = `<ellipse cx="800" cy="925" rx="350" ry="62" fill="#8c1247"/><ellipse cx="800" cy="925" rx="328" ry="54" fill="none" stroke="#ffb3d1" stroke-width="3" stroke-dasharray="12 9"/><ellipse cx="800" cy="925" rx="250" ry="38" fill="#b81c62"/>
+      <g class="gato"><path d="M1098 914 Q1140 900 1126 868 Q1118 852 1104 860" fill="none" stroke="#140b16" stroke-width="11" stroke-linecap="round"/>
+        <ellipse cx="1052" cy="910" rx="60" ry="27" fill="#140b16"/><circle cx="996" cy="898" r="24" fill="#140b16"/>
+        <path d="M978 884 L984 862 L995 880Z M1000 878 L1010 858 L1016 882Z" fill="#140b16"/>
+        <path d="M985 899 q4 3 8 0 M1000 899 q4 3 8 0" fill="none" stroke="#ffe6a3" stroke-width="2" stroke-linecap="round"/></g>`;
+
+    // ---- FRENTE (desfocada): vela grande, ervas penduradas perto da câmera, poeirinha de luz ----
+    let poeira = "";
+    for (let i = 0; i < 34; i++) poeira += `<circle class="vagalume" cx="${f1(R() * 1600)}" cy="${f1(120 + R() * 760)}" r="${f1(1.5 + R() * 2.5)}" fill="#ffd9a0" opacity=".6" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`;
+    const frente = `
+      <circle cx="80" cy="760" r="190" fill="url(#i-vela)" class="tremeluz"/>
+      <rect x="40" y="790" width="80" height="260" rx="10" fill="#fff0d8"/><path class="chama chama--lenta" d="M80 730 C62 760 64 786 80 790 C96 786 98 760 80 730Z" fill="url(#i-chama)"/>
+      <rect x="1460" y="790" width="150" height="230" rx="30" fill="rgba(120,180,140,.25)" stroke="rgba(255,255,255,.25)" stroke-width="3"/><rect x="1470" y="860" width="130" height="150" rx="22" fill="#2f5a3a" opacity=".7"/>
+      <path d="M0 0 Q400 70 800 20 Q1200 -30 1600 40 V0Z" fill="#1e0d05"/>
+      ${maco(120, 30, 150, "#1f3a22", null)}${maco(300, 50, 120, "#2a2448", "#4a3f7a", .06)}${maco(1300, 40, 130, "#22401f", null, .12)}${maco(1490, 24, 160, "#1f3a22", null)}
+      ${poeira}`;
+
+    return camada(VB, .2, fundo) + camada(VB, .5, meio) + camada(VB, .8, perto) + `<div class="luz-lareira"></div>` + camada(VB, 1.4, frente, "camada--desfocada") + `<div class="vinheta"></div>`;
+  }
+
+  /* ---------- Montagem e profundidade (parallax) ---------- */
+  const palco = $("#casinha-palco"), zoomEl = $("#casinha-zoom"), chamadaCasa = $("#casinha-chamada");
+  const interior = $("#interior"), sala = $("#sala"), mundo = $("#sala-mundo"), dicaCasa = $("#dica-casa");
+  const clarao = $("#clarao"), pergaminho = $("#pergaminho"), pergConteudo = $("#pergaminho-conteudo");
+  const hud = $("#caldeirao-hud"), hudIngs = $("#hud-ings"), botaoMexer = $("#mexer");
+  zoomEl.innerHTML = cenaFora();
+  mundo.innerHTML = cenaDentro();
+  mundo.style.setProperty("--liq", "#7a4fd6");
+  mundo.style.setProperty("--liq-claro", "#d9c8ff");
+  const casaEl = $("#casa");
+  if (toque) chamadaCasa.textContent = "✦ Toque na porta para entrar…";
+  let foraVisivel = false, dentro = false, entrando = false;
+  new IntersectionObserver(e => { foraVisivel = e[0].isIntersecting; }, { threshold: 0 }).observe(palco);
+
+  const prof = { x: 0, y: 0 };
+  const camadasFora = $$(".camada", zoomEl), camadasDentro = $$(".camada", mundo);
+  function profundidade() {
+    if (!parado && (foraVisivel || dentro)) {
+      prof.x += (olhar.x - prof.x) * .06; prof.y += (olhar.y - prof.y) * .06;
+      (dentro ? camadasDentro : camadasFora).forEach(c => {
+        const p = +c.dataset.p;
+        c.style.transform = `translate3d(${(-prof.x * p * 24).toFixed(2)}px, ${(-prof.y * p * 14).toFixed(2)}px, 0)${p > 1 ? " scale(1.08)" : ""}`;
+      });
+    }
+    requestAnimationFrame(profundidade);
+  }
+  requestAnimationFrame(profundidade);
+
+  // Neve caindo na frente da casinha
+  const neve = $("#casa-neve"), nc = neve.getContext("2d");
+  let flocos = [];
+  function medirNeve() {
+    const r = palco.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+    neve.width = r.width * d; neve.height = r.height * d; nc.setTransform(d, 0, 0, d, 0, 0);
+    flocos = Array.from({ length: Math.round(r.width / 9) }, () => ({ x: Math.random() * r.width, y: Math.random() * r.height, r: .8 + Math.random() * 2.4, v: .3 + Math.random() * .9, f: Math.random() * 6 }));
+  }
+  function nevar(t) {
+    if (foraVisivel && !parado) {
+      const w = neve.width / Math.min(devicePixelRatio || 1, 2), h = neve.height / Math.min(devicePixelRatio || 1, 2);
+      nc.clearRect(0, 0, w, h); nc.fillStyle = "rgba(255,255,255,.85)";
+      for (const f of flocos) {
+        f.y += f.v; f.x += Math.sin(t * .001 + f.f) * .4;
+        if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; }
+        nc.beginPath(); nc.arc(f.x, f.y, f.r, 0, 6.283); nc.fill();
+      }
+    }
+    requestAnimationFrame(nevar);
+  }
+  medirNeve(); addEventListener("resize", medirNeve);
+  if (!parado) requestAnimationFrame(nevar);
+
+  /* ---------- Entrar e sair ---------- */
+  let timerPorta;
+  const acordar = () => { if (entrando || dentro) return; casaEl.classList.add("acordada"); };
+  const dormir = () => { casaEl.classList.remove("acordada"); clearTimeout(timerPorta); };
+  casaEl.addEventListener("pointerenter", e => {
+    acordar();
+    if (e.pointerType === "mouse") { clearTimeout(timerPorta); timerPorta = setTimeout(entrar, 1300); }
+  });
+  casaEl.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") dormir(); });
+  casaEl.addEventListener("click", entrar);
+  casaEl.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); entrar(); } });
+
+  function entrar() {
+    if (entrando || dentro) return;
+    entrando = true; clearTimeout(timerPorta);
+    acordar();
+    const pr = $("#porta-casa").getBoundingClientRect(), zr = zoomEl.getBoundingClientRect();
+    zoomEl.style.transformOrigin = `${pr.left + pr.width / 2 - zr.left}px ${pr.top + pr.height * .55 - zr.top}px`;
+    palco.classList.remove("saindo");
+    palco.classList.add("entrando");
+    sino(5);
+    soltar(pr.left + pr.width / 2, pr.top + pr.height / 2, 50, { forca: 4, anel: true, curta: true });
+    const rastro = setInterval(() => soltar(innerWidth / 2 + (Math.random() - .5) * innerWidth, innerHeight / 2 + (Math.random() - .5) * innerHeight, 6, { forca: 5, curta: true }), 60);
+    setTimeout(() => clarao.classList.add("aceso"), parado ? 0 : 950);
+    setTimeout(() => {
+      clearInterval(rastro);
+      abrirInterior();
+      clarao.classList.remove("aceso");
+      entrando = false;
+      palco.classList.remove("entrando"); dormir();
+    }, parado ? 60 : 1600);
+  }
+  function abrirInterior() {
+    dentro = true;
+    interior.classList.add("aberto"); interior.setAttribute("aria-hidden", "false");
+    document.body.classList.add("travado");
+    // usa a largura de layout: a animação de chegada amplia a sala e mudaria o scrollWidth
+    requestAnimationFrame(() => { sala.scrollLeft = (mundo.offsetWidth - sala.clientWidth) / 2; });
+    dicaCasa.textContent = toque ? "Arraste para os lados para olhar a casinha ✦ Pegue uma erva e jogue no caldeirão" : "Pegue uma erva ou um pote e jogue no caldeirão ✦ ou toque nas placas";
+    setTimeout(() => $("#sair-casa").focus({ preventScroll: true }), 700);
+  }
+  function sair() {
+    if (!dentro) return;
+    fecharPergaminho(); esvaziar(false);
+    clarao.classList.add("aceso");
+    setTimeout(() => {
+      dentro = false;
+      interior.classList.remove("aberto"); interior.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("travado");
+      palco.scrollIntoView({ block: "center" });
+      // a câmera sai pela porta: começa perto e se afasta
+      zoomEl.style.transition = "none"; palco.classList.add("entrando"); void zoomEl.offsetWidth;
+      zoomEl.style.transition = ""; palco.classList.add("saindo"); palco.classList.remove("entrando");
+      clarao.classList.remove("aceso");
+      casaEl.focus({ preventScroll: true });
+    }, parado ? 0 : 500);
+  }
+  $("#sair-casa").addEventListener("click", sair);
+  addEventListener("keydown", e => {
+    if (e.key !== "Escape" || !dentro) return;
+    if (pergaminho.classList.contains("aberto")) fecharPergaminho(); else sair();
+  });
+
+  /* ---------- Pergaminho com o conteúdo de cada canto ---------- */
+  function abrirPergaminho(html) {
+    pergConteudo.innerHTML = html;
+    pergaminho.scrollTop = 0;
+    pergaminho.classList.add("aberto");
+    sino(3);
+  }
+  function fecharPergaminho() { pergaminho.classList.remove("aberto"); }
+  $("#fechar-pergaminho").addEventListener("click", fecharPergaminho);
+  const gemaSVG = cor => `<svg viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,2 44,14 44,34 24,46 4,34 4,14" fill="${cor}" stroke="rgba(0,0,0,.25)"/><polygon points="24,2 44,14 24,20 4,14" fill="#fff" opacity=".35"/><polygon points="24,20 44,14 44,34 24,46" fill="#000" opacity=".12"/><line x1="24" y1="20" x2="24" y2="46" stroke="#fff" stroke-opacity=".3"/></svg>`;
+  function abrirArea(area) {
+    if (area === "caldeirao") {
+      fecharPergaminho();
+      centrarCaldeirao();
+      dicaCasa.textContent = "Pegue uma erva do varal ou um pote da lareira e jogue no caldeirão ✦ até 3 ingredientes";
+      brilharEm($("#caldeirao"), 30);
+      return;
+    }
+    const c = CASA[area];
+    let corpo = "";
+    if (area === "cristais") {
+      corpo = `<div class="gemas">${c.itens.map(([n, cor], i) => `<button class="gema" type="button" data-i="${i}" aria-pressed="false">${gemaSVG(cor)}${n}</button>`).join("")}</div><div class="gema-detalhe" id="gema-detalhe" hidden></div>`;
+    } else {
+      corpo = c.itens.map(([n, a, b]) => `<div class="item-casa"><h4>${n}</h4>${area === "magias"
+        ? `<span class="rotulo-casa">Você vai precisar de</span><p>${a}</p><span class="rotulo-casa">Como fazer</span><p>${b}</p>`
+        : area === "chas" ? `<span class="rotulo-casa">Para quando</span><p>${a}</p><span class="rotulo-casa">Preparo</span><p>${b}</p>`
+        : `<span class="rotulo-casa">${a}</span><p>${b}</p>`}</div>`).join("");
+    }
+    abrirPergaminho(`<h3>${c.titulo}</h3><p class="sub">${c.sub}</p>${corpo}<p class="nota-casa">${c.nota}</p>
+      <a class="botao botao--rosa" href="${zap(`Olá, Tryv! Entrei na casinha do site e quero saber mais sobre ${c.titulo.toLowerCase()} ✨`)}" target="_blank" rel="noopener">${ICONE_ZAP} Conversar com a Tryv</a>`);
+    if (area === "cristais") $$(".gema", pergConteudo).forEach(b => b.addEventListener("click", () => {
+      $$(".gema", pergConteudo).forEach(x => x.setAttribute("aria-pressed", x === b));
+      const [n, cor, palavras, texto] = c.itens[+b.dataset.i];
+      const det = $("#gema-detalhe");
+      det.hidden = false;
+      det.innerHTML = `<h4>${n}</h4><span class="rotulo-casa">${palavras}</span><p>${texto}</p>`;
+      const r = b.getBoundingClientRect();
+      soltar(r.left + r.width / 2, r.top + r.height / 2, 18, { forca: 2, curta: true, cores: [cor.match(/\w\w/g).map(h => parseInt(h, 16)).join(",")] });
+      sino(2);
+    }));
+  }
+  mundo.addEventListener("click", e => {
+    const p = e.target.closest(".ponto");
+    if (p && !e.target.closest(".ingrediente")) abrirArea(p.dataset.area);
+  });
+  mundo.addEventListener("keydown", e => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const ingEl = e.target.closest(".ingrediente"), p = e.target.closest(".ponto");
+    if (ingEl) { e.preventDefault(); jogar(ingEl, null); }
+    else if (p) { e.preventDefault(); abrirArea(p.dataset.area); }
+  });
+  function centrarCaldeirao() {
+    sala.scrollTo({ left: (mundo.offsetWidth - sala.clientWidth) / 2, behavior: parado ? "auto" : "smooth" });
+  }
+
+  /* ---------- O caldeirão: pegar, arrastar e jogar ---------- */
+  let noCaldeirao = [], arrasto = null;
+  const centroBoca = () => { const r = $("#liquido").getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
+  const sobreBoca = (x, y) => { const r = $("#boca").getBoundingClientRect(); return x > r.left - 20 && x < r.right + 20 && y > r.top - 40 && y < r.bottom + 10; };
+  function criarFantasma(el) {
+    const bb = el.getBBox(), r = el.getBoundingClientRect();
+    const f = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    f.setAttribute("viewBox", `${bb.x} ${bb.y} ${bb.width} ${bb.height}`);
+    f.setAttribute("class", "fantasma");
+    f.style.width = r.width + "px"; f.style.height = r.height + "px";
+    const g = el.cloneNode(true); g.removeAttribute("class"); g.removeAttribute("tabindex"); g.removeAttribute("role");
+    f.appendChild(g);
+    document.body.appendChild(f);
+    return { f, w: r.width, h: r.height, x0: r.left, y0: r.top };
+  }
+  const posFantasma = (a, x, y, giro = 0, esc = 1.12) => { a.f.style.transform = `translate(${x - a.w / 2}px, ${y - a.h / 2}px) rotate(${giro}deg) scale(${esc})`; };
+
+  mundo.addEventListener("pointerdown", e => {
+    const el = e.target.closest(".ingrediente");
+    if (!el || !dentro || e.button > 0) return;
+    e.preventDefault();
+    const a = criarFantasma(el);
+    arrasto = { el, a, id: e.pointerId, sx: e.clientX, sy: e.clientY, x: e.clientX, y: e.clientY, vx: 0, moveu: false };
+    el.classList.add("pego");
+    posFantasma(a, e.clientX, e.clientY);
+    fecharPergaminho();
+    dicaCasa.textContent = `${INGREDIENTES[el.dataset.ing].nome}: leve até o caldeirão e solte ✦`;
+    sino(1);
+  });
+  // No celular, impede que o dedo arrastando o ingrediente role a sala
+  mundo.addEventListener("touchstart", e => { if (e.target.closest(".ingrediente")) e.preventDefault(); }, { passive: false });
+  addEventListener("pointermove", e => {
+    if (!arrasto || e.pointerId !== arrasto.id) return;
+    const dx = e.clientX - arrasto.x;
+    arrasto.vx = arrasto.vx * .7 + dx * .3;
+    arrasto.x = e.clientX; arrasto.y = e.clientY;
+    if (Math.hypot(e.clientX - arrasto.sx, e.clientY - arrasto.sy) > 8) arrasto.moveu = true;
+    posFantasma(arrasto.a, e.clientX, e.clientY, Math.max(-25, Math.min(25, arrasto.vx * 2)));
+    if (Math.random() < .5) soltar(e.clientX, e.clientY, 1, { forca: .6, subir: -.2, cores: [INGREDIENTES[arrasto.el.dataset.ing].cor.join(",")] });
+    const mira = sobreBoca(e.clientX, e.clientY);
+    $("#caldeirao").style.filter = mira ? "brightness(1.35) drop-shadow(0 0 22px rgba(255,220,140,.9))" : "";
+    // perto da borda da tela, a sala rola sozinha
+    if (e.clientX < 50) sala.scrollLeft -= 12; else if (e.clientX > innerWidth - 50) sala.scrollLeft += 12;
+  });
+  const soltarIngrediente = e => {
+    if (!arrasto || e.pointerId !== arrasto.id) return;
+    const { el, a, moveu } = arrasto;
+    arrasto = null;
+    $("#caldeirao").style.filter = "";
+    if (!moveu || sobreBoca(e.clientX, e.clientY)) jogar(el, a);
+    else {
+      // não caiu no caldeirão: volta para o lugar
+      const anim = a.f.animate([{ transform: a.f.style.transform }, { transform: `translate(${a.x0}px, ${a.y0}px) scale(1)` }], { duration: 450, easing: "cubic-bezier(.3,.7,.2,1)" });
+      anim.onfinish = () => { a.f.remove(); el.classList.remove("pego"); };
+      dicaCasa.textContent = "Quase! Solte o ingrediente bem em cima do caldeirão ✦";
+    }
+  };
+  addEventListener("pointerup", soltarIngrediente);
+  addEventListener("pointercancel", soltarIngrediente);
+
+  function jogar(el, a) {
+    const id = el.dataset.ing, ingr = INGREDIENTES[id];
+    if (noCaldeirao.length >= 3 || noCaldeirao.includes(id)) {
+      if (a) a.f.remove();
+      el.classList.remove("pego");
+      dicaCasa.textContent = noCaldeirao.includes(id) ? `${ingr.nome} já está no caldeirão. Escolha outro ✦` : "O caldeirão já tem 3 ingredientes. Mexa! ✦";
+      return;
+    }
+    a = a || criarFantasma(el);
+    el.classList.add("pego");
+    const alvo = centroBoca();
+    const de = a.f.style.transform || `translate(${a.x0}px, ${a.y0}px)`;
+    const meioX = (alvo.x + (a.x0 + a.w / 2)) / 2, topo = Math.min(alvo.y, a.y0) - 90;
+    const anim = a.f.animate([
+      { transform: de },
+      { transform: `translate(${meioX - a.w / 2}px, ${topo - a.h / 2}px) rotate(160deg) scale(1)`, offset: .5 },
+      { transform: `translate(${alvo.x - a.w / 2}px, ${alvo.y - a.h / 2}px) rotate(320deg) scale(.15)` },
+    ], { duration: parado ? 10 : 700, easing: "cubic-bezier(.4,.1,.6,1)" });
+    anim.onfinish = () => {
+      a.f.remove();
+      setTimeout(() => el.classList.remove("pego"), 900);
+      noCaldeirao.push(id);
+      // respingo: anel no líquido e faíscas da cor do ingrediente
+      const onda = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
+      Object.entries({ cx: 800, cy: 662, rx: 70, ry: 12, fill: "none", stroke: rgb(ingr.cor), "stroke-width": 4, class: "onda" }).forEach(([k, v]) => onda.setAttribute(k, v));
+      $("#ondas").appendChild(onda); setTimeout(() => onda.remove(), 1000);
+      soltar(alvo.x, alvo.y, 34, { forca: 3.4, subir: 1.6, peso: .06, cores: [ingr.cor.join(","), "255,246,210"] });
+      sino(3);
+      misturar();
+    };
+  }
+  function misturar() {
+    const cores = noCaldeirao.map(i => INGREDIENTES[i].cor);
+    const media = [0, 1, 2].map(k => Math.round(cores.reduce((s, c) => s + c[k], 0) / cores.length));
+    const claro = media.map(v => Math.round(v + (255 - v) * .55));
+    mundo.style.setProperty("--liq", rgb(media));
+    mundo.style.setProperty("--liq-claro", rgb(claro));
+    hudIngs.innerHTML = noCaldeirao.map(i => `<span class="chip-ing"><i style="background:${rgb(INGREDIENTES[i].cor)}"></i>${INGREDIENTES[i].nome}</span>`).join(" ");
+    hud.classList.add("visivel");
+    botaoMexer.disabled = noCaldeirao.length < 2;
+    dicaCasa.textContent = noCaldeirao.length < 3 ? `Mais ${3 - noCaldeirao.length === 1 ? "um ingrediente" : "um ou dois ingredientes"}… ou mexa quando quiser ✦` : "Pronto! O caldeirão vai ferver ✦";
+    if (noCaldeirao.length === 3) setTimeout(mexer, 700);
+  }
+  function esvaziar(com_efeito = true) {
+    noCaldeirao = [];
+    hud.classList.remove("visivel");
+    mundo.style.setProperty("--liq", "#7a4fd6"); mundo.style.setProperty("--liq-claro", "#d9c8ff");
+    if (com_efeito) { const c = centroBoca(); soltar(c.x, c.y, 20, { forca: 2, cores: ["217,200,255"] }); dicaCasa.textContent = "Caldeirão limpinho. Pegue uma erva e jogue lá dentro ✦"; }
+  }
+  $("#esvaziar").addEventListener("click", () => esvaziar());
+  botaoMexer.addEventListener("click", mexer);
+  function mexer() {
+    if (noCaldeirao.length < 2 || mundo.classList.contains("fervendo")) return;
+    const usados = [...noCaldeirao];
+    const soma = {};
+    usados.forEach(i => Object.entries(INGREDIENTES[i].int).forEach(([k, v]) => { soma[k] = (soma[k] || 0) + v; }));
+    const ord = Object.entries(soma).sort((a, b) => b[1] - a[1]);
+    let chave = ord[0][0];
+    if (ord.length >= 4) chave = "caos";
+    else if (ord.length >= 2 && ord[1][1] >= ord[0][1] * .6) chave = [ord[0][0], ord[1][0]].sort().join("+");
+    const [nome, texto, ritual] = POCOES[chave] || POCOES[ord[0][0]];
+    const cor = getComputedStyle(mundo).getPropertyValue("--liq").trim();
+    const corRGB = (cor.match(/\d+/g) || [122, 79, 214]).slice(0, 3).join(",");
+    mundo.classList.add("fervendo");
+    hud.classList.remove("visivel");
+    dicaCasa.textContent = "Borbulhando…";
+    sino(6);
+    const c = centroBoca();
+    const fumaca = setInterval(() => soltar(c.x + (Math.random() - .5) * 120, c.y - 10, 10, { forca: 2.2, subir: 2.6, peso: -.01, tam: 1.6, cores: [corRGB, "255,246,210", "255,140,192"] }), 70);
+    setTimeout(() => {
+      clearInterval(fumaca);
+      soltar(c.x, c.y - 60, 80, { forca: 6, anel: true, curta: true, cores: [corRGB, "255,246,210"] });
+      sino(5);
+      mundo.classList.remove("fervendo");
+      noCaldeirao = [];
+      const lista = usados.map(i => INGREDIENTES[i].nome).join(", ");
+      abrirPergaminho(`<div class="pocao-titulo"><svg class="pocao-frasco" viewBox="0 0 44 56" aria-hidden="true"><rect x="16" y="1" width="12" height="8" rx="2" fill="#b98a55"/><path d="M15 9h14v8c8 4 11 10 11 18 0 10-8 18-18 18S4 45 4 35c0-8 3-14 11-18z" fill="rgba(255,255,255,.35)" stroke="#7a3e10" stroke-width="1.5"/><path d="M6 33c0 10 7 16 16 16s16-6 16-16z" fill="rgb(${corRGB})"/><ellipse cx="13" cy="30" rx="3" ry="7" fill="#fff" opacity=".5"/></svg>
+          <div><span class="rotulo-casa">Sua poção</span><h3>${nome}</h3></div></div>
+        <p class="sub">${texto}</p>
+        <div class="item-casa"><span class="rotulo-casa">Ingredientes</span><p>${lista}</p></div>
+        <div class="item-casa"><span class="rotulo-casa">Uma magia leve para levar</span><p>${ritual}</p></div>
+        <p class="nota-casa">Esta é uma magia de brincadeira, um gostinho. Magias de verdade, feitas para você, a Tryv prepara com cuidado.</p>
+        <a class="botao botao--rosa" href="${zap(`Olá, Tryv! Fiz a ${nome} no caldeirão do site (${lista}) e quero uma magia de verdade ✨`)}" target="_blank" rel="noopener">${ICONE_ZAP} Quero uma magia com a Tryv</a>
+        <button class="botao botao--vidro" id="outra-pocao" type="button" style="margin-top:.7rem;color:#5a2b0c;box-shadow:0 0 0 1px rgba(122,62,16,.4) inset">↻ Fazer outra poção</button>`);
+      $("#outra-pocao").addEventListener("click", () => { fecharPergaminho(); esvaziar(); centrarCaldeirao(); });
+      dicaCasa.textContent = `Você fez: ${nome} ✦`;
+    }, parado ? 0 : 1700);
+  }
+  mundo.addEventListener("pointerover", e => {
+    const el = e.target.closest(".ingrediente");
+    if (el && !arrasto) dicaCasa.textContent = `${INGREDIENTES[el.dataset.ing].nome} ✦ arraste até o caldeirão`;
+  });
 
   /* ---------- Árvores da floresta (geradas, sempre iguais) ---------- */
   let semente = 7;
