@@ -128,7 +128,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .abertura__palco { position: relative; width: min(92vw, 640px); text-align: center; }
 .abertura__arco { position: absolute; left: 0; top: -6%; width: 100%; overflow: visible; }
 .abertura__arco path { fill: none; stroke: url(#arco-ouro); stroke-width: 2.4; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(255, 220, 140, .9)); }
-.abertura__logo { width: min(64vw, 340px); margin: 14% auto 0; opacity: 0; transform: scale(.92); animation: surgir 1.6s 1.5s cubic-bezier(.2, .7, .2, 1) forwards; filter: drop-shadow(0 0 30px rgba(255, 45, 135, .35)); }
+.abertura__logo { width: min(50vw, 250px); margin: 10% auto 0; opacity: 0; transform: scale(.92); animation: surgir 1.6s 1.5s cubic-bezier(.2, .7, .2, 1) forwards; filter: drop-shadow(0 0 30px rgba(242, 193, 78, .3)); }
 .abertura__era { font: italic 500 clamp(1.3rem, 4vw, 1.9rem)/1.3 var(--livro); color: var(--ouro-claro); margin: 1.2rem 0 0; opacity: 0; animation: surgir 1.2s .3s forwards; }
 .abertura__pular { margin-top: 1.4rem; opacity: 0; animation: surgir 1s 2.8s forwards; }
 @keyframes surgir { to { opacity: 1; transform: none; } }
@@ -141,7 +141,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .topo--rolou { background: rgba(14, 10, 38, .72); backdrop-filter: blur(14px) saturate(1.3); box-shadow: 0 1px 0 var(--linha); }
 .topo__linha { display: flex; align-items: center; gap: 1rem; min-height: 72px; }
 .marca { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
-.marca img { width: 44px; height: auto; filter: drop-shadow(0 0 8px rgba(255, 45, 135, .4)); }
+.marca img { width: 32px; height: auto; filter: drop-shadow(0 0 8px rgba(242, 193, 78, .35)); }
 .marca span { font: 600 1.1rem/1 var(--titulo); letter-spacing: .06em; background: var(--dourado); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .menu { margin-left: auto; display: flex; gap: .15rem; }
 .menu a {
@@ -152,6 +152,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   content: "✦"; position: absolute; left: 50%; bottom: -.35rem; transform: translateX(-50%) scale(0);
   font-size: .6rem; color: var(--ouro); transition: transform .3s;
 }
+.menu a { white-space: nowrap; }
 .menu a:hover, .menu a[aria-current="true"] { color: var(--ouro-claro); }
 .menu a:hover::after, .menu a[aria-current="true"]::after { transform: translateX(-50%) scale(1); }
 .icone-botao {
@@ -169,7 +170,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .idioma.em-ingles .idioma__pt { display: block; }
 .idioma:hover { box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 14px rgba(242, 193, 78, .35); }
 .abre-menu { display: none; }
-@media (max-width: 1020px) {
+@media (max-width: 1200px) {
   .abre-menu { display: grid; }
   .menu {
     position: fixed; inset: 0; z-index: -1; flex-direction: column; align-items: center; justify-content: center; gap: .6rem;
@@ -189,7 +190,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .heroi__conteudo { position: relative; z-index: 2; }
 .heroi__lema { display: block; font: 500 .78rem/1.5 var(--corpo); letter-spacing: .3em; text-transform: uppercase; color: var(--texto-2); }
 .heroi__lema b { color: var(--ouro); font-weight: 600; }
-.heroi__logo-caixa { position: relative; width: min(78vw, 400px); margin: 1.2rem auto .6rem; }
+.heroi__logo-caixa { position: relative; width: min(56vw, 290px); margin: 1.2rem auto .6rem; }
 .heroi__logo-caixa::before {
   content: ""; position: absolute; inset: 8% 6%; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(255, 45, 135, .38), rgba(242, 193, 78, .15) 55%, transparent 75%);
@@ -466,7 +467,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 @keyframes bater { from { transform: rotate(10deg) scaleY(1); } to { transform: rotate(-26deg) scaleY(.55); } }
 @keyframes bater-dir { from { transform: rotate(-10deg) scaleY(1); } to { transform: rotate(26deg) scaleY(.55); } }
 
-/* ---------- Descubra-se: os cinco portais ---------- */
+/* ---------- Descubra-se: os seis portais ---------- */
 .nascimento {
   display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 1rem;
   max-width: 780px; margin: 0 auto; padding: clamp(1.1rem, 3vw, 1.6rem); border-radius: var(--raio);
@@ -721,7 +722,97 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .chip-ing i { width: 10px; height: 10px; border-radius: 50%; }
 .botao[disabled] { opacity: .45; pointer-events: none; }
 
+/* ---------- Roda do Ano ---------- */
+.roda-ano { text-align: center; }
+.roda-ano__nota { max-width: 60ch; margin: 1rem auto 0; color: var(--texto-2); font-size: .98rem; }
+.roda-ano__nota strong { color: var(--ouro-claro); font-weight: 600; }
+.roda-ano__grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(1.4rem, 4vw, 3rem); align-items: start; margin-top: 2rem; text-align: left; }
+.roda-ano__visual { position: sticky; top: 96px; }
+.roda-ano__visual svg { width: 100%; height: auto; display: block; overflow: visible; }
+.sabbat-no { cursor: pointer; }
+.sabbat-no circle.fundo { transition: r .3s, fill .3s, stroke .3s; }
+.sabbat-no:hover circle.fundo, .sabbat-no:focus-visible circle.fundo { fill: rgba(242, 193, 78, .3); }
+.sabbat-no:focus-visible { outline: none; }
+.sabbat-no.ativo circle.fundo { fill: rgba(242, 193, 78, .35); stroke: #ffe6a3; filter: drop-shadow(0 0 10px rgba(242, 193, 78, .8)); }
+.roda-ano__painel { padding: clamp(1.3rem, 3vw, 2rem); border-radius: 24px; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; }
+.roda-ano__painel h3 { font: 600 clamp(1.7rem, 3.4vw, 2.3rem)/1.1 var(--titulo); color: var(--ouro-claro); margin: .4rem 0 0; }
+.roda-ano__outros { margin: .3rem 0 0; color: var(--rosa-claro); font-size: .95rem; }
+.roda-ano__data { display: inline-block; margin: .9rem 0 0; padding: .35rem .9rem; border-radius: 999px; background: rgba(242, 193, 78, .14); color: var(--ouro-claro); font-weight: 500; }
+.roda-ano__painel .destaque { font: italic 500 clamp(1.2rem, 2.4vw, 1.4rem)/1.45 var(--livro); color: var(--texto); margin: 1rem 0 0; }
+.roda-ano__painel > p { color: var(--texto-2); }
+.corresp { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .7rem; margin: 1.3rem 0 1.4rem; }
+.corresp div { padding: .8rem .95rem; border-radius: 16px; background: rgba(10, 7, 28, .45); box-shadow: 0 0 0 1px rgba(242, 193, 78, .14) inset; }
+.corresp h4 { margin: 0 0 .3rem; font: 500 .72rem/1.2 var(--corpo); letter-spacing: .18em; text-transform: uppercase; color: var(--ouro); }
+.corresp p { margin: 0; font-size: .95rem; color: var(--texto-2); line-height: 1.5; }
+.cores-sabbat { display: flex; gap: .35rem; margin-top: .45rem; }
+.cores-sabbat i { width: 22px; height: 22px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(255, 255, 255, .3) inset; }
+@media (max-width: 560px) { .so-largo { display: none; } .roda-ano .gato-sentado { width: 54px; top: -88px !important; } }
+@media (max-width: 860px) { .roda-ano__grade { grid-template-columns: 1fr; } .roda-ano__visual { position: static; max-width: 460px; margin: 0 auto; width: 100%; } }
+
+/* ---------- Panteões ---------- */
+.abas { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+.abas button { border: 0; padding: .6rem 1.1rem; border-radius: 999px; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; color: var(--texto-2); font-weight: 500; transition: background .3s, color .3s; }
+.abas button[aria-selected="true"] { background: var(--dourado); color: #2a1606; box-shadow: none; }
+.panteao__intro { max-width: 62ch; margin: 1.6rem auto 0; text-align: center; color: var(--texto-2); }
+.panteao__grupo { margin: 2rem 0 .8rem; text-align: center; font: 600 1.15rem/1.2 var(--titulo); color: var(--rosa-claro); letter-spacing: .06em; }
+.deuses { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .9rem; margin-top: 1.4rem; align-items: start; }
+.deus { border-radius: 20px; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; transition: box-shadow .3s, transform .3s; }
+.deus:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--ouro) inset, 0 12px 30px rgba(0, 0, 0, .35); }
+.deus[open] { box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 26px rgba(242, 193, 78, .22); }
+.deus summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: .9rem; padding: 1rem 1.1rem; }
+.deus summary::-webkit-details-marker { display: none; }
+.deus__simbolo { flex: none; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; font-size: 1.5rem; background: rgba(242, 193, 78, .12); box-shadow: 0 0 0 1px rgba(242, 193, 78, .35) inset; }
+.deus__nome { display: block; font: 600 1.15rem/1.15 var(--titulo); color: var(--ouro-claro); }
+.deus__dom { display: block; margin-top: .2rem; font-size: .9rem; color: var(--texto-2); }
+.deus__corpo { padding: 0 1.1rem 1.1rem; font-size: .95rem; color: var(--texto-2); }
+.deus__corpo p { margin: .55rem 0 0; }
+.deus__corpo strong { color: var(--ouro-claro); font-weight: 500; }
+
+/* ---------- Player de música ---------- */
+.musica-botao {
+  position: fixed; left: max(1rem, env(safe-area-inset-left)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 40;
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; border: 0; color: #2a1606;
+  background: var(--dourado); box-shadow: 0 0 0 3px rgba(255, 45, 135, .45), 0 10px 26px rgba(0, 0, 0, .45); transition: transform .3s;
+}
+.musica-botao:hover { transform: scale(1.08); }
+.musica-botao svg { width: 24px; height: 24px; }
+.musica-botao.tocando svg { animation: notaPula 1s ease-in-out infinite alternate; }
+@keyframes notaPula { to { transform: translateY(-3px) rotate(-6deg); } }
+.musica-painel {
+  position: fixed; left: max(1rem, env(safe-area-inset-left)); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 66px); z-index: 41;
+  width: min(360px, calc(100vw - 2rem)); padding: 1rem; border-radius: 22px; background: rgba(18, 12, 44, .94); backdrop-filter: blur(10px);
+  box-shadow: 0 0 0 1px var(--linha) inset, 0 20px 50px rgba(0, 0, 0, .55);
+  opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .35s, visibility .35s, transform .35s;
+}
+.musica-painel.aberto { opacity: 1; visibility: visible; transform: none; }
+.musica-painel h3 { margin: 0; font: 600 1.05rem/1.2 var(--titulo); color: var(--ouro-claro); }
+.musica-painel p { margin: .4rem 0 .8rem; font-size: .9rem; color: var(--texto-2); }
+.musica-painel iframe { display: block; width: 100%; height: 352px; border: 0; border-radius: 14px; }
+.musica-painel .botao { width: 100%; justify-content: center; }
+.musica-fechar { position: absolute; top: .6rem; right: .6rem; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .08); color: var(--texto-2); font-size: 1.1rem; }
+
+/* ---------- Gatos pretos ---------- */
+.gato-sentado { position: absolute; width: 74px; height: auto; z-index: 2; cursor: pointer; filter: drop-shadow(0 0 10px rgba(160, 120, 255, .35)); }
+.gato-sentado:focus { outline: none; }
+.gato-sentado:focus-visible { outline: 2px solid var(--ouro); outline-offset: 4px; border-radius: 10px; }
+.gato-sentado .olhos { transform-box: fill-box; transform-origin: center; animation: piscar 5s infinite; }
+.gato-sentado .rabo { transform-box: fill-box; transform-origin: 0% 100%; animation: rabo 3.2s ease-in-out infinite alternate; }
+@keyframes piscar { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+@keyframes rabo { from { transform: rotate(-8deg); } to { transform: rotate(10deg); } }
+.gato-sentado.miau { animation: miau .5s; }
+@keyframes miau { 40% { transform: translateY(-8px) scale(1.06); } }
+.balao-miau { position: absolute; z-index: 3; padding: .3rem .7rem; border-radius: 12px; background: rgba(18, 12, 44, .9); box-shadow: 0 0 0 1px var(--linha) inset; font: italic 500 1rem var(--livro); color: var(--ouro-claro); pointer-events: none; animation: balao 1.6s forwards; }
+@keyframes balao { from { opacity: 0; transform: translateY(6px); } 15%, 75% { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-10px); } }
+.gato-andando { position: fixed; left: 0; bottom: 0; z-index: 39; width: 120px; pointer-events: none; transform: translateX(-140px); opacity: 0; }
+.gato-andando.indo { opacity: 1; animation: atravessar 16s linear forwards; }
+.gato-andando .pata-a { transform-box: fill-box; transform-origin: 50% 0; animation: passo .5s ease-in-out infinite alternate; }
+.gato-andando .pata-b { transform-box: fill-box; transform-origin: 50% 0; animation: passo .5s ease-in-out infinite alternate-reverse; }
+.gato-andando .rabo { transform-box: fill-box; transform-origin: 0% 100%; animation: rabo 1s ease-in-out infinite alternate; }
+@keyframes passo { from { transform: rotate(-16deg); } to { transform: rotate(16deg); } }
+@keyframes atravessar { to { transform: translateX(calc(100vw + 40px)); } }
+
 @media (prefers-reduced-motion: reduce) {
+  .gato-andando { display: none; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
   .js .surge { opacity: 1; transform: none; filter: none; }
@@ -746,7 +837,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       </defs>
       <path id="arco" d="M30 300 C 120 40, 480 40, 570 300"/>
     </svg>
-    <img class="abertura__logo" src="assets/logo.webp" alt="Bem Dito Tarot" width="1197" height="1097">
+    <img class="abertura__logo" src="assets/logo-tryv.webp" alt="Tryv Tuath: everything is possible" width="516" height="678">
     <p class="abertura__era">Era uma vez uma pergunta…</p>
     <div class="abertura__pular"><button class="botao botao--vidro" type="button">Entrar ✨</button></div>
   </div>
@@ -754,11 +845,13 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 
 <header class="topo" id="topo">
   <div class="envelope topo__linha">
-    <a class="marca" translate="no" href="#inicio"><img src="assets/logo-pequeno.webp" alt="" width="240" height="220"><span>Bem Dito</span></a>
+    <a class="marca" translate="no" href="#inicio"><img src="assets/logo-tryv-pequeno.webp" alt="" width="240" height="316"><span>Bem Dito</span></a>
     <nav class="menu" id="menu" aria-label="Seções">
       <a href="#cartas">Cartas</a>
       <a href="#descubra">Descubra-se</a>
+      <a href="#roda">Roda do Ano</a>
       <a href="#casinha">Casinha</a>
+      <a href="#panteoes">Panteões</a>
       <a href="#consultas">Consultas</a>
       <a href="#tryv">Tryv</a>
       <a href="#livro">Livro</a>
@@ -787,7 +880,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <span class="heroi__lema">Do macro ao micro · <b>espiritualidade</b> · <b>autoconhecimento</b> · <b>empoderamento</b></span>
       <div class="heroi__logo-caixa">
         <button class="heroi__logo" id="logo-heroi" type="button" aria-label="Bem Dito Tarot (toque para um pouco de magia)">
-          <img src="assets/logo.webp" alt="Bem Dito Tarot" width="1197" height="1097" fetchpriority="high">
+          <img src="assets/logo-tryv.webp" alt="Tryv Tuath: everything is possible" width="516" height="678" fetchpriority="high">
         </button>
       </div>
       <h1>Toda pergunta merece ser <em>bem dita</em>.</h1>
@@ -857,7 +950,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <div class="cabeca surge">
         <span class="chamada">Degustação mágica</span>
         <h2 class="titulo">Descubra-se</h2>
-        <p class="intro">Cinco portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.</p>
+        <p class="intro">Seis portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.</p>
       </div>
       <form class="nascimento surge" id="nascimento" novalidate>
         <label class="campo">Seu nome <input id="n-nome" type="text" autocomplete="given-name" placeholder="opcional" maxlength="40"></label>
@@ -895,8 +988,38 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
             <span class="portal__face portal__face--frente"></span>
           </span>
         </button>
+        <button class="portal" type="button" data-portal="totem" aria-label="Animal de poder">
+          <span class="portal__dentro">
+            <span class="portal__face portal__face--verso"><span class="portal__icone">🐾</span><span class="portal__nome">Animal de poder</span><span class="portal__sub">totem</span></span>
+            <span class="portal__face portal__face--frente"></span>
+          </span>
+        </button>
       </div>
       <div class="revelacao" id="revelacao" hidden aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ================= RODA DO ANO ================= -->
+  <section class="secao" id="roda">
+    <div class="envelope">
+      <div class="cabeca surge">
+        <span class="chamada">Paganismo e natureza</span>
+        <h2 class="titulo">A Roda do Ano</h2>
+        <p class="intro">Oito sabbats marcam o giro das estações: quatro festas do Sol, nos solstícios e equinócios, e quatro festas do fogo, entre elas. Escolha a sua roda e toque num sabbat.</p>
+      </div>
+      <div class="roda-ano surge" style="position:relative">
+        <svg class="gato-sentado" style="right:2%;top:-64px" viewBox="0 0 90 100" role="button" tabindex="0" aria-label="Gato preto"><g fill="#07050c"><path class="rabo" d="M58 92 C80 90 86 70 76 56 C72 50 66 52 70 58 C76 68 72 82 56 84Z"/><path d="M30 96 C18 96 14 84 18 70 C21 58 26 50 26 42 L22 18 L33 30 C38 28 46 28 51 30 L62 18 L58 42 C58 50 64 58 66 70 C70 84 64 96 52 96Z"/></g><g class="olhos"><ellipse cx="35" cy="42" rx="4" ry="5" fill="#ffd34d"/><ellipse cx="49" cy="42" rx="4" ry="5" fill="#ffd34d"/><ellipse cx="35" cy="42" rx="1.2" ry="4" fill="#07050c"/><ellipse cx="49" cy="42" rx="1.2" ry="4" fill="#07050c"/></g></svg>
+        <div class="modos" role="group" aria-label="Qual roda">
+          <button type="button" data-roda="sul" aria-pressed="true"><span class="so-largo">Hemisfério </span>Sul</button>
+          <button type="button" data-roda="norte" aria-pressed="false"><span class="so-largo">Hemisfério </span>Norte</button>
+          <button type="button" data-roda="mista" aria-pressed="false">Mista</button>
+        </div>
+        <p class="roda-ano__nota" id="roda-nota"></p>
+        <div class="roda-ano__grade">
+          <div class="roda-ano__visual" id="roda-svg"></div>
+          <div class="roda-ano__painel" id="roda-painel" aria-live="polite"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -912,6 +1035,22 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
         <div class="casinha-zoom" id="casinha-zoom"></div>
         <canvas class="casa-neve" id="casa-neve" aria-hidden="true"></canvas>
         <button class="casinha-chamada" id="casinha-chamada" type="button">✦ Passe a varinha na porta…</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PANTEÕES ================= -->
+  <section class="secao" id="panteoes">
+    <div class="envelope">
+      <div class="cabeca surge">
+        <span class="chamada">Deuses e deusas</span>
+        <h2 class="titulo">Os panteões</h2>
+        <p class="intro">Cada povo deu nome e rosto ao sagrado. Conheça algumas divindades, seus símbolos e o que se costuma oferecer a elas.</p>
+      </div>
+      <div class="panteoes surge">
+        <div class="abas" role="tablist" aria-label="Panteões" id="abas-panteoes"></div>
+        <div id="panteao" role="tabpanel"></div>
+        <p class="aviso" style="text-align:center;max-width:70ch;margin:2rem auto 0">✦ Algumas destas são religiões vivas, como as de matriz africana, o hinduísmo e o xintoísmo. Para cultuar essas divindades, siga a orientação das próprias tradições e de quem as pratica.</p>
       </div>
     </div>
   </section>
@@ -1063,7 +1202,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
           <li><strong>Receba sua leitura</strong>E leve com você o que as cartas têm a dizer.</li>
         </ol>
         <div class="cartao-contato surge">
-          <img src="assets/logo-pequeno.webp" alt="" width="240" height="220" loading="lazy">
+          <img src="assets/logo-tryv-pequeno.webp" alt="" width="240" height="316" loading="lazy">
           <a class="botao botao--rosa" data-zap="Olá, Tryv! Vim pelo site Bem Dito Tarot ✨" href="https://wa.me/5551996489944" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.1Z"/></svg>
             (51) 99648-9944
@@ -1082,11 +1221,26 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 </main>
 
 <footer class="rodape">
-  <div class="envelope">
+  <div class="envelope" style="position:relative">
+    <svg class="gato-sentado" style="left:6%;top:-112px;width:62px" viewBox="0 0 90 100" role="button" tabindex="0" aria-label="Gato preto"><g fill="#07050c"><path class="rabo" d="M58 92 C80 90 86 70 76 56 C72 50 66 52 70 58 C76 68 72 82 56 84Z"/><path d="M30 96 C18 96 14 84 18 70 C21 58 26 50 26 42 L22 18 L33 30 C38 28 46 28 51 30 L62 18 L58 42 C58 50 64 58 66 70 C70 84 64 96 52 96Z"/></g><g class="olhos"><ellipse cx="35" cy="42" rx="4" ry="5" fill="#9bf08a"/><ellipse cx="49" cy="42" rx="4" ry="5" fill="#9bf08a"/><ellipse cx="35" cy="42" rx="1.2" ry="4" fill="#07050c"/><ellipse cx="49" cy="42" rx="1.2" ry="4" fill="#07050c"/></g></svg>
     <p class="rodape__assinatura">Mude-se e descobrirá novos outros para refletir-se.</p>
     <p>© <span id="ano">2026</span> Bem Dito Tarot · Tryv Tuath</p>
   </div>
 </footer>
+
+<!-- Gato preto que atravessa a tela de vez em quando -->
+<svg class="gato-andando" id="gato-andando" viewBox="0 0 140 80" aria-hidden="true"><g fill="#07050c"><path class="rabo" d="M28 34 C14 30 8 16 14 6 C16 3 20 5 18 9 C14 18 20 26 32 28Z"/><rect class="pata-a" x="36" y="44" width="7" height="30" rx="3.5"/><rect class="pata-b" x="46" y="44" width="7" height="30" rx="3.5"/><rect class="pata-b" x="84" y="44" width="7" height="30" rx="3.5"/><rect class="pata-a" x="94" y="44" width="7" height="30" rx="3.5"/><ellipse cx="66" cy="40" rx="40" ry="15"/><circle cx="108" cy="30" r="13"/><path d="M99 22 L101 8 L109 19Z M110 19 L118 8 L119 23Z"/></g><ellipse cx="113" cy="29" rx="2.4" ry="2.8" fill="#ffd34d"/></svg>
+
+<!-- Player de música (playlist da Tryv no Spotify) -->
+<button class="musica-botao" id="musica-botao" type="button" aria-expanded="false" aria-controls="musica-painel" aria-label="Músicas da Tryv">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="18" cy="16" r="3" fill="currentColor"/></svg>
+</button>
+<div class="musica-painel" id="musica-painel" role="dialog" aria-label="Músicas da Tryv">
+  <button class="musica-fechar" id="musica-fechar" type="button" aria-label="Fechar">×</button>
+  <h3>Trilha da Tryv ♪</h3>
+  <p>As músicas que a Tryv escolheu para acompanhar a sua visita.</p>
+  <div id="musica-conteudo"></div>
+</div>
 
 <!-- Dentro da casinha: cena em tela cheia, montada pelo script -->
 <div class="interior" id="interior" role="dialog" aria-modal="true" aria-label="Dentro da casinha" aria-hidden="true">
@@ -1719,10 +1873,10 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     setTimeout(() => leitura.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "nearest" }), 300);
   }
 
-  $$(".modos button").forEach(b => b.addEventListener("click", () => {
+  $$(".modos [data-modo]").forEach(b => b.addEventListener("click", () => {
     if (b.dataset.modo === modo && !tiradas.length) return;
     modo = b.dataset.modo;
-    $$(".modos button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    $$(".modos [data-modo]").forEach(x => x.setAttribute("aria-pressed", x === b));
     embaralhar();
   }));
   $("#de-novo").addEventListener("click", () => {
@@ -1766,7 +1920,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   embaralhar();
 
   /* =========================================================================
-     DESCUBRA-SE: cinco portais a partir da data de nascimento (mapa astral,
+     DESCUBRA-SE: seis portais a partir da data de nascimento (mapa astral,
      kin maia, anjo cabalístico, horóscopo chinês e arcano de nascimento).
      Tudo é calculado aqui no navegador; nada é enviado a lugar nenhum.
      ========================================================================= */
@@ -2076,6 +2230,31 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     const br = s => s.split("-").reverse().join("/");
     return { n: i + 1, nome, dons, periodo: `${br(ini)} a ${br(fim)}`, coro: COROS[Math.floor(i / 8)] };
   }
+  // Animal de poder pela Roda da Medicina (Sun Bear e Wabun): [início dia, mês, nome, emoji, lua, clã, qualidades, mensagem, sombra]
+  const TOTENS = [
+    [22, 12, "Ganso-das-neves", "🦢", "Lua da Renovação da Terra", "Tartaruga (terra)", "determinação, ambição e perseverança", "Você voa alto e longe sem perder o rumo. Passo a passo, chega aonde decidir chegar.", "a cobrança excessiva consigo e com os outros"],
+    [20, 1, "Lontra", "🦦", "Lua do Descanso e da Purificação", "Borboleta (ar)", "originalidade, liberdade e amizade", "Sua magia é ver o mundo de um jeito novo e lembrar a todos que brincar também cura.", "a rebeldia sem causa e a dificuldade de se comprometer"],
+    [19, 2, "Lobo", "🐺", "Lua dos Grandes Ventos", "Sapo (água)", "intuição, sensibilidade e compaixão", "Você sente o que os outros não dizem. Seu faro é guia para a matilha, e sua solidão, mestra.", "absorver dores alheias e se isolar para se proteger"],
+    [21, 3, "Falcão", "🦅", "Lua do Despertar", "Pássaro-Trovão (fogo)", "coragem, iniciativa e visão", "Você enxerga de cima e mergulha certeiro. Nasceu para abrir caminhos e começar o novo.", "a impaciência e o impulso de agir antes de olhar"],
+    [20, 4, "Castor", "🦫", "Lua do Crescimento", "Tartaruga (terra)", "constância, praticidade e construção", "Você transforma sonhos em casa, rio em lago, ideia em obra. Seu dom é fazer acontecer.", "a teimosia e o apego ao que já está construído"],
+    [21, 5, "Cervo", "🦌", "Lua do Plantio", "Borboleta (ar)", "gentileza, curiosidade e comunicação", "Você caminha leve e atento. Sua doçura abre portas que a força nunca abriria.", "a dispersão e a dificuldade de escolher um caminho"],
+    [21, 6, "Pica-pau", "🐦", "Lua dos Dias Longos", "Sapo (água)", "cuidado, ritmo e acolhimento", "Você é o coração que bate no tronco da árvore: nutre, protege e mantém o ritmo da família.", "a possessividade e o medo de perder quem ama"],
+    [23, 7, "Salmão", "🐟", "Lua do Amadurecimento", "Pássaro-Trovão (fogo)", "entusiasmo, vitalidade e propósito", "Você nada contra a corrente quando é preciso. Seu propósito é maior que o cansaço.", "o orgulho e a necessidade de estar sempre certo"],
+    [23, 8, "Urso", "🐻", "Lua da Colheita", "Tartaruga (terra)", "sabedoria prática, paciência e cura", "Você sabe a hora de agir e a hora de recolher. Na sua caverna nasce a cura.", "a autocrítica e o perfeccionismo"],
+    [23, 9, "Corvo", "🪶", "Lua dos Patos que Voam", "Borboleta (ar)", "magia, equilíbrio e diplomacia", "Você é guardião dos mistérios e ponte entre mundos. Sua palavra harmoniza o que está em guerra.", "a indecisão e o medo de desagradar"],
+    [23, 10, "Serpente", "🐍", "Lua das Geadas", "Sapo (água)", "transformação, renascimento e intensidade", "Você troca de pele quantas vezes for preciso. Do que morre em você, nasce poder.", "o ciúme e guardar mágoas em segredo"],
+    [23, 11, "Coruja", "🦉", "Lua das Neves Longas", "Pássaro-Trovão (fogo)", "sabedoria, verdade e visão no escuro", "Você enxerga o que está escondido. Sua liberdade é dizer a verdade com voo silencioso.", "o excesso e a franqueza que fere"],
+  ];
+  function calcTotem(p) {
+    const n = p.m * 100 + p.d;
+    let i = TOTENS.length - 1;
+    for (let k = 1; k < TOTENS.length; k++) if (n >= TOTENS[k][1] * 100 + TOTENS[k][0]) i = k;
+    if (n >= 1222) i = 0;
+    if (n < 120) i = 0;
+    const [d, m, nome, emoji, lua, cla, quali, msg, sombra] = TOTENS[i], prox = TOTENS[(i + 1) % 12];
+    const fim = new Date(2001, prox[1] - 1, prox[0] - 1);
+    return { i, nome, emoji, lua, cla, quali, msg, sombra, periodo: `${dois(d)}/${dois(m)} e ${dois(fim.getDate())}/${dois(fim.getMonth() + 1)}` };
+  }
   function calcChina(p) {
     const ano = ASTRO.anoNovoChines(p.a);
     const nasc = Date.UTC(p.a, p.m - 1, p.d), virada = Date.UTC(ano.ano, ano.mes - 1, ano.dia);
@@ -2244,13 +2423,14 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   }
   function prepararPortais() {
     const sol = signoDe(ASTRO.planetaLon("sol", ASTRO.diaJ(pessoa.a, pessoa.m, pessoa.d, 15)));
-    const k = calcKin(pessoa), anj = calcAnjo(pessoa), ch = calcChina(pessoa), arc = calcArcano(pessoa);
+    const k = calcKin(pessoa), anj = calcAnjo(pessoa), ch = calcChina(pessoa), arc = calcArcano(pessoa), tot = calcTotem(pessoa);
     const faces = {
       mapa: frente(sol.glifo, `Sol em ${sol.nome}`, "toque para o mapa"),
       kin: frente(String(k.kin), k.nome, "seu kin"),
       anjo: frente(String(anj.n), anj.nome, anj.coro[0]),
       china: frente(ch.animal[1], `${ch.animal[0]} de ${ch.elemento[0]}`, ch.yin ? "yin" : "yang", true),
       arcano: frente(arc.pers.num, arc.pers.nome, "arcano de nascimento"),
+      totem: frente(tot.emoji, tot.nome, "animal de poder"),
     };
     portais.forEach(p => {
       p.classList.remove("virado", "ativo");
@@ -2361,6 +2541,19 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
           ${r.mesma ? "<p>Sua carta da alma é a mesma: personalidade e alma falam a mesma língua.</p>" : `<p><strong>${r.alma.nome}</strong> é a carta da sua alma: ${r.alma.msg.charAt(0).toLowerCase() + r.alma.msg.slice(1)}</p>`}
           <p>A conta: somamos dia, mês e ano, e reduzimos até chegar a um dos 22 Arcanos Maiores. ${conta}.</p>`,
         mensagem: `Olá, Tryv! ${quem()} e meu arcano de nascimento é ${r.pers.nome}${r.mesma ? "" : `, com ${r.alma.nome} na alma`}. Quero aprofundar ✨`,
+      });
+    }
+    if (tipo === "totem") {
+      const t = calcTotem(pessoa);
+      html = painel({
+        chamada: "Animal de poder", titulo: `${t.emoji} ${t.nome}`,
+        visual: svgRoda({ n: 12, rotulos: TOTENS.map(x => x[3]), indice: t.i, centro: t.emoji, sub: t.nome.toUpperCase(), fonte: 20 }),
+        texto: `<p class="destaque">${t.msg}</p>
+          <p>Quem nasce entre ${t.periodo} caminha com o <strong>${t.nome}</strong>, sob a <strong>${t.lua}</strong>.</p>
+          <ul class="palavras">${t.quali.split(/, | e /).map(q => `<li>${q}</li>`).join("")}</ul>
+          <p><strong>Clã elemental</strong>: ${t.cla}. <strong>Sombra a cuidar</strong>: ${t.sombra}.</p>
+          <p>Este é o animal da Roda da Medicina, ligado ao período em que você nasceu. O animal de poder pessoal costuma se revelar numa jornada xamânica, e é isso que a Tryv conduz em consulta.</p>`,
+        mensagem: `Olá, Tryv! ${quem()} e meu animal de poder na Roda da Medicina é o ${t.nome}. Quero fazer a jornada para encontrar o meu ✨`,
       });
     }
     if (tipo === "mapa") html = painelMapa();
@@ -3538,6 +3731,289 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     if (el && !arrasto) dicaCasa.textContent = `${INGREDIENTES[el.dataset.ing].nome} ✦ arraste até o caldeirão`;
   });
 
+  /* =====================================================================
+     RODA DO ANO: os oito sabbats nos hemisférios Sul e Norte.
+     Textos escritos pelo Claude; a Tryv vai revisar.
+     ===================================================================== */
+  // cores: [nome, hex]; norte/sul: [dia, mês] usado para posicionar na roda
+  const SABBATS = [
+    { id: "samhain", nome: "Samhain", emoji: "🎃", tipo: "Festa do fogo", outros: "Ano Novo das Bruxas · noite dos ancestrais", norte: [31, 10], sul: [30, 4], dataN: "31 de outubro", dataS: "30 de abril para 1º de maio",
+      tema: "O véu entre os mundos fica fino. É tempo de honrar quem veio antes e deixar morrer o que já cumpriu seu ciclo.",
+      texto: "Para muitas tradições, Samhain é o fim e o começo da Roda. A terra se recolhe, os ancestrais são lembrados com carinho e a magia de divinação fica mais forte.",
+      cores: [["preto", "#0d0b10"], ["laranja", "#e0711c"], ["roxo", "#5b2a86"]], ervas: "artemísia, sálvia, alecrim, arruda, cravo e folhas secas", cristais: "obsidiana, ônix, quartzo fumê e ametista",
+      itens: "espelho negro, caldeirão, velas pretas, fotos dos ancestrais e oráculos", comidas: "abóbora, maçã, romã, castanhas, sopas e pão caseiro", bebidas: "sidra, vinho tinto e chá de maçã com canela",
+      decoracao: "altar dos ancestrais, abóboras com velas, folhas secas e caveirinhas", praticas: "ceia muda para os ancestrais, leitura de oráculos e ritual de liberação", divindades: "Hécate, Morrighan, Cerridwen e Anúbis" },
+    { id: "yule", nome: "Yule", emoji: "🌲", tipo: "Solstício de inverno", outros: "Renascimento do Sol · a noite mais longa", norte: [21, 12], sul: [21, 6], dataN: "21 de dezembro", dataS: "21 de junho",
+      tema: "Na noite mais longa do ano, a luz renasce. A partir de agora, os dias voltam a crescer.",
+      texto: "Yule celebra a esperança: a Deusa dá à luz o Sol criança. Acendem-se velas e fogueiras para chamar a luz de volta, e se planta, por dentro, o desejo do novo ciclo.",
+      cores: [["verde", "#1f6b3a"], ["vermelho", "#a8182c"], ["dourado", "#e0b040"], ["branco", "#f4f0e6"]], ervas: "pinheiro, azevinho, visco, canela, cravo e louro", cristais: "granada, rubi, olho de tigre e citrino",
+      itens: "tronco de Yule, velas vermelhas e douradas, sinos e guirlanda", comidas: "pães de especiarias, frutas secas, nozes, assados e biscoitos", bebidas: "quentão, vinho quente e chocolate quente com canela",
+      decoracao: "guirlandas de pinheiro, laranjas com cravo, estrelas e luzinhas", praticas: "vigília até o amanhecer, troca de presentes e intenções para o novo ciclo solar", divindades: "Frigga, Mãe Holle, o Rei do Carvalho e o Sol Invicto" },
+    { id: "imbolc", nome: "Imbolc", emoji: "🕯️", tipo: "Festa do fogo", outros: "Candlemas · festa de Brigid", norte: [1, 2], sul: [1, 8], dataN: "1º e 2 de fevereiro", dataS: "1º e 2 de agosto",
+      tema: "As primeiras luzes da primavera. A semente acorda debaixo da terra fria.",
+      texto: "Imbolc é a festa da purificação e da inspiração, dedicada a Brigid, senhora do fogo, da poesia e da cura. Limpa-se a casa e abençoam-se os projetos que vão brotar.",
+      cores: [["branco", "#f4f0e6"], ["prata", "#c9ccd6"], ["amarelo-claro", "#f2e08a"], ["vermelho", "#a8182c"]], ervas: "angélica, manjericão, louro, camomila, alecrim e sementes", cristais: "ametista, pedra da lua, granada e quartzo branco",
+      itens: "cruz de Brigid, velas brancas, vassoura, leite e água de poço", comidas: "leite, queijos, manteiga, pães, mingau e sementes", bebidas: "leite com mel, chá de camomila e hidromel",
+      decoracao: "muitas velas acesas, flores brancas e a bonequinha de palha de Brigid", praticas: "faxina energética, bênção de sementes e projetos, poesia e rituais de cura", divindades: "Brigid, Vesta e Héstia" },
+    { id: "ostara", nome: "Ostara", emoji: "🥚", tipo: "Equinócio de primavera", outros: "Equilíbrio entre luz e sombra · fertilidade", norte: [20, 3], sul: [22, 9], dataN: "20 e 21 de março", dataS: "21 a 23 de setembro",
+      tema: "Dia e noite têm a mesma duração. A vida floresce e tudo pede para ser plantado.",
+      texto: "Ostara celebra a fertilidade e o equilíbrio. Os ovos e as sementes guardam a promessa da vida, e é tempo de começar aquilo que se quer ver crescer.",
+      cores: [["verde-claro", "#9fd39a"], ["amarelo", "#f2d24a"], ["rosa", "#f2a2c0"], ["lilás", "#c3a6e6"]], ervas: "jasmim, violeta, rosa, lavanda, narciso e trevo", cristais: "quartzo rosa, água-marinha, ágata musgo e jaspe",
+      itens: "ovos pintados, sementes, cesta, flores e a lebre", comidas: "ovos, saladas verdes, brotos, mel, pães doces e frutas", bebidas: "chás de flores, sucos frescos e hidromel",
+      decoracao: "ovos coloridos, ninhos, flores e vasinhos com mudas", praticas: "plantar sementes de intenção, pintar ovos com símbolos e rituais de equilíbrio", divindades: "Eostre, Perséfone, Freya e Flora" },
+    { id: "beltane", nome: "Beltane", emoji: "🔥", tipo: "Festa do fogo", outros: "Festa da vida · união sagrada", norte: [1, 5], sul: [31, 10], dataN: "1º de maio", dataS: "31 de outubro para 1º de novembro",
+      tema: "O fogo da vida está no auge. Amor, desejo, alegria e criatividade dançam juntos.",
+      texto: "Beltane celebra a união do Deus e da Deusa e a fertilidade da terra. Pula-se a fogueira, dança-se em volta do mastro de fitas e pede-se amor e prosperidade.",
+      cores: [["vermelho", "#c2273d"], ["verde", "#2f8a4a"], ["branco", "#f4f0e6"], ["rosa", "#ff7fb5"]], ervas: "rosa, espinheiro, bétula, hortelã, alecrim e flores do campo", cristais: "esmeralda, quartzo rosa, cornalina e malaquita",
+      itens: "mastro de fitas, fogueira, coroa de flores e fitas coloridas", comidas: "frutas vermelhas, morangos, mel, aveia, bolos e saladas", bebidas: "vinho, hidromel, sucos vermelhos e chá de rosas",
+      decoracao: "fitas, coroas de flores e galhos floridos", praticas: "pular a fogueira, dançar, banho de orvalho e rituais de amor", divindades: "Flora, Cernunnos, Freya e Pã" },
+    { id: "litha", nome: "Litha", emoji: "☀️", tipo: "Solstício de verão", outros: "Meio do verão · o Sol no auge", norte: [21, 6], sul: [21, 12], dataN: "21 de junho", dataS: "21 de dezembro",
+      tema: "O dia mais longo do ano. O Sol está no auge da força e tudo transborda.",
+      texto: "Litha é a festa da plenitude. As ervas colhidas nesse dia têm poder dobrado, e é tempo de celebrar as conquistas e pedir força para o que falta realizar.",
+      cores: [["dourado", "#e0b040"], ["amarelo", "#f2d24a"], ["laranja", "#e8802a"], ["azul-céu", "#7fb6ff"]], ervas: "girassol, hipérico, camomila, calêndula, lavanda e verbena", cristais: "citrino, âmbar, pedra do sol e olho de tigre",
+      itens: "fogueira, espelho solar, guirlanda de ervas e discos solares", comidas: "frutas frescas, mel, pães, legumes do verão e saladas", bebidas: "hidromel, sucos cítricos, água solarizada e chá gelado de hibisco",
+      decoracao: "girassóis, sóis dourados, guirlandas de ervas e flores amarelas", praticas: "colher ervas mágicas, banho de sol, rituais de força e de realização", divindades: "Rá, Lugh, Apolo e Áine" },
+    { id: "lammas", nome: "Lammas", emoji: "🌾", tipo: "Festa do fogo", outros: "Lughnasadh · primeira colheita", norte: [1, 8], sul: [1, 2], dataN: "1º de agosto", dataS: "1º e 2 de fevereiro",
+      tema: "A primeira colheita. Tempo de agradecer o pão na mesa e os frutos do próprio esforço.",
+      texto: "Lammas honra os grãos e o trabalho. Assa-se o primeiro pão da colheita, partilha-se a fartura e olha-se para o que já floresceu nos projetos do ano.",
+      cores: [["dourado", "#e0b040"], ["laranja", "#e8802a"], ["marrom", "#7a4a22"], ["verde-oliva", "#6b7a3a"]], ervas: "trigo, milho, girassol, manjericão, hortelã e papoula", cristais: "citrino, olho de tigre, ágata e aventurina",
+      itens: "boneca de milho ou trigo, foice, espigas e pão em forma de figura", comidas: "pão caseiro, milho, grãos, frutas da estação, tortas e bolos", bebidas: "cerveja artesanal, vinho, sucos e chá de hortelã",
+      decoracao: "espigas, feixes de trigo e cestas de frutas", praticas: "assar pão em gratidão, partilhar e celebrar as primeiras conquistas", divindades: "Lugh, Ceres, Deméter e Tailtiu" },
+    { id: "mabon", nome: "Mabon", emoji: "🍂", tipo: "Equinócio de outono", outros: "Segunda colheita · gratidão", norte: [22, 9], sul: [20, 3], dataN: "21 a 23 de setembro", dataS: "20 e 21 de março",
+      tema: "De novo, dia e noite se equilibram. A natureza agradece e começa a se recolher.",
+      texto: "Mabon é o dia de ação de graças das bruxas. Colhe-se o que foi plantado, agradece-se a fartura e prepara-se o coração para o tempo de introspecção.",
+      cores: [["laranja", "#e0711c"], ["vinho", "#6e1a2e"], ["marrom", "#7a4a22"], ["dourado", "#e0b040"]], ervas: "sálvia, mirra, folhas de carvalho, cravo, canela e maçã", cristais: "safira, lápis-lazúli, topázio e ágata",
+      itens: "cornucópia, folhas secas, pinhas e uma balança", comidas: "maçãs, uvas, abóbora, nozes, batatas e tortas", bebidas: "vinho, sidra, suco de uva e chá de maçã",
+      decoracao: "cornucópia, folhas de outono, cabaças e cachos de uva", praticas: "lista de gratidão, doações e rituais de equilíbrio", divindades: "Perséfone, Deméter, Mabon e Pomona" },
+  ];
+  const NOTAS_RODA = {
+    sul: "Aqui no Hemisfério Sul as estações são invertidas: Yule cai em junho e Litha em dezembro. É a roda que acompanha o céu e a natureza do Brasil.",
+    norte: "As datas tradicionais europeias, de onde vêm os nomes dos sabbats. É a roda que aparece na maioria dos livros.",
+    mista: "Muitas bruxas no Brasil honram a estação daqui e também as datas tradicionais. Na roda mista, o anel de fora mostra o Norte e o de dentro, o Sul.",
+  };
+  const rodaSvg = $("#roda-svg"), rodaPainel = $("#roda-painel"), rodaNota = $("#roda-nota");
+  let rodaModo = "sul", sabbatAtivo = null;
+  const diaDoAno = (d, m) => Math.round((Date.UTC(2001, m - 1, d) - Date.UTC(2001, 0, 1)) / 864e5);
+  const anguloData = (d, m) => diaDoAno(d, m) / 365 * 360 - 90;
+  const polar = (r, a) => [r * Math.cos(a * Math.PI / 180), r * Math.sin(a * Math.PI / 180)];
+  function proximoSabbat(modo) {
+    const hojeD = new Date(), n = diaDoAno(hojeD.getDate(), hojeD.getMonth() + 1);
+    const lista = SABBATS.map(s => { const [d, m] = modo === "norte" ? s.norte : s.sul; let falta = diaDoAno(d, m) - n; if (falta < 0) falta += 365; return { s, falta }; });
+    return lista.sort((a, b) => a.falta - b.falta)[0];
+  }
+  function desenharRoda() {
+    const hojeD = new Date(), aHoje = anguloData(hojeD.getDate(), hojeD.getMonth() + 1);
+    const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+    let s = `<circle r="214" fill="rgba(18,14,46,.55)" stroke="rgba(242,193,78,.35)"/><circle r="186" fill="none" stroke="rgba(242,193,78,.2)"/>`;
+    // estações (cor do anel), conforme o hemisfério
+    const estacoes = [[[21, 12], [20, 3], "verão", "#e0b040"], [[20, 3], [21, 6], "outono", "#c8662a"], [[21, 6], [22, 9], "inverno", "#6f8fd6"], [[22, 9], [21, 12], "primavera", "#5fb06b"]];
+    if (rodaModo !== "mista") estacoes.forEach(([de, ate, nome, cor], i) => {
+      const nomeReal = rodaModo === "sul" ? nome : ["inverno", "primavera", "verão", "outono"][i];
+      const corReal = rodaModo === "sul" ? cor : ["#6f8fd6", "#5fb06b", "#e0b040", "#c8662a"][i];
+      let a0 = anguloData(...de), a1 = anguloData(...ate); if (a1 < a0) a1 += 360;
+      const [x0, y0] = polar(200, a0), [x1, y1] = polar(200, a1);
+      s += `<path d="M${f1(x0)} ${f1(y0)} A200 200 0 0 1 ${f1(x1)} ${f1(y1)}" fill="none" stroke="${corReal}" stroke-width="10" opacity=".55" stroke-linecap="round"/>`;
+      const [tx, ty] = polar(232, (a0 + a1) / 2);
+      s += `<text x="${f1(tx)}" y="${f1(ty)}" text-anchor="middle" dominant-baseline="central" font-family="Jost, sans-serif" font-size="12" letter-spacing="2" fill="${corReal}">${nomeReal.toUpperCase()}</text>`;
+    });
+    meses.forEach((m, i) => {
+      const a = anguloData(15, i + 1), [x, y] = polar(172, a), [lx, ly] = polar(186, anguloData(1, i + 1)), [lx2, ly2] = polar(178, anguloData(1, i + 1));
+      s += `<text x="${f1(x)}" y="${f1(y)}" text-anchor="middle" dominant-baseline="central" font-family="Jost, sans-serif" font-size="10.5" letter-spacing="1" fill="#c9bfe6" opacity=".7">${m}</text><line x1="${f1(lx)}" y1="${f1(ly)}" x2="${f1(lx2)}" y2="${f1(ly2)}" stroke="rgba(242,193,78,.4)"/>`;
+    });
+    // ponteiro de hoje
+    const [hx, hy] = polar(200, aHoje);
+    s += `<line x1="0" y1="0" x2="${f1(hx)}" y2="${f1(hy)}" stroke="#ff8cc0" stroke-width="1.5" stroke-dasharray="3 5" opacity=".8"/><circle cx="${f1(hx)}" cy="${f1(hy)}" r="6" fill="#ff8cc0"/>`;
+    const [hlx, hly] = polar(250, aHoje);
+    s += `<text x="${f1(hlx)}" y="${f1(hly)}" text-anchor="middle" dominant-baseline="central" font-family="Jost, sans-serif" font-size="12" font-weight="600" fill="#ff8cc0">hoje</text>`;
+    // sabbats
+    const aneis = rodaModo === "mista" ? [["norte", 148, "N"], ["sul", 90, "S"]] : [[rodaModo, 128, ""]];
+    aneis.forEach(([hem, r, marca]) => {
+      SABBATS.forEach(sb => {
+        const [d, m] = sb[hem], [x, y] = polar(r, anguloData(d, m)), rr = rodaModo === "mista" ? 18 : 26;
+        s += `<g class="sabbat-no${sb.id === sabbatAtivo ? " ativo" : ""}" data-sabbat="${sb.id}" role="button" tabindex="0" aria-label="${sb.nome}${marca ? (marca === "N" ? ", Norte" : ", Sul") : ""}" transform="translate(${f1(x)} ${f1(y)})">
+          <circle class="fundo" r="${rr}" fill="rgba(10,7,28,.85)" stroke="rgba(242,193,78,.6)" stroke-width="1.5"/>
+          <text text-anchor="middle" dominant-baseline="central" font-size="${rr * .95}" y="1">${sb.emoji}</text>
+          ${marca ? `<text y="${rr + 11}" text-anchor="middle" font-family="Jost, sans-serif" font-size="10" font-weight="600" fill="${marca === "N" ? "#ffe6a3" : "#ff8cc0"}">${marca}</text>` : `<text y="${rr + 15}" text-anchor="middle" font-family="Cinzel, serif" font-size="12.5" font-weight="600" fill="#ffe6a3">${sb.nome}</text>`}
+        </g>`;
+      });
+    });
+    const ativo = SABBATS.find(x => x.id === sabbatAtivo);
+    s += `<text y="-4" text-anchor="middle" font-family="Cinzel, serif" font-size="${rodaModo === "mista" ? 15 : 19}" font-weight="600" fill="#ffe6a3">${ativo ? ativo.nome : ""}</text>
+      <text y="16" text-anchor="middle" font-family="Jost, sans-serif" font-size="10" letter-spacing="2" fill="#ff8cc0">${ativo ? ativo.tipo.toUpperCase() : ""}</text>`;
+    rodaSvg.innerHTML = `<svg viewBox="-270 -270 540 540" role="group" aria-label="Roda do Ano">${s}</svg>`;
+  }
+  function mostrarSabbat(id) {
+    sabbatAtivo = id;
+    const s = SABBATS.find(x => x.id === id);
+    const data = rodaModo === "norte" ? s.dataN : rodaModo === "sul" ? s.dataS : `Sul: ${s.dataS} · Norte: ${s.dataN}`;
+    const grade = [["Cores", s.cores.map(c => c[0]).join(", ") + `<span class="cores-sabbat">${s.cores.map(c => `<i style="background:${c[1]}" title="${c[0]}"></i>`).join("")}</span>`],
+      ["Ervas e flores", s.ervas], ["Cristais", s.cristais], ["Itens mágicos", s.itens], ["Comidas", s.comidas], ["Bebidas", s.bebidas], ["Decoração", s.decoracao], ["Práticas", s.praticas], ["Divindades", s.divindades]];
+    rodaPainel.innerHTML = `<span class="chamada">${s.tipo}</span><h3>${s.emoji} ${s.nome}</h3><p class="roda-ano__outros">${s.outros}</p>
+      <span class="roda-ano__data">${data}</span><p class="destaque">${s.tema}</p><p>${s.texto}</p>
+      <div class="corresp">${grade.map(([t, v]) => `<div><h4>${t}</h4><p>${v}</p></div>`).join("")}</div>
+      <a class="botao botao--rosa" href="${zap(`Olá, Tryv! Vi a Roda do Ano no site e quero celebrar ${s.nome} com você ✨`)}" target="_blank" rel="noopener">${ICONE_ZAP} Celebrar ${s.nome} com a Tryv</a>`;
+    desenharRoda();
+  }
+  function trocarRoda(modo) {
+    rodaModo = modo;
+    $$("[data-roda]").forEach(b => b.setAttribute("aria-pressed", b.dataset.roda === modo));
+    const prox = proximoSabbat(modo === "norte" ? "norte" : "sul");
+    rodaNota.innerHTML = `${NOTAS_RODA[modo]} <strong>Próximo sabbat${modo === "mista" ? " no Sul" : ""}: ${prox.s.nome}, ${prox.falta === 0 ? "hoje" : `em ${prox.falta} ${prox.falta === 1 ? "dia" : "dias"}`}.</strong>`;
+    mostrarSabbat(sabbatAtivo || prox.s.id);
+  }
+  $$("[data-roda]").forEach(b => b.addEventListener("click", () => { trocarRoda(b.dataset.roda); sino(2); }));
+  rodaSvg.addEventListener("click", e => {
+    const no = e.target.closest("[data-sabbat]");
+    if (!no) return;
+    mostrarSabbat(no.dataset.sabbat); sino(3);
+    if (innerWidth <= 860) rodaPainel.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "start" });
+  });
+  rodaSvg.addEventListener("keydown", e => {
+    const no = e.target.closest("[data-sabbat]");
+    if (no && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); mostrarSabbat(no.dataset.sabbat); $(`[data-sabbat="${no.dataset.sabbat}"]`, rodaSvg).focus(); }
+  });
+  trocarRoda("sul");
+
+  /* =====================================================================
+     PANTEÕES: [nome, símbolo, domínio, símbolos sagrados, oferendas e correspondências, texto]
+     Textos escritos pelo Claude; a Tryv vai revisar.
+     ===================================================================== */
+  const PANTEOES = [
+    { id: "egipcio", nome: "Egípcio", emoji: "𓂀", intro: "No Egito antigo, os deuses moravam no Nilo, no Sol e nas estrelas. Magia (heka) era uma força do próprio universo.", grupos: [{ deuses: [
+      ["Ísis", "☥", "magia, maternidade e cura", "o trono, as asas abertas e o ankh", "leite, mel, incenso de mirra e flores brancas", "A grande maga, que reuniu os pedaços de Osíris e o trouxe de volta. Protege mães, crianças e quem estuda os mistérios."],
+      ["Osíris", "🌾", "morte, renascimento e colheita", "o cajado, o mangual e a coroa branca", "grãos, pão, cerveja e incenso", "Senhor do mundo dos mortos e da fertilidade do Nilo. Ensina que todo fim prepara uma nova vida."],
+      ["Hórus", "𓂀", "céu, proteção e realeza", "o olho de Hórus e o falcão", "água fresca, pão e incenso de olíbano", "O deus falcão cujo olho tudo vê. O Udjat, seu olho, é um dos amuletos de proteção mais antigos do mundo."],
+      ["Anúbis", "🐺", "passagens, proteção e os mortos", "o chacal, a balança e o embalsamamento", "velas, mirra e pão", "Guia das almas na travessia. É chamado para proteção e para atravessar momentos de transição."],
+      ["Bastet", "🐈‍⬛", "lar, alegria, gatos e proteção", "o gato, o sistro e o perfume", "leite, perfume, música e flores", "A deusa gata, guardiã do lar e da alegria. Os gatos eram sagrados para ela, e maltratá-los era crime no Egito."],
+      ["Thoth", "🪶", "sabedoria, escrita e magia", "a íbis, a lua e a paleta de escriba", "tinta, papiro, incenso e livros", "Senhor das palavras e dos números, inventou a escrita. Patrono de estudantes, escritores e magos."],
+    ] }] },
+    { id: "grego", nome: "Grego", emoji: "🏛️", intro: "Os deuses do Olimpo amavam, brigavam e se transformavam como os humanos. Seus mitos ainda moram na nossa língua.", grupos: [{ deuses: [
+      ["Hécate", "🗝️", "magia, encruzilhadas e a lua nova", "as chaves, as tochas e os cães", "alho, mel, ovos e pão, deixados na encruzilhada", "Rainha das bruxas e guardiã dos caminhos. Ilumina escolhas difíceis e protege quem anda no escuro."],
+      ["Afrodite", "🌹", "amor, beleza e prazer", "a rosa, a pomba e a concha", "rosas, maçãs, mel e perfume", "Nascida da espuma do mar. Ensina o amor-próprio, a sensualidade e a beleza de estar viva."],
+      ["Atena", "🦉", "sabedoria, estratégia e artes", "a coruja, a oliveira e o escudo", "azeite, azeitonas e tecidos", "Deusa da inteligência e da justiça. Chamada para estudar, decidir com clareza e defender o que é certo."],
+      ["Ártemis", "🏹", "lua, natureza selvagem e liberdade", "o arco, o cervo e a lua crescente", "ervas silvestres, mel e água de nascente", "Senhora das florestas e protetora das mulheres. Guarda a liberdade e a força de ser quem se é."],
+      ["Deméter", "🌾", "colheita, fartura e maternidade", "o trigo, a foice e a tocha", "pão, grãos e frutas", "Mãe da terra fértil. Quando sua filha Perséfone desce ao submundo, ela chora e chega o inverno."],
+      ["Perséfone", "🍎", "ciclos, primavera e submundo", "a romã, as flores e o cetro", "romã, flores e mel", "Rainha do submundo e donzela da primavera. Ensina a transitar entre a luz e a sombra."],
+    ] }] },
+    { id: "nordico", nome: "Nórdico", emoji: "ᚱ", intro: "Os povos do Norte viam o mundo sustentado pela árvore Yggdrasil. Runas, sagas e magia seiðr vêm daí.", grupos: [{ deuses: [
+      ["Odin", "🐦‍⬛", "sabedoria, runas e poesia", "os dois corvos, a lança e o olho que falta", "hidromel, pão e poesia", "Deu um olho em troca da sabedoria e se pendurou na árvore do mundo para aprender as runas."],
+      ["Freya", "🐈‍⬛", "amor, magia seiðr e coragem", "a carruagem puxada por gatos, o colar e o falcão", "mel, âmbar, flores e hidromel", "Senhora da magia e do amor, viaja numa carruagem puxada por dois gatos. Patrona das bruxas nórdicas."],
+      ["Thor", "🔨", "proteção, trovão e força", "o martelo Mjölnir e o carvalho", "cerveja, pão e carne", "Protetor dos humanos e dos deuses. Seu martelo afasta o mal e abençoa casamentos e casas."],
+      ["Frigga", "🧶", "lar, destino e maternidade", "a roca, as chaves e as nuvens", "pão, linho e velas", "Esposa de Odin, conhece o destino de todos, mas não conta. Protege o lar e tece as nuvens."],
+      ["Loki", "🦊", "transformação, astúcia e caos", "a raposa, o fogo e as formas que muda", "doces e risadas (com cuidado)", "Muda de forma e de lado. Lembra que o caos também abre caminhos, e que todo poder tem seu preço."],
+      ["Hel", "💀", "mundo dos mortos e ciclos", "meio rosto vivo, meio caveira", "silêncio, velas e flores secas", "Senhora do reino dos que morreram em paz. Ensina a aceitar o fim com dignidade."],
+    ] }] },
+    { id: "celta", nome: "Celta", emoji: "☘️", intro: "Para os celtas, o sagrado estava nos rios, nos poços, nas árvores e nos animais. A Roda do Ano bebe muito dessa fonte.", grupos: [{ deuses: [
+      ["Brigid", "🕯️", "fogo, poesia, cura e forja", "a cruz de palha, o poço e a chama", "leite, pão, velas brancas e poesia", "Tríplice deusa da inspiração. Sua chama foi mantida acesa por séculos em Kildare. Celebrada em Imbolc."],
+      ["Cernunnos", "🦌", "natureza, fertilidade e animais", "os chifres de cervo, o torque e a serpente", "vinho, grãos, frutos da floresta", "O deus de chifres, senhor dos bichos e da floresta. Lembra que somos parte da natureza, não seus donos."],
+      ["Morrighan", "🐦‍⬛", "destino, soberania e transformação", "o corvo, a lança e o rio", "vinho tinto, água e penas pretas", "Grande rainha que vê o destino nas batalhas. Ensina a enfrentar o medo e a reivindicar o próprio poder."],
+      ["Cerridwen", "🫕", "caldeirão, sabedoria e renascimento", "o caldeirão, a porca branca e a lua", "grãos, ervas e água", "Guardiã do caldeirão da inspiração. Suas três gotas de sabedoria criaram o grande bardo Taliesin."],
+      ["Danu", "🌊", "mãe dos deuses, rios e abundância", "os rios e as águas correntes", "água, flores e leite", "Mãe dos Tuatha Dé Danann, o povo mágico da Irlanda. É a fonte de onde tudo flui."],
+      ["Lugh", "🌞", "luz, talentos e colheita", "a lança, a funda e o Sol", "pão, grãos e cerveja", "O deus de muitos talentos. Seu festival, Lughnasadh, celebra a primeira colheita."],
+    ] }] },
+    { id: "hindu", nome: "Hindu", emoji: "🪷", intro: "O hinduísmo é uma das religiões vivas mais antigas do mundo. Seus deuses são faces de um mesmo sagrado.", grupos: [{ deuses: [
+      ["Ganesha", "🐘", "remove obstáculos e abençoa começos", "a cabeça de elefante, o rato e os doces", "doces (modak), flores amarelas e incenso", "Saudado antes de qualquer começo. Abre caminhos, traz sabedoria e protege viajantes e estudantes."],
+      ["Lakshmi", "🪷", "prosperidade, beleza e sorte", "a flor de lótus, as moedas de ouro e a coruja", "flores de lótus, arroz, doces e lamparinas", "Deusa da abundância em todas as formas. Celebrada no Diwali, a festa das luzes."],
+      ["Shiva", "🔱", "transformação, meditação e a dança cósmica", "o tridente, a lua crescente e a serpente", "água, leite, folhas de bel e cinzas", "O que destrói para renovar. Sua dança cria e desfaz o universo."],
+      ["Durga", "🐅", "proteção, força e coragem", "o tigre ou leão, as muitas armas e o lótus", "flores vermelhas, frutas e lamparinas", "A guerreira invencível que derrotou o demônio búfalo. Protege quem enfrenta grandes batalhas."],
+      ["Saraswati", "🎶", "sabedoria, artes e música", "a vina, o cisne e os livros", "flores brancas, frutas e instrumentos", "Patrona dos estudos, da música e da fala. Invocada por artistas, professores e estudantes."],
+      ["Kali", "🌑", "tempo, libertação e transformação", "a espada, o colar de crânios e a língua de fora", "flores vermelhas, doces e incenso", "A mãe feroz que corta ilusões e o ego. Por trás do medo, é amor que liberta."],
+    ] }] },
+    { id: "oriental", nome: "Oriental", emoji: "⛩️", intro: "Da China ao Japão, deusas e espíritos guardam a compaixão, o Sol, a Lua e a prosperidade.", grupos: [{ deuses: [
+      ["Kuan Yin", "🪷", "compaixão e misericórdia (China)", "o vaso de água, o salgueiro e o lótus", "flores, frutas, chá e incenso", "Aquela que ouve os lamentos do mundo. Acolhe quem sofre e ensina a bondade com todos os seres."],
+      ["Amaterasu", "☀️", "Sol e luz (Japão)", "o espelho sagrado e o Sol nascente", "arroz, saquê e sal", "A deusa do Sol do xintoísmo. Quando se escondeu numa caverna, o mundo ficou escuro até que a alegria a trouxe de volta."],
+      ["Inari", "🦊", "prosperidade, arroz e negócios (Japão)", "as raposas brancas e os portais vermelhos", "arroz, saquê e tofu frito", "Seus milhares de portais vermelhos sobem a montanha em Kyoto. Abençoa colheitas e comércio."],
+      ["Benzaiten", "🎵", "artes, água e fortuna (Japão)", "o alaúde biwa, a serpente e a água", "música, flores e moedas", "Deusa de tudo que flui: água, palavras, música e dinheiro. Uma das Sete Divindades da Sorte."],
+      ["Chang'e", "🌕", "a Lua (China)", "o coelho de jade e a lua cheia", "bolos lunares, frutas redondas e chá", "Mora na Lua com o coelho de jade. É celebrada no Festival do Meio do Outono."],
+      ["Xi Wangmu", "🍑", "imortalidade e sabedoria (China)", "os pêssegos da imortalidade e a montanha Kunlun", "pêssegos, chá e incenso", "A Rainha Mãe do Oeste guarda os pêssegos que dão vida eterna. Protege mulheres e iniciadas."],
+    ] }] },
+    { id: "brasileiro", nome: "Brasileiro", emoji: "🌿", intro: "No Brasil, o sagrado tem duas raízes fortes: os povos originários, com seus encantados da mata, e as religiões de matriz africana, com os orixás.", grupos: [
+      { titulo: "Povos originários (tupi-guarani)", deuses: [
+        ["Tupã", "⚡", "trovão, criação e força", "o raio, o trovão e as tempestades", "respeito à natureza, cantos e silêncio", "Manifestação do trovão e do grande poder criador para os povos tupi-guarani."],
+        ["Jaci", "🌙", "a Lua, a saudade e o amor", "a lua e as plantas que florescem à noite", "flores brancas, cantos e água", "A mãe-lua que protege os amantes e faz crescer as plantas. Irmã e companheira de Guaraci."],
+        ["Guaraci", "☀️", "o Sol, a vida e o calor", "o Sol e o dia", "frutas e cantos ao amanhecer", "O Sol que dá vida a todas as criaturas e ilumina os caminhos."],
+        ["Iara", "🧜‍♀️", "as águas doces e o encanto", "os rios, o canto e os cabelos longos", "flores e espelhos jogados no rio", "A mãe-d’água dos rios amazônicos, que encanta com seu canto. Guardiã das águas doces."],
+        ["Curupira", "👣", "proteção das matas e dos bichos", "os pés virados para trás e o cabelo de fogo", "fumo, mel e cachaça deixados na mata", "Protetor da floresta, confunde caçadores e quem desmata. Ensina a pedir licença antes de entrar na mata."],
+        ["Rudá", "💘", "o amor", "as nuvens e o entardecer", "flores e cantos", "Deus guerreiro do amor, que mora nas nuvens e desperta a saudade nos corações."],
+      ] },
+      { titulo: "Orixás (matriz africana)", deuses: [
+        ["Iemanjá", "🌊", "mar, maternidade e proteção", "o mar, as conchas e o espelho", "flores brancas, perfume e espelhos, entregues no mar", "A grande mãe das águas salgadas, celebrada no Ano Novo e em 2 de fevereiro. Acolhe e protege seus filhos."],
+        ["Oxum", "💛", "águas doces, amor e prosperidade", "o espelho, o leque e o ouro", "flores amarelas, mel e perfume", "Senhora dos rios e cachoeiras, da fertilidade e da riqueza. Doce e poderosa."],
+        ["Iansã", "🌪️", "ventos, tempestades e coragem", "a espada, o eruexim e os raios", "acarajé e flores vermelhas", "A guerreira dos ventos que conduz os eguns. Senhora da transformação e da paixão."],
+        ["Xangô", "⚖️", "justiça, trovão e fogo", "o machado de duas lâminas (oxé) e as pedreiras", "amalá e quiabo", "O rei justo do trovão. Protege quem busca equilíbrio e justiça."],
+        ["Ogum", "⚔️", "caminhos, trabalho e tecnologia", "a espada, as ferramentas e o ferro", "feijoada, inhame e cerveja", "O desbravador que abre caminhos com sua espada. Senhor do ferro e das batalhas do dia a dia."],
+        ["Oxóssi", "🏹", "caça, fartura e conhecimento", "o arco e flecha (ofá) e a mata", "milho, frutas e coco", "O caçador de uma flecha só, que nunca erra. Traz fartura, sabedoria e o alimento para a casa."],
+      ] },
+    ] },
+  ];
+  const abasEl = $("#abas-panteoes"), panteaoEl = $("#panteao");
+  abasEl.innerHTML = PANTEOES.map((p, i) => `<button type="button" role="tab" id="aba-${p.id}" aria-controls="panteao" aria-selected="${i === 0}" data-panteao="${p.id}">${p.nome}</button>`).join("");
+  function mostrarPanteao(id) {
+    const p = PANTEOES.find(x => x.id === id);
+    $$("[data-panteao]", abasEl).forEach(b => b.setAttribute("aria-selected", b.dataset.panteao === id));
+    panteaoEl.setAttribute("aria-labelledby", `aba-${id}`);
+    panteaoEl.innerHTML = `<p class="panteao__intro">${p.intro}</p>` + p.grupos.map(g => `${g.titulo ? `<h3 class="panteao__grupo">${g.titulo}</h3>` : ""}<div class="deuses">${g.deuses.map(([nome, simb, dom, simbolos, oferendas, texto]) => `
+      <details class="deus"><summary><span class="deus__simbolo" aria-hidden="true">${simb}</span><span><span class="deus__nome">${nome}</span><span class="deus__dom">${dom}</span></span></summary>
+        <div class="deus__corpo"><p>${texto}</p><p><strong>Símbolos</strong>: ${simbolos}.</p><p><strong>Oferendas</strong>: ${oferendas}.</p></div></details>`).join("")}</div>`).join("");
+  }
+  abasEl.addEventListener("click", e => { const b = e.target.closest("[data-panteao]"); if (b) { mostrarPanteao(b.dataset.panteao); sino(2); } });
+  abasEl.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const bs = $$("[data-panteao]", abasEl), i = bs.indexOf(document.activeElement);
+    if (i < 0) return;
+    const n = bs[(i + (e.key === "ArrowRight" ? 1 : bs.length - 1)) % bs.length];
+    n.focus(); mostrarPanteao(n.dataset.panteao);
+  });
+  mostrarPanteao(PANTEOES[0].id);
+
+  /* ---------- Player: playlist da Tryv no Spotify ----------
+     Para trocar a lista, cole aqui o link da playlist (Spotify > Compartilhar > Copiar link).
+     As músicas que ela acrescentar na playlist aparecem sozinhas. */
+  const PLAYLIST_SPOTIFY = "";
+  const PERFIL_SPOTIFY = "https://open.spotify.com/user/21tyvaoezzny5ykubpgamm26q";
+  const musicaBotao = $("#musica-botao"), musicaPainel = $("#musica-painel"), musicaConteudo = $("#musica-conteudo");
+  let musicaCarregada = false;
+  function abrirMusica(abrir) {
+    musicaPainel.classList.toggle("aberto", abrir);
+    musicaBotao.setAttribute("aria-expanded", abrir);
+    if (abrir && !musicaCarregada) {
+      musicaCarregada = true;
+      const id = (PLAYLIST_SPOTIFY.match(/playlist\/([A-Za-z0-9]+)/) || [])[1];
+      musicaConteudo.innerHTML = id
+        ? `<iframe src="https://open.spotify.com/embed/playlist/${id}?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Playlist da Tryv no Spotify"></iframe>`
+        : `<a class="botao botao--ouro" href="${PERFIL_SPOTIFY}" target="_blank" rel="noopener">♪ Ouvir a Tryv no Spotify</a>`;
+      if (id) musicaBotao.classList.add("tocando");
+    }
+  }
+  musicaBotao.addEventListener("click", () => abrirMusica(!musicaPainel.classList.contains("aberto")));
+  $("#musica-fechar").addEventListener("click", () => abrirMusica(false));
+
+  /* ---------- Gatos pretos: os sentados miam ao toque; um atravessa a tela de vez em quando ---------- */
+  $$(".gato-sentado").forEach(g => {
+    const miar = () => {
+      g.classList.remove("miau"); void g.getBoundingClientRect(); g.classList.add("miau");
+      const r = g.getBoundingClientRect(), pai = g.parentElement.getBoundingClientRect();
+      const b = document.createElement("span");
+      b.className = "balao-miau"; b.textContent = ["Miau ✨", "Prrr…", "Miau!", "🐾 Miau"][Math.floor(Math.random() * 4)];
+      b.style.left = (r.left - pai.left + r.width * .6) + "px"; b.style.top = (r.top - pai.top - 30) + "px";
+      g.parentElement.appendChild(b); setTimeout(() => b.remove(), 1700);
+      soltar(r.left + r.width / 2, r.top + r.height * .4, 16, { forca: 2, curta: true, cores: ["255,211,77", "200,170,255"] });
+      sino(1);
+    };
+    g.addEventListener("click", miar);
+    g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); miar(); } });
+  });
+  const gatoAndando = $("#gato-andando");
+  if (!parado) {
+    const passear = () => {
+      if (!document.hidden && !document.body.classList.contains("travado")) {
+        gatoAndando.classList.remove("indo"); void gatoAndando.getBoundingClientRect(); gatoAndando.classList.add("indo");
+      }
+      setTimeout(passear, 45000 + Math.random() * 40000);
+    };
+    setTimeout(passear, 12000);
+  }
+
   /* ---------- Árvores da floresta (geradas, sempre iguais) ---------- */
   let semente = 7;
   const aleatorio = () => (semente = (semente * 16807) % 2147483647) / 2147483647;
@@ -3575,7 +4051,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     "Levar para uma consulta": "Take it to a reading", "↻ Embaralhar de novo": "↻ Shuffle again",
     "A mesa encantada é um carinho para o seu dia. A leitura completa, feita com atenção à sua história, é com a Tryv.": "The enchanted table is a little gift for your day. A full reading, attentive to your own story, is with Tryv.",
     "Degustação mágica": "A magical taste",
-    "Cinco portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.": "Five portals open from your date of birth. It is just a taste: Tryv explores each one in depth in a reading.",
+    "Seis portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.": "Six portals open from your date of birth. It is just a taste: Tryv explores each one in depth in a reading.",
     "Seu nome": "Your name", "Data de nascimento": "Date of birth", "✦ Abrir os portais": "✦ Open the portals",
     "Mapa astral": "Birth chart", "gratuito": "free", "Kin maia": "Mayan Kin", "Anjo cabalístico": "Kabbalistic angel", "os 72 nomes": "the 72 names",
     "Horóscopo chinês": "Chinese horoscope", "animal e elemento": "animal and element", "Arcano de nascimento": "Birth arcana", "tarô": "tarot",
@@ -3641,6 +4117,12 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     "Pronto! O caldeirão vai ferver ✦": "Ready! The cauldron is about to boil ✦",
     "Caldeirão limpinho. Pegue uma erva e jogue lá dentro ✦": "Spotless cauldron. Grab an herb and drop it in ✦",
     "Borbulhando…": "Bubbling…",
+    "Festa do fogo": "Fire festival", "Solstício de inverno": "Winter solstice", "Solstício de verão": "Summer solstice",
+    "Equinócio de primavera": "Spring equinox", "Equinócio de outono": "Autumn equinox",
+    "Roda do Ano": "Wheel of the Year", "A Roda do Ano": "The Wheel of the Year", "Paganismo e natureza": "Paganism and nature",
+    "Panteões": "Pantheons", "Os panteões": "The pantheons", "Deuses e deusas": "Gods and goddesses",
+    "Animal de poder": "Power animal", "animal de poder": "power animal", "Mista": "Mixed",
+    "Trilha da Tryv ♪": "Tryv’s soundtrack ♪", "♪ Ouvir a Tryv no Spotify": "♪ Listen to Tryv on Spotify",
   });
   const CITACAO = "When you touch one thing with deep awareness, you touch everything.";
   const TITULO = "Bem Dito Tarot — Tarot and oracles with Tryv Tuath";
