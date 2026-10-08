@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" translate="no">
 <head>
 <meta charset="utf-8">
+<!-- o site tem o próprio botão EN/PT; o tradutor do navegador brigaria com ele e travaria a página -->
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bem Dito Tarot — Tarô e oráculos com Tryv Tuath</title>
 <meta name="description" content="Leituras de tarô e oráculos, mentoria, rituais, Reiki e regressão com Tryv Tuath. Atendimento remoto ou presencial.">
@@ -636,6 +638,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 /* ---------- Dentro ---------- */
 .interior { position: fixed; inset: 0; z-index: 60; background: #1a0b05; opacity: 0; visibility: hidden; transition: opacity .6s, visibility .6s; }
 .interior.aberto { opacity: 1; visibility: visible; }
+/* animações da casinha só rodam quando dá para vê-las (poupa o processador) */
+.interior:not(.aberto) *, .casinha-palco.longe * { animation-play-state: paused !important; }
 .interior__sala { position: absolute; inset: 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; overscroll-behavior: contain; }
 .interior__sala::-webkit-scrollbar { display: none; }
 .sala-mundo { position: relative; height: 100%; width: max(100%, calc(100dvh * 1.6)); overflow: hidden; }
@@ -3402,7 +3406,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   // No celular a cena é estreita: aproxima a câmera da casinha para a porta ficar maior
   const zoomBase = () => (palco.clientWidth < 560 ? 1.32 : 1);
   let foraVisivel = false, dentro = false, entrando = false;
-  new IntersectionObserver(e => { foraVisivel = e[0].isIntersecting; }, { threshold: 0 }).observe(palco);
+  new IntersectionObserver(e => { foraVisivel = e[0].isIntersecting; palco.classList.toggle("longe", !foraVisivel); }, { threshold: 0 }).observe(palco);
 
   const prof = { x: 0, y: 0 };
   const camadasFora = $$(".camada", zoomEl), camadasDentro = $$(".camada", mundo);
@@ -4146,7 +4150,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 
   let ingles = false;
   const traduzidos = new Map(); // nó de texto → { pt, en }
-  const PULAR = "script, style, noscript, option, [translate=no], #citacao";
+  // o <html> tem translate="no" só para o tradutor do navegador; aqui valem os elementos marcados por dentro
+  const PULAR = "script, style, noscript, option, body [translate=no], #citacao";
   const temLetra = /\p{L}/u;
   const aceitar = no => {
     const reg = traduzidos.get(no);
@@ -4169,10 +4174,17 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     return true;
   };
   // o que já está na memória troca na hora; o resto vai ao tradutor em lotes
+  const pedidos = [];
+  let pausado = false;
   const traduzirNos = async (nos) => {
     if (traduzidos.size > 3000) traduzidos.forEach((_, no) => { if (!no.isConnected) traduzidos.delete(no); });
     const faltam = nos.filter(no => !aplicar(no));
     if (!faltam.length) return;
+    // trava de segurança: se algo ficar trocando o texto sem parar, para de pedir traduções por um tempo
+    const agora = Date.now();
+    pedidos.push(agora);
+    while (pedidos.length && agora - pedidos[0] > 60000) pedidos.shift();
+    if (pedidos.length > 30) { pausar(); return; }
     const textos = [...new Set(faltam.map(no => no.nodeValue.trim()))];
     const lotes = [];
     let lote = [], tam = 0;
@@ -4188,13 +4200,27 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     if (ingles) faltam.forEach(no => { if (no.isConnected && aceitar(no)) aplicar(no); });
   };
   // textos que o site escreve depois (cartas, portais, casinha) são traduzidos assim que aparecem
+  // quantas vezes cada trecho já foi trocado: se alguém (o tradutor do navegador, por exemplo)
+  // fica devolvendo o português, o mesmo nó volta sem parar e a página travaria
+  const vezes = new WeakMap();
+  let rajada = 0, inicioRajada = 0;
+  const pausar = () => {
+    if (pausado) return;
+    pausado = true; vigia.disconnect();
+    setTimeout(() => { pausado = false; pedidos.length = 0; rajada = 0; if (ingles) vigia.observe(document.body, { subtree: true, childList: true, characterData: true }); }, 20000);
+  };
   const vigia = new MutationObserver(mudancas => {
-    if (!ingles) return;
-    const nos = [];
+    if (!ingles || pausado) return;
+    const agora = Date.now();
+    if (agora - inicioRajada > 2000) { inicioRajada = agora; rajada = 0; }
+    let nos = [];
     for (const m of mudancas) {
       if (m.type === "characterData") coletar(m.target, nos);
       else m.addedNodes.forEach(n => coletar(n, nos));
     }
+    nos = nos.filter(no => { const v = (vezes.get(no) || 0) + 1; vezes.set(no, v); return v <= 4; });
+    rajada += nos.length;
+    if (rajada > 1500) { pausar(); return; }
     if (nos.length) traduzirNos(nos);
   });
 
@@ -4240,7 +4266,11 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     try { localStorage.setItem("bemdito-idioma", ingles ? "en" : "pt"); } catch {}
   });
   let salvo = null;
-  try { salvo = localStorage.getItem("bemdito-idioma"); } catch {}
+  try {
+    // saída de emergência: endereço terminado em ?pt apaga o idioma e as traduções guardadas
+    if (/[?&]pt\b/.test(location.search)) { localStorage.removeItem("bemdito-idioma"); localStorage.removeItem(MEMORIA); }
+    salvo = localStorage.getItem("bemdito-idioma");
+  } catch {}
   if (salvo === "en") paraIngles();
 })();
 </script>
