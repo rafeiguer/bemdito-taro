@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://rafeiguer.github.io/bemdito-taro/">
 <meta property="og:title" content="Bem Dito Tarot">
-<meta property="og:description" content="Toda pergunta merece ser bem dita. Tarô e oráculos com Tryv Tuath.">
+<meta property="og:description" content="Você é o oráculo. Tarô e oráculos com Tryv Tuath.">
 <meta property="og:image" content="https://rafeiguer.github.io/bemdito-taro/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
@@ -447,16 +447,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .zap-flutuante svg { width: 28px; height: 28px; }
 
 /* ---------- Varinha (mouse) e fada (celular) ---------- */
-.com-varinha, .com-varinha * { cursor: none !important; }
-#varinha {
-  position: fixed; left: 0; top: 0; z-index: 100; width: 64px; height: 64px; pointer-events: none;
-  opacity: 0; transition: opacity .3s; will-change: transform;
-}
-#varinha.visivel { opacity: 1; }
-#varinha svg { width: 100%; height: 100%; overflow: visible; transform-origin: 10px 10px; transition: transform .25s; }
-#varinha .ponta { transform-origin: 10px 10px; transition: transform .25s, filter .25s; }
-#varinha.ativa .ponta { transform: scale(1.45) rotate(18deg); filter: drop-shadow(0 0 8px #fff3c4); }
-#varinha.clique svg { transform: rotate(-14deg); }
+/* a varinha é o próprio cursor (imagem definida no script): o navegador desenha sem atraso */
 #fada { position: fixed; left: 0; top: 0; z-index: 95; width: 46px; height: 46px; margin: -23px 0 0 -23px; pointer-events: none; will-change: transform; display: none; }
 .com-fada #fada { display: block; }
 .fada__corpo { position: absolute; inset: 0; transition: transform .3s; }
@@ -563,6 +554,9 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .mapa .aspecto { stroke-dasharray: 400; stroke-dashoffset: 400; animation: tracar 1.4s ease forwards; animation-delay: calc(2.2s + var(--k) * 40ms); }
 @keyframes tracar { to { stroke-dashoffset: 0; } }
 .mapa-info { min-height: 1.6em; margin: .6rem 0 0; text-align: center; font: italic 500 1.15rem/1.4 var(--livro); color: var(--ouro-claro); }
+.mapa-legenda { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.1rem; margin: .5rem 0 0; font-size: .85rem; color: var(--texto-2); }
+.mapa-legenda span { display: inline-flex; align-items: center; gap: .4rem; }
+.mapa-legenda i { width: 22px; border-top: 2px solid; }
 .tabela-astros { width: 100%; margin-top: 1.2rem; border-collapse: collapse; font-size: .95rem; }
 .tabela-astros td { padding: .42rem .4rem; border-bottom: 1px solid rgba(242, 193, 78, .12); color: var(--texto-2); }
 .tabela-astros td:first-child { width: 2rem; font: 1.15rem/1 var(--simbolo); color: var(--ouro-claro); text-align: center; }
@@ -849,7 +843,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 
 <header class="topo" id="topo">
   <div class="envelope topo__linha">
-    <a class="marca" translate="no" href="#inicio"><img src="assets/logo-tryv-pequeno.webp" alt="" width="240" height="316"><span>Bem Dito</span></a>
+    <a class="marca" translate="no" href="#inicio"><img src="assets/logo-tryv-icone.webp" alt="" width="96" height="126"><span>Tryv Tuath</span></a>
     <nav class="menu" id="menu" aria-label="Seções">
       <a href="#cartas">Cartas</a>
       <a href="#descubra">Descubra-se</a>
@@ -887,7 +881,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
           <img src="assets/logo-tryv.webp" alt="Tryv Tuath: everything is possible" width="516" height="678" fetchpriority="high">
         </button>
       </div>
-      <h1>Toda pergunta merece ser <em>bem dita</em>.</h1>
+      <h1>Você é o <em>oráculo</em>.</h1>
       <p class="heroi__texto">Tarô, oráculos e terapias com Tryv Tuath. Com amor, verdade e um pouco de magia.</p>
       <div class="heroi__acoes">
         <a class="botao botao--ouro" href="#cartas">✦ Tirar minha carta</a>
@@ -952,8 +946,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   <section class="secao" id="descubra">
     <div class="envelope">
       <div class="cabeca surge">
-        <span class="chamada">Degustação mágica</span>
-        <h2 class="titulo">Descubra-se</h2>
+        <span class="chamada">Descubra-se</span>
+        <h2 class="titulo">Vamos explorar mais sobre você?</h2>
         <p class="intro">Seis portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.</p>
       </div>
       <form class="nascimento surge" id="nascimento" novalidate>
@@ -1206,7 +1200,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
           <li><strong>Receba sua leitura</strong>E leve com você o que as cartas têm a dizer.</li>
         </ol>
         <div class="cartao-contato surge">
-          <img src="assets/logo-tryv-pequeno.webp" alt="" width="240" height="316" loading="lazy">
+          <img src="assets/logo-tryv.webp" alt="" width="516" height="678" loading="lazy">
           <a class="botao botao--rosa" data-zap="Olá, Tryv! Vim pelo site Bem Dito Tarot ✨" href="https://wa.me/5551996489944" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.1Z"/></svg>
             (51) 99648-9944
@@ -1272,19 +1266,6 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 </a>
 
 <canvas id="magia" aria-hidden="true"></canvas>
-<div id="varinha" aria-hidden="true">
-  <svg viewBox="0 0 64 64">
-    <defs>
-      <linearGradient id="cabo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d2"/><stop offset=".5" stop-color="#f6cd62"/><stop offset=".56" stop-color="#ff2d87"/><stop offset=".64" stop-color="#ff2d87"/><stop offset=".7" stop-color="#d39a2c"/><stop offset="1" stop-color="#8a5a12"/></linearGradient>
-    </defs>
-    <path d="M14 14 L58 58" stroke="#120e2e" stroke-width="7" stroke-linecap="round" opacity=".6"/>
-    <path d="M14 14 L58 58" stroke="url(#cabo)" stroke-width="4.5" stroke-linecap="round"/>
-    <g class="ponta">
-      <path d="M10 0 L12.6 7.4 L20 10 L12.6 12.6 L10 20 L7.4 12.6 L0 10 L7.4 7.4Z" fill="#fff6d2" stroke="#f2c14e" stroke-width="1"/>
-      <circle cx="10" cy="10" r="2.4" fill="#fff"/>
-    </g>
-  </svg>
-</div>
 <div id="fada" aria-hidden="true">
   <div class="fada__corpo">
     <span class="fada__asa fada__asa--esq"></span><span class="fada__asa fada__asa--dir"></span>
@@ -1478,28 +1459,35 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   }
 
   /* ---------- Varinha de condão (mouse) ---------- */
-  const varinha = $("#varinha");
   const mouse = { x: -100, y: -100, px: -100, py: -100 };
-  if (!toque && !parado) {
-    document.documentElement.classList.add("com-varinha");
+  if (!toque) {
+    // A varinha vira o cursor do sistema (imagem SVG). Antes era um elemento movido pelo script,
+    // que sempre chegava um ou dois quadros atrasado em relação ao mouse.
+    const cabo = `<defs><linearGradient id="c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d2"/><stop offset=".5" stop-color="#f6cd62"/><stop offset=".56" stop-color="#ff2d87"/><stop offset=".64" stop-color="#ff2d87"/><stop offset=".7" stop-color="#d39a2c"/><stop offset="1" stop-color="#8a5a12"/></linearGradient></defs>
+      <path d="M14 14 L58 58" stroke="#120e2e" stroke-width="7" stroke-linecap="round" opacity=".6"/><path d="M14 14 L58 58" stroke="url(#c)" stroke-width="4.5" stroke-linecap="round"/>`;
+    const ponta = `<path d="M10 0 L12.6 7.4 L20 10 L12.6 12.6 L10 20 L7.4 12.6 L0 10 L7.4 7.4Z" fill="#fff6d2" stroke="#f2c14e" stroke-width="1"/><circle cx="10" cy="10" r="2.4" fill="#fff"/>`;
+    const svg = (corpo, giro = 0) => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><g transform="rotate(${giro} 10 10)">${corpo}</g></svg>`)}") 10 10`;
+    const normal = svg(cabo + ponta);
+    const ativa = svg(cabo + `<circle cx="10" cy="10" r="9" fill="#fff3c4" opacity=".45"/><g transform="rotate(18 10 10) translate(10 10) scale(1.4) translate(-10 -10)">${ponta}</g>`);
+    const clique = svg(cabo + ponta, -14);
+    const alvos = "a, button, [role=button], .leque__carta, .personas li, summary, label, select, .ingrediente, .ponto";
+    const estilo = document.createElement("style");
+    estilo.textContent = `html, html * { cursor: ${normal}, auto; }
+      :is(${alvos}), :is(${alvos}) * { cursor: ${ativa}, pointer !important; }
+      html:active, html:active * { cursor: ${clique}, auto !important; }
+      input[type=text], input:not([type]), textarea { cursor: text !important; }`;
+    document.head.appendChild(estilo);
     addEventListener("pointermove", e => {
       if (e.pointerType !== "mouse" && e.pointerType !== "pen") return;
       mouse.x = e.clientX; mouse.y = e.clientY;
-      varinha.classList.add("visivel");
-      varinha.style.transform = `translate(${mouse.x - 10}px, ${mouse.y - 10}px)`;
-      const alvo = e.target.closest && e.target.closest("a, button, [role=button], .leque__carta, .personas li");
-      varinha.classList.toggle("ativa", !!alvo);
       olhar.x = (mouse.x / W - 0.5) * 2; olhar.y = (mouse.y / H - 0.5) * 2;
     }, { passive: true });
-    document.addEventListener("mouseleave", () => varinha.classList.remove("visivel"));
-    addEventListener("pointerdown", e => {
+    if (!parado) addEventListener("pointerdown", e => {
       if (e.pointerType !== "mouse") return;
-      varinha.classList.add("clique");
       soltar(e.clientX, e.clientY, 34, { forca: 3.2, anel: true, curta: true });
       soltar(e.clientX, e.clientY, 14, { forca: 1.5 });
       sino();
     });
-    addEventListener("pointerup", () => varinha.classList.remove("clique"));
   }
   function rastroVarinha() {
     const dx = mouse.x - mouse.px, dy = mouse.y - mouse.py;
@@ -1985,8 +1973,15 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       const sol = solLon(d);
       if (nome === "sol") return sol.lon;
       if (nome === "lua") return luaLon(d);
+      // Lilith (Lua Negra média): apogeu médio da órbita da Lua = perigeu médio + 180°
+      if (nome === "lilith") return norm(263.3862 + 0.1114035140 * d);
       let h;
-      if (nome === "plutao") {
+      if (nome === "quiron") {
+        // Quíron: órbita de Kepler (JPL); periélio em 14/02/1996. Posição J2000 levada ao equinócio da data
+        const a = 13.692;
+        h = orbita({ N: 209.296, i: 6.9297, w: 339.255, a, e: 0.37897, M: 0.9856076686 / Math.pow(a, 1.5) * (d + 1415.2) });
+        h.lon += 3.82394e-5 * d;
+      } else if (nome === "plutao") {
         const S = 50.03 + 0.033459652 * d, P = 238.95 + 0.003968789 * d;
         const lon = 238.9508 + 0.00400703 * d - 19.799 * sen(P) + 19.848 * cos(P) + 0.897 * sen(2 * P) - 4.956 * cos(2 * P)
           + 0.61 * sen(3 * P) + 1.211 * cos(3 * P) - 0.341 * sen(4 * P) - 0.19 * cos(4 * P) + 0.128 * sen(5 * P) - 0.034 * cos(5 * P)
@@ -2145,6 +2140,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   const PLANETAS = [
     ["sol", "Sol", "☉"], ["lua", "Lua", "☽"], ["mercurio", "Mercúrio", "☿"], ["venus", "Vênus", "♀"], ["marte", "Marte", "♂"],
     ["jupiter", "Júpiter", "♃"], ["saturno", "Saturno", "♄"], ["urano", "Urano", "♅"], ["netuno", "Netuno", "♆"], ["plutao", "Plutão", "♇"],
+    ["quiron", "Quíron", "⚷"], ["lilith", "Lilith", "⚸"],
   ].map(([id, nome, glifo]) => ({ id, nome, glifo: glifo + T }));
   // [nome, UF, latitude, longitude, fuso (horas em relação a UTC), teve horário de verão]
   const CIDADES = [
@@ -2293,7 +2289,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     const astros = PLANETAS.map(pl => {
       const lon = ASTRO.planetaLon(pl.id, d);
       const mov = ((ASTRO.planetaLon(pl.id, d + 0.5) - ASTRO.planetaLon(pl.id, d - 0.5)) + 540) % 360 - 180;
-      return { ...pl, lon, retro: mov < 0 && pl.id !== "sol" && pl.id !== "lua" };
+      return { ...pl, lon, retro: mov < 0 && pl.id !== "sol" && pl.id !== "lua" && pl.id !== "lilith" };
     });
     const ang = f.semHora ? null : ASTRO.angulos(d, ut, f.lat, f.lon);
     return { astros, asc: ang ? ang.asc : null, mc: ang ? ang.mc : null };
@@ -2368,15 +2364,26 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
           <text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="Cinzel, serif" font-size="11" font-weight="600" fill="#ff8cc0">${rot}</text>`;
       }
     }
-    // Aspectos maiores entre os astros
-    const ASPECTOS = [[60, 5, "#b9a3ff"], [90, 6, "#ff5aa5"], [120, 6, "#7fd1ff"], [180, 8, "#ff5aa5"]];
+    // Aspectos: sextil, quadratura, trígono e oposição. Orbe maior quando o Sol ou a Lua estão no par
+    // (6° a 8°) e menor para os demais (4° a 6°). Entram também Quíron, Lilith, Ascendente e Meio do Céu.
+    const ASPECTOS = [
+      { ang: 60, orbeLuz: 6, orbe: 4, cor: "#b9a3ff", traco: "4 3" },
+      { ang: 90, orbeLuz: 7, orbe: 5, cor: "#ff5aa5", traco: "" },
+      { ang: 120, orbeLuz: 7, orbe: 5, cor: "#7fd1ff", traco: "" },
+      { ang: 180, orbeLuz: 8, orbe: 6, cor: "#ff5aa5", traco: "" },
+    ];
+    const pontos = r.astros.map(a => ({ id: a.id, lon: a.lon }));
+    if (r.asc != null) pontos.push({ id: "asc", lon: r.asc }, { id: "mc", lon: r.mc });
     let aspectos = "", k = 0;
-    for (let i = 0; i < r.astros.length; i++) for (let j = i + 1; j < r.astros.length; j++) {
-      const sep = Math.abs(((r.astros[i].lon - r.astros[j].lon) % 360 + 540) % 360 - 180);
-      const asp = ASPECTOS.find(([ang, orbe]) => Math.abs(sep - ang) <= orbe);
+    for (let i = 0; i < pontos.length; i++) for (let j = i + 1; j < pontos.length; j++) {
+      const p1 = pontos[i], p2 = pontos[j];
+      if (p1.id === "asc" && p2.id === "mc") continue; // os dois eixos do mapa, não é aspecto
+      const luz = ["sol", "lua"].includes(p1.id) || ["sol", "lua"].includes(p2.id);
+      const sep = Math.abs(((p1.lon - p2.lon) % 360 + 540) % 360 - 180);
+      const asp = ASPECTOS.find(x => Math.abs(sep - x.ang) <= (luz ? x.orbeLuz : x.orbe));
       if (!asp) continue;
-      const [a, b] = P(r.astros[i].lon, 62), [c, d] = P(r.astros[j].lon, 62);
-      aspectos += `<line class="aspecto" style="--k:${k++}" x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${asp[2]}" stroke-width="1" stroke-opacity=".75"/>`;
+      const [a, b] = P(p1.lon, 62), [c, d] = P(p2.lon, 62);
+      aspectos += `<line class="aspecto" style="--k:${k++}" x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${asp.cor}" stroke-width="1" stroke-opacity=".75"${asp.traco ? ` stroke-dasharray="${asp.traco}"` : ""}/>`;
     }
     // Afasta os símbolos que caem muito perto uns dos outros
     const ord = r.astros.map((a, i) => ({ i, ang: a.lon })).sort((x, y) => x.ang - y.ang);
@@ -2638,7 +2645,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     const resumo = `Sol em ${sS.nome}, Lua em ${sL.nome}${sA ? `, Ascendente em ${sA.nome}` : ""}`;
     $("#mapa-resultado").innerHTML = painel({
       chamada: `${dataBR(pessoa)}${mapaPrefs.semHora ? "" : ` · ${mapaPrefs.hora}`} · ${esc(lugar)}`, titulo: resumo,
-      visual: `<div style="width:100%">${svgMapa(r)}<p class="mapa-info" id="mapa-info">Toque num planeta para ver onde ele estava.</p></div>`,
+      visual: `<div style="width:100%">${svgMapa(r)}<p class="mapa-info" id="mapa-info">Toque num planeta para ver onde ele estava.</p>
+        <p class="mapa-legenda"><span><i style="border-color:#7fd1ff"></i>trígono</span><span><i style="border-color:#b9a3ff;border-top-style:dashed"></i>sextil</span><span><i style="border-color:#ff5aa5"></i>quadratura e oposição</span></p></div>`,
       texto, mensagem: `Olá, Tryv! ${quem()}${mapaPrefs.semHora ? "" : ` às ${mapaPrefs.hora}`} em ${lugar}. Fiz o mapa no site: ${resumo}. Quero aprofundar meu mapa astral ✨`,
     });
     const res = $("#mapa-resultado");
@@ -4046,7 +4054,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     "Entrar ✨": "Enter ✨",
     "Cartas": "Cards", "Descubra-se": "Discover yourself", "Casinha": "Cottage", "Consultas": "Readings", "Livro": "Book", "Contato": "Contact",
     "Do macro ao micro ·": "From macro to micro ·", "espiritualidade": "spirituality", "autoconhecimento": "self-knowledge", "empoderamento": "empowerment",
-    "Toda pergunta merece ser": "Every question deserves to be", "bem dita": "well said",
+    "Você é o": "You are the", "oráculo": "oracle", "Vamos explorar mais sobre você?": "Shall we explore more about you?",
     "Tarô, oráculos e terapias com Tryv Tuath. Com amor, verdade e um pouco de magia.": "Tarot, oracles and therapies with Tryv Tuath. With love, truth and a little magic.",
     "✦ Tirar minha carta": "✦ Draw my card", "Agendar consulta": "Book a reading",
     "Oráculo encantado": "Enchanted oracle", "Escolha a sua carta": "Choose your card",
