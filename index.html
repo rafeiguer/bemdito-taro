@@ -794,6 +794,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .sabbat-no circle.fundo { transition: r .3s, fill .3s, stroke .3s; }
 .sabbat-no:hover circle.fundo, .sabbat-no:focus-visible circle.fundo { fill: rgba(242, 193, 78, .3); }
 .sabbat-no:focus-visible { outline: none; }
+.sabbat-no.vigor circle.fundo { stroke: #ff8cc0; stroke-width: 2.5; filter: drop-shadow(0 0 8px rgba(255, 140, 192, .7)); }
 .sabbat-no.ativo circle.fundo { fill: rgba(242, 193, 78, .35); stroke: #ffe6a3; filter: drop-shadow(0 0 10px rgba(242, 193, 78, .8)); }
 .roda-ano__painel { padding: clamp(1.3rem, 3vw, 2rem); border-radius: 24px; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; }
 .roda-ano__painel h3 { font: 600 clamp(1.7rem, 3.4vw, 2.3rem)/1.1 var(--titulo); color: var(--ouro-claro); margin: .4rem 0 0; }
@@ -4039,14 +4040,21 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     mista: "Muitas bruxas no Brasil honram a estação daqui e também as datas tradicionais. Na roda mista, o anel de fora mostra o Norte e o de dentro, o Sul.",
   };
   const rodaSvg = $("#roda-svg"), rodaPainel = $("#roda-painel"), rodaNota = $("#roda-nota");
-  let rodaModo = "sul", sabbatAtivo = null;
+  let rodaModo = "sul", sabbatAtivo = null, sabbatHem = "sul"; // sabbatHem: em qual anel ele foi escolhido (importa na roda mista)
   const diaDoAno = (d, m) => Math.round((Date.UTC(2001, m - 1, d) - Date.UTC(2001, 0, 1)) / 864e5);
   const anguloData = (d, m) => diaDoAno(d, m) / 365 * 360 - 90;
   const polar = (r, a) => [r * Math.cos(a * Math.PI / 180), r * Math.sin(a * Math.PI / 180)];
   function proximoSabbat(modo) {
     const hojeD = new Date(), n = diaDoAno(hojeD.getDate(), hojeD.getMonth() + 1);
-    const lista = SABBATS.map(s => { const [d, m] = modo === "norte" ? s.norte : s.sul; let falta = diaDoAno(d, m) - n; if (falta < 0) falta += 365; return { s, falta }; });
+    // no próprio dia, aquele sabbat já está em vigor: o próximo é o seguinte
+    const lista = SABBATS.map(s => { const [d, m] = modo === "norte" ? s.norte : s.sul; let falta = diaDoAno(d, m) - n; if (falta <= 0) falta += 365; return { s, falta }; });
     return lista.sort((a, b) => a.falta - b.falta)[0];
+  }
+  // festa em vigor: a última que já aconteceu (vale até o dia do próximo sabbat)
+  function sabbatEmVigor(hem) {
+    const hojeD = new Date(), n = diaDoAno(hojeD.getDate(), hojeD.getMonth() + 1);
+    const lista = SABBATS.map(s => { const [d, m] = s[hem]; let passou = n - diaDoAno(d, m); if (passou < 0) passou += 365; return { s, passou, desde: `${dois(d)}/${dois(m)}` }; });
+    return lista.sort((a, b) => a.passou - b.passou)[0];
   }
   function desenharRoda() {
     const hojeD = new Date(), aHoje = anguloData(hojeD.getDate(), hojeD.getMonth() + 1);
@@ -4077,16 +4085,24 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     aneis.forEach(([hem, r, marca]) => {
       SABBATS.forEach(sb => {
         const [d, m] = sb[hem], [x, y] = polar(r, anguloData(d, m)), rr = rodaModo === "mista" ? 18 : 26;
-        s += `<g class="sabbat-no${sb.id === sabbatAtivo ? " ativo" : ""}" data-sabbat="${sb.id}" role="button" tabindex="0" aria-label="${sb.nome}${marca ? (marca === "N" ? ", Norte" : ", Sul") : ""}" transform="translate(${f1(x)} ${f1(y)})">
+        s += `<g class="sabbat-no${sb.id === sabbatAtivo && (rodaModo !== "mista" || hem === sabbatHem) ? " ativo" : ""}${sb.id === sabbatEmVigor(hem).s.id ? " vigor" : ""}" data-sabbat="${sb.id}" data-hem="${hem}" role="button" tabindex="0" aria-label="${sb.nome}${marca ? (marca === "N" ? ", Norte" : ", Sul") : ""}" transform="translate(${f1(x)} ${f1(y)})">
           <circle class="fundo" r="${rr}" fill="rgba(10,7,28,.85)" stroke="rgba(242,193,78,.6)" stroke-width="1.5"/>
           <text text-anchor="middle" dominant-baseline="central" font-size="${rr * .95}" y="1">${sb.emoji}</text>
           ${marca ? `<text y="${rr + 11}" text-anchor="middle" font-family="Jost, sans-serif" font-size="10" font-weight="600" fill="${marca === "N" ? "#ffe6a3" : "#ff8cc0"}">${marca}</text>` : `<text y="${rr + 15}" text-anchor="middle" font-family="Cinzel, serif" font-size="12.5" font-weight="600" fill="#ffe6a3">${sb.nome}</text>`}
         </g>`;
       });
     });
-    const ativo = SABBATS.find(x => x.id === sabbatAtivo);
-    s += `<text y="-4" text-anchor="middle" font-family="Cinzel, serif" font-size="${rodaModo === "mista" ? 15 : 19}" font-weight="600" fill="#ffe6a3">${ativo ? ativo.nome : ""}</text>
-      <text y="16" text-anchor="middle" font-family="Jost, sans-serif" font-size="10" letter-spacing="2" fill="#ff8cc0">${ativo ? ativo.tipo.toUpperCase() : ""}</text>`;
+    // no centro, só a festa em vigor (na mista, a do Sul e a do Norte)
+    const rotulo = `<text y="${rodaModo === "mista" ? -24 : -22}" text-anchor="middle" font-family="Jost, sans-serif" font-size="10" letter-spacing="2.5" fill="#ff8cc0">EM VIGOR</text>`;
+    if (rodaModo === "mista") {
+      const vs = sabbatEmVigor("sul").s, vn = sabbatEmVigor("norte").s;
+      s += rotulo + `<text y="-2" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="600" fill="#ffe6a3"><tspan fill="#ff8cc0" font-family="Jost, sans-serif" font-size="10">S </tspan>${vs.nome}</text>
+        <text y="18" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="600" fill="#ffe6a3"><tspan fill="#ffe6a3" font-family="Jost, sans-serif" font-size="10">N </tspan>${vn.nome}</text>`;
+    } else {
+      const v = sabbatEmVigor(rodaModo);
+      s += rotulo + `<text y="2" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#ffe6a3">${v.s.nome}</text>
+        <text y="21" text-anchor="middle" font-family="Jost, sans-serif" font-size="10" letter-spacing="1" fill="#c9bfe6">desde ${v.desde}</text>`;
+    }
     rodaSvg.innerHTML = `<svg viewBox="-270 -270 540 540" role="group" aria-label="Roda do Ano">${s}</svg>`;
   }
   function mostrarSabbat(id) {
@@ -4104,20 +4120,27 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   function trocarRoda(modo) {
     rodaModo = modo;
     $$("[data-roda]").forEach(b => b.setAttribute("aria-pressed", b.dataset.roda === modo));
-    const prox = proximoSabbat(modo === "norte" ? "norte" : "sul");
-    rodaNota.innerHTML = `${NOTAS_RODA[modo]} <strong>Próximo sabbat${modo === "mista" ? " no Sul" : ""}: ${prox.s.nome}, ${prox.falta === 0 ? "hoje" : `em ${prox.falta} ${prox.falta === 1 ? "dia" : "dias"}`}.</strong>`;
-    mostrarSabbat(sabbatAtivo || prox.s.id);
+    const quando = p => p.falta === 0 ? "hoje" : `em ${p.falta} ${p.falta === 1 ? "dia" : "dias"}`;
+    if (modo === "mista") {
+      const vs = sabbatEmVigor("sul"), vn = sabbatEmVigor("norte");
+      rodaNota.innerHTML = `${NOTAS_RODA[modo]} <strong>Em vigor: ${vs.s.nome} no Sul e ${vn.s.nome} no Norte.</strong>`;
+      sabbatHem = "sul"; mostrarSabbat(vs.s.id);
+    } else {
+      const v = sabbatEmVigor(modo), prox = proximoSabbat(modo);
+      rodaNota.innerHTML = `${NOTAS_RODA[modo]} <strong>Em vigor: ${v.s.nome}, desde ${v.desde}. Próximo: ${prox.s.nome}, ${quando(prox)}.</strong>`;
+      mostrarSabbat(v.s.id); // ao trocar de roda, o painel mostra a festa em vigor dela
+    }
   }
   $$("[data-roda]").forEach(b => b.addEventListener("click", () => { trocarRoda(b.dataset.roda); sino(2); }));
   rodaSvg.addEventListener("click", e => {
     const no = e.target.closest("[data-sabbat]");
     if (!no) return;
-    mostrarSabbat(no.dataset.sabbat); sino(3);
+    sabbatHem = no.dataset.hem; mostrarSabbat(no.dataset.sabbat); sino(3);
     if (innerWidth <= 860) rodaPainel.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "start" });
   });
   rodaSvg.addEventListener("keydown", e => {
     const no = e.target.closest("[data-sabbat]");
-    if (no && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); mostrarSabbat(no.dataset.sabbat); $(`[data-sabbat="${no.dataset.sabbat}"]`, rodaSvg).focus(); }
+    if (no && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); sabbatHem = no.dataset.hem; mostrarSabbat(no.dataset.sabbat); $(`[data-sabbat="${no.dataset.sabbat}"][data-hem="${no.dataset.hem}"]`, rodaSvg).focus(); }
   });
   trocarRoda("sul");
 
