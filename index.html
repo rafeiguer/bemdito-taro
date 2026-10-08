@@ -174,11 +174,16 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .abre-menu { display: none; }
 @media (max-width: 1200px) {
   .abre-menu { display: grid; }
+  /* tamanho explícito: o desfoque do topo prende "inset: 0" ao tamanho do topo, e o menu vazava sobre a página */
   .menu {
-    position: fixed; inset: 0; z-index: -1; flex-direction: column; align-items: center; justify-content: center; gap: .6rem;
-    background: radial-gradient(90% 70% at 50% 40%, rgba(43, 26, 94, .97), rgba(10, 7, 28, .98));
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; z-index: -1;
+    flex-direction: column; align-items: center; justify-content: center; gap: .4rem;
+    background: radial-gradient(90% 70% at 50% 40%, rgba(43, 26, 94, .82), rgba(10, 7, 28, .88));
+    backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2);
     opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s;
   }
+  /* com o menu aberto o topo tira o próprio desfoque, senão o vidro fosco do menu não funciona */
+  .topo:has(.menu.aberto) { backdrop-filter: none; -webkit-backdrop-filter: none; background: transparent; box-shadow: none; }
   .menu.aberto { opacity: 1; visibility: visible; }
   .menu a { font: 600 1.5rem/1.2 var(--titulo); color: var(--ouro-claro); padding: .6rem 1.2rem; }
   .idioma { margin-left: auto; }
@@ -377,7 +382,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 @media (max-width: 860px) { .livro { grid-template-columns: 1fr; } .livro__palco { order: -1; } }
 .livro__palco { display: grid; place-items: center; perspective: 1800px; min-height: 380px; }
 .livro3d {
-  --lw: min(240px, 44vw);
+  --lw: min(260px, 46vw);
   position: relative; width: var(--lw); aspect-ratio: 689 / 1100; border: 0; padding: 0; background: none;
   transform-style: preserve-3d; transform: rotateY(-14deg) rotateX(4deg); transition: transform 1.1s cubic-bezier(.3, .7, .2, 1);
 }
@@ -388,7 +393,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   border-radius: 3px 10px 10px 3px; text-align: left; color: #3a2510;
   background: linear-gradient(90deg, #d9c9a3 0%, #f7eed7 6%, #fbf4e2 100%);
   box-shadow: 0 30px 60px rgba(0, 0, 0, .5);
-  font: 500 clamp(.72rem, 2.4vw, .95rem)/1.45 var(--livro);
+  font: 500 clamp(.56rem, 1.75vw, .8rem)/1.4 var(--livro); overflow-y: auto; scrollbar-width: thin;
 }
 .livro3d__miolo strong { font: 600 1.05em/1.2 var(--titulo); color: #7a3e10; }
 .livro3d__capa {
@@ -399,10 +404,11 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .livro3d__capa img, .livro3d__capa-dentro { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 3px 10px 10px 3px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .livro3d__capa img { object-fit: cover; box-shadow: inset 4px 0 10px rgba(0, 0, 0, .4), 0 30px 60px rgba(0, 0, 0, .55); }
 .livro3d__capa-dentro {
-  transform: rotateY(180deg); display: grid; place-items: center; border-radius: 10px 3px 3px 10px;
+  transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: center; gap: .55rem; border-radius: 10px 3px 3px 10px;
   background: radial-gradient(circle, #5a1d10, #2a0c06); box-shadow: inset 0 0 0 6px #2a0c06, inset 0 0 0 7px rgba(242, 193, 78, .6);
-  font: italic 500 1.1rem/1.3 var(--livro); color: var(--ouro-claro); text-align: center; padding: 15%;
+  font: 500 clamp(.56rem, 1.75vw, .8rem)/1.4 var(--livro); color: #f3dfb4; text-align: left; padding: 10% 11%; overflow-y: auto; scrollbar-width: thin;
 }
+.livro3d__capa-dentro em { font: italic 600 1.35em/1.2 var(--livro); color: var(--ouro-claro); text-align: center; }
 .livro__texto p { color: var(--texto-2); margin: 1rem 0 0; }
 .livro__texto .botao { margin-top: 1.6rem; }
 
@@ -678,15 +684,17 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 
 /* Pergaminho com o conteúdo de cada canto */
 .pergaminho {
-  position: absolute; z-index: 6; top: 0; right: 0; bottom: 0; width: min(460px, 100%); overflow-y: auto; overscroll-behavior: contain;
-  padding: 4.2rem clamp(1.3rem, 4vw, 2.2rem) 2rem;
-  background: radial-gradient(120% 60% at 50% 0%, #fffaf0, transparent 70%), linear-gradient(180deg, #f8edd3, #ecdcb4);
-  color: #3a2510; box-shadow: -20px 0 60px rgba(0, 0, 0, .5), inset 0 0 0 10px #ecdcb4, inset 0 0 0 11px rgba(122, 62, 16, .45);
-  transform: translateX(105%); transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+  /* cartão translúcido no canto: a casinha continua aparecendo atrás */
+  position: absolute; z-index: 6; top: 76px; right: 14px; bottom: 14px; width: min(380px, calc(100% - 28px)); overflow-y: auto; overscroll-behavior: contain;
+  padding: 3.4rem clamp(1.2rem, 3vw, 1.8rem) 1.6rem; border-radius: 22px;
+  background: radial-gradient(120% 50% at 50% 0%, rgba(255, 250, 240, .9), transparent 70%), linear-gradient(180deg, rgba(248, 237, 211, .86), rgba(236, 220, 180, .86));
+  backdrop-filter: blur(5px);
+  color: #3a2510; box-shadow: 0 20px 50px rgba(0, 0, 0, .5), inset 0 0 0 8px rgba(236, 220, 180, .6), inset 0 0 0 9px rgba(122, 62, 16, .4);
+  transform: translateX(calc(100% + 40px)); transition: transform .6s cubic-bezier(.2, .7, .2, 1);
 }
 .pergaminho.aberto { transform: none; }
 @media (max-width: 700px) {
-  .pergaminho { top: auto; left: 0; width: 100%; max-height: 74dvh; border-radius: 24px 24px 0 0; transform: translateY(105%); padding-top: 3.4rem; }
+  .pergaminho { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; max-height: 50dvh; border-radius: 22px; transform: translateY(110%); padding-top: 3rem; }
 }
 .pergaminho__fechar { position: absolute; top: .9rem; right: .9rem; width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(122, 62, 16, .12); color: #7a3e10; font-size: 1.2rem; }
 .pergaminho h3 { font: 600 1.7rem/1.15 var(--titulo); color: #7a3e10; }
@@ -719,6 +727,61 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .chip-ing { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .7rem; border-radius: 999px; font-size: .85rem; color: #fff; background: rgba(255, 255, 255, .1); }
 .chip-ing i { width: 10px; height: 10px; border-radius: 50%; }
 .botao[disabled] { opacity: .45; pointer-events: none; }
+
+/* ---------- Oráculo dos animais de poder ---------- */
+.oraculo-animal { margin-top: clamp(3rem, 7vw, 4.5rem); text-align: center; overflow-x: clip; }
+.oraculo-animal__titulo { font: 600 clamp(1.4rem, 3vw, 1.9rem)/1.2 var(--titulo); color: var(--ouro-claro); margin: 0; }
+.oraculo-animal__intro { max-width: 52ch; margin: .6rem auto 0; color: var(--texto-2); }
+.animais-leque { position: relative; height: clamp(190px, 34vw, 240px); margin: 1.8rem auto 0; max-width: 620px; }
+.carta-animal {
+  position: absolute; left: 50%; bottom: 0; width: clamp(92px, 17vw, 120px); aspect-ratio: 5 / 8; margin-left: calc(clamp(92px, 17vw, 120px) / -2);
+  border: 0; padding: 0; background: none; perspective: 900px; transform-origin: 50% 120%;
+  /* --k vai de -4 a 4 (posição no leque); --abre e --passo controlam o quanto ele abre */
+  --abre: 9%; --passo: 9deg; --giro: calc(var(--k) * var(--passo));
+  left: calc(50% + var(--k) * var(--abre));
+  transform: rotate(var(--giro)) translateY(0); transition: transform .45s cubic-bezier(.3, .7, .2, 1), opacity .4s;
+}
+@media (max-width: 560px) { .carta-animal { --abre: 7%; --passo: 5deg; } }
+.carta-animal:hover, .carta-animal:focus-visible { transform: rotate(var(--giro)) translateY(-16px); outline: none; }
+.carta-animal__dentro { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.3, .7, .2, 1); }
+.carta-animal.virada .carta-animal__dentro { transform: rotateY(180deg); }
+.carta-animal__verso, .carta-animal__frente { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: grid; place-items: center; }
+.carta-animal__verso {
+  background: radial-gradient(circle at 50% 45%, #3a2470, #140c33 70%); box-shadow: 0 0 0 1px rgba(242, 193, 78, .7) inset, 0 0 0 5px #140c33 inset, 0 0 0 6px rgba(242, 193, 78, .45) inset, 0 12px 26px rgba(0, 0, 0, .45);
+  font-size: 2.2rem; color: var(--ouro-claro);
+}
+.carta-animal__frente {
+  transform: rotateY(180deg); align-content: center; gap: .3rem; padding: .5rem;
+  background: linear-gradient(180deg, #fbf3dc, #ecd9ad); box-shadow: 0 0 0 1px #b8862a inset, 0 0 0 5px #fbf3dc inset, 0 0 0 6px rgba(184, 134, 42, .6) inset, 0 14px 30px rgba(0, 0, 0, .5);
+}
+.carta-animal__frente b { font-size: clamp(2.2rem, 6vw, 2.9rem); line-height: 1; }
+.carta-animal__frente span { font: 600 clamp(.7rem, 1.9vw, .82rem)/1.15 var(--titulo); color: #5a2b0c; }
+.animais-leque.escolhido .carta-animal:not(.virada) { opacity: 0; pointer-events: none; transform: rotate(var(--giro)) translateY(30px); }
+.animais-leque.escolhido .carta-animal.virada { transform: rotate(0) translateY(-6px) scale(1.25); z-index: 5; }
+.animal-leitura { max-width: 640px; margin: 2.4rem auto 0; padding: clamp(1.2rem, 3vw, 1.8rem); border-radius: 22px; text-align: left; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; }
+.animal-leitura h4 { margin: 0; font: 600 clamp(1.4rem, 3vw, 1.8rem)/1.15 var(--titulo); color: var(--ouro-claro); }
+.animal-leitura .destaque { font: italic 500 clamp(1.15rem, 2.4vw, 1.35rem)/1.45 var(--livro); color: var(--texto); margin: .8rem 0 0; }
+.animal-leitura p { color: var(--texto-2); }
+.animal-leitura .rev__acoes { margin-top: 1.2rem; }
+
+/* ---------- Botão de ajuda (?) e explicação ---------- */
+.ajuda {
+  display: inline-grid; place-items: center; width: 30px; height: 30px; margin-left: .5rem; vertical-align: middle; border: 0; border-radius: 50%;
+  background: rgba(242, 193, 78, .14); box-shadow: 0 0 0 1px rgba(242, 193, 78, .55) inset; color: var(--ouro-claro); font: 700 .95rem/1 var(--corpo);
+  transition: background .3s, box-shadow .3s;
+}
+.ajuda:hover, .ajuda:focus-visible { background: rgba(242, 193, 78, .3); box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 14px rgba(242, 193, 78, .45); outline: none; }
+.ajuda__caixa {
+  position: fixed; inset: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(440px, calc(100vw - 32px)); max-height: min(80vh, 560px); overflow-y: auto;
+  margin: 0; padding: 1.4rem 1.4rem 1.2rem; border: 0; border-radius: 22px; text-align: left;
+  background: rgba(18, 12, 44, .96); color: var(--texto-2); box-shadow: 0 0 0 1px var(--linha) inset, 0 24px 60px rgba(0, 0, 0, .6);
+}
+.ajuda__caixa::backdrop { background: rgba(5, 3, 15, .55); backdrop-filter: blur(2px); }
+.ajuda__caixa h4 { margin: 0 2rem .6rem 0; font: 600 1.2rem/1.2 var(--titulo); color: var(--ouro-claro); }
+.ajuda__caixa p, .ajuda__caixa li { font-size: .97rem; line-height: 1.55; }
+.ajuda__caixa ol { padding-left: 1.2rem; margin: .4rem 0 0; }
+.ajuda__caixa li { margin-top: .35rem; }
+.ajuda__fechar { position: absolute; top: .7rem; right: .7rem; width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .08); color: var(--texto-2); font-size: 1.1rem; }
 
 /* ---------- Roda do Ano ---------- */
 .roda-ano { text-align: center; }
@@ -913,7 +976,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <div class="envelope">
       <div class="cabeca surge">
         <span class="chamada">Oráculo encantado</span>
-        <h2 class="titulo">Escolha a sua carta</h2>
+        <h2 class="titulo">Escolha a sua carta<button class="ajuda" type="button" popovertarget="aj-cartas" aria-label="Como funciona?">?</button></h2>
         <p class="intro">Respire, pense na sua pergunta e deixe a mão escolher. O baralho sabe o caminho.</p>
       </div>
       <div class="mesa surge" id="mesa">
@@ -947,7 +1010,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <div class="envelope">
       <div class="cabeca surge">
         <span class="chamada">Descubra-se</span>
-        <h2 class="titulo">Vamos explorar mais sobre você?</h2>
+        <h2 class="titulo">Vamos explorar mais sobre você?<button class="ajuda" type="button" popovertarget="aj-portais" aria-label="Como funciona?">?</button></h2>
         <p class="intro">Seis portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.</p>
       </div>
       <form class="nascimento surge" id="nascimento" novalidate>
@@ -994,6 +1057,14 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
         </button>
       </div>
       <div class="revelacao" id="revelacao" hidden aria-live="polite"></div>
+
+      <!-- Oráculo dos animais de poder: tirar uma carta (não depende da data de nascimento) -->
+      <div class="oraculo-animal surge" id="oraculo-animal">
+        <h3 class="oraculo-animal__titulo">Oráculo dos animais de poder<button class="ajuda" type="button" popovertarget="aj-animais" aria-label="Como funciona?">?</button></h3>
+        <p class="oraculo-animal__intro">O totem acima vem da sua data de nascimento. Aqui é diferente: pense numa pergunta e deixe um animal escolher você.</p>
+        <div class="animais-leque" id="animais-leque" aria-label="Cartas dos animais, viradas para baixo"></div>
+        <div class="animal-leitura" id="animal-leitura" hidden aria-live="polite"></div>
+      </div>
     </div>
   </section>
 
@@ -1002,7 +1073,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <div class="envelope">
       <div class="cabeca surge">
         <span class="chamada">Paganismo e natureza</span>
-        <h2 class="titulo">A Roda do Ano</h2>
+        <h2 class="titulo">A Roda do Ano<button class="ajuda" type="button" popovertarget="aj-roda" aria-label="Como funciona?">?</button></h2>
         <p class="intro">Oito sabbats marcam o giro das estações: quatro festas do Sol, nos solstícios e equinócios, e quatro festas do fogo, entre elas. Escolha a sua roda e toque num sabbat.</p>
       </div>
       <div class="roda-ano surge" style="position:relative">
@@ -1026,7 +1097,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <div class="envelope">
       <div class="cabeca surge">
         <span class="chamada">Era uma vez, na floresta</span>
-        <h2 class="titulo">A casinha da Tryv</h2>
+        <h2 class="titulo">A casinha da Tryv<button class="ajuda" type="button" popovertarget="aj-casinha" aria-label="Como funciona?">?</button></h2>
         <p class="intro">Uma casinha de bruxa escondida no bosque. Passe a varinha na porta e entre: tem ervas, chás, cristais, magias leves e um caldeirão fervendo.</p>
       </div>
       <div class="casinha-palco surge" id="casinha-palco">
@@ -1042,7 +1113,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <div class="envelope">
       <div class="cabeca surge">
         <span class="chamada">Deuses e deusas</span>
-        <h2 class="titulo">Os panteões</h2>
+        <h2 class="titulo">Os panteões<button class="ajuda" type="button" popovertarget="aj-panteoes" aria-label="Como funciona?">?</button></h2>
         <p class="intro">Cada povo deu nome e rosto ao sagrado. Conheça algumas divindades, seus símbolos e o que se costuma oferecer a elas.</p>
       </div>
       <div class="panteoes surge">
@@ -1162,7 +1233,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <div class="envelope livro">
       <div class="livro__texto surge">
         <span class="chamada">O livro</span>
-        <h2 class="titulo">O Multiverso</h2>
+        <h2 class="titulo">O Multiverso<button class="ajuda" type="button" popovertarget="aj-livro" aria-label="Como funciona?">?</button></h2>
         <p class="intro" style="margin-left:0">Desmistificando seu poder espiritual.</p>
         <p>Um guia prático, com técnicas simples para levar ao dia a dia. Convida você a olhar para as próprias crenças, refletir e se descobrir, com linguagem clara e inspiradora, para aprofundar sua conexão espiritual e chegar a um estado de bem-estar.</p>
         <p>Toque na capa para abrir o livro.</p>
@@ -1170,14 +1241,14 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       </div>
       <div class="livro__palco surge">
         <button class="livro3d" id="livro3d" type="button" aria-pressed="false" aria-label="Abrir o livro O Multiverso">
+          <!-- textos da contracapa do livro -->
           <span class="livro3d__miolo">
             <strong>O Multiverso</strong>
-            <span>Num universo onde as fronteiras entre a ciência e a espiritualidade se entrelaçam, surge a figura luminosa de Tryv Tuath: escritora, mentora e mestre das energias sutis.</span>
-            <span>Um convite a perceber os meandros do autoconhecimento e da cura, e a descobrir a verdadeira capacidade de realização e transformação na própria vida.</span>
+            <span>O livro oferece um guia prático para desmistificar o poder espiritual, apresentando técnicas simples que podem ser incorporadas ao cotidiano. Ele convida o leitor a explorar suas crenças pessoais sobre espiritualidade, incentivando a reflexão e a autodescoberta. Através de práticas acessíveis, o autor busca motivar a adoção de abordagens alternativas e saudáveis, revelando a verdadeira capacidade de realização e transformação na vida do leitor. Com uma linguagem clara e inspiradora, o livro se torna uma ferramenta valiosa para quem deseja aprofundar sua conexão espiritual e alcançar um estado de bem-estar.</span>
           </span>
           <span class="livro3d__capa">
             <img src="assets/livro-capa.webp" alt="" width="689" height="1100" loading="lazy">
-            <span class="livro3d__capa-dentro">“Everything<br>is possible.”</span>
+            <span class="livro3d__capa-dentro"><em>“Everything is possible.”</em><span>Em um universo onde as fronteiras entre a ciência e a espiritualidade se entrelaçam, surge a figura iluminada de Tryv Tuath. Escritora, mentora e mestre das energias sutis, ela nos convida a percorrer os meandros do autoconhecimento e da cura através de suas experiências transformadoras. Com um olhar perspicaz que une a física e a filosofia, Tryv nos apresenta uma narrativa envolvente e acessível, onde os fenômenos energéticos são desmistificados e traduzidos em práticas que podem ser incorporadas ao cotidiano.</span></span>
           </span>
         </button>
       </div>
@@ -1272,6 +1343,70 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <span class="fada__asa fada__asa--b fada__asa--esq"></span><span class="fada__asa fada__asa--b fada__asa--dir"></span>
     <span class="fada__luz"></span>
   </div>
+</div>
+
+<!-- Explicações dos botões "?" (popover nativo: fecha no X, tocando fora ou com Esc) -->
+<div class="ajuda__caixa" id="aj-cartas" popover>
+  <button class="ajuda__fechar" type="button" popovertarget="aj-cartas" popovertargetaction="hide" aria-label="Fechar">✕</button>
+  <h4>Como funciona a mesa de tarô</h4>
+  <ol>
+    <li>Escolha <strong>Carta do dia</strong> (um conselho para hoje) ou <strong>Três cartas</strong> (o que passou, o que é agora e o caminho).</li>
+    <li>Respire, pense na sua pergunta e toque numa carta do leque. Ela voa até a mesa e vira.</li>
+    <li>Leia a mensagem, ouça em voz alta no 🔊 ou leve o resultado para a Tryv pelo WhatsApp.</li>
+  </ol>
+  <p>As cartas são os 22 Arcanos Maiores, embaralhados a cada tiragem. É um carinho para o dia; a leitura completa é com a Tryv.</p>
+</div>
+<div class="ajuda__caixa" id="aj-portais" popover>
+  <button class="ajuda__fechar" type="button" popovertarget="aj-portais" popovertargetaction="hide" aria-label="Fechar">✕</button>
+  <h4>Como funcionam os portais</h4>
+  <ol>
+    <li>Digite a sua data de nascimento (o nome é opcional) e toque em <strong>Abrir os portais</strong>.</li>
+    <li>Toque em cada portal para virá-lo: mapa astral, Kin maia, anjo cabalístico, horóscopo chinês, arcano de nascimento e animal de poder.</li>
+    <li>No mapa astral, informe a hora e a cidade do nascimento para ver o Ascendente, as casas e os aspectos entre os astros.</li>
+  </ol>
+  <p>Tudo é calculado aqui mesmo, no seu aparelho. Nada é enviado para lugar nenhum.</p>
+</div>
+<div class="ajuda__caixa" id="aj-animais" popover>
+  <button class="ajuda__fechar" type="button" popovertarget="aj-animais" popovertargetaction="hide" aria-label="Fechar">✕</button>
+  <h4>Como funciona o oráculo dos animais</h4>
+  <ol>
+    <li>Pense numa pergunta ou numa situação da sua vida.</li>
+    <li>Toque numa das cartas viradas para baixo. O animal que aparecer traz a medicina (o ensinamento) para esse momento.</li>
+    <li>Quer outra mensagem? Toque em <strong>Tirar outra carta</strong>.</li>
+  </ol>
+  <p>O totem dos portais vem da data de nascimento e é sempre o mesmo. Aqui o animal muda a cada tiragem.</p>
+</div>
+<div class="ajuda__caixa" id="aj-roda" popover>
+  <button class="ajuda__fechar" type="button" popovertarget="aj-roda" popovertargetaction="hide" aria-label="Fechar">✕</button>
+  <h4>Como funciona a Roda do Ano</h4>
+  <ol>
+    <li>Escolha a sua roda: <strong>Sul</strong> (as estações do Brasil), <strong>Norte</strong> (as datas tradicionais europeias) ou <strong>Mista</strong> (as duas juntas).</li>
+    <li>A roda é um relógio do ano, com janeiro no alto. O ponto rosa marca o dia de hoje.</li>
+    <li>Toque num sabbat para ver a data, o sentido da festa e as correspondências: cores, ervas, cristais, comidas, bebidas, decoração e práticas.</li>
+  </ol>
+</div>
+<div class="ajuda__caixa" id="aj-casinha" popover>
+  <button class="ajuda__fechar" type="button" popovertarget="aj-casinha" popovertargetaction="hide" aria-label="Fechar">✕</button>
+  <h4>Como funciona a casinha</h4>
+  <ol>
+    <li>Para entrar: no computador, pare a varinha sobre a porta ou clique; no celular, toque na cena.</li>
+    <li>Lá dentro, toque nas placas <strong>Ervas</strong>, <strong>Chás</strong>, <strong>Magias</strong> e <strong>Cristais</strong> para ler os segredos de cada canto.</li>
+    <li>Para fazer uma poção, arraste ervas do varal ou potes da lareira até o caldeirão (até 3 ingredientes) e toque em <strong>Mexer</strong>.</li>
+    <li>Para sair, toque em <strong>Sair da casinha</strong>, no alto da tela.</li>
+  </ol>
+</div>
+<div class="ajuda__caixa" id="aj-panteoes" popover>
+  <button class="ajuda__fechar" type="button" popovertarget="aj-panteoes" popovertargetaction="hide" aria-label="Fechar">✕</button>
+  <h4>Como funcionam os panteões</h4>
+  <ol>
+    <li>Escolha um povo nas abas: egípcio, grego, nórdico, celta, hindu, oriental ou brasileiro.</li>
+    <li>Toque numa divindade para abrir o cartão com a história, os símbolos e as oferendas.</li>
+  </ol>
+</div>
+<div class="ajuda__caixa" id="aj-livro" popover>
+  <button class="ajuda__fechar" type="button" popovertarget="aj-livro" popovertargetaction="hide" aria-label="Fechar">✕</button>
+  <h4>O livro virtual</h4>
+  <p>Toque na capa para abrir o livro e ler, nas duas páginas, o texto da contracapa. Toque de novo para fechar.</p>
 </div>
 
 <script>
@@ -1544,11 +1679,12 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   }
 
   /* ---------- Laço de animação ---------- */
-  let anterior = performance.now();
+  let anterior = performance.now(), nQuadro = 0;
   function quadro(agora) {
     const dt = Math.min(3, (agora - anterior) / 16.67);
     anterior = agora;
-    desenharCeu(agora);
+    // o céu não aparece com a casinha aberta; no celular, piscar a 30 quadros por segundo já basta
+    if (!document.body.classList.contains("travado") && (!toque || ++nQuadro % 2 === 0)) desenharCeu(agora);
     if (!toque) rastroVarinha();
     else voarFada(dt, agora);
     desenharMagia(dt);
@@ -2047,80 +2183,82 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     }
     return { diaJ, planetaLon, angulos, anoNovoChines, kinMaia };
   })();
-  // Os 72 anjos da Cabala, cada um regendo cinco dias a partir de 21 de março: [nome, início, fim, dons]
+  // Os 72 anjos da Cabala no sistema de Monica Buonfiglio (referência: Terra Esotérico).
+  // Cada anjo rege um dia que volta a cada 73 dias, a partir de 20/03: [nome, dias protegidos, número de sorte, carta do tarô, salmo, dons]
+  // Os dons são um resumo nosso, não o texto dos livros.
   const ANJOS = [
-  ["Vehuiah","03-21","03-25","vontade, iniciativa e novos começos"],
-  ["Jeliel","03-26","03-30","amor, fidelidade e harmonia nos relacionamentos"],
-  ["Sitael","03-31","04-04","proteção, construção e superação das adversidades"],
-  ["Elemiah","04-05","04-09","sucesso no trabalho, boas viagens e tranquilidade"],
-  ["Mahasiah","04-10","04-14","paz, aprendizado e harmonia"],
-  ["Lelahel","04-15","04-20","luz, cura e amor"],
-  ["Achaiah","04-21","04-25","paciência e descoberta dos segredos da natureza"],
-  ["Cahethel","04-26","04-30","bênção, colheita e gratidão"],
-  ["Haziel","05-01","05-05","misericórdia, perdão e reconciliação"],
-  ["Aladiah","05-06","05-10","graça, cura e regeneração"],
-  ["Lauviah","05-11","05-15","vitória e reconhecimento"],
-  ["Hahaiah","05-16","05-20","refúgio, sonhos e intuição"],
-  ["Iezalel","05-21","05-25","fidelidade, união e amizade"],
-  ["Mebahel","05-26","05-31","justiça, verdade e liberdade"],
-  ["Hariel","06-01","06-05","purificação e fé"],
-  ["Hekamiah","06-06","06-10","lealdade e coragem"],
-  ["Lauviah","06-11","06-15","revelação, inspiração e sono tranquilo"],
-  ["Caliel","06-16","06-21","verdade e justiça"],
-  ["Leuviah","06-22","06-26","memória e inteligência"],
-  ["Pahaliah","06-27","07-01","redenção e espiritualidade"],
-  ["Nelchael","07-02","07-06","conhecimento e amor aos estudos"],
-  ["Ieiaiel","07-07","07-11","fortuna, renome e diplomacia"],
-  ["Melahel","07-12","07-16","cura pela natureza e proteção"],
-  ["Haheuiah","07-17","07-22","proteção e abrigo"],
-  ["Nith-Haiah","07-23","07-27","sabedoria e magia branca"],
-  ["Haaiah","07-28","08-01","ordem, contemplação e diplomacia"],
-  ["Ierathel","08-02","08-06","confiança e missão de espalhar a luz"],
-  ["Seheiah","08-07","08-12","longevidade, saúde e prevenção"],
-  ["Reiiel","08-13","08-17","libertação e oração"],
-  ["Omael","08-18","08-22","fecundidade, paciência e alegria"],
-  ["Lecabel","08-23","08-28","talento e solução de problemas"],
-  ["Vasariah","08-29","09-02","clemência, bondade e boa memória"],
-  ["Iehuiah","09-03","09-07","proteção e discernimento"],
-  ["Lehahiah","09-08","09-12","calma, ordem e obediência ao bem"],
-  ["Chavakiah","09-13","09-17","reconciliação e harmonia familiar"],
-  ["Menadel","09-18","09-23","trabalho e vocação"],
-  ["Aniel","09-24","09-28","coragem e ruptura de barreiras"],
-  ["Haamiah","09-29","10-03","ritual, verdade e proteção"],
-  ["Rehael","10-04","10-08","saúde e amor entre pais e filhos"],
-  ["Ieiazel","10-09","10-13","consolação e libertação"],
-  ["Hahahel","10-14","10-18","missão, fé e espiritualidade"],
-  ["Mikael","10-19","10-23","ordem, intuição e verdade"],
-  ["Veuliah","10-24","10-28","prosperidade e libertação"],
-  ["Ielahiah","10-29","11-02","vitória, proteção e justiça"],
-  ["Sealiah","11-03","11-07","motivação, vontade e saúde"],
-  ["Ariel","11-08","11-12","revelação, sonhos e percepção"],
-  ["Asaliah","11-13","11-17","contemplação e verdade"],
-  ["Mihael","11-18","11-22","fertilidade, amor e reconciliação"],
-  ["Vehuel","11-23","11-27","elevação e grandeza de alma"],
-  ["Daniel","11-28","12-02","eloquência, misericórdia e decisão"],
-  ["Hahasiah","12-03","12-07","medicina universal e sabedoria"],
-  ["Imamiah","12-08","12-12","superação e reparação dos erros"],
-  ["Nanael","12-13","12-16","espiritualidade e conhecimento"],
-  ["Nithael","12-17","12-21","rejuvenescimento e legitimidade"],
-  ["Mebahiah","12-22","12-26","lucidez e moral"],
-  ["Poiel","12-27","12-31","fortuna, modéstia e realização"],
-  ["Nemamiah","01-01","01-05","discernimento e prosperidade"],
-  ["Ieialel","01-06","01-10","força mental e cura"],
-  ["Harahel","01-11","01-15","riqueza intelectual e fertilidade"],
-  ["Mitzrael","01-16","01-20","reparação e cura da mente"],
-  ["Umabel","01-21","01-25","amizade e afinidade"],
-  ["Iah-Hel","01-26","01-30","sabedoria e paz interior"],
-  ["Anauel","01-31","02-04","união, prosperidade e comércio"],
-  ["Mehiel","02-05","02-09","inspiração, escrita e criatividade"],
-  ["Damabiah","02-10","02-14","sabedoria e sucesso nas empreitadas"],
-  ["Manakel","02-15","02-19","conhecimento do bem e sono tranquilo"],
-  ["Eiael","02-20","02-24","transformação e longevidade"],
-  ["Habuhiah","02-25","03-01","saúde, cura e natureza"],
-  ["Rochel","03-02","03-06","restituição e reencontro do que foi perdido"],
-  ["Jabamiah","03-07","03-11","alquimia e regeneração"],
-  ["Haiaiel","03-12","03-16","proteção, coragem e armas da luz"],
-  ["Mumiah","03-17","03-20","renascimento e encerramento de ciclos"],
+    ["Vehuiah", "20/03 · 01/06 · 13/08 · 25/10 · 06/01", 8, "A justiça", "3", "coragem para começar e realizar o que parece difícil"],
+    ["Jeliel", "21/03 · 02/06 · 14/08 · 26/10 · 07/01", 9, "O ermitão", "21", "paz nos relacionamentos, harmonia no casal e justiça nas disputas"],
+    ["Sitael", "22/03 · 03/06 · 15/08 · 27/10 · 08/01", 11, "A força", "90", "proteção nas adversidades, magnetismo pessoal e grandes descobertas"],
+    ["Elemiah", "23/03 · 04/06 · 16/08 · 28/10 · 09/01", 11, "A força", "6", "serenidade para a mente inquieta, boas viagens e autoconhecimento"],
+    ["Mahasiah", "24/03 · 05/06 · 17/08 · 29/10 · 10/01", 12, "O enforcado", "33", "viver em paz com todos, gosto pelo estudo, pela filosofia e pelas artes"],
+    ["Lelahel", "25/03 · 06/06 · 18/08 · 30/10 · 11/01", 6, "Os enamorados", "9", "luz para curar, amor, arte e boa sorte"],
+    ["Achaiah", "26/03 · 07/06 · 19/08 · 31/10 · 12/01", 10, "A roda da fortuna", "102", "paciência e o dom de entender os segredos da natureza"],
+    ["Cahethel", "27/03 · 08/06 · 20/08 · 01/11 · 13/01", 6, "Os enamorados", "94 e/ou 95", "gratidão, fartura da terra e proteção divina"],
+    ["Haziel", "28/03 · 09/06 · 21/08 · 02/11 · 14/01", 8, "A justiça", "24", "bondade, perdão e reconciliação"],
+    ["Aladiah", "29/03 · 10/06 · 22/08 · 03/11 · 15/01", 5, "O papa", "32", "cura e proteção contra o mal"],
+    ["Laoviah", "30/03 · 11/06 · 23/08 · 04/11 · 16/01", 7, "O carro", "17", "vitória, talento e aprendizado com a experiência"],
+    ["Hahahiah", "31/03 · 12/06 · 24/08 · 05/11 · 17/01", 5, "O papa", "9", "proteção contra adversários e revelações"],
+    ["Yesalel", "01/04 · 13/06 · 25/08 · 06/11 · 18/01", 6, "Os enamorados", "97", "amizades, harmonia no casal e compreensão"],
+    ["Mebahel", "02/04 · 14/06 · 26/08 · 07/11 · 19/01", 6, "Os enamorados", "9", "justiça, verdade e libertação de quem se sente preso"],
+    ["Hariel", "03/04 · 15/06 · 27/08 · 08/11 · 20/01", 12, "O enforcado", "93", "fé pura e inspiração para descobertas nas ciências e nas artes"],
+    ["Hekamiah", "04/04 · 16/06 · 28/08 · 09/11 · 21/01", 7, "O carro", "87", "coragem, lealdade e proteção a quem lidera"],
+    ["Lauviah", "05/04 · 17/06 · 29/08 · 10/11 · 22/01", 7, "O carro", "8", "sono tranquilo, alívio da tristeza e revelações em sonhos"],
+    ["Caliel", "06/04 · 18/06 · 30/08 · 11/11 · 23/01", 10, "A roda da fortuna", "7", "verdade e triunfo dos inocentes nas adversidades"],
+    ["Leuviah", "07/04 · 19/06 · 31/08 · 12/11 · 24/01", 12, "O enforcado", "39", "memória, inteligência e graça"],
+    ["Pahaliah", "08/04 · 20/06 · 01/09 · 13/11 · 25/01", 13, "A morte", "119", "vocação, ética e compreensão dos mistérios da fé"],
+    ["Nelchael", "09/04 · 21/06 · 02/09 · 14/11 · 26/01", 5, "O papa", "30", "proteção contra calúnias e talento para as ciências exatas e a astrologia"],
+    ["Ieiaiel", "10/04 · 22/06 · 03/09 · 15/11 · 27/01", 7, "O carro", "120", "fortuna, renome, diplomacia e novos caminhos"],
+    ["Melahel", "11/04 · 23/06 · 04/09 · 16/11 · 28/01", 7, "O carro", "120", "proteção nas viagens, beleza e o saber das ervas que curam"],
+    ["Haheuiah", "12/04 · 24/06 · 05/09 · 17/11 · 29/01", 4, "O imperador", "32", "graça e misericórdia"],
+    ["Nith-Haiah", "13/04 · 25/06 · 06/09 · 18/11 · 30/01", 11, "A força", "9", "sabedoria nos mistérios esotéricos e paz pela verdade"],
+    ["Haaiah", "14/04 · 26/06 · 07/09 · 19/11 · 31/01", 4, "O louco", "118", "sucesso em causas e julgamentos, diplomacia e contemplação"],
+    ["Ierathel", "15/04 · 27/06 · 08/09 · 20/11 · 01/02", 11, "A força", "139", "proteção contra conspirações e amor à liberdade"],
+    ["Seheiah", "16/04 · 28/06 · 09/09 · 21/11 · 02/02", 6, "Os enamorados", "70", "saúde, vida longa e proteção contra acidentes e perdas"],
+    ["Reyel", "17/04 · 29/06 · 10/09 · 22/11 · 03/02", 8, "A justiça", "53", "meditação, fé e proteção contra quem prejudica"],
+    ["Omael", "18/04 · 30/06 · 11/09 · 23/11 · 04/02", 6, "Os enamorados", "70", "paciência nos momentos de desespero e cuidado com os animais e a cura"],
+    ["Lecabel", "19/04 · 01/07 · 12/09 · 24/11 · 05/02", 11, "A força", "70", "clareza para resolver problemas difíceis e prosperidade no campo"],
+    ["Vasahiah", "20/04 · 02/07 · 13/09 · 25/11 · 06/02", 8, "A justiça", "32", "justiça, clemência e proteção em processos"],
+    ["Iehuiah", "21/04 · 03/07 · 14/09 · 26/11 · 07/02", 9, "O ermitão", "33", "discernimento para reconhecer traições e proteção contra a inveja"],
+    ["Lehahiah", "22/04 · 04/07 · 15/09 · 27/11 · 08/02", 10, "A roda da fortuna", "130", "harmonia, paz e inteligência"],
+    ["Chavakiah", "23/04 · 05/07 · 16/09 · 28/11 · 09/02", 6, "Os enamorados", "114", "reconciliação, paz em família e partilhas amigáveis"],
+    ["Menadel", "24/04 · 06/07 · 17/09 · 29/11 · 10/02", 8, "A justiça", "25", "manter o emprego, preservar os bens e reencontrar o que se perdeu"],
+    ["Aniel", "25/04 · 07/07 · 18/09 · 30/11 · 11/02", 11, "A força", "79", "vitória, vida digna e inspiração para as ciências e a filosofia"],
+    ["Haamiah", "26/04 · 08/07 · 19/09 · 01/12 · 12/02", 4, "A morte", "90", "descoberta dos tesouros e segredos da Terra e proteção espiritual"],
+    ["Rehael", "27/04 · 09/07 · 20/09 · 02/12 · 13/02", 9, "O ermitão", "29", "saúde, longevidade e amor entre pais e filhos"],
+    ["Ieiazel", "28/04 · 10/07 · 21/09 · 03/12 · 14/02", 4, "O imperador", "87", "inspiração para a escrita e alívio da tristeza e do medo"],
+    ["Hahahel", "29/04 · 11/07 · 22/09 · 04/12 · 15/02", 10, "A roda da fortuna", "119", "proteção da fé e de quem se dedica à espiritualidade"],
+    ["Mikael", "30/04 · 12/07 · 23/09 · 05/12 · 16/02", 11, "A força", "120", "viagens seguras e visão clara sobre a vida social"],
+    ["Veuliah", "01/05 · 13/07 · 24/09 · 06/12 · 17/02", 12, "O enforcado", "87", "libertação e vitória sobre as forças contrárias"],
+    ["Yelaiah", "02/05 · 14/07 · 25/09 · 07/12 · 18/02", 6, "Os enamorados", "118", "proteção em processos e contra a violência"],
+    ["Sealiah", "03/05 · 15/07 · 26/09 · 08/12 · 19/02", 7, "O carro", "93", "esperança para os desanimados e cuidado com tudo o que vive"],
+    ["Ariel", "04/05 · 16/07 · 27/09 · 09/12 · 20/02", 14, "A temperança", "144", "gratidão, revelações em sonhos e encontrar o que estava perdido"],
+    ["Asaliah", "05/05 · 17/07 · 28/09 · 10/12 · 21/02", 10, "A roda da fortuna", "104", "consciência elevada, verdade e metas construtivas"],
+    ["Mihael", "06/05 · 18/07 · 29/09 · 11/12 · 22/02", 5, "O papa", "97", "união do casal, intuição e premonições"],
+    ["Vehuel", "07/05 · 19/07 · 30/09 · 12/12 · 23/02", 3, "A imperatriz", "144", "elevação espiritual e generosidade"],
+    ["Daniel", "08/05 · 20/07 · 01/10 · 13/12 · 24/02", 5, "O papa", "102 e/ou 103", "consolo, decisão e senso de justiça"],
+    ["Hahasiah", "09/05 · 21/07 · 02/10 · 14/12 · 25/02", 10, "A roda da fortuna", "103", "contemplação e compreensão dos mistérios"],
+    ["Imamaiah", "10/05 · 22/07 · 03/10 · 15/12 · 26/02", 12, "O enforcado", "7", "liberdade, proteção nas viagens e amparo aos solitários"],
+    ["Nanael", "11/05 · 23/07 · 04/10 · 16/12 · 27/02", 6, "Os enamorados", "118", "estudo, ensino e as altas ciências"],
+    ["Nithael", "12/05 · 24/07 · 05/10 · 17/12 · 28/02 e 29/02", 5, "A temperança", "102", "longevidade, estabilidade e proteção a quem lidera"],
+    ["Mebahiah", "13/05 · 25/07 · 06/10 · 18/12 · 01/03", 8, "A justiça", "101", "consolo, força para vencer e proteção às crianças"],
+    ["Poiel", "14/05 · 26/07 · 07/10 · 19/12 · 02/03", 10, "A roda da fortuna", "144", "prestígio, fortuna e sabedoria filosófica"],
+    ["Nemamiah", "15/05 · 27/07 · 08/10 · 20/12 · 03/03", 10, "A roda da fortuna", "113", "prosperidade nas causas justas e libertação dos vícios"],
+    ["Ieialel", "16/05 · 28/07 · 09/10 · 21/12 · 04/03", 9, "O ermitão", "6", "alívio da tristeza e proteção contra a maldade"],
+    ["Harahel", "17/05 · 29/07 · 10/10 · 22/12 · 05/03", 7, "O carro", "112", "saúde, fertilidade e respeito em família"],
+    ["Mitzrael", "18/05 · 30/07 · 11/10 · 23/12 · 06/03", 10, "A roda da fortuna", "144", "cura emocional, fidelidade e libertação de perseguições"],
+    ["Umabel", "19/05 · 31/07 · 12/10 · 24/12 · 07/03", 7, "O carro", "112", "amizade e talento para a astrologia, a psicologia e o esoterismo"],
+    ["Iah-Hel", "20/05 · 01/08 · 13/10 · 25/12 · 08/03", 6, "Os enamorados", "118", "sabedoria, ideias luminosas e vida honesta"],
+    ["Anauel", "21/05 · 02/08 · 14/10 · 26/12 · 09/03", 13, "A morte", "2", "espiritualidade verdadeira, saúde e paz em família"],
+    ["Mehiel", "22/05 · 03/08 · 15/10 · 27/12 · 10/03", 5, "O papa", "32", "proteção contra a raiva e talento para escrever e ensinar"],
+    ["Damabiah", "23/05 · 04/08 · 16/10 · 28/12 · 11/03", 7, "O carro", "89", "proteção contra maus presságios e êxito nos empreendimentos"],
+    ["Manakel", "24/05 · 05/08 · 17/10 · 29/12 · 12/03", 7, "O carro", "37", "calma, inspiração para a música e a poesia e contato com os elementais"],
+    ["Ayel", "25/05 · 06/08 · 18/10 · 30/12 · 13/03", 4, "O imperador", "36", "consolo nas injustiças, prosperidade e estudo do misticismo"],
+    ["Habuhiah", "26/05 · 07/08 · 19/10 · 31/12 · 14/03", 10, "A roda da fortuna", "105", "paz, saúde e fertilidade da terra"],
+    ["Rochel", "27/05 · 08/08 · 20/10 · 01/01 · 15/03", 12, "O enforcado", "15", "encontrar o que se perdeu, renome e sucesso"],
+    ["Yabamiah", "28/05 · 09/08 · 21/10 · 02/01 · 16/03", 4, "O imperador", "91", "regeneração, harmonia com a natureza e libertação dos vícios"],
+    ["Haiaiel", "29/05 · 10/08 · 22/10 · 03/01 · 17/03", 11, "A força", "108", "força, vitória, paz e libertação de opressões"],
+    ["Mumiah", "30/05 · 11/08 · 23/10 · 04/01 · 18/03", 11, "A força", "114", "proteção espiritual, descobertas úteis e longevidade"],
   ];
 
   const SIGNOS = [
@@ -2223,12 +2361,20 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     const fem = selo.g === "f";
     return { kin, s, t, selo, tom, cor, oculto: 261 - kin, nome: `${selo.nome} ${fem ? tom.f : tom.m} ${fem ? cor.f : cor.m}` };
   }
+  // Os 72 anjos se revezam um por dia a partir de 20/03, 01/06, 13/08, 25/10 e 06/01.
+  // Os cinco dias que sobram (19/03, 31/05, 12/08, 24/10 e 05/01) são dos Gênios da Humanidade.
   function calcAnjo(p) {
-    const c = p.m * 100 + p.d, cod = s => +s.replace("-", "");
-    const i = ANJOS.findIndex(([, ini, fim]) => { const a = cod(ini), b = cod(fim); return a <= b ? c >= a && c <= b : c >= a || c <= b; });
-    const [nome, ini, fim, dons] = ANJOS[i];
-    const br = s => s.split("-").reverse().join("/");
-    return { n: i + 1, nome, dons, periodo: `${br(ini)} a ${br(fim)}`, coro: COROS[Math.floor(i / 8)] };
+    const doa = (d, m) => Math.round((Date.UTC(2001, m - 1, d) - Date.UTC(2001, 0, 1)) / 864e5);
+    let i = -1;
+    if (p.m === 2 && p.d === 29) i = 53; // Nithael protege 28 e 29/02
+    else for (const [d, m] of [[20, 3], [1, 6], [13, 8], [25, 10], [6, 1]]) {
+      const delta = (doa(p.d, p.m) - doa(d, m) + 365) % 365;
+      if (delta < 72) { i = delta; break; }
+    }
+    if (i < 0) return { n: 0, genio: true, nome: "Gênios da Humanidade", coro: ["Todos os coros", "os 72 anjos"] };
+    const [nome, dias, sorte, carta, salmo, dons] = ANJOS[i];
+    const hora = min => `${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}`;
+    return { n: i + 1, nome, dias, sorte, carta, salmo, dons, coro: COROS[Math.floor(i / 8)], presente: `${hora(i * 20)} às ${hora(i * 20 + 20).replace("24:00", "00:00")}` };
   }
   // Animal de poder pela Roda da Medicina (Sun Bear e Wabun): [início dia, mês, nome, emoji, lua, clã, qualidades, mensagem, sombra]
   const TOTENS = [
@@ -2438,7 +2584,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     const faces = {
       mapa: frente(sol.glifo, `Sol em ${sol.nome}`, "toque para o mapa"),
       kin: frente(String(k.kin), k.nome, "seu kin"),
-      anjo: frente(String(anj.n), anj.nome, anj.coro[0]),
+      anjo: frente(anj.genio ? "∞" : String(anj.n), anj.genio ? "Gênios" : anj.nome, anj.coro[0]),
       china: frente(ch.animal[1], `${ch.animal[0]} de ${ch.elemento[0]}`, ch.yin ? "yin" : "yang", true),
       arcano: frente(arc.pers.num, arc.pers.nome, "arcano de nascimento"),
       totem: frente(tot.emoji, tot.nome, "animal de poder"),
@@ -2515,13 +2661,21 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     }
     if (tipo === "anjo") {
       const a = calcAnjo(pessoa);
-      html = painel({
+      const sobre = `<p>Os 72 nomes vêm do Shem HaMephorash. Aqui seguimos o sistema de Monica Buonfiglio: cada anjo rege um dia, que se repete cinco vezes no ano.</p>`;
+      html = a.genio ? painel({
+        chamada: "Anjo cabalístico", titulo: "Gênios da Humanidade",
+        visual: svgRoda({ n: 72, indice: -1, centro: "∞", sub: "OS 72 ANJOS" }),
+        texto: `<p class="destaque">Você nasceu num dos cinco dias dos Gênios da Humanidade: 19/03, 31/05, 12/08, 24/10 ou 05/01.</p>
+          <p>Nesses dias nenhum anjo rege sozinho. Quem nasce neles pode chamar por todos os 72 anjos, conforme a necessidade de cada momento.</p>${sobre}`,
+        mensagem: `Olá, Tryv! ${quem()} e nasci num dia dos Gênios da Humanidade. Quero aprofundar ✨`,
+      }) : painel({
         chamada: "Anjo cabalístico", titulo: `${a.nome}`,
         visual: svgRoda({ n: 72, indice: a.n - 1, centro: `Nº ${a.n}`, sub: a.nome.toUpperCase() }),
-        texto: `<p class="destaque">Quem nasce entre ${a.periodo} é guardado por ${a.nome}, o ${a.n}º dos 72 anjos da Cabala.</p>
+        texto: `<p class="destaque">Você é guardado por ${a.nome}, o ${a.n}º dos 72 anjos da Cabala.</p>
           <p><strong>Dons</strong>: ${a.dons}.</p>
-          <p><strong>Coro</strong>: ${a.coro[0]}, sob a regência do arcanjo ${a.coro[1]}.</p>
-          <p>Os 72 nomes vêm do Shem HaMephorash; cada anjo rege cinco dias do ano, a partir de 21 de março.</p>`,
+          <ul class="palavras"><li>número de sorte: ${a.sorte}</li><li>carta: ${a.carta}</li><li>salmo ${a.salmo}</li></ul>
+          <p><strong>Protege os dias</strong>: ${a.dias}.</p>
+          <p><strong>Coro</strong>: ${a.coro[0]}, sob a regência do arcanjo ${a.coro[1]}. <strong>Presente na Terra</strong>: das ${a.presente}.</p>${sobre}`,
         mensagem: `Olá, Tryv! ${quem()} e meu anjo cabalístico é ${a.nome} (nº ${a.n}). Quero aprofundar ✨`,
       });
     }
@@ -2851,7 +3005,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     let pingos = "";
     for (let i = 0; i < 3; i++) { const px = x - w / 2 + 3 + R() * (w - 6), L = 6 + R() * h * .35; pingos += `<rect x="${f1(px - 2)}" y="${topo}" width="4.5" height="${f1(L)}" rx="2.2" fill="#f3e6c8"/>`; }
     return `<g>
-      <circle cx="${x}" cy="${topo - 12}" r="${f1(70 + h * .4)}" fill="url(#i-vela)" class="tremeluz" style="animation-delay:-${atraso}s;mix-blend-mode:screen"/>
+      <circle cx="${x}" cy="${topo - 12}" r="${f1(70 + h * .4)}" fill="url(#i-vela)" style="mix-blend-mode:screen"/>
       <rect x="${x - w / 2}" y="${topo}" width="${w}" height="${h}" rx="3" fill="url(#i-cera)"/>
       <ellipse cx="${x}" cy="${topo + 1}" rx="${w / 2}" ry="3" fill="#fbf1da"/>${pingos}
       <line x1="${x}" y1="${topo}" x2="${x + .5}" y2="${topo - 7}" stroke="#1c1008" stroke-width="2"/>
@@ -2864,6 +3018,14 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     return `<g class="ponto" data-area="${area}" role="button" tabindex="0" aria-label="${texto}">
       <g class="placa"><rect x="${x - w / 2}" y="${y - 21}" width="${w}" height="42" rx="21" fill="rgba(20,9,4,.82)" stroke="rgba(242,193,78,.75)" stroke-width="1.5"/>
       <text x="${x}" y="${y + 1}" text-anchor="middle" dominant-baseline="central" font-family="Cinzel, serif" font-size="19" font-weight="600" fill="#ffe6a3">${texto} ✦</text></g></g>`;
+  };
+
+  // Partes paradas e pesadas (palha, pedras, paredes) viram uma imagem dentro do desenho, no mesmo lugar.
+  // Qualquer animação num SVG faz o navegador redesenhar o SVG inteiro a cada quadro; como imagem,
+  // essas milhares de formas são desenhadas uma vez só. (x, y, w, h) é o retângulo que a parte ocupa.
+  const imagem = (defs, x, y, w, h, conteudo) => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x} ${y} ${w} ${h}" width="${w}" height="${h}">${defs}${conteudo}</svg>`;
+    return `<image x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="none" href="data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svg)))}"/>`;
   };
 
   // Telhado de palha visto de frente: faixa grossa ao longo das águas, com fios, musgo e florzinhas
@@ -2978,9 +3140,9 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <path d="M${x} ${y - r} V${y + r} M${x - r} ${y} H${x + r}" stroke="#3a2210" stroke-width="4"/><circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#6b4322" stroke-width="3"/>`;
 
     // chaminé de pedra com fumaça e um rastro de pó de fada
-    const chamine = `${pedras(552, 214, 52, 160, R, 20)}
+    const chamine = imagem(defs, 540, 195, 76, 185, `${pedras(552, 214, 52, 160, R, 20)}
       <rect x="544" y="198" width="68" height="20" rx="4" fill="#6f6862"/><rect x="544" y="198" width="68" height="6" rx="3" fill="#fff" opacity=".12"/>
-      <ellipse cx="560" cy="250" rx="12" ry="7" fill="#3f7a31"/><ellipse cx="596" cy="300" rx="9" ry="6" fill="#2f5e2a"/>`;
+      <ellipse cx="560" cy="250" rx="12" ry="7" fill="#3f7a31"/><ellipse cx="596" cy="300" rx="9" ry="6" fill="#2f5e2a"/>`);
     const fumaca = [0, 1, 2, 3].map(i => `<circle class="fumaca" cx="578" cy="190" r="16" fill="url(#c-fumaca)" style="animation-delay:-${i}s"/>`).join("");
     const redemoinho = `<g class="redemoinho">
       <path d="M578 186 C560 120 640 96 650 140 C660 190 560 190 520 140 C470 80 380 120 350 90" fill="none" stroke="url(#c-ouro)" stroke-width="3" stroke-linecap="round" opacity=".75"/>
@@ -2990,12 +3152,12 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     </g>`;
 
     // ala da direita (mais baixa)
-    const ala = `${reboco("M610 500 L677 376 L745 500 V615 H610Z")}
+    const ala = `${imagem(defs, 600, 370, 155, 250, `${reboco("M610 500 L677 376 L745 500 V615 H610Z")}
       ${vigaV(616, 500, 612, 12)}${vigaV(739, 500, 612, 12)}${vigaH(610, 745, 500, 13)}${vigaV(677, 390, 500, 10)}
-      ${vigaD(622, 494, 660, 420, 9)}${vigaD(733, 494, 694, 420, 9)}
+      ${vigaD(622, 494, 660, 420, 9)}${vigaD(733, 494, 694, 420, 9)}`)}
       ${janelaRedonda(677, 455, 15)}
-      ${janela(648, 528, 58, 58)}${jardineira(640, 592, 74)}
-      ${telhado([[588, 518], [677, 352], [767, 518]], 36, R, .55)}`;
+      ${janela(648, 528, 58, 58)}${imagem(defs, 630, 572, 95, 42, jardineira(640, 592, 74))}
+      ${imagem(defs, 552, 312, 250, 240, telhado([[588, 518], [677, 352], [767, 518]], 36, R, .55))}`;
 
     // bloco principal com a porta
     const portaLuz = `<path d="M434 615 V556 A36 36 0 0 1 506 556 V615Z" fill="#ffe2a0"/><path d="M434 615 V556 A36 36 0 0 1 506 556 V615Z" fill="url(#c-brilho)"/>`;
@@ -3022,20 +3184,20 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <path d="M562 568 L588 568 L602 618 L548 618Z" fill="#c9a25a"/>${Array.from({ length: 9 }, (_, i) => `<line x1="${566 + i * 2.6}" y1="572" x2="${552 + i * 6}" y2="618" stroke="#8a6430" stroke-width="1.4"/>`).join("")}
       <rect x="562" y="566" width="26" height="6" rx="2" fill="#8a3a2a"/></g>`;
     const principal = `${chamine}
-      ${reboco("M330 440 L470 230 L610 440 V615 H330Z")}
+      ${imagem(defs, 320, 225, 300, 395, `${reboco("M330 440 L470 230 L610 440 V615 H330Z")}
       ${vigaV(336, 440, 612, 14)}${vigaV(604, 440, 612, 14)}${vigaV(424, 446, 612, 12)}${vigaV(516, 446, 612, 12)}
       ${vigaH(330, 610, 440, 15)}${vigaH(330, 610, 606, 12)}
       ${vigaV(470, 246, 334, 12)}${vigaH(400, 540, 334, 12)}${vigaD(346, 432, 404, 340, 10)}${vigaD(594, 432, 536, 340, 10)}
-      ${vigaD(344, 600, 418, 520, 9)}
+      ${vigaD(344, 600, 418, 520, 9)}`)}
       ${janelaRedonda(470, 386, 26)}
-      ${janela(352, 470, 56, 66, true)}${jardineira(344, 546, 72)}
+      ${janela(352, 470, 56, 66, true)}${imagem(defs, 334, 526, 92, 42, jardineira(344, 546, 72))}
       ${portaLuz}${arco}${porta}
       <path d="M516 500 h26 v4 h-22Z" fill="#1f1f24"/><line x1="538" y1="504" x2="538" y2="512" stroke="#1f1f24" stroke-width="2"/>${lanterna(538, 514)}
       ${vassoura}
-      ${telhado([[300, 460], [470, 194], [640, 460]], 46, R, .6)}`;
+      ${imagem(defs, 258, 150, 425, 360, telhado([[300, 460], [470, 194], [640, 460]], 46, R, .6))}`;
 
     // alicerce, degraus, caminho e jardim
-    const alicerce = pedras(318, 612, 440, 42, R, 24);
+    const alicerce = imagem(defs, 316, 610, 444, 46, pedras(318, 612, 440, 42, R, 24));
     const degraus = `<rect x="424" y="652" width="92" height="12" rx="4" fill="#8d8780" stroke="#2a2420" stroke-width="1.5"/><rect x="414" y="663" width="112" height="13" rx="4" fill="#77716a" stroke="#2a2420" stroke-width="1.5"/>`;
     let caminho = "";
     [[470, 694, 40, 11], [455, 726, 48, 13], [482, 762, 56, 15], [462, 802, 66, 17]].forEach(([x, y, rx, ry]) => {
@@ -3054,7 +3216,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       ${caminho}${poste}
       <g id="casa" role="button" tabindex="0" aria-label="Entrar na casinha">
         ${fumaca}${ala}${principal}${alicerce}${degraus}
-        ${flores(318, 410, 650, 16)}${flores(530, 760, 650, 26)}
+        ${imagem(defs, 305, 628, 470, 40, flores(318, 410, 650, 16) + flores(530, 760, 650, 26))}
         ${arbusto(300, 640, 24)}${arbusto(770, 642, 26)}
         ${cogumelo(790, 676, 1.1)}${cogumelo(808, 680, .8)}${cogumelo(296, 678, .9)}
         <circle id="anel-porta" cx="470" cy="575" r="66" fill="none" stroke="#ffe6a3" stroke-width="3" stroke-dasharray="415" stroke-dashoffset="415" transform="rotate(-90 470 575)" style="filter:drop-shadow(0 0 6px #ffd27a)"/>
@@ -3244,7 +3406,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     let cristais = "";
     [[.36, "#8a5cd0", 1], [.42, "#f6a7c6", .8], [.48, "#e9a93a", .9], [.55, "#d6e4ff", 1.1], [.6, "#6fd0b8", .7]].reverse().forEach(([t, cor, tm]) => {
       const p = pd(t, jv1), s = escala(t), x = p[0] - 17 * s, y = p[1] + 1;
-      cristais += `<circle cx="${f1(x)}" cy="${f1(y - 25 * s)}" r="${f1(40 * s)}" fill="${cor}" opacity=".08" class="tremeluz" style="mix-blend-mode:screen"/>
+      cristais += `<circle cx="${f1(x)}" cy="${f1(y - 25 * s)}" r="${f1(40 * s)}" fill="${cor}" opacity=".08" style="mix-blend-mode:screen"/>
         <g transform="translate(${f1(x)} ${f1(y)}) scale(${f1(s * tm)})">${cristal(-10, 0, 48, 16, cor, -12)}${cristal(4, 0, 64, 20, cor, 4)}${cristal(16, 0, 38, 14, cor, 18)}</g>`;
     });
     const luarChao = `<polygon points="${pt(J[3])} ${pt(J[2])} ${f1(J[2][0] - 260)},${f1(FY1 + 120)} ${f1(J[3][0] - 330)},${f1(FY1 + 200)}" fill="#8fa8ff" opacity=".05"/>`;
@@ -3263,11 +3425,11 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     const ing = (id, conteudo) => `<g class="ingrediente" data-ing="${id}" role="button" tabindex="0" aria-label="${INGREDIENTES[id].nome}: jogar no caldeirão">${conteudo}</g>`;
     const varal = `<line x1="580" y1="${FY0}" x2="580" y2="236" stroke="#a8875a" stroke-width="2"/><line x1="1020" y1="${FY0}" x2="1020" y2="236" stroke="#a8875a" stroke-width="2"/>
       <rect x="560" y="232" width="480" height="12" rx="6" fill="#4a2c14"/><rect x="560" y="232" width="480" height="4" rx="2" fill="#7a4f2a"/>
-      ${ing("rosa", ramo(640, 240, 100, "rosa", R))}
-      ${ing("lavanda", ramo(720, 240, 108, "lavanda", R))}
-      ${ing("alecrim", ramo(800, 240, 104, "alecrim", R))}
-      ${ing("arruda", ramo(880, 240, 96, "arruda", R))}
-      ${ing("louro", ramo(960, 240, 100, "louro", R))}`;
+      ${ing("rosa", imagem(defs, 575, 236, 130, 130, ramo(640, 240, 100, "rosa", R)))}
+      ${ing("lavanda", imagem(defs, 655, 236, 130, 135, ramo(720, 240, 108, "lavanda", R)))}
+      ${ing("alecrim", imagem(defs, 735, 236, 130, 135, ramo(800, 240, 104, "alecrim", R)))}
+      ${ing("arruda", imagem(defs, 815, 236, 130, 130, ramo(880, 240, 96, "arruda", R)))}
+      ${ing("louro", imagem(defs, 890, 236, 140, 135, ramo(960, 240, 100, "louro", R)))}`;
     const B = 432; // cornija
     const potes = `
       ${ing("mel", `<ellipse cx="652" cy="${B + 1}" rx="30" ry="4" fill="#000" opacity=".5"/><path d="M626 ${B} C618 ${B - 30} 622 ${B - 56} 634 ${B - 62} H670 C682 ${B - 56} 686 ${B - 30} 678 ${B}Z" fill="url(#i-mel)"/><path d="M626 ${B} C618 ${B - 30} 622 ${B - 56} 634 ${B - 62} H670 C682 ${B - 56} 686 ${B - 30} 678 ${B}Z" fill="url(#i-vidro)" stroke="rgba(255,236,200,.4)" stroke-width="1.4"/>
@@ -3281,7 +3443,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
         <rect x="774" y="${B - 64}" width="52" height="64" rx="9" fill="url(#i-vidro)" stroke="rgba(255,236,200,.45)" stroke-width="1.4"/><rect x="776" y="${B - 74}" width="48" height="12" rx="3" fill="#8a6038"/><rect x="776" y="${B - 74}" width="48" height="4" rx="2" fill="#b08458"/><rect x="779" y="${B - 60}" width="4" height="46" rx="2" fill="#fff" opacity=".45"/>`)}
       ${ing("camomila", `<ellipse cx="872" cy="${B + 1}" rx="24" ry="3.5" fill="#000" opacity=".5"/><rect x="852" y="${B - 40}" width="40" height="38" rx="6" fill="#6b5a2a" opacity=".55"/>${[[860, 38], [874, 34], [884, 22], [862, 20], [876, 14], [866, 30], [882, 32]].map(([x, d]) => `<circle cx="${x}" cy="${B - d}" r="5.5" fill="#f4ecd6"/><circle cx="${x}" cy="${B - d}" r="2.4" fill="#e0a92a"/>`).join("")}
         <rect x="849" y="${B - 60}" width="46" height="60" rx="8" fill="url(#i-vidro)" stroke="rgba(255,236,200,.4)" stroke-width="1.4"/><path d="M851 ${B - 58} Q872 ${B - 76} 893 ${B - 58} L890 ${B - 52} H854Z" fill="#3d4a2a"/><line x1="853" y1="${B - 54}" x2="891" y2="${B - 54}" stroke="#c9a66b" stroke-width="1.6"/><rect x="853" y="${B - 50}" width="4" height="40" rx="2" fill="#fff" opacity=".4"/>`)}
-      ${ing("lua", `<circle cx="946" cy="${B - 28}" r="38" fill="#7fb6ff" opacity=".12" class="tremeluz" style="mix-blend-mode:screen"/><ellipse cx="946" cy="${B + 1}" rx="26" ry="3.5" fill="#000" opacity=".5"/>
+      ${ing("lua", `<circle cx="946" cy="${B - 28}" r="38" fill="#7fb6ff" opacity=".12" style="mix-blend-mode:screen"/><ellipse cx="946" cy="${B + 1}" rx="26" ry="3.5" fill="#000" opacity=".5"/>
         <circle cx="946" cy="${B - 26}" r="26" fill="url(#i-lua)" opacity=".9"/><circle cx="946" cy="${B - 26}" r="26" fill="url(#i-vidro)" stroke="rgba(220,236,255,.6)" stroke-width="1.6"/>
         <rect x="938" y="${B - 70}" width="16" height="22" rx="2" fill="url(#i-vidro)" stroke="rgba(220,236,255,.5)"/><rect x="937" y="${B - 78}" width="18" height="10" rx="3" fill="#8a6038"/>
         <path d="M954 ${B - 36} a11 11 0 1 0 0 20 a8 8 0 1 1 0 -20Z" fill="#fff6d2" opacity=".9"/><rect x="928" y="${B - 40}" width="4" height="24" rx="2" fill="#fff" opacity=".5"/>`)}`;
@@ -3305,7 +3467,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
         <path d="M682 676 C688 744 724 782 760 796" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="8" stroke-linecap="round"/>
         <path d="M900 690 C896 740 870 776 840 792" fill="none" stroke="#ff9a4a" stroke-opacity=".25" stroke-width="5" stroke-linecap="round"/>
         <circle cx="664" cy="664" r="13" fill="none" stroke="#1c1c24" stroke-width="6"/><circle cx="936" cy="664" r="13" fill="none" stroke="#1c1c24" stroke-width="6"/>
-        <ellipse cx="800" cy="626" rx="170" ry="80" fill="url(#i-brilho-liq)" class="tremeluz" style="mix-blend-mode:screen"/>
+        <ellipse cx="800" cy="626" rx="170" ry="80" fill="url(#i-brilho-liq)" style="mix-blend-mode:screen"/>
         <ellipse cx="800" cy="640" rx="138" ry="30" fill="#1a1a22" stroke="#4a4a5c" stroke-width="6"/>
         <ellipse cx="800" cy="636" rx="138" ry="28" fill="none" stroke="#ff9a4a" stroke-opacity=".25" stroke-width="2"/>
         <ellipse id="liquido" cx="800" cy="642" rx="120" ry="21" fill="url(#i-liq)"/>
@@ -3320,14 +3482,14 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       livros += `<rect x="348" y="${yb}" width="150" height="10" fill="#3d2410"/>`;
       while (x < 480) { const w = 10 + R() * 9, h = 52 + R() * 34, inc = R() < .12 ? 10 : 0; livros += `<rect x="${f1(x)}" y="${f1(yb - h)}" width="${f1(w)}" height="${f1(h)}" fill="${["#5a1e1e", "#2a3a2a", "#3a2a4a", "#6b4a1e", "#1e2a3a", "#4a2a1a"][Math.floor(R() * 6)]}" transform="rotate(${inc} ${f1(x)} ${yb})"/><rect x="${f1(x + 2)}" y="${f1(yb - h + 8)}" width="${f1(w - 4)}" height="3" fill="#c9a24a" opacity=".6" transform="rotate(${inc} ${f1(x)} ${yb})"/>`; x += w + 1.5 + inc; }
     }
-    const bola = `<circle cx="590" cy="530" r="34" fill="#8a7bff" opacity=".1" class="tremeluz" style="mix-blend-mode:screen"/><path d="M570 560 h40 l6 14 h-52Z" fill="#3d2410"/><circle cx="590" cy="534" r="26" fill="#2a2470" opacity=".85"/><circle cx="590" cy="534" r="26" fill="url(#i-vidro)" stroke="rgba(200,190,255,.5)" stroke-width="1.5"/><circle cx="583" cy="526" r="7" fill="#fff" opacity=".35"/>${estrela4(596, 540, 5, "#d6ccff", 'class="vagalume"')}`;
+    const bola = `<circle cx="590" cy="530" r="34" fill="#8a7bff" opacity=".1" style="mix-blend-mode:screen"/><path d="M570 560 h40 l6 14 h-52Z" fill="#3d2410"/><circle cx="590" cy="534" r="26" fill="#2a2470" opacity=".85"/><circle cx="590" cy="534" r="26" fill="url(#i-vidro)" stroke="rgba(200,190,255,.5)" stroke-width="1.5"/><circle cx="583" cy="526" r="7" fill="#fff" opacity=".35"/>${estrela4(596, 540, 5, "#d6ccff")}`;
     const vassouraIn = `<g transform="rotate(10 1180 700)"><rect x="1176" y="390" width="7" height="310" rx="3" fill="#5a3519"/><path d="M1162 612 L1198 612 L1224 712 L1136 712Z" fill="#8a6430"/>${Array.from({ length: 11 }, (_, i) => `<line x1="${1166 + i * 3}" y1="616" x2="${1142 + i * 7.6}" y2="712" stroke="#5e4220" stroke-width="1.5"/>`).join("")}<rect x="1162" y="608" width="36" height="8" rx="2" fill="#4a1e1e"/></g>`;
     let macosDir = "";
     [[1110, "rosa"], [1160, "lavanda"], [1210, "alecrim"]].forEach(([x, tipo]) => { macosDir += `<line x1="${x}" y1="${FY0}" x2="${x}" y2="200" stroke="#a8875a" stroke-width="1.5"/>${ramo(x, 200, 74, tipo, R)}`; });
 
     // ---- grimório no atril (magias) ----
     const grimorio = `<g class="ponto" data-area="magias" role="button" tabindex="0" aria-label="Grimório de magias">
-      <ellipse cx="470" cy="610" rx="120" ry="80" fill="url(#i-vela)" class="tremeluz" style="mix-blend-mode:screen"/>
+      <ellipse cx="470" cy="610" rx="120" ry="80" fill="url(#i-vela)" style="mix-blend-mode:screen"/>
       <path d="M460 650 h20 l8 220 h-36Z" fill="#3d2410"/><ellipse cx="470" cy="872" rx="62" ry="12" fill="#1c1007"/>
       <polygon points="392,664 548,664 536,628 404,628" fill="#4a2c14"/>
       <path d="M404 630 L470 640 L470 604 L410 594Z" fill="#e8d8b0"/><path d="M470 640 L536 630 L530 594 L470 604Z" fill="#dccb9e"/>
@@ -3335,12 +3497,12 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       ${[0, 1, 2, 3, 4].map(i => `<line x1="418" y1="${604 + i * 6}" x2="462" y2="${610 + i * 6}" stroke="#7a5a3a" stroke-width="1.3"/><line x1="478" y1="${610 + i * 6}" x2="522" y2="${604 + i * 6}" stroke="#7a5a3a" stroke-width="1.3"/>`).join("")}
       <circle cx="500" cy="614" r="8" fill="none" stroke="#8a2a2a" stroke-width="1.4"/>${estrela4(500, 614, 5, "#8a2a2a")}
       ${vela(548, 664, 46, R, 16)}
-      ${Array.from({ length: 6 }, () => `<circle class="vagalume" cx="${f1(430 + R() * 80)}" cy="${f1(560 + R() * 40)}" r="${f1(1.4 + R() * 1.8)}" fill="#ffe6a3" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`).join("")}
+      ${Array.from({ length: 3 }, () => `<circle class="vagalume" cx="${f1(430 + R() * 80)}" cy="${f1(560 + R() * 40)}" r="${f1(1.4 + R() * 1.8)}" fill="#ffe6a3" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`).join("")}
     </g>`;
 
     // ---- mesa de chá (chás), à direita, de madeira escura ----
     const mesa = `<g class="ponto" data-area="chas" role="button" tabindex="0" aria-label="Chás">
-      <ellipse cx="1330" cy="640" rx="190" ry="110" fill="url(#i-vela)" class="tremeluz" style="mix-blend-mode:screen"/>
+      <ellipse cx="1330" cy="640" rx="190" ry="110" fill="url(#i-vela)" style="mix-blend-mode:screen"/>
       <rect x="1196" y="700" width="16" height="190" fill="#2e1a0a"/><rect x="1448" y="700" width="16" height="190" fill="#2e1a0a"/><rect x="1320" y="706" width="14" height="168" fill="#24150a"/>
       <ellipse cx="1330" cy="700" rx="160" ry="30" fill="#2e1a0a"/><ellipse cx="1330" cy="694" rx="160" ry="30" fill="#5a3519"/><ellipse cx="1330" cy="692" rx="140" ry="22" fill="#6b4322" opacity=".5"/>
       <path d="M1220 690 Q1330 676 1440 690 L1430 708 Q1330 696 1230 708Z" fill="#6e2a2a" opacity=".7"/>
@@ -3355,17 +3517,19 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     </g>`;
 
     // ---- luzes: escurece as bordas e acende em volta do fogo e das velas ----
+    // as luzes grandes ficam paradas aqui; quem tremeluz é a camada .luz-lareira (CSS, bem mais leve)
     const luzes = `<rect width="1600" height="1000" fill="url(#i-escuro)"/>
-      <ellipse cx="800" cy="720" rx="560" ry="360" fill="url(#i-luz-quente)" class="tremeluz" style="mix-blend-mode:screen"/>
-      <ellipse cx="800" cy="460" rx="300" ry="220" fill="url(#i-luz-quente)" opacity=".6" class="tremeluz" style="mix-blend-mode:screen;animation-delay:-.7s"/>
+      <ellipse cx="800" cy="720" rx="560" ry="360" fill="url(#i-luz-quente)" style="mix-blend-mode:screen"/>
+      <ellipse cx="800" cy="460" rx="300" ry="220" fill="url(#i-luz-quente)" opacity=".6" style="mix-blend-mode:screen"/>
       ${luarChao}`;
 
-    const fundo = `${defs}${teto}${fundoParede}${paredeEsq}${paredeDir}${chao}
+    // paredes, teto, chão, estantes e lareira viram imagens (paradas); o resto continua vivo
+    const fundo = `${defs}${imagem(defs, 0, 0, 1600, 1000, teto + fundoParede + paredeEsq + paredeDir + chao)}
       ${teia(FX0 + 4, FY0 + 4, 70, 0)}${teia(FX1 - 4, FY0 + 4, 60, 90)}${teia(4, 4, 120, 0)}
-      ${livros}${bola}${vassouraIn}${macosDir}
-      <g class="ponto" data-area="ervas" role="button" tabindex="0" aria-label="Ervas">${macosEsq}${estante}</g>
+      ${imagem(defs, 340, 230, 170, 235, livros)}${bola}${vassouraIn}${imagem(defs, 1060, 140, 200, 170, macosDir)}
+      <g class="ponto" data-area="ervas" role="button" tabindex="0" aria-label="Ervas">${imagem(defs, 0, 60, 345, 700, macosEsq + estante)}</g>
       ${janela}
-      ${lareira}${fogoLareira}
+      ${imagem(defs, 600, 150, 400, 570, lareira)}${fogoLareira}
       ${vela(616, B, 54, R, 16)}${vela(986, B, 44, R, 16)}
       ${luzes}`;
 
@@ -3387,14 +3551,15 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 
     // ---- frente (desfocada): vela grande, ervas perto da câmera, poeirinha de luz ----
     let poeira = "";
-    for (let i = 0; i < 30; i++) poeira += `<circle class="vagalume" cx="${f1(R() * 1600)}" cy="${f1(120 + R() * 760)}" r="${f1(1.4 + R() * 2.2)}" fill="#ffc98a" opacity=".55" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`;
+    // camada desfocada: só a chama da vela grande se mexe (a poeira fica parada para não redesenhar o desfoque)
+    for (let i = 0; i < 30; i++) poeira += `<circle cx="${f1(R() * 1600)}" cy="${f1(120 + R() * 760)}" r="${f1(1.4 + R() * 2.2)}" fill="#ffc98a" opacity=".55"/>`;
     const frente = `
-      <circle cx="90" cy="770" r="210" fill="url(#i-vela)" class="tremeluz" style="mix-blend-mode:screen"/>
+      <circle cx="90" cy="770" r="210" fill="url(#i-vela)" style="mix-blend-mode:screen"/>
       <rect x="44" y="796" width="92" height="260" rx="8" fill="url(#i-cera)"/><rect x="60" y="796" width="9" height="60" rx="4" fill="#f3e6c8"/>
       <path class="chama chama--lenta" d="M90 734 C70 766 72 792 90 796 C108 792 110 766 90 734Z" fill="url(#i-chama)"/>
       <rect x="1468" y="780" width="150" height="240" rx="34" fill="url(#i-vidro)" stroke="rgba(255,236,200,.25)" stroke-width="3"/><rect x="1478" y="850" width="130" height="160" rx="24" fill="#3a2a10" opacity=".75"/><rect x="1488" y="800" width="10" height="160" rx="5" fill="#fff" opacity=".25"/>
       <path d="M0 0 Q400 60 800 16 Q1200 -26 1600 36 V0Z" fill="#0c0603"/>
-      <g opacity=".95">${ramo(130, 20, 170, "escura", R)}${ramo(320, 34, 130, "escura", R)}${ramo(1290, 30, 140, "escura", R)}${ramo(1480, 16, 170, "escura", R)}</g>
+      <g opacity=".95">${imagem(defs, 0, 0, 1600, 230, ramo(130, 20, 170, "escura", R) + ramo(320, 34, 130, "escura", R) + ramo(1290, 30, 140, "escura", R) + ramo(1480, 16, 170, "escura", R))}</g>
       ${poeira}`;
 
     return camada(VB, .2, fundo) + camada(VB, .5, meio) + camada(VB, .8, perto) + `<div class="luz-lareira"></div>` + camada(VB, 1.4, frente, "camada--desfocada") + `<div class="vinheta"></div>`;
@@ -3443,7 +3608,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     flocos = Array.from({ length: Math.round(r.width / 20) }, () => ({ x: Math.random() * r.width, y: Math.random() * r.height, r: .8 + Math.random() * 2.4, v: .3 + Math.random() * .9, f: Math.random() * 6 }));
   }
   function nevar(t) {
-    if (foraVisivel && !parado) {
+    if (foraVisivel && !dentro && !parado) {
       const w = neve.width / Math.min(devicePixelRatio || 1, 2), h = neve.height / Math.min(devicePixelRatio || 1, 2);
       nc.clearRect(0, 0, w, h);
       // pó de fada dourado subindo devagar e piscando
@@ -3503,8 +3668,10 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       palco.classList.remove("entrando"); dormir();
     }, parado ? 60 : 1600);
   }
+  let entrouEm = 0;
   function abrirInterior() {
-    dentro = true;
+    dentro = true; entrouEm = Date.now();
+    palco.classList.add("longe"); // a cena de fora fica escondida: pausa as animações dela
     interior.classList.add("aberto"); interior.setAttribute("aria-hidden", "false");
     document.body.classList.add("travado");
     // usa a largura de layout: a animação de chegada amplia a sala e mudaria o scrollWidth
@@ -3518,6 +3685,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     clarao.classList.add("aceso");
     setTimeout(() => {
       dentro = false;
+      palco.classList.toggle("longe", !foraVisivel);
       interior.classList.remove("aberto"); interior.setAttribute("aria-hidden", "true");
       document.body.classList.remove("travado");
       palco.scrollIntoView({ block: "center" });
@@ -3576,6 +3744,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     }));
   }
   mundo.addEventListener("click", e => {
+    // o toque que fez entrar não pode abrir uma placa: a pessoa precisa ver a casinha primeiro
+    if (Date.now() - entrouEm < 1200) return;
     const p = e.target.closest(".ponto");
     if (p && !e.target.closest(".ingrediente")) abrirArea(p.dataset.area);
   });
@@ -3742,6 +3912,71 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     const el = e.target.closest(".ingrediente");
     if (el && !arrasto) dicaCasa.textContent = `${INGREDIENTES[el.dataset.ing].nome} ✦ arraste até o caldeirão`;
   });
+
+  /* =====================================================================
+     ORÁCULO DOS ANIMAIS DE PODER: [nome, emoji, medicina, mensagem, pergunta]
+     Textos escritos pelo Claude; a Tryv vai revisar.
+     ===================================================================== */
+  const ANIMAIS_PODER = [
+    ["Águia", "🦅", "visão e espírito", "Suba e olhe de cima. O que parece enorme aqui embaixo fica pequeno lá no alto.", "O que você veria se olhasse essa situação de longe?"],
+    ["Lobo", "🐺", "intuição e lealdade", "Confie no seu faro. Você sabe mais do que pensa, e não precisa caminhar sozinho.", "Quem é a sua matilha agora?"],
+    ["Urso", "🐻", "introspecção e cura", "É hora de se recolher, como na caverna. Descansar também é um jeito de crescer.", "Do que você precisa se afastar para se curar?"],
+    ["Coruja", "🦉", "sabedoria e verdade", "Enxergue no escuro. Há uma verdade que você já percebeu e ainda não disse.", "O que você está fingindo não ver?"],
+    ["Serpente", "🐍", "transformação", "Troque de pele. O que ficou apertado precisa ficar para trás.", "Que pele velha você está pronto para soltar?"],
+    ["Borboleta", "🦋", "renascimento e leveza", "Você está no meio de uma metamorfose. Confie no casulo: as asas estão vindo.", "Em que fase da transformação você está?"],
+    ["Cervo", "🦌", "gentileza", "A doçura abre portas que a força não abre. Seja gentil, inclusive com você.", "Onde a gentileza resolveria mais do que a briga?"],
+    ["Raposa", "🦊", "astúcia e adaptação", "Observe antes de agir. Às vezes o melhor caminho é discreto e criativo.", "Que solução esperta está bem na sua frente?"],
+    ["Corvo", "🪶", "magia e mistério", "A magia já está acontecendo, mesmo que você ainda não veja. Preste atenção aos sinais.", "Que sinal tem aparecido para você?"],
+    ["Cavalo", "🐎", "liberdade e força", "Galope. Você tem energia para ir longe, desde que siga na direção do que ama.", "O que te prende e o que te libertaria?"],
+    ["Tartaruga", "🐢", "paciência e proteção", "Devagar também se chega. Cada passo firme constrói a sua casa.", "Onde a pressa está atrapalhando?"],
+    ["Baleia", "🐋", "memória ancestral", "Escute o canto que vem de longe. Seus ancestrais têm algo a dizer.", "Que história da sua família pede para ser ouvida?"],
+    ["Leão", "🦁", "coragem e liderança", "Ocupe o seu lugar. Sua voz tem força e merece ser ouvida.", "Onde você está se diminuindo?"],
+    ["Onça", "🐆", "poder pessoal", "Recupere o seu poder. Silenciosa e certeira, a onça não pede licença para ser quem é.", "Em que área da vida você entregou o seu poder?"],
+    ["Beija-flor", "🐦", "alegria e doçura", "Beba o néctar da vida. Há doçura disponível hoje, é só parar para provar.", "O que traz doçura para os seus dias?"],
+    ["Arara", "🦜", "comunicação e cor", "Fale e mostre as suas cores. O mundo precisa da sua expressão.", "O que você está calando?"],
+    ["Boto", "🐬", "encanto e emoção", "Mergulhe nas águas do sentir. O encanto está em deixar a emoção conduzir um pouco.", "O que o seu coração quer que você sinta?"],
+    ["Lontra", "🦦", "brincadeira e criatividade", "Brinque como a lontra. A criatividade nasce quando você se permite.", "Quando foi a última vez que você brincou de verdade?"],
+    ["Coelho", "🐇", "medo e fertilidade", "Olhe para o medo com carinho. Ele avisa, mas não precisa decidir por você.", "Qual medo está tomando as decisões?"],
+    ["Gato", "🐈‍⬛", "independência e magia", "Seja dono do seu tempo. O gato sabe a hora de se aproximar e a hora de se recolher.", "Onde você precisa colocar limites?"],
+    ["Aranha", "🕷️", "criação e destino", "Você tece a sua teia. Cada escolha de hoje é um fio do seu futuro.", "Que fio você quer tecer agora?"],
+    ["Sapo", "🐸", "limpeza e renovação", "Limpe e renove. Como a chuva para o sapo, as lágrimas também lavam.", "O que precisa ser limpo na sua vida?"],
+    ["Abelha", "🐝", "comunidade e trabalho doce", "Trabalho feito com amor vira mel. Junte-se a quem soma.", "Com quem você constrói o seu mel?"],
+    ["Elefante", "🐘", "memória e força", "Você é mais forte do que imagina. Lembre do caminho que já percorreu.", "Que conquista sua você esqueceu de celebrar?"],
+  ];
+  const animaisLeque = $("#animais-leque"), animalLeitura = $("#animal-leitura");
+  function embaralharAnimais() {
+    const ordem = ANIMAIS_PODER.map((_, i) => i).sort(() => Math.random() - .5).slice(0, 9);
+    animaisLeque.classList.remove("escolhido");
+    animalLeitura.hidden = true;
+    animaisLeque.innerHTML = ordem.map((a, k) => {
+      return `<button class="carta-animal" type="button" data-animal="${a}" style="--k:${k - 4}" aria-label="Carta ${k + 1}, virada para baixo">
+        <span class="carta-animal__dentro"><span class="carta-animal__verso" aria-hidden="true">🐾</span>
+        <span class="carta-animal__frente"><b>${ANIMAIS_PODER[a][1]}</b><span>${ANIMAIS_PODER[a][0]}</span></span></span></button>`;
+    }).join("");
+  }
+  animaisLeque.addEventListener("click", e => {
+    const c = e.target.closest(".carta-animal");
+    if (!c || animaisLeque.classList.contains("escolhido")) return;
+    const [nome, emoji, medicina, msg, pergunta] = ANIMAIS_PODER[+c.dataset.animal];
+    c.classList.add("virada"); c.setAttribute("aria-label", nome);
+    animaisLeque.classList.add("escolhido");
+    const r = c.getBoundingClientRect();
+    soltar(r.left + r.width / 2, r.top + r.height / 2, 40, { forca: 3, anel: true, curta: true });
+    sino(4);
+    setTimeout(() => {
+      animalLeitura.innerHTML = `<span class="chamada">Seu animal de hoje</span><h4>${emoji} ${nome}</h4>
+        <p class="destaque">${msg}</p>
+        <p><strong>Medicina</strong>: ${medicina}.</p>
+        <p><strong>Para refletir</strong>: ${pergunta}</p>
+        <div class="rev__acoes">
+          <a class="botao botao--rosa" href="${zap(`Olá, Tryv! Tirei o ${nome} no oráculo dos animais do site. Quero entender a mensagem ✨`)}" target="_blank" rel="noopener">${ICONE_ZAP} Levar para a Tryv</a>
+          <button class="botao botao--vidro" type="button" id="outro-animal">↻ Tirar outra carta</button>
+        </div>`;
+      animalLeitura.hidden = false;
+      $("#outro-animal").addEventListener("click", () => { embaralharAnimais(); sino(2); });
+    }, parado ? 0 : 900);
+  });
+  embaralharAnimais();
 
   /* =====================================================================
      RODA DO ANO: os oito sabbats nos hemisférios Sul e Norte.
