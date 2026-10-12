@@ -1,0 +1,3196 @@
+{
+  "_leia": "Textos, fotos e vídeos do site. A Tryv edita pela tela Configurações (configuracoes.html), que publica este arquivo direto no GitHub. Textos aceitam **negrito** e *itálico*. Em \"ingles\" ficam as traduções feitas à mão (texto em português -> inglês); o que não estiver lá é traduzido pelo Google. Listas com quantidade fixa (signos, anjos, kin, horóscopo chinês, totens, sabbats) seguem a ordem dos cálculos: não reordene.",
+  "abertura": {
+    "frase": "Era uma vez uma pergunta…",
+    "botao": "Entrar ✨"
+  },
+  "menu": {
+    "cartas": "Cartas",
+    "descubra": "Descubra-se",
+    "roda": "Roda do Ano",
+    "casinha": "Casinha",
+    "panteoes": "Panteões",
+    "consultas": "Consultas",
+    "tryv": "Tryv",
+    "livro": "Livro",
+    "contato": "Contato"
+  },
+  "inicio": {
+    "lema": "Do macro ao micro · **espiritualidade** · **autoconhecimento** · **empoderamento**",
+    "titulo": "Você é o *oráculo*.",
+    "texto": "Tarô, oráculos e terapias com Tryv Tuath. Com amor, verdade e um pouco de magia.",
+    "botaoCarta": "✦ Tirar minha carta",
+    "botaoAgendar": "Agendar consulta",
+    "mensagemAgendar": "Olá, Tryv! Vim pelo site Bem Dito Tarot e quero agendar uma consulta ✨"
+  },
+  "cartas": {
+    "chamada": "Oráculo encantado",
+    "titulo": "Escolha a sua carta",
+    "intro": "Respire, pense na sua pergunta e deixe a mão escolher. O baralho sabe o caminho.",
+    "aviso": "A mesa encantada é um carinho para o seu dia. A leitura completa, feita com atenção à sua história, é com a Tryv.",
+    "ajuda": {
+      "titulo": "Como funciona a mesa de tarô",
+      "passos": [
+        "Escolha **Carta do dia** (um conselho para hoje) ou **Três cartas** (o que passou, o que é agora e o caminho).",
+        "Respire, pense na sua pergunta e toque numa carta do leque. Ela voa até a mesa e vira.",
+        "Leia a mensagem, ouça em voz alta no 🔊 ou leve o resultado para a Tryv pelo WhatsApp."
+      ],
+      "nota": "As cartas são os 22 Arcanos Maiores, embaralhados a cada tiragem. É um carinho para o dia; a leitura completa é com a Tryv."
+    },
+    "arcanos": [
+      {
+        "num": "0",
+        "nome": "O Louco",
+        "glifo": "✧",
+        "msg": "Um salto de fé. Algo novo te chama: vá leve, de coração aberto e pés atentos.",
+        "foto": "assets/cartas/arcano-00.webp"
+      },
+      {
+        "num": "I",
+        "nome": "O Mago",
+        "glifo": "∞",
+        "msg": "Você já tem nas mãos tudo de que precisa. É hora de transformar intenção em ação.",
+        "foto": "assets/cartas/arcano-01.webp"
+      },
+      {
+        "num": "II",
+        "nome": "A Sacerdotisa",
+        "glifo": "☽",
+        "msg": "A resposta mora no silêncio. Escute sua intuição antes de ouvir o mundo.",
+        "foto": "assets/cartas/arcano-02.webp"
+      },
+      {
+        "num": "III",
+        "nome": "A Imperatriz",
+        "glifo": "♀",
+        "msg": "Tempo de florescer. Cuide, nutra e deixe a abundância encontrar você.",
+        "foto": "assets/cartas/arcano-03.webp"
+      },
+      {
+        "num": "IV",
+        "nome": "O Imperador",
+        "glifo": "♂",
+        "msg": "Estrutura também é amor. Organize seu reino e firme seus limites.",
+        "foto": "assets/cartas/arcano-04.webp"
+      },
+      {
+        "num": "V",
+        "nome": "O Hierofante",
+        "glifo": "⚜",
+        "msg": "Busque um conselho sábio. Há sabedoria no que veio antes de você.",
+        "foto": "assets/cartas/arcano-05.webp"
+      },
+      {
+        "num": "VI",
+        "nome": "Os Enamorados",
+        "glifo": "♡",
+        "msg": "Uma escolha do coração se aproxima. Escolha o que está alinhado com quem você é.",
+        "foto": "assets/cartas/arcano-06.webp"
+      },
+      {
+        "num": "VII",
+        "nome": "O Carro",
+        "glifo": "✶",
+        "msg": "Direção e coragem. Segure as rédeas: o caminho se abre para quem avança.",
+        "foto": "assets/cartas/arcano-07.webp"
+      },
+      {
+        "num": "VIII",
+        "nome": "A Força",
+        "glifo": "❦",
+        "msg": "Doçura que vence o medo. Sua maior força é a gentileza consigo.",
+        "foto": "assets/cartas/arcano-08.webp"
+      },
+      {
+        "num": "IX",
+        "nome": "O Eremita",
+        "glifo": "✵",
+        "msg": "Recolha-se para ouvir a própria luz. A solidão de agora é semente.",
+        "foto": "assets/cartas/arcano-09.webp"
+      },
+      {
+        "num": "X",
+        "nome": "A Roda da Fortuna",
+        "glifo": "⊕",
+        "msg": "A roda gira. O que parecia parado começa a se mover a seu favor.",
+        "foto": "assets/cartas/arcano-10.webp"
+      },
+      {
+        "num": "XI",
+        "nome": "A Justiça",
+        "glifo": "⚖",
+        "msg": "Equilíbrio e verdade. O que é justo encontra o seu lugar.",
+        "foto": "assets/cartas/arcano-11.webp"
+      },
+      {
+        "num": "XII",
+        "nome": "O Enforcado",
+        "glifo": "♆",
+        "msg": "Mude o ponto de vista. A pausa de agora revela o que a pressa escondia.",
+        "foto": "assets/cartas/arcano-12.webp"
+      },
+      {
+        "num": "XIII",
+        "nome": "A Morte",
+        "glifo": "⚘",
+        "msg": "Um ciclo se fecha para outro nascer. Deixe ir com gratidão.",
+        "foto": "assets/cartas/arcano-13.webp"
+      },
+      {
+        "num": "XIV",
+        "nome": "A Temperança",
+        "glifo": "≈",
+        "msg": "Misture com calma. A cura vem da medida certa entre os opostos.",
+        "foto": "assets/cartas/arcano-14.webp"
+      },
+      {
+        "num": "XV",
+        "nome": "O Diabo",
+        "glifo": "♄",
+        "msg": "Olhe para as correntes com coragem: muitas delas já estão abertas.",
+        "foto": "assets/cartas/arcano-15.webp"
+      },
+      {
+        "num": "XVI",
+        "nome": "A Torre",
+        "glifo": "↯",
+        "msg": "O que não era firme cai, para que você construa sobre a verdade.",
+        "foto": "assets/cartas/arcano-16.webp"
+      },
+      {
+        "num": "XVII",
+        "nome": "A Estrela",
+        "glifo": "★",
+        "msg": "O céu conspira a seu favor. A esperança volta a brilhar.",
+        "foto": "assets/cartas/arcano-17.webp"
+      },
+      {
+        "num": "XVIII",
+        "nome": "A Lua",
+        "glifo": "☾",
+        "msg": "Nem tudo é o que parece. Atravesse a névoa confiando nos seus sonhos.",
+        "foto": "assets/cartas/arcano-18.webp"
+      },
+      {
+        "num": "XIX",
+        "nome": "O Sol",
+        "glifo": "☉",
+        "msg": "Alegria, clareza e vitória. Brilhe sem pedir licença.",
+        "foto": "assets/cartas/arcano-19.webp"
+      },
+      {
+        "num": "XX",
+        "nome": "O Julgamento",
+        "glifo": "✺",
+        "msg": "Um chamado para despertar. Chegou a hora de renascer na sua melhor versão.",
+        "foto": "assets/cartas/arcano-20.webp"
+      },
+      {
+        "num": "XXI",
+        "nome": "O Mundo",
+        "glifo": "♁",
+        "msg": "Ciclo completo. Celebre o caminho e prepare-se para a próxima dança.",
+        "foto": "assets/cartas/arcano-21.webp"
+      }
+    ],
+    "verso": "assets/cartas/verso.webp"
+  },
+  "descubra": {
+    "chamada": "Descubra-se",
+    "titulo": "Vamos explorar mais sobre você?",
+    "intro": "Seis portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.",
+    "portais": {
+      "mapa": {
+        "nome": "Mapa astral",
+        "sub": "gratuito"
+      },
+      "kin": {
+        "nome": "Kin maia",
+        "sub": "Tzolkin"
+      },
+      "anjo": {
+        "nome": "Anjo cabalístico",
+        "sub": "os 72 nomes"
+      },
+      "china": {
+        "nome": "Horóscopo chinês",
+        "sub": "animal e elemento"
+      },
+      "arcano": {
+        "nome": "Arcano de nascimento",
+        "sub": "tarô"
+      },
+      "totem": {
+        "nome": "Animal de poder",
+        "sub": "totem"
+      }
+    },
+    "ajuda": {
+      "titulo": "Como funcionam os portais",
+      "passos": [
+        "Digite a sua data de nascimento (o nome é opcional) e toque em **Abrir os portais**.",
+        "Toque em cada portal para virá-lo: mapa astral, Kin maia, anjo cabalístico, horóscopo chinês, arcano de nascimento e animal de poder.",
+        "No mapa astral, informe a hora e a cidade do nascimento para ver o Ascendente, as casas e os aspectos entre os astros."
+      ],
+      "nota": "Tudo é calculado aqui mesmo, no seu aparelho. Nada é enviado para lugar nenhum."
+    },
+    "aviso": "✦ Isto é uma degustação. A leitura completa e aprofundada é feita pela Tryv, olhando para a sua história.",
+    "signos": [
+      {
+        "nome": "Áries",
+        "glifo": "♈",
+        "elemento": "fogo",
+        "sol": "coragem, iniciativa e o fogo de quem abre caminhos",
+        "lua": "emoções rápidas e sinceras: você sente e já age",
+        "asc": "chega com energia, franqueza e vontade de começar"
+      },
+      {
+        "nome": "Touro",
+        "glifo": "♉",
+        "elemento": "terra",
+        "sol": "constância, sensualidade e o prazer das coisas simples e bem feitas",
+        "lua": "precisa de segurança, conforto e afeto que se pode tocar",
+        "asc": "transmite calma, presença e firmeza"
+      },
+      {
+        "nome": "Gêmeos",
+        "glifo": "♊",
+        "elemento": "ar",
+        "sol": "curiosidade, palavra e a leveza de quem aprende com tudo",
+        "lua": "se acalma conversando, trocando e entendendo",
+        "asc": "transmite leveza, conversa fácil e curiosidade"
+      },
+      {
+        "nome": "Câncer",
+        "glifo": "♋",
+        "elemento": "agua",
+        "sol": "cuidado, memória e um coração que acolhe",
+        "lua": "sente fundo e protege quem ama como um lar",
+        "asc": "transmite doçura, sensibilidade e acolhimento"
+      },
+      {
+        "nome": "Leão",
+        "glifo": "♌",
+        "elemento": "fogo",
+        "sol": "brilho, generosidade e a coragem de ser quem se é",
+        "lua": "precisa ser vista e reconhecida, e retribui com calor",
+        "asc": "entra em cena com presença, charme e luz própria"
+      },
+      {
+        "nome": "Virgem",
+        "glifo": "♍",
+        "elemento": "terra",
+        "sol": "atenção aos detalhes, serviço e a magia do que é útil",
+        "lua": "se acalma pondo ordem no mundo e na rotina",
+        "asc": "transmite discrição, atenção e capricho"
+      },
+      {
+        "nome": "Libra",
+        "glifo": "♎",
+        "elemento": "ar",
+        "sol": "harmonia, beleza e a arte das relações",
+        "lua": "precisa de paz, equilíbrio e boa companhia",
+        "asc": "chega com elegância, gentileza e diplomacia"
+      },
+      {
+        "nome": "Escorpião",
+        "glifo": "♏",
+        "elemento": "agua",
+        "sol": "intensidade, profundidade e o poder de se transformar",
+        "lua": "sente tudo em profundidade e não aceita meias-verdades",
+        "asc": "tem um olhar magnético e misterioso"
+      },
+      {
+        "nome": "Sagitário",
+        "glifo": "♐",
+        "elemento": "fogo",
+        "sol": "fé, aventura e a busca por sentido",
+        "lua": "precisa de liberdade, horizonte e otimismo",
+        "asc": "transmite entusiasmo, franqueza e alegria de viver"
+      },
+      {
+        "nome": "Capricórnio",
+        "glifo": "♑",
+        "elemento": "terra",
+        "sol": "ambição serena, responsabilidade e construção a longo prazo",
+        "lua": "sente com reserva e encontra segurança no que conquista",
+        "asc": "transmite seriedade, maturidade e confiança"
+      },
+      {
+        "nome": "Aquário",
+        "glifo": "♒",
+        "elemento": "ar",
+        "sol": "originalidade, liberdade e visão de futuro",
+        "lua": "precisa de espaço, amizade e ideias novas",
+        "asc": "chega com um jeito único, livre e diferente"
+      },
+      {
+        "nome": "Peixes",
+        "glifo": "♓",
+        "elemento": "agua",
+        "sol": "sensibilidade, imaginação e compaixão sem fronteiras",
+        "lua": "sente o mundo inteiro e precisa de silêncio para se recompor",
+        "asc": "transmite doçura, mistério e um ar sonhador"
+      }
+    ],
+    "kin": {
+      "selos": [
+        {
+          "nome": "Dragão",
+          "g": "m",
+          "acao": "nutrir",
+          "essencia": "ser",
+          "poder": "nascimento"
+        },
+        {
+          "nome": "Vento",
+          "g": "m",
+          "acao": "comunicar",
+          "essencia": "respiração",
+          "poder": "espírito"
+        },
+        {
+          "nome": "Noite",
+          "g": "f",
+          "acao": "sonhar",
+          "essencia": "intuição",
+          "poder": "abundância"
+        },
+        {
+          "nome": "Semente",
+          "g": "f",
+          "acao": "almejar",
+          "essencia": "percepção",
+          "poder": "florescimento"
+        },
+        {
+          "nome": "Serpente",
+          "g": "f",
+          "acao": "sobreviver",
+          "essencia": "instinto",
+          "poder": "força vital"
+        },
+        {
+          "nome": "Enlaçador de Mundos",
+          "g": "m",
+          "acao": "igualar",
+          "essencia": "oportunidade",
+          "poder": "morte e renascimento"
+        },
+        {
+          "nome": "Mão",
+          "g": "f",
+          "acao": "conhecer",
+          "essencia": "cura",
+          "poder": "realização"
+        },
+        {
+          "nome": "Estrela",
+          "g": "f",
+          "acao": "embelezar",
+          "essencia": "arte",
+          "poder": "elegância"
+        },
+        {
+          "nome": "Lua",
+          "g": "f",
+          "acao": "purificar",
+          "essencia": "fluxo",
+          "poder": "água universal"
+        },
+        {
+          "nome": "Cachorro",
+          "g": "m",
+          "acao": "amar",
+          "essencia": "lealdade",
+          "poder": "coração"
+        },
+        {
+          "nome": "Macaco",
+          "g": "m",
+          "acao": "brincar",
+          "essencia": "ilusão",
+          "poder": "magia"
+        },
+        {
+          "nome": "Humano",
+          "g": "m",
+          "acao": "influenciar",
+          "essencia": "sabedoria",
+          "poder": "livre-arbítrio"
+        },
+        {
+          "nome": "Caminhante do Céu",
+          "g": "m",
+          "acao": "explorar",
+          "essencia": "vigilância",
+          "poder": "espaço"
+        },
+        {
+          "nome": "Mago",
+          "g": "m",
+          "acao": "encantar",
+          "essencia": "receptividade",
+          "poder": "atemporalidade"
+        },
+        {
+          "nome": "Águia",
+          "g": "f",
+          "acao": "criar",
+          "essencia": "mente",
+          "poder": "visão"
+        },
+        {
+          "nome": "Guerreiro",
+          "g": "m",
+          "acao": "questionar",
+          "essencia": "destemor",
+          "poder": "inteligência"
+        },
+        {
+          "nome": "Terra",
+          "g": "f",
+          "acao": "evoluir",
+          "essencia": "sincronicidade",
+          "poder": "navegação"
+        },
+        {
+          "nome": "Espelho",
+          "g": "m",
+          "acao": "refletir",
+          "essencia": "ordem",
+          "poder": "infinito"
+        },
+        {
+          "nome": "Tormenta",
+          "g": "f",
+          "acao": "catalisar",
+          "essencia": "energia",
+          "poder": "autogeração"
+        },
+        {
+          "nome": "Sol",
+          "g": "m",
+          "acao": "iluminar",
+          "essencia": "vida",
+          "poder": "fogo universal"
+        }
+      ],
+      "tons": [
+        {
+          "m": "Magnético",
+          "f": "Magnética",
+          "tema": "propósito",
+          "acoes": "unificar e atrair"
+        },
+        {
+          "m": "Lunar",
+          "f": "Lunar",
+          "tema": "desafio",
+          "acoes": "polarizar e estabilizar"
+        },
+        {
+          "m": "Elétrico",
+          "f": "Elétrica",
+          "tema": "serviço",
+          "acoes": "ativar e vincular"
+        },
+        {
+          "m": "Auto-Existente",
+          "f": "Auto-Existente",
+          "tema": "forma",
+          "acoes": "definir e medir"
+        },
+        {
+          "m": "Harmônico",
+          "f": "Harmônica",
+          "tema": "radiância",
+          "acoes": "comandar e empoderar"
+        },
+        {
+          "m": "Rítmico",
+          "f": "Rítmica",
+          "tema": "igualdade",
+          "acoes": "organizar e equilibrar"
+        },
+        {
+          "m": "Ressonante",
+          "f": "Ressonante",
+          "tema": "sintonia",
+          "acoes": "canalizar e inspirar"
+        },
+        {
+          "m": "Galáctico",
+          "f": "Galáctica",
+          "tema": "integridade",
+          "acoes": "harmonizar e modelar"
+        },
+        {
+          "m": "Solar",
+          "f": "Solar",
+          "tema": "intenção",
+          "acoes": "pulsar e realizar"
+        },
+        {
+          "m": "Planetário",
+          "f": "Planetária",
+          "tema": "manifestação",
+          "acoes": "aperfeiçoar e produzir"
+        },
+        {
+          "m": "Espectral",
+          "f": "Espectral",
+          "tema": "liberação",
+          "acoes": "dissolver e divulgar"
+        },
+        {
+          "m": "Cristal",
+          "f": "Cristal",
+          "tema": "cooperação",
+          "acoes": "dedicar e universalizar"
+        },
+        {
+          "m": "Cósmico",
+          "f": "Cósmica",
+          "tema": "presença",
+          "acoes": "perdurar e transcender"
+        }
+      ],
+      "cores": [
+        {
+          "m": "Vermelho",
+          "f": "Vermelha",
+          "hex": "#e0473f",
+          "tinta": "#fff",
+          "papel": "inicia"
+        },
+        {
+          "m": "Branco",
+          "f": "Branca",
+          "hex": "#f3efe6",
+          "tinta": "#2a1606",
+          "papel": "refina"
+        },
+        {
+          "m": "Azul",
+          "f": "Azul",
+          "hex": "#3f7fe0",
+          "tinta": "#fff",
+          "papel": "transforma"
+        },
+        {
+          "m": "Amarelo",
+          "f": "Amarela",
+          "hex": "#f2c14e",
+          "tinta": "#2a1606",
+          "papel": "amadurece"
+        }
+      ]
+    },
+    "anjos": {
+      "sobre": "Os 72 nomes vêm do Shem HaMephorash. Aqui seguimos o sistema de Monica Buonfiglio: cada anjo rege um dia, que se repete cinco vezes no ano.",
+      "genios": [
+        "Você nasceu num dos cinco dias dos Gênios da Humanidade: 19/03, 31/05, 12/08, 24/10 ou 05/01.",
+        "Nesses dias nenhum anjo rege sozinho. Quem nasce neles pode chamar por todos os 72 anjos, conforme a necessidade de cada momento."
+      ],
+      "lista": [
+        {
+          "nome": "Vehuiah",
+          "dias": "20/03 · 01/06 · 13/08 · 25/10 · 06/01",
+          "sorte": 8,
+          "carta": "A justiça",
+          "salmo": "3",
+          "dons": "coragem para começar e realizar o que parece difícil"
+        },
+        {
+          "nome": "Jeliel",
+          "dias": "21/03 · 02/06 · 14/08 · 26/10 · 07/01",
+          "sorte": 9,
+          "carta": "O ermitão",
+          "salmo": "21",
+          "dons": "paz nos relacionamentos, harmonia no casal e justiça nas disputas"
+        },
+        {
+          "nome": "Sitael",
+          "dias": "22/03 · 03/06 · 15/08 · 27/10 · 08/01",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "90",
+          "dons": "proteção nas adversidades, magnetismo pessoal e grandes descobertas"
+        },
+        {
+          "nome": "Elemiah",
+          "dias": "23/03 · 04/06 · 16/08 · 28/10 · 09/01",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "6",
+          "dons": "serenidade para a mente inquieta, boas viagens e autoconhecimento"
+        },
+        {
+          "nome": "Mahasiah",
+          "dias": "24/03 · 05/06 · 17/08 · 29/10 · 10/01",
+          "sorte": 12,
+          "carta": "O enforcado",
+          "salmo": "33",
+          "dons": "viver em paz com todos, gosto pelo estudo, pela filosofia e pelas artes"
+        },
+        {
+          "nome": "Lelahel",
+          "dias": "25/03 · 06/06 · 18/08 · 30/10 · 11/01",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "9",
+          "dons": "luz para curar, amor, arte e boa sorte"
+        },
+        {
+          "nome": "Achaiah",
+          "dias": "26/03 · 07/06 · 19/08 · 31/10 · 12/01",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "102",
+          "dons": "paciência e o dom de entender os segredos da natureza"
+        },
+        {
+          "nome": "Cahethel",
+          "dias": "27/03 · 08/06 · 20/08 · 01/11 · 13/01",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "94 e/ou 95",
+          "dons": "gratidão, fartura da terra e proteção divina"
+        },
+        {
+          "nome": "Haziel",
+          "dias": "28/03 · 09/06 · 21/08 · 02/11 · 14/01",
+          "sorte": 8,
+          "carta": "A justiça",
+          "salmo": "24",
+          "dons": "bondade, perdão e reconciliação"
+        },
+        {
+          "nome": "Aladiah",
+          "dias": "29/03 · 10/06 · 22/08 · 03/11 · 15/01",
+          "sorte": 5,
+          "carta": "O papa",
+          "salmo": "32",
+          "dons": "cura e proteção contra o mal"
+        },
+        {
+          "nome": "Laoviah",
+          "dias": "30/03 · 11/06 · 23/08 · 04/11 · 16/01",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "17",
+          "dons": "vitória, talento e aprendizado com a experiência"
+        },
+        {
+          "nome": "Hahahiah",
+          "dias": "31/03 · 12/06 · 24/08 · 05/11 · 17/01",
+          "sorte": 5,
+          "carta": "O papa",
+          "salmo": "9",
+          "dons": "proteção contra adversários e revelações"
+        },
+        {
+          "nome": "Yesalel",
+          "dias": "01/04 · 13/06 · 25/08 · 06/11 · 18/01",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "97",
+          "dons": "amizades, harmonia no casal e compreensão"
+        },
+        {
+          "nome": "Mebahel",
+          "dias": "02/04 · 14/06 · 26/08 · 07/11 · 19/01",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "9",
+          "dons": "justiça, verdade e libertação de quem se sente preso"
+        },
+        {
+          "nome": "Hariel",
+          "dias": "03/04 · 15/06 · 27/08 · 08/11 · 20/01",
+          "sorte": 12,
+          "carta": "O enforcado",
+          "salmo": "93",
+          "dons": "fé pura e inspiração para descobertas nas ciências e nas artes"
+        },
+        {
+          "nome": "Hekamiah",
+          "dias": "04/04 · 16/06 · 28/08 · 09/11 · 21/01",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "87",
+          "dons": "coragem, lealdade e proteção a quem lidera"
+        },
+        {
+          "nome": "Lauviah",
+          "dias": "05/04 · 17/06 · 29/08 · 10/11 · 22/01",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "8",
+          "dons": "sono tranquilo, alívio da tristeza e revelações em sonhos"
+        },
+        {
+          "nome": "Caliel",
+          "dias": "06/04 · 18/06 · 30/08 · 11/11 · 23/01",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "7",
+          "dons": "verdade e triunfo dos inocentes nas adversidades"
+        },
+        {
+          "nome": "Leuviah",
+          "dias": "07/04 · 19/06 · 31/08 · 12/11 · 24/01",
+          "sorte": 12,
+          "carta": "O enforcado",
+          "salmo": "39",
+          "dons": "memória, inteligência e graça"
+        },
+        {
+          "nome": "Pahaliah",
+          "dias": "08/04 · 20/06 · 01/09 · 13/11 · 25/01",
+          "sorte": 13,
+          "carta": "A morte",
+          "salmo": "119",
+          "dons": "vocação, ética e compreensão dos mistérios da fé"
+        },
+        {
+          "nome": "Nelchael",
+          "dias": "09/04 · 21/06 · 02/09 · 14/11 · 26/01",
+          "sorte": 5,
+          "carta": "O papa",
+          "salmo": "30",
+          "dons": "proteção contra calúnias e talento para as ciências exatas e a astrologia"
+        },
+        {
+          "nome": "Ieiaiel",
+          "dias": "10/04 · 22/06 · 03/09 · 15/11 · 27/01",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "120",
+          "dons": "fortuna, renome, diplomacia e novos caminhos"
+        },
+        {
+          "nome": "Melahel",
+          "dias": "11/04 · 23/06 · 04/09 · 16/11 · 28/01",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "120",
+          "dons": "proteção nas viagens, beleza e o saber das ervas que curam"
+        },
+        {
+          "nome": "Haheuiah",
+          "dias": "12/04 · 24/06 · 05/09 · 17/11 · 29/01",
+          "sorte": 4,
+          "carta": "O imperador",
+          "salmo": "32",
+          "dons": "graça e misericórdia"
+        },
+        {
+          "nome": "Nith-Haiah",
+          "dias": "13/04 · 25/06 · 06/09 · 18/11 · 30/01",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "9",
+          "dons": "sabedoria nos mistérios esotéricos e paz pela verdade"
+        },
+        {
+          "nome": "Haaiah",
+          "dias": "14/04 · 26/06 · 07/09 · 19/11 · 31/01",
+          "sorte": 4,
+          "carta": "O louco",
+          "salmo": "118",
+          "dons": "sucesso em causas e julgamentos, diplomacia e contemplação"
+        },
+        {
+          "nome": "Ierathel",
+          "dias": "15/04 · 27/06 · 08/09 · 20/11 · 01/02",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "139",
+          "dons": "proteção contra conspirações e amor à liberdade"
+        },
+        {
+          "nome": "Seheiah",
+          "dias": "16/04 · 28/06 · 09/09 · 21/11 · 02/02",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "70",
+          "dons": "saúde, vida longa e proteção contra acidentes e perdas"
+        },
+        {
+          "nome": "Reyel",
+          "dias": "17/04 · 29/06 · 10/09 · 22/11 · 03/02",
+          "sorte": 8,
+          "carta": "A justiça",
+          "salmo": "53",
+          "dons": "meditação, fé e proteção contra quem prejudica"
+        },
+        {
+          "nome": "Omael",
+          "dias": "18/04 · 30/06 · 11/09 · 23/11 · 04/02",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "70",
+          "dons": "paciência nos momentos de desespero e cuidado com os animais e a cura"
+        },
+        {
+          "nome": "Lecabel",
+          "dias": "19/04 · 01/07 · 12/09 · 24/11 · 05/02",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "70",
+          "dons": "clareza para resolver problemas difíceis e prosperidade no campo"
+        },
+        {
+          "nome": "Vasahiah",
+          "dias": "20/04 · 02/07 · 13/09 · 25/11 · 06/02",
+          "sorte": 8,
+          "carta": "A justiça",
+          "salmo": "32",
+          "dons": "justiça, clemência e proteção em processos"
+        },
+        {
+          "nome": "Iehuiah",
+          "dias": "21/04 · 03/07 · 14/09 · 26/11 · 07/02",
+          "sorte": 9,
+          "carta": "O ermitão",
+          "salmo": "33",
+          "dons": "discernimento para reconhecer traições e proteção contra a inveja"
+        },
+        {
+          "nome": "Lehahiah",
+          "dias": "22/04 · 04/07 · 15/09 · 27/11 · 08/02",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "130",
+          "dons": "harmonia, paz e inteligência"
+        },
+        {
+          "nome": "Chavakiah",
+          "dias": "23/04 · 05/07 · 16/09 · 28/11 · 09/02",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "114",
+          "dons": "reconciliação, paz em família e partilhas amigáveis"
+        },
+        {
+          "nome": "Menadel",
+          "dias": "24/04 · 06/07 · 17/09 · 29/11 · 10/02",
+          "sorte": 8,
+          "carta": "A justiça",
+          "salmo": "25",
+          "dons": "manter o emprego, preservar os bens e reencontrar o que se perdeu"
+        },
+        {
+          "nome": "Aniel",
+          "dias": "25/04 · 07/07 · 18/09 · 30/11 · 11/02",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "79",
+          "dons": "vitória, vida digna e inspiração para as ciências e a filosofia"
+        },
+        {
+          "nome": "Haamiah",
+          "dias": "26/04 · 08/07 · 19/09 · 01/12 · 12/02",
+          "sorte": 4,
+          "carta": "A morte",
+          "salmo": "90",
+          "dons": "descoberta dos tesouros e segredos da Terra e proteção espiritual"
+        },
+        {
+          "nome": "Rehael",
+          "dias": "27/04 · 09/07 · 20/09 · 02/12 · 13/02",
+          "sorte": 9,
+          "carta": "O ermitão",
+          "salmo": "29",
+          "dons": "saúde, longevidade e amor entre pais e filhos"
+        },
+        {
+          "nome": "Ieiazel",
+          "dias": "28/04 · 10/07 · 21/09 · 03/12 · 14/02",
+          "sorte": 4,
+          "carta": "O imperador",
+          "salmo": "87",
+          "dons": "inspiração para a escrita e alívio da tristeza e do medo"
+        },
+        {
+          "nome": "Hahahel",
+          "dias": "29/04 · 11/07 · 22/09 · 04/12 · 15/02",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "119",
+          "dons": "proteção da fé e de quem se dedica à espiritualidade"
+        },
+        {
+          "nome": "Mikael",
+          "dias": "30/04 · 12/07 · 23/09 · 05/12 · 16/02",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "120",
+          "dons": "viagens seguras e visão clara sobre a vida social"
+        },
+        {
+          "nome": "Veuliah",
+          "dias": "01/05 · 13/07 · 24/09 · 06/12 · 17/02",
+          "sorte": 12,
+          "carta": "O enforcado",
+          "salmo": "87",
+          "dons": "libertação e vitória sobre as forças contrárias"
+        },
+        {
+          "nome": "Yelaiah",
+          "dias": "02/05 · 14/07 · 25/09 · 07/12 · 18/02",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "118",
+          "dons": "proteção em processos e contra a violência"
+        },
+        {
+          "nome": "Sealiah",
+          "dias": "03/05 · 15/07 · 26/09 · 08/12 · 19/02",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "93",
+          "dons": "esperança para os desanimados e cuidado com tudo o que vive"
+        },
+        {
+          "nome": "Ariel",
+          "dias": "04/05 · 16/07 · 27/09 · 09/12 · 20/02",
+          "sorte": 14,
+          "carta": "A temperança",
+          "salmo": "144",
+          "dons": "gratidão, revelações em sonhos e encontrar o que estava perdido"
+        },
+        {
+          "nome": "Asaliah",
+          "dias": "05/05 · 17/07 · 28/09 · 10/12 · 21/02",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "104",
+          "dons": "consciência elevada, verdade e metas construtivas"
+        },
+        {
+          "nome": "Mihael",
+          "dias": "06/05 · 18/07 · 29/09 · 11/12 · 22/02",
+          "sorte": 5,
+          "carta": "O papa",
+          "salmo": "97",
+          "dons": "união do casal, intuição e premonições"
+        },
+        {
+          "nome": "Vehuel",
+          "dias": "07/05 · 19/07 · 30/09 · 12/12 · 23/02",
+          "sorte": 3,
+          "carta": "A imperatriz",
+          "salmo": "144",
+          "dons": "elevação espiritual e generosidade"
+        },
+        {
+          "nome": "Daniel",
+          "dias": "08/05 · 20/07 · 01/10 · 13/12 · 24/02",
+          "sorte": 5,
+          "carta": "O papa",
+          "salmo": "102 e/ou 103",
+          "dons": "consolo, decisão e senso de justiça"
+        },
+        {
+          "nome": "Hahasiah",
+          "dias": "09/05 · 21/07 · 02/10 · 14/12 · 25/02",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "103",
+          "dons": "contemplação e compreensão dos mistérios"
+        },
+        {
+          "nome": "Imamaiah",
+          "dias": "10/05 · 22/07 · 03/10 · 15/12 · 26/02",
+          "sorte": 12,
+          "carta": "O enforcado",
+          "salmo": "7",
+          "dons": "liberdade, proteção nas viagens e amparo aos solitários"
+        },
+        {
+          "nome": "Nanael",
+          "dias": "11/05 · 23/07 · 04/10 · 16/12 · 27/02",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "118",
+          "dons": "estudo, ensino e as altas ciências"
+        },
+        {
+          "nome": "Nithael",
+          "dias": "12/05 · 24/07 · 05/10 · 17/12 · 28/02 e 29/02",
+          "sorte": 5,
+          "carta": "A temperança",
+          "salmo": "102",
+          "dons": "longevidade, estabilidade e proteção a quem lidera"
+        },
+        {
+          "nome": "Mebahiah",
+          "dias": "13/05 · 25/07 · 06/10 · 18/12 · 01/03",
+          "sorte": 8,
+          "carta": "A justiça",
+          "salmo": "101",
+          "dons": "consolo, força para vencer e proteção às crianças"
+        },
+        {
+          "nome": "Poiel",
+          "dias": "14/05 · 26/07 · 07/10 · 19/12 · 02/03",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "144",
+          "dons": "prestígio, fortuna e sabedoria filosófica"
+        },
+        {
+          "nome": "Nemamiah",
+          "dias": "15/05 · 27/07 · 08/10 · 20/12 · 03/03",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "113",
+          "dons": "prosperidade nas causas justas e libertação dos vícios"
+        },
+        {
+          "nome": "Ieialel",
+          "dias": "16/05 · 28/07 · 09/10 · 21/12 · 04/03",
+          "sorte": 9,
+          "carta": "O ermitão",
+          "salmo": "6",
+          "dons": "alívio da tristeza e proteção contra a maldade"
+        },
+        {
+          "nome": "Harahel",
+          "dias": "17/05 · 29/07 · 10/10 · 22/12 · 05/03",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "112",
+          "dons": "saúde, fertilidade e respeito em família"
+        },
+        {
+          "nome": "Mitzrael",
+          "dias": "18/05 · 30/07 · 11/10 · 23/12 · 06/03",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "144",
+          "dons": "cura emocional, fidelidade e libertação de perseguições"
+        },
+        {
+          "nome": "Umabel",
+          "dias": "19/05 · 31/07 · 12/10 · 24/12 · 07/03",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "112",
+          "dons": "amizade e talento para a astrologia, a psicologia e o esoterismo"
+        },
+        {
+          "nome": "Iah-Hel",
+          "dias": "20/05 · 01/08 · 13/10 · 25/12 · 08/03",
+          "sorte": 6,
+          "carta": "Os enamorados",
+          "salmo": "118",
+          "dons": "sabedoria, ideias luminosas e vida honesta"
+        },
+        {
+          "nome": "Anauel",
+          "dias": "21/05 · 02/08 · 14/10 · 26/12 · 09/03",
+          "sorte": 13,
+          "carta": "A morte",
+          "salmo": "2",
+          "dons": "espiritualidade verdadeira, saúde e paz em família"
+        },
+        {
+          "nome": "Mehiel",
+          "dias": "22/05 · 03/08 · 15/10 · 27/12 · 10/03",
+          "sorte": 5,
+          "carta": "O papa",
+          "salmo": "32",
+          "dons": "proteção contra a raiva e talento para escrever e ensinar"
+        },
+        {
+          "nome": "Damabiah",
+          "dias": "23/05 · 04/08 · 16/10 · 28/12 · 11/03",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "89",
+          "dons": "proteção contra maus presságios e êxito nos empreendimentos"
+        },
+        {
+          "nome": "Manakel",
+          "dias": "24/05 · 05/08 · 17/10 · 29/12 · 12/03",
+          "sorte": 7,
+          "carta": "O carro",
+          "salmo": "37",
+          "dons": "calma, inspiração para a música e a poesia e contato com os elementais"
+        },
+        {
+          "nome": "Ayel",
+          "dias": "25/05 · 06/08 · 18/10 · 30/12 · 13/03",
+          "sorte": 4,
+          "carta": "O imperador",
+          "salmo": "36",
+          "dons": "consolo nas injustiças, prosperidade e estudo do misticismo"
+        },
+        {
+          "nome": "Habuhiah",
+          "dias": "26/05 · 07/08 · 19/10 · 31/12 · 14/03",
+          "sorte": 10,
+          "carta": "A roda da fortuna",
+          "salmo": "105",
+          "dons": "paz, saúde e fertilidade da terra"
+        },
+        {
+          "nome": "Rochel",
+          "dias": "27/05 · 08/08 · 20/10 · 01/01 · 15/03",
+          "sorte": 12,
+          "carta": "O enforcado",
+          "salmo": "15",
+          "dons": "encontrar o que se perdeu, renome e sucesso"
+        },
+        {
+          "nome": "Yabamiah",
+          "dias": "28/05 · 09/08 · 21/10 · 02/01 · 16/03",
+          "sorte": 4,
+          "carta": "O imperador",
+          "salmo": "91",
+          "dons": "regeneração, harmonia com a natureza e libertação dos vícios"
+        },
+        {
+          "nome": "Haiaiel",
+          "dias": "29/05 · 10/08 · 22/10 · 03/01 · 17/03",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "108",
+          "dons": "força, vitória, paz e libertação de opressões"
+        },
+        {
+          "nome": "Mumiah",
+          "dias": "30/05 · 11/08 · 23/10 · 04/01 · 18/03",
+          "sorte": 11,
+          "carta": "A força",
+          "salmo": "114",
+          "dons": "proteção espiritual, descobertas úteis e longevidade"
+        }
+      ],
+      "coros": [
+        {
+          "coro": "Serafins",
+          "arcanjo": "Metatron"
+        },
+        {
+          "coro": "Querubins",
+          "arcanjo": "Raziel"
+        },
+        {
+          "coro": "Tronos",
+          "arcanjo": "Tsaphkiel"
+        },
+        {
+          "coro": "Dominações",
+          "arcanjo": "Tsadkiel"
+        },
+        {
+          "coro": "Potências",
+          "arcanjo": "Camael"
+        },
+        {
+          "coro": "Virtudes",
+          "arcanjo": "Rafael"
+        },
+        {
+          "coro": "Principados",
+          "arcanjo": "Haniel"
+        },
+        {
+          "coro": "Arcanjos",
+          "arcanjo": "Miguel"
+        },
+        {
+          "coro": "Anjos",
+          "arcanjo": "Gabriel"
+        }
+      ]
+    },
+    "china": {
+      "animais": [
+        {
+          "nome": "Rato",
+          "han": "鼠",
+          "texto": "esperteza, charme e talento para encontrar oportunidades"
+        },
+        {
+          "nome": "Boi",
+          "han": "牛",
+          "texto": "força, paciência e determinação incansável"
+        },
+        {
+          "nome": "Tigre",
+          "han": "虎",
+          "texto": "coragem, paixão e espírito livre"
+        },
+        {
+          "nome": "Coelho",
+          "han": "兔",
+          "texto": "delicadeza, diplomacia e uma sorte tranquila"
+        },
+        {
+          "nome": "Dragão",
+          "han": "龍",
+          "texto": "poder, carisma e grandes sonhos"
+        },
+        {
+          "nome": "Serpente",
+          "han": "蛇",
+          "texto": "sabedoria, intuição e elegância misteriosa"
+        },
+        {
+          "nome": "Cavalo",
+          "han": "馬",
+          "texto": "liberdade, energia e entusiasmo contagiante"
+        },
+        {
+          "nome": "Cabra",
+          "han": "羊",
+          "texto": "criatividade, gentileza e senso estético"
+        },
+        {
+          "nome": "Macaco",
+          "han": "猴",
+          "texto": "inteligência, humor e versatilidade"
+        },
+        {
+          "nome": "Galo",
+          "han": "雞",
+          "texto": "franqueza, disciplina e brilho próprio"
+        },
+        {
+          "nome": "Cão",
+          "han": "狗",
+          "texto": "lealdade, justiça e coração fiel"
+        },
+        {
+          "nome": "Porco",
+          "han": "豬",
+          "texto": "generosidade, alegria e bom coração"
+        }
+      ],
+      "elementos": [
+        {
+          "nome": "Madeira",
+          "han": "木",
+          "texto": "crescimento, generosidade e visão"
+        },
+        {
+          "nome": "Fogo",
+          "han": "火",
+          "texto": "paixão, liderança e calor humano"
+        },
+        {
+          "nome": "Terra",
+          "han": "土",
+          "texto": "estabilidade, prudência e senso prático"
+        },
+        {
+          "nome": "Metal",
+          "han": "金",
+          "texto": "determinação, firmeza e foco"
+        },
+        {
+          "nome": "Água",
+          "han": "水",
+          "texto": "intuição, flexibilidade e profundidade"
+        }
+      ]
+    },
+    "totens": {
+      "nota": "Este é o animal da Roda da Medicina, ligado ao período em que você nasceu. O animal de poder pessoal costuma se revelar numa jornada xamânica, e é isso que a Tryv conduz em consulta.",
+      "lista": [
+        {
+          "dia": 22,
+          "mes": 12,
+          "nome": "Ganso-das-neves",
+          "emoji": "🦢",
+          "lua": "Lua da Renovação da Terra",
+          "cla": "Tartaruga (terra)",
+          "qualidades": "determinação, ambição e perseverança",
+          "mensagem": "Você voa alto e longe sem perder o rumo. Passo a passo, chega aonde decidir chegar.",
+          "sombra": "a cobrança excessiva consigo e com os outros"
+        },
+        {
+          "dia": 20,
+          "mes": 1,
+          "nome": "Lontra",
+          "emoji": "🦦",
+          "lua": "Lua do Descanso e da Purificação",
+          "cla": "Borboleta (ar)",
+          "qualidades": "originalidade, liberdade e amizade",
+          "mensagem": "Sua magia é ver o mundo de um jeito novo e lembrar a todos que brincar também cura.",
+          "sombra": "a rebeldia sem causa e a dificuldade de se comprometer"
+        },
+        {
+          "dia": 19,
+          "mes": 2,
+          "nome": "Lobo",
+          "emoji": "🐺",
+          "lua": "Lua dos Grandes Ventos",
+          "cla": "Sapo (água)",
+          "qualidades": "intuição, sensibilidade e compaixão",
+          "mensagem": "Você sente o que os outros não dizem. Seu faro é guia para a matilha, e sua solidão, mestra.",
+          "sombra": "absorver dores alheias e se isolar para se proteger"
+        },
+        {
+          "dia": 21,
+          "mes": 3,
+          "nome": "Falcão",
+          "emoji": "🦅",
+          "lua": "Lua do Despertar",
+          "cla": "Pássaro-Trovão (fogo)",
+          "qualidades": "coragem, iniciativa e visão",
+          "mensagem": "Você enxerga de cima e mergulha certeiro. Nasceu para abrir caminhos e começar o novo.",
+          "sombra": "a impaciência e o impulso de agir antes de olhar"
+        },
+        {
+          "dia": 20,
+          "mes": 4,
+          "nome": "Castor",
+          "emoji": "🦫",
+          "lua": "Lua do Crescimento",
+          "cla": "Tartaruga (terra)",
+          "qualidades": "constância, praticidade e construção",
+          "mensagem": "Você transforma sonhos em casa, rio em lago, ideia em obra. Seu dom é fazer acontecer.",
+          "sombra": "a teimosia e o apego ao que já está construído"
+        },
+        {
+          "dia": 21,
+          "mes": 5,
+          "nome": "Cervo",
+          "emoji": "🦌",
+          "lua": "Lua do Plantio",
+          "cla": "Borboleta (ar)",
+          "qualidades": "gentileza, curiosidade e comunicação",
+          "mensagem": "Você caminha leve e atento. Sua doçura abre portas que a força nunca abriria.",
+          "sombra": "a dispersão e a dificuldade de escolher um caminho"
+        },
+        {
+          "dia": 21,
+          "mes": 6,
+          "nome": "Pica-pau",
+          "emoji": "🐦",
+          "lua": "Lua dos Dias Longos",
+          "cla": "Sapo (água)",
+          "qualidades": "cuidado, ritmo e acolhimento",
+          "mensagem": "Você é o coração que bate no tronco da árvore: nutre, protege e mantém o ritmo da família.",
+          "sombra": "a possessividade e o medo de perder quem ama"
+        },
+        {
+          "dia": 23,
+          "mes": 7,
+          "nome": "Salmão",
+          "emoji": "🐟",
+          "lua": "Lua do Amadurecimento",
+          "cla": "Pássaro-Trovão (fogo)",
+          "qualidades": "entusiasmo, vitalidade e propósito",
+          "mensagem": "Você nada contra a corrente quando é preciso. Seu propósito é maior que o cansaço.",
+          "sombra": "o orgulho e a necessidade de estar sempre certo"
+        },
+        {
+          "dia": 23,
+          "mes": 8,
+          "nome": "Urso",
+          "emoji": "🐻",
+          "lua": "Lua da Colheita",
+          "cla": "Tartaruga (terra)",
+          "qualidades": "sabedoria prática, paciência e cura",
+          "mensagem": "Você sabe a hora de agir e a hora de recolher. Na sua caverna nasce a cura.",
+          "sombra": "a autocrítica e o perfeccionismo"
+        },
+        {
+          "dia": 23,
+          "mes": 9,
+          "nome": "Corvo",
+          "emoji": "🪶",
+          "lua": "Lua dos Patos que Voam",
+          "cla": "Borboleta (ar)",
+          "qualidades": "magia, equilíbrio e diplomacia",
+          "mensagem": "Você é guardião dos mistérios e ponte entre mundos. Sua palavra harmoniza o que está em guerra.",
+          "sombra": "a indecisão e o medo de desagradar"
+        },
+        {
+          "dia": 23,
+          "mes": 10,
+          "nome": "Serpente",
+          "emoji": "🐍",
+          "lua": "Lua das Geadas",
+          "cla": "Sapo (água)",
+          "qualidades": "transformação, renascimento e intensidade",
+          "mensagem": "Você troca de pele quantas vezes for preciso. Do que morre em você, nasce poder.",
+          "sombra": "o ciúme e guardar mágoas em segredo"
+        },
+        {
+          "dia": 23,
+          "mes": 11,
+          "nome": "Coruja",
+          "emoji": "🦉",
+          "lua": "Lua das Neves Longas",
+          "cla": "Pássaro-Trovão (fogo)",
+          "qualidades": "sabedoria, verdade e visão no escuro",
+          "mensagem": "Você enxerga o que está escondido. Sua liberdade é dizer a verdade com voo silencioso.",
+          "sombra": "o excesso e a franqueza que fere"
+        }
+      ]
+    }
+  },
+  "animais": {
+    "titulo": "Oráculo dos animais de poder",
+    "intro": "O totem acima vem da sua data de nascimento. Aqui é diferente: pense numa pergunta e deixe um animal escolher você.",
+    "ajuda": {
+      "titulo": "Como funciona o oráculo dos animais",
+      "passos": [
+        "Pense numa pergunta ou numa situação da sua vida.",
+        "Toque numa das cartas viradas para baixo. O animal que aparecer traz a medicina (o ensinamento) para esse momento.",
+        "Quer outra mensagem? Toque em **Tirar outra carta**."
+      ],
+      "nota": "O totem dos portais vem da data de nascimento e é sempre o mesmo. Aqui o animal muda a cada tiragem."
+    },
+    "cartas": [
+      {
+        "nome": "Águia",
+        "emoji": "🦅",
+        "medicina": "visão e espírito",
+        "mensagem": "Suba e olhe de cima. O que parece enorme aqui embaixo fica pequeno lá no alto.",
+        "pergunta": "O que você veria se olhasse essa situação de longe?",
+        "foto": "assets/animais/aguia.webp"
+      },
+      {
+        "nome": "Lobo",
+        "emoji": "🐺",
+        "medicina": "intuição e lealdade",
+        "mensagem": "Confie no seu faro. Você sabe mais do que pensa, e não precisa caminhar sozinho.",
+        "pergunta": "Quem é a sua matilha agora?",
+        "foto": "assets/animais/lobo.webp"
+      },
+      {
+        "nome": "Urso",
+        "emoji": "🐻",
+        "medicina": "introspecção e cura",
+        "mensagem": "É hora de se recolher, como na caverna. Descansar também é um jeito de crescer.",
+        "pergunta": "Do que você precisa se afastar para se curar?",
+        "foto": "assets/animais/urso.webp"
+      },
+      {
+        "nome": "Coruja",
+        "emoji": "🦉",
+        "medicina": "sabedoria e verdade",
+        "mensagem": "Enxergue no escuro. Há uma verdade que você já percebeu e ainda não disse.",
+        "pergunta": "O que você está fingindo não ver?",
+        "foto": "assets/animais/coruja.webp"
+      },
+      {
+        "nome": "Serpente",
+        "emoji": "🐍",
+        "medicina": "transformação",
+        "mensagem": "Troque de pele. O que ficou apertado precisa ficar para trás.",
+        "pergunta": "Que pele velha você está pronto para soltar?",
+        "foto": "assets/animais/serpente.webp"
+      },
+      {
+        "nome": "Borboleta",
+        "emoji": "🦋",
+        "medicina": "renascimento e leveza",
+        "mensagem": "Você está no meio de uma metamorfose. Confie no casulo: as asas estão vindo.",
+        "pergunta": "Em que fase da transformação você está?",
+        "foto": "assets/animais/borboleta.webp"
+      },
+      {
+        "nome": "Cervo",
+        "emoji": "🦌",
+        "medicina": "gentileza",
+        "mensagem": "A doçura abre portas que a força não abre. Seja gentil, inclusive com você.",
+        "pergunta": "Onde a gentileza resolveria mais do que a briga?",
+        "foto": "assets/animais/cervo.webp"
+      },
+      {
+        "nome": "Raposa",
+        "emoji": "🦊",
+        "medicina": "astúcia e adaptação",
+        "mensagem": "Observe antes de agir. Às vezes o melhor caminho é discreto e criativo.",
+        "pergunta": "Que solução esperta está bem na sua frente?",
+        "foto": "assets/animais/raposa.webp"
+      },
+      {
+        "nome": "Corvo",
+        "emoji": "🪶",
+        "medicina": "magia e mistério",
+        "mensagem": "A magia já está acontecendo, mesmo que você ainda não veja. Preste atenção aos sinais.",
+        "pergunta": "Que sinal tem aparecido para você?",
+        "foto": "assets/animais/corvo.webp"
+      },
+      {
+        "nome": "Cavalo",
+        "emoji": "🐎",
+        "medicina": "liberdade e força",
+        "mensagem": "Galope. Você tem energia para ir longe, desde que siga na direção do que ama.",
+        "pergunta": "O que te prende e o que te libertaria?",
+        "foto": "assets/animais/cavalo.webp"
+      },
+      {
+        "nome": "Tartaruga",
+        "emoji": "🐢",
+        "medicina": "paciência e proteção",
+        "mensagem": "Devagar também se chega. Cada passo firme constrói a sua casa.",
+        "pergunta": "Onde a pressa está atrapalhando?",
+        "foto": "assets/animais/tartaruga.webp"
+      },
+      {
+        "nome": "Baleia",
+        "emoji": "🐋",
+        "medicina": "memória ancestral",
+        "mensagem": "Escute o canto que vem de longe. Seus ancestrais têm algo a dizer.",
+        "pergunta": "Que história da sua família pede para ser ouvida?",
+        "foto": "assets/animais/baleia.webp"
+      },
+      {
+        "nome": "Leão",
+        "emoji": "🦁",
+        "medicina": "coragem e liderança",
+        "mensagem": "Ocupe o seu lugar. Sua voz tem força e merece ser ouvida.",
+        "pergunta": "Onde você está se diminuindo?",
+        "foto": "assets/animais/leao.webp"
+      },
+      {
+        "nome": "Onça",
+        "emoji": "🐆",
+        "medicina": "poder pessoal",
+        "mensagem": "Recupere o seu poder. Silenciosa e certeira, a onça não pede licença para ser quem é.",
+        "pergunta": "Em que área da vida você entregou o seu poder?",
+        "foto": "assets/animais/onca.webp"
+      },
+      {
+        "nome": "Beija-flor",
+        "emoji": "🐦",
+        "medicina": "alegria e doçura",
+        "mensagem": "Beba o néctar da vida. Há doçura disponível hoje, é só parar para provar.",
+        "pergunta": "O que traz doçura para os seus dias?",
+        "foto": "assets/animais/beija-flor.webp"
+      },
+      {
+        "nome": "Arara",
+        "emoji": "🦜",
+        "medicina": "comunicação e cor",
+        "mensagem": "Fale e mostre as suas cores. O mundo precisa da sua expressão.",
+        "pergunta": "O que você está calando?",
+        "foto": "assets/animais/arara.webp"
+      },
+      {
+        "nome": "Boto",
+        "emoji": "🐬",
+        "medicina": "encanto e emoção",
+        "mensagem": "Mergulhe nas águas do sentir. O encanto está em deixar a emoção conduzir um pouco.",
+        "pergunta": "O que o seu coração quer que você sinta?",
+        "foto": "assets/animais/boto.webp"
+      },
+      {
+        "nome": "Lontra",
+        "emoji": "🦦",
+        "medicina": "brincadeira e criatividade",
+        "mensagem": "Brinque como a lontra. A criatividade nasce quando você se permite.",
+        "pergunta": "Quando foi a última vez que você brincou de verdade?",
+        "foto": "assets/animais/lontra.webp"
+      },
+      {
+        "nome": "Coelho",
+        "emoji": "🐇",
+        "medicina": "medo e fertilidade",
+        "mensagem": "Olhe para o medo com carinho. Ele avisa, mas não precisa decidir por você.",
+        "pergunta": "Qual medo está tomando as decisões?",
+        "foto": "assets/animais/coelho.webp"
+      },
+      {
+        "nome": "Gato",
+        "emoji": "🐈‍⬛",
+        "medicina": "independência e magia",
+        "mensagem": "Seja dono do seu tempo. O gato sabe a hora de se aproximar e a hora de se recolher.",
+        "pergunta": "Onde você precisa colocar limites?",
+        "foto": "assets/animais/gato.webp"
+      },
+      {
+        "nome": "Aranha",
+        "emoji": "🕷️",
+        "medicina": "criação e destino",
+        "mensagem": "Você tece a sua teia. Cada escolha de hoje é um fio do seu futuro.",
+        "pergunta": "Que fio você quer tecer agora?",
+        "foto": "assets/animais/aranha.webp"
+      },
+      {
+        "nome": "Sapo",
+        "emoji": "🐸",
+        "medicina": "limpeza e renovação",
+        "mensagem": "Limpe e renove. Como a chuva para o sapo, as lágrimas também lavam.",
+        "pergunta": "O que precisa ser limpo na sua vida?",
+        "foto": "assets/animais/sapo.webp"
+      },
+      {
+        "nome": "Abelha",
+        "emoji": "🐝",
+        "medicina": "comunidade e trabalho doce",
+        "mensagem": "Trabalho feito com amor vira mel. Junte-se a quem soma.",
+        "pergunta": "Com quem você constrói o seu mel?",
+        "foto": "assets/animais/abelha.webp"
+      },
+      {
+        "nome": "Elefante",
+        "emoji": "🐘",
+        "medicina": "memória e força",
+        "mensagem": "Você é mais forte do que imagina. Lembre do caminho que já percorreu.",
+        "pergunta": "Que conquista sua você esqueceu de celebrar?",
+        "foto": "assets/animais/elefante.webp"
+      }
+    ]
+  },
+  "roda": {
+    "chamada": "Paganismo e natureza",
+    "titulo": "A Roda do Ano",
+    "intro": "Oito sabbats marcam o giro das estações: quatro festas do Sol, nos solstícios e equinócios, e quatro festas do fogo, entre elas. Escolha a sua roda e toque num sabbat.",
+    "ajuda": {
+      "titulo": "Como funciona a Roda do Ano",
+      "passos": [
+        "Escolha a sua roda: **Sul** (as estações do Brasil), **Norte** (as datas tradicionais europeias) ou **Mista** (as duas juntas).",
+        "A roda é um relógio do ano, com janeiro no alto. O ponto rosa marca o dia de hoje.",
+        "Toque num sabbat para ver a data, o sentido da festa e as correspondências: cores, ervas, cristais, comidas, bebidas, decoração e práticas."
+      ],
+      "nota": ""
+    },
+    "notas": {
+      "sul": "Aqui no Hemisfério Sul as estações são invertidas: Yule cai em junho e Litha em dezembro. É a roda que acompanha o céu e a natureza do Brasil.",
+      "norte": "As datas tradicionais europeias, de onde vêm os nomes dos sabbats. É a roda que aparece na maioria dos livros.",
+      "mista": "Muitas bruxas no Brasil honram a estação daqui e também as datas tradicionais. Na roda mista, o anel de fora mostra o Norte e o de dentro, o Sul."
+    },
+    "sabbats": [
+      {
+        "id": "samhain",
+        "nome": "Samhain",
+        "emoji": "🎃",
+        "tipo": "Festa do fogo",
+        "outros": "Ano Novo das Bruxas · noite dos ancestrais",
+        "norte": [
+          31,
+          10
+        ],
+        "sul": [
+          30,
+          4
+        ],
+        "dataN": "31 de outubro",
+        "dataS": "30 de abril para 1º de maio",
+        "tema": "O véu entre os mundos fica fino. É tempo de honrar quem veio antes e deixar morrer o que já cumpriu seu ciclo.",
+        "texto": "Para muitas tradições, Samhain é o fim e o começo da Roda. A terra se recolhe, os ancestrais são lembrados com carinho e a magia de divinação fica mais forte.",
+        "cores": [
+          [
+            "preto",
+            "#0d0b10"
+          ],
+          [
+            "laranja",
+            "#e0711c"
+          ],
+          [
+            "roxo",
+            "#5b2a86"
+          ]
+        ],
+        "ervas": "artemísia, sálvia, alecrim, arruda, cravo e folhas secas",
+        "cristais": "obsidiana, ônix, quartzo fumê e ametista",
+        "itens": "espelho negro, caldeirão, velas pretas, fotos dos ancestrais e oráculos",
+        "comidas": "abóbora, maçã, romã, castanhas, sopas e pão caseiro",
+        "bebidas": "sidra, vinho tinto e chá de maçã com canela",
+        "decoracao": "altar dos ancestrais, abóboras com velas, folhas secas e caveirinhas",
+        "praticas": "ceia muda para os ancestrais, leitura de oráculos e ritual de liberação",
+        "divindades": "Hécate, Morrighan, Cerridwen e Anúbis"
+      },
+      {
+        "id": "yule",
+        "nome": "Yule",
+        "emoji": "🌲",
+        "tipo": "Solstício de inverno",
+        "outros": "Renascimento do Sol · a noite mais longa",
+        "norte": [
+          21,
+          12
+        ],
+        "sul": [
+          21,
+          6
+        ],
+        "dataN": "21 de dezembro",
+        "dataS": "21 de junho",
+        "tema": "Na noite mais longa do ano, a luz renasce. A partir de agora, os dias voltam a crescer.",
+        "texto": "Yule celebra a esperança: a Deusa dá à luz o Sol criança. Acendem-se velas e fogueiras para chamar a luz de volta, e se planta, por dentro, o desejo do novo ciclo.",
+        "cores": [
+          [
+            "verde",
+            "#1f6b3a"
+          ],
+          [
+            "vermelho",
+            "#a8182c"
+          ],
+          [
+            "dourado",
+            "#e0b040"
+          ],
+          [
+            "branco",
+            "#f4f0e6"
+          ]
+        ],
+        "ervas": "pinheiro, azevinho, visco, canela, cravo e louro",
+        "cristais": "granada, rubi, olho de tigre e citrino",
+        "itens": "tronco de Yule, velas vermelhas e douradas, sinos e guirlanda",
+        "comidas": "pães de especiarias, frutas secas, nozes, assados e biscoitos",
+        "bebidas": "quentão, vinho quente e chocolate quente com canela",
+        "decoracao": "guirlandas de pinheiro, laranjas com cravo, estrelas e luzinhas",
+        "praticas": "vigília até o amanhecer, troca de presentes e intenções para o novo ciclo solar",
+        "divindades": "Frigga, Mãe Holle, o Rei do Carvalho e o Sol Invicto"
+      },
+      {
+        "id": "imbolc",
+        "nome": "Imbolc",
+        "emoji": "🕯️",
+        "tipo": "Festa do fogo",
+        "outros": "Candlemas · festa de Brigid",
+        "norte": [
+          1,
+          2
+        ],
+        "sul": [
+          1,
+          8
+        ],
+        "dataN": "1º e 2 de fevereiro",
+        "dataS": "1º e 2 de agosto",
+        "tema": "As primeiras luzes da primavera. A semente acorda debaixo da terra fria.",
+        "texto": "Imbolc é a festa da purificação e da inspiração, dedicada a Brigid, senhora do fogo, da poesia e da cura. Limpa-se a casa e abençoam-se os projetos que vão brotar.",
+        "cores": [
+          [
+            "branco",
+            "#f4f0e6"
+          ],
+          [
+            "prata",
+            "#c9ccd6"
+          ],
+          [
+            "amarelo-claro",
+            "#f2e08a"
+          ],
+          [
+            "vermelho",
+            "#a8182c"
+          ]
+        ],
+        "ervas": "angélica, manjericão, louro, camomila, alecrim e sementes",
+        "cristais": "ametista, pedra da lua, granada e quartzo branco",
+        "itens": "cruz de Brigid, velas brancas, vassoura, leite e água de poço",
+        "comidas": "leite, queijos, manteiga, pães, mingau e sementes",
+        "bebidas": "leite com mel, chá de camomila e hidromel",
+        "decoracao": "muitas velas acesas, flores brancas e a bonequinha de palha de Brigid",
+        "praticas": "faxina energética, bênção de sementes e projetos, poesia e rituais de cura",
+        "divindades": "Brigid, Vesta e Héstia"
+      },
+      {
+        "id": "ostara",
+        "nome": "Ostara",
+        "emoji": "🥚",
+        "tipo": "Equinócio de primavera",
+        "outros": "Equilíbrio entre luz e sombra · fertilidade",
+        "norte": [
+          20,
+          3
+        ],
+        "sul": [
+          22,
+          9
+        ],
+        "dataN": "20 e 21 de março",
+        "dataS": "21 a 23 de setembro",
+        "tema": "Dia e noite têm a mesma duração. A vida floresce e tudo pede para ser plantado.",
+        "texto": "Ostara celebra a fertilidade e o equilíbrio. Os ovos e as sementes guardam a promessa da vida, e é tempo de começar aquilo que se quer ver crescer.",
+        "cores": [
+          [
+            "verde-claro",
+            "#9fd39a"
+          ],
+          [
+            "amarelo",
+            "#f2d24a"
+          ],
+          [
+            "rosa",
+            "#f2a2c0"
+          ],
+          [
+            "lilás",
+            "#c3a6e6"
+          ]
+        ],
+        "ervas": "jasmim, violeta, rosa, lavanda, narciso e trevo",
+        "cristais": "quartzo rosa, água-marinha, ágata musgo e jaspe",
+        "itens": "ovos pintados, sementes, cesta, flores e a lebre",
+        "comidas": "ovos, saladas verdes, brotos, mel, pães doces e frutas",
+        "bebidas": "chás de flores, sucos frescos e hidromel",
+        "decoracao": "ovos coloridos, ninhos, flores e vasinhos com mudas",
+        "praticas": "plantar sementes de intenção, pintar ovos com símbolos e rituais de equilíbrio",
+        "divindades": "Eostre, Perséfone, Freya e Flora"
+      },
+      {
+        "id": "beltane",
+        "nome": "Beltane",
+        "emoji": "🔥",
+        "tipo": "Festa do fogo",
+        "outros": "Festa da vida · união sagrada",
+        "norte": [
+          1,
+          5
+        ],
+        "sul": [
+          31,
+          10
+        ],
+        "dataN": "1º de maio",
+        "dataS": "31 de outubro para 1º de novembro",
+        "tema": "O fogo da vida está no auge. Amor, desejo, alegria e criatividade dançam juntos.",
+        "texto": "Beltane celebra a união do Deus e da Deusa e a fertilidade da terra. Pula-se a fogueira, dança-se em volta do mastro de fitas e pede-se amor e prosperidade.",
+        "cores": [
+          [
+            "vermelho",
+            "#c2273d"
+          ],
+          [
+            "verde",
+            "#2f8a4a"
+          ],
+          [
+            "branco",
+            "#f4f0e6"
+          ],
+          [
+            "rosa",
+            "#ff7fb5"
+          ]
+        ],
+        "ervas": "rosa, espinheiro, bétula, hortelã, alecrim e flores do campo",
+        "cristais": "esmeralda, quartzo rosa, cornalina e malaquita",
+        "itens": "mastro de fitas, fogueira, coroa de flores e fitas coloridas",
+        "comidas": "frutas vermelhas, morangos, mel, aveia, bolos e saladas",
+        "bebidas": "vinho, hidromel, sucos vermelhos e chá de rosas",
+        "decoracao": "fitas, coroas de flores e galhos floridos",
+        "praticas": "pular a fogueira, dançar, banho de orvalho e rituais de amor",
+        "divindades": "Flora, Cernunnos, Freya e Pã"
+      },
+      {
+        "id": "litha",
+        "nome": "Litha",
+        "emoji": "☀️",
+        "tipo": "Solstício de verão",
+        "outros": "Meio do verão · o Sol no auge",
+        "norte": [
+          21,
+          6
+        ],
+        "sul": [
+          21,
+          12
+        ],
+        "dataN": "21 de junho",
+        "dataS": "21 de dezembro",
+        "tema": "O dia mais longo do ano. O Sol está no auge da força e tudo transborda.",
+        "texto": "Litha é a festa da plenitude. As ervas colhidas nesse dia têm poder dobrado, e é tempo de celebrar as conquistas e pedir força para o que falta realizar.",
+        "cores": [
+          [
+            "dourado",
+            "#e0b040"
+          ],
+          [
+            "amarelo",
+            "#f2d24a"
+          ],
+          [
+            "laranja",
+            "#e8802a"
+          ],
+          [
+            "azul-céu",
+            "#7fb6ff"
+          ]
+        ],
+        "ervas": "girassol, hipérico, camomila, calêndula, lavanda e verbena",
+        "cristais": "citrino, âmbar, pedra do sol e olho de tigre",
+        "itens": "fogueira, espelho solar, guirlanda de ervas e discos solares",
+        "comidas": "frutas frescas, mel, pães, legumes do verão e saladas",
+        "bebidas": "hidromel, sucos cítricos, água solarizada e chá gelado de hibisco",
+        "decoracao": "girassóis, sóis dourados, guirlandas de ervas e flores amarelas",
+        "praticas": "colher ervas mágicas, banho de sol, rituais de força e de realização",
+        "divindades": "Rá, Lugh, Apolo e Áine"
+      },
+      {
+        "id": "lammas",
+        "nome": "Lammas",
+        "emoji": "🌾",
+        "tipo": "Festa do fogo",
+        "outros": "Lughnasadh · primeira colheita",
+        "norte": [
+          1,
+          8
+        ],
+        "sul": [
+          1,
+          2
+        ],
+        "dataN": "1º de agosto",
+        "dataS": "1º e 2 de fevereiro",
+        "tema": "A primeira colheita. Tempo de agradecer o pão na mesa e os frutos do próprio esforço.",
+        "texto": "Lammas honra os grãos e o trabalho. Assa-se o primeiro pão da colheita, partilha-se a fartura e olha-se para o que já floresceu nos projetos do ano.",
+        "cores": [
+          [
+            "dourado",
+            "#e0b040"
+          ],
+          [
+            "laranja",
+            "#e8802a"
+          ],
+          [
+            "marrom",
+            "#7a4a22"
+          ],
+          [
+            "verde-oliva",
+            "#6b7a3a"
+          ]
+        ],
+        "ervas": "trigo, milho, girassol, manjericão, hortelã e papoula",
+        "cristais": "citrino, olho de tigre, ágata e aventurina",
+        "itens": "boneca de milho ou trigo, foice, espigas e pão em forma de figura",
+        "comidas": "pão caseiro, milho, grãos, frutas da estação, tortas e bolos",
+        "bebidas": "cerveja artesanal, vinho, sucos e chá de hortelã",
+        "decoracao": "espigas, feixes de trigo e cestas de frutas",
+        "praticas": "assar pão em gratidão, partilhar e celebrar as primeiras conquistas",
+        "divindades": "Lugh, Ceres, Deméter e Tailtiu"
+      },
+      {
+        "id": "mabon",
+        "nome": "Mabon",
+        "emoji": "🍂",
+        "tipo": "Equinócio de outono",
+        "outros": "Segunda colheita · gratidão",
+        "norte": [
+          22,
+          9
+        ],
+        "sul": [
+          20,
+          3
+        ],
+        "dataN": "21 a 23 de setembro",
+        "dataS": "20 e 21 de março",
+        "tema": "De novo, dia e noite se equilibram. A natureza agradece e começa a se recolher.",
+        "texto": "Mabon é o dia de ação de graças das bruxas. Colhe-se o que foi plantado, agradece-se a fartura e prepara-se o coração para o tempo de introspecção.",
+        "cores": [
+          [
+            "laranja",
+            "#e0711c"
+          ],
+          [
+            "vinho",
+            "#6e1a2e"
+          ],
+          [
+            "marrom",
+            "#7a4a22"
+          ],
+          [
+            "dourado",
+            "#e0b040"
+          ]
+        ],
+        "ervas": "sálvia, mirra, folhas de carvalho, cravo, canela e maçã",
+        "cristais": "safira, lápis-lazúli, topázio e ágata",
+        "itens": "cornucópia, folhas secas, pinhas e uma balança",
+        "comidas": "maçãs, uvas, abóbora, nozes, batatas e tortas",
+        "bebidas": "vinho, sidra, suco de uva e chá de maçã",
+        "decoracao": "cornucópia, folhas de outono, cabaças e cachos de uva",
+        "praticas": "lista de gratidão, doações e rituais de equilíbrio",
+        "divindades": "Perséfone, Deméter, Mabon e Pomona"
+      }
+    ]
+  },
+  "casinha": {
+    "chamada": "Era uma vez, na floresta",
+    "titulo": "A casinha da Tryv",
+    "intro": "Uma casinha de bruxa escondida no bosque. Passe a varinha na porta e entre: tem ervas, chás, cristais, magias leves e um caldeirão fervendo.",
+    "ajuda": {
+      "titulo": "Como funciona a casinha",
+      "passos": [
+        "Para entrar: no computador, pare a varinha sobre a porta ou clique; no celular, toque na cena.",
+        "Lá dentro, toque nas placas **Ervas**, **Chás**, **Magias** e **Cristais** para ler os segredos de cada canto.",
+        "Para fazer uma poção, arraste ervas do varal ou potes da lareira até o caldeirão (até 3 ingredientes) e toque em **Mexer**.",
+        "Para sair, toque em **Sair da casinha**, no alto da tela."
+      ],
+      "nota": ""
+    },
+    "ervas": {
+      "titulo": "Prateleira das ervas",
+      "sub": "Cada erva tem um segredo. Aqui vão alguns, para começar.",
+      "nota": "Ervas são aliadas antigas. Use com respeito e, na dúvida, pergunte à Tryv.",
+      "itens": [
+        {
+          "nome": "Alecrim",
+          "para": "alegria, proteção e boa memória",
+          "dica": "Um raminho na bolsa ou no bolso para clarear as ideias e afastar o desânimo."
+        },
+        {
+          "nome": "Arruda",
+          "para": "proteção",
+          "dica": "Um vasinho perto da porta de entrada é a guardiã clássica da casa."
+        },
+        {
+          "nome": "Lavanda",
+          "para": "calma e sono tranquilo",
+          "dica": "Um saquinho de flores secas no travesseiro ajuda a desacelerar."
+        },
+        {
+          "nome": "Manjericão",
+          "para": "prosperidade e limpeza",
+          "dica": "Tenha um vaso na cozinha e, ao regar, mentalize a casa farta."
+        },
+        {
+          "nome": "Louro",
+          "para": "vitória e prosperidade",
+          "dica": "Uma folha seca na carteira para chamar dinheiro e boas notícias."
+        },
+        {
+          "nome": "Sálvia",
+          "para": "limpeza energética",
+          "dica": "Na defumação, passe a fumaça pelos cantos da casa com as janelas abertas."
+        },
+        {
+          "nome": "Camomila",
+          "para": "calma e doçura",
+          "dica": "Em chá ou num banho morno, acalma o corpo e o humor."
+        },
+        {
+          "nome": "Hortelã",
+          "para": "renovação e frescor",
+          "dica": "Folhas amassadas na água do banho trazem ânimo para recomeçar."
+        }
+      ]
+    },
+    "chas": {
+      "titulo": "Mesinha dos chás",
+      "sub": "Chás simples, para fazer em casa e tomar com intenção.",
+      "nota": "Chá é carinho, não remédio. Gestantes, lactantes, crianças e quem usa medicamentos devem conversar com um profissional de saúde antes.",
+      "itens": [
+        {
+          "nome": "Camomila",
+          "quando": "no fim do dia, para desacelerar",
+          "preparo": "1 colher de sopa de flores secas para 1 xícara de água quente. Abafe por 5 minutos."
+        },
+        {
+          "nome": "Erva-cidreira",
+          "quando": "quando a cabeça está agitada",
+          "preparo": "Um punhado de folhas frescas em água quente, abafado por 5 a 7 minutos."
+        },
+        {
+          "nome": "Hibisco com canela",
+          "quando": "nos dias frios, para aquecer",
+          "preparo": "1 colher de hibisco e 1 pau de canela em 1 xícara de água quente por 5 minutos."
+        },
+        {
+          "nome": "Gengibre, limão e mel",
+          "quando": "para aquecer a garganta e o coração",
+          "preparo": "Ferva fatias de gengibre por 5 minutos; desligue e junte limão e uma colher de mel."
+        },
+        {
+          "nome": "Hortelã",
+          "quando": "depois das refeições, para refrescar",
+          "preparo": "Folhas frescas em água quente, abafadas por 5 minutos."
+        },
+        {
+          "nome": "Lavanda",
+          "quando": "no ritual do sono",
+          "preparo": "1 colher de chá de lavanda culinária em água quente por 4 minutos. Pouquinho, que ela é forte."
+        }
+      ]
+    },
+    "magias": {
+      "titulo": "O grimório",
+      "sub": "Magias rápidas e leves, para o dia a dia.",
+      "nota": "Rituais mais profundos a Tryv faz com você, com cuidado e no seu tempo.",
+      "itens": [
+        {
+          "nome": "Banho de louro da prosperidade",
+          "precisa": "3 folhas de louro e 1 litro de água",
+          "como": "Ferva as folhas por 3 minutos, espere amornar e jogue do pescoço para baixo, numa quinta-feira, mentalizando portas se abrindo."
+        },
+        {
+          "nome": "Saquinho de proteção",
+          "precisa": "alecrim, arruda e uma pitada de sal grosso",
+          "como": "Coloque tudo num saquinho de pano, dê três nós e carregue na bolsa. Troque a cada lua nova."
+        },
+        {
+          "nome": "Pote de mel da doçura",
+          "precisa": "um potinho, mel, canela e um papel",
+          "como": "Escreva no papel a situação que precisa de doçura, coloque no pote com mel e uma pitada de canela e guarde num lugar alto."
+        },
+        {
+          "nome": "Intenções da lua nova",
+          "precisa": "papel, caneta e uma vela branca",
+          "como": "Na lua nova, acenda a vela, escreva três intenções no presente (“eu tenho”, “eu sou”) e leia em voz alta."
+        },
+        {
+          "nome": "Limpeza da casa",
+          "precisa": "sálvia ou incenso e uma vassoura",
+          "como": "Abra as janelas, passe a fumaça pelos cantos e varra de dentro para fora, pedindo que saia o que não serve mais."
+        },
+        {
+          "nome": "Água solar",
+          "precisa": "um copo de vidro e água",
+          "como": "Deixe o copo ao sol da manhã por uma hora e beba com uma intenção para o dia."
+        }
+      ]
+    },
+    "cristais": {
+      "titulo": "Janela dos cristais",
+      "sub": "Toque num cristal para ler o que ele guarda.",
+      "nota": "Para limpar seus cristais: água corrente (menos a selenita, que não gosta de água), luz da lua ou um tempinho na terra.",
+      "itens": [
+        {
+          "nome": "Quartzo rosa",
+          "cor": "#f6a7c6",
+          "palavras": "amor e autoestima",
+          "texto": "A pedra do coração: acalma, acolhe e ensina a amar a si primeiro."
+        },
+        {
+          "nome": "Ametista",
+          "cor": "#9b6bd6",
+          "palavras": "intuição e calma",
+          "texto": "Ajuda a meditar, a dormir melhor e a ouvir a voz de dentro."
+        },
+        {
+          "nome": "Citrino",
+          "cor": "#f2b84b",
+          "palavras": "prosperidade e alegria",
+          "texto": "Um pedacinho de sol: atrai abundância e devolve o otimismo."
+        },
+        {
+          "nome": "Cristal de quartzo",
+          "cor": "#e4eeff",
+          "palavras": "clareza e energia",
+          "texto": "O amplificador: potencializa intenções e outras pedras."
+        },
+        {
+          "nome": "Turmalina negra",
+          "cor": "#2b2b35",
+          "palavras": "proteção",
+          "texto": "A guardiã: absorve o que é pesado e firma os pés no chão."
+        },
+        {
+          "nome": "Pedra da lua",
+          "cor": "#dfe6f6",
+          "palavras": "ciclos e intuição",
+          "texto": "Ligada à lua e ao feminino: ajuda a fluir com as mudanças."
+        },
+        {
+          "nome": "Olho de tigre",
+          "cor": "#b5762a",
+          "palavras": "coragem e foco",
+          "texto": "Para dias de decisão: traz firmeza, foco e confiança."
+        },
+        {
+          "nome": "Selenita",
+          "cor": "#f4f0e6",
+          "palavras": "limpeza e paz",
+          "texto": "Limpa o ambiente e as outras pedras; traz uma paz branquinha."
+        },
+        {
+          "nome": "Aventurina",
+          "cor": "#3fae6a",
+          "palavras": "sorte e oportunidades",
+          "texto": "A pedra da boa sorte: abre caminhos e novas chances."
+        },
+        {
+          "nome": "Lápis-lazúli",
+          "cor": "#2c4fb3",
+          "palavras": "verdade e comunicação",
+          "texto": "Para falar o que se sente, com sabedoria e verdade."
+        },
+        {
+          "nome": "Cornalina",
+          "cor": "#e0602c",
+          "palavras": "vitalidade e criatividade",
+          "texto": "Acende a vontade de fazer, criar e se mexer."
+        },
+        {
+          "nome": "Obsidiana",
+          "cor": "#1d1622",
+          "palavras": "proteção e autoconhecimento",
+          "texto": "Um espelho escuro: mostra as sombras para que se transformem."
+        }
+      ]
+    },
+    "ingredientes": {
+      "rosa": "Pétalas de rosa",
+      "lavanda": "Lavanda",
+      "alecrim": "Alecrim",
+      "arruda": "Arruda",
+      "louro": "Louro",
+      "mel": "Mel",
+      "canela": "Canela",
+      "sal": "Sal grosso",
+      "camomila": "Camomila",
+      "lua": "Água de lua"
+    },
+    "pocoes": {
+      "amor": {
+        "nome": "Poção do Amor-Próprio",
+        "texto": "Doce como mel, rosa como o coração: lembra que o primeiro amor é o seu.",
+        "ritual": "Escreva três qualidades suas num papel, dobre em direção a você e guarde no travesseiro até a lua cheia."
+      },
+      "prosperidade": {
+        "nome": "Elixir da Abundância",
+        "texto": "Dourado e perfumado de canela: abre portas e chama boas oportunidades.",
+        "ritual": "Coloque três folhas de louro na carteira numa quinta-feira e agradeça cada dinheiro que entrar."
+      },
+      "protecao": {
+        "nome": "Escudo da Bruxa Boa",
+        "texto": "Verde-escuro e firme: cria em volta de você uma bolha de luz.",
+        "ritual": "Faça um saquinho com alecrim e uma pitada de sal grosso e carregue na bolsa."
+      },
+      "calma": {
+        "nome": "Névoa Lilás da Calma",
+        "texto": "Cheira a lavanda e a fim de tarde: desacelera o coração e a mente.",
+        "ritual": "Antes de dormir, respire fundo sete vezes com um saquinho de lavanda perto do rosto."
+      },
+      "limpeza": {
+        "nome": "Banho de Lua Limpa",
+        "texto": "Clarinha e fresca: leva embora o peso dos dias.",
+        "ritual": "Deixe um copo de água sob a lua por uma noite e lave as mãos com ela pela manhã, com intenção."
+      },
+      "alegria": {
+        "nome": "Faísca da Alegria",
+        "texto": "Borbulha, ri e faz cócegas: devolve a leveza ao dia.",
+        "ritual": "Acenda uma vela amarela, coloque a música que você mais ama e dance de olhos fechados."
+      },
+      "caos": {
+        "nome": "Caldo do Caos Criativo",
+        "texto": "Você misturou de tudo um pouco, e o caldeirão riu! Às vezes a magia nasce justo da bagunça.",
+        "ritual": "Escreva uma ideia maluca e dê um pequeno passo por ela ainda hoje."
+      },
+      "alegria+amor": {
+        "nome": "Riso Cor-de-Rosa",
+        "texto": "Amor leve, daquele que faz rir à toa.",
+        "ritual": "Mande uma mensagem carinhosa para alguém, sem motivo nenhum."
+      },
+      "alegria+calma": {
+        "nome": "Brisa de Domingo",
+        "texto": "Alegria mansa, de rede e céu azul.",
+        "ritual": "Tome um chá devagar, sem celular, olhando pela janela."
+      },
+      "alegria+limpeza": {
+        "nome": "Sol da Manhã",
+        "texto": "Abre as janelas da alma e deixa a luz entrar.",
+        "ritual": "Abra todas as janelas da casa pela manhã e diga em voz alta: “que entre o que é bom”."
+      },
+      "alegria+prosperidade": {
+        "nome": "Moeda que Dança",
+        "texto": "Prosperidade que chega rindo, com leveza.",
+        "ritual": "Guarde uma moeda brilhante num potinho com canela e sorria toda vez que olhar para ele."
+      },
+      "alegria+protecao": {
+        "nome": "Guarda-Chuva de Estrelas",
+        "texto": "Proteção alegre: nada pesado chega perto de quem brilha.",
+        "ritual": "Use uma peça amarela e repita: “minha luz me protege”."
+      },
+      "amor+calma": {
+        "nome": "Abraço de Lavanda",
+        "texto": "O amor que acalma e acolhe, como colo.",
+        "ritual": "Passe um creme com cheiro de lavanda nos pulsos e se abrace por um minuto."
+      },
+      "amor+limpeza": {
+        "nome": "Água de Rosas",
+        "texto": "Lava as mágoas para o coração recomeçar limpinho.",
+        "ritual": "Coloque pétalas de rosa num banho morno e deixe ir, com a água, o que doeu."
+      },
+      "amor+prosperidade": {
+        "nome": "Mel Dourado do Encontro",
+        "texto": "Atrai o que é doce: pessoas, convites e oportunidades.",
+        "ritual": "Escreva seu desejo num papel, coloque num potinho de mel e guarde num lugar alto."
+      },
+      "amor+protecao": {
+        "nome": "Coração Blindado",
+        "texto": "Amar sem medo, com o coração protegido.",
+        "ritual": "Desenhe um coração num papel, contorne com um círculo e guarde na carteira."
+      },
+      "calma+limpeza": {
+        "nome": "Água de Nuvem",
+        "texto": "Silencia o barulho de dentro e lava a cabeça.",
+        "ritual": "Lave o rosto com água fria e diga: “eu solto o que não é meu”."
+      },
+      "calma+prosperidade": {
+        "nome": "Chá da Paciência Dourada",
+        "texto": "O que é seu chega no tempo certo.",
+        "ritual": "Plante uma semente num vasinho e cuide dela todos os dias."
+      },
+      "calma+protecao": {
+        "nome": "Manto de Camomila",
+        "texto": "Um manto macio que acalma e guarda.",
+        "ritual": "Borrife um pouquinho de chá de camomila frio no travesseiro."
+      },
+      "limpeza+prosperidade": {
+        "nome": "Vassoura de Ouro",
+        "texto": "Varre o velho para abrir espaço ao novo e farto.",
+        "ritual": "Varra a casa de dentro para fora e deixe um pote de arroz com três moedas na cozinha."
+      },
+      "limpeza+protecao": {
+        "nome": "Vassoura Encantada",
+        "texto": "Limpa e fecha a porta para o que não convém.",
+        "ritual": "Deixe um pratinho de sal grosso atrás da porta de entrada e troque a cada lua nova."
+      },
+      "prosperidade+protecao": {
+        "nome": "Cofre de Arruda",
+        "texto": "Guarda o que é seu e multiplica com cuidado.",
+        "ritual": "Tenha um vasinho de arruda perto da porta e uma folha de louro no cofrinho."
+      }
+    },
+    "pocaoNota": "Esta é uma magia de brincadeira, um gostinho. Magias de verdade, feitas para você, a Tryv prepara com cuidado."
+  },
+  "panteoes": {
+    "chamada": "Deuses e deusas",
+    "titulo": "Os panteões",
+    "intro": "Cada povo deu nome e rosto ao sagrado. Conheça algumas divindades, seus símbolos e o que se costuma oferecer a elas.",
+    "aviso": "✦ Algumas destas são religiões vivas, como as de matriz africana, o hinduísmo e o xintoísmo. Para cultuar essas divindades, siga a orientação das próprias tradições e de quem as pratica.",
+    "ajuda": {
+      "titulo": "Como funcionam os panteões",
+      "passos": [
+        "Escolha um povo nas abas: egípcio, grego, nórdico, celta, hindu, oriental ou brasileiro.",
+        "Toque numa divindade para abrir o cartão com a história, os símbolos e as oferendas."
+      ],
+      "nota": ""
+    },
+    "lista": [
+      {
+        "id": "egipcio",
+        "nome": "Egípcio",
+        "emoji": "𓂀",
+        "intro": "No Egito antigo, os deuses moravam no Nilo, no Sol e nas estrelas. Magia (heka) era uma força do próprio universo.",
+        "grupos": [
+          {
+            "titulo": "",
+            "deuses": [
+              {
+                "nome": "Ísis",
+                "simbolo": "☥",
+                "dominio": "magia, maternidade e cura",
+                "simbolos": "o trono, as asas abertas e o ankh",
+                "oferendas": "leite, mel, incenso de mirra e flores brancas",
+                "texto": "A grande maga, que reuniu os pedaços de Osíris e o trouxe de volta. Protege mães, crianças e quem estuda os mistérios."
+              },
+              {
+                "nome": "Osíris",
+                "simbolo": "🌾",
+                "dominio": "morte, renascimento e colheita",
+                "simbolos": "o cajado, o mangual e a coroa branca",
+                "oferendas": "grãos, pão, cerveja e incenso",
+                "texto": "Senhor do mundo dos mortos e da fertilidade do Nilo. Ensina que todo fim prepara uma nova vida."
+              },
+              {
+                "nome": "Hórus",
+                "simbolo": "𓂀",
+                "dominio": "céu, proteção e realeza",
+                "simbolos": "o olho de Hórus e o falcão",
+                "oferendas": "água fresca, pão e incenso de olíbano",
+                "texto": "O deus falcão cujo olho tudo vê. O Udjat, seu olho, é um dos amuletos de proteção mais antigos do mundo."
+              },
+              {
+                "nome": "Anúbis",
+                "simbolo": "🐺",
+                "dominio": "passagens, proteção e os mortos",
+                "simbolos": "o chacal, a balança e o embalsamamento",
+                "oferendas": "velas, mirra e pão",
+                "texto": "Guia das almas na travessia. É chamado para proteção e para atravessar momentos de transição."
+              },
+              {
+                "nome": "Bastet",
+                "simbolo": "🐈‍⬛",
+                "dominio": "lar, alegria, gatos e proteção",
+                "simbolos": "o gato, o sistro e o perfume",
+                "oferendas": "leite, perfume, música e flores",
+                "texto": "A deusa gata, guardiã do lar e da alegria. Os gatos eram sagrados para ela, e maltratá-los era crime no Egito."
+              },
+              {
+                "nome": "Thoth",
+                "simbolo": "🪶",
+                "dominio": "sabedoria, escrita e magia",
+                "simbolos": "a íbis, a lua e a paleta de escriba",
+                "oferendas": "tinta, papiro, incenso e livros",
+                "texto": "Senhor das palavras e dos números, inventou a escrita. Patrono de estudantes, escritores e magos."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "grego",
+        "nome": "Grego",
+        "emoji": "🏛️",
+        "intro": "Os deuses do Olimpo amavam, brigavam e se transformavam como os humanos. Seus mitos ainda moram na nossa língua.",
+        "grupos": [
+          {
+            "titulo": "",
+            "deuses": [
+              {
+                "nome": "Hécate",
+                "simbolo": "🗝️",
+                "dominio": "magia, encruzilhadas e a lua nova",
+                "simbolos": "as chaves, as tochas e os cães",
+                "oferendas": "alho, mel, ovos e pão, deixados na encruzilhada",
+                "texto": "Rainha das bruxas e guardiã dos caminhos. Ilumina escolhas difíceis e protege quem anda no escuro."
+              },
+              {
+                "nome": "Afrodite",
+                "simbolo": "🌹",
+                "dominio": "amor, beleza e prazer",
+                "simbolos": "a rosa, a pomba e a concha",
+                "oferendas": "rosas, maçãs, mel e perfume",
+                "texto": "Nascida da espuma do mar. Ensina o amor-próprio, a sensualidade e a beleza de estar viva."
+              },
+              {
+                "nome": "Atena",
+                "simbolo": "🦉",
+                "dominio": "sabedoria, estratégia e artes",
+                "simbolos": "a coruja, a oliveira e o escudo",
+                "oferendas": "azeite, azeitonas e tecidos",
+                "texto": "Deusa da inteligência e da justiça. Chamada para estudar, decidir com clareza e defender o que é certo."
+              },
+              {
+                "nome": "Ártemis",
+                "simbolo": "🏹",
+                "dominio": "lua, natureza selvagem e liberdade",
+                "simbolos": "o arco, o cervo e a lua crescente",
+                "oferendas": "ervas silvestres, mel e água de nascente",
+                "texto": "Senhora das florestas e protetora das mulheres. Guarda a liberdade e a força de ser quem se é."
+              },
+              {
+                "nome": "Deméter",
+                "simbolo": "🌾",
+                "dominio": "colheita, fartura e maternidade",
+                "simbolos": "o trigo, a foice e a tocha",
+                "oferendas": "pão, grãos e frutas",
+                "texto": "Mãe da terra fértil. Quando sua filha Perséfone desce ao submundo, ela chora e chega o inverno."
+              },
+              {
+                "nome": "Perséfone",
+                "simbolo": "🍎",
+                "dominio": "ciclos, primavera e submundo",
+                "simbolos": "a romã, as flores e o cetro",
+                "oferendas": "romã, flores e mel",
+                "texto": "Rainha do submundo e donzela da primavera. Ensina a transitar entre a luz e a sombra."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "nordico",
+        "nome": "Nórdico",
+        "emoji": "ᚱ",
+        "intro": "Os povos do Norte viam o mundo sustentado pela árvore Yggdrasil. Runas, sagas e magia seiðr vêm daí.",
+        "grupos": [
+          {
+            "titulo": "",
+            "deuses": [
+              {
+                "nome": "Odin",
+                "simbolo": "🐦‍⬛",
+                "dominio": "sabedoria, runas e poesia",
+                "simbolos": "os dois corvos, a lança e o olho que falta",
+                "oferendas": "hidromel, pão e poesia",
+                "texto": "Deu um olho em troca da sabedoria e se pendurou na árvore do mundo para aprender as runas."
+              },
+              {
+                "nome": "Freya",
+                "simbolo": "🐈‍⬛",
+                "dominio": "amor, magia seiðr e coragem",
+                "simbolos": "a carruagem puxada por gatos, o colar e o falcão",
+                "oferendas": "mel, âmbar, flores e hidromel",
+                "texto": "Senhora da magia e do amor, viaja numa carruagem puxada por dois gatos. Patrona das bruxas nórdicas."
+              },
+              {
+                "nome": "Thor",
+                "simbolo": "🔨",
+                "dominio": "proteção, trovão e força",
+                "simbolos": "o martelo Mjölnir e o carvalho",
+                "oferendas": "cerveja, pão e carne",
+                "texto": "Protetor dos humanos e dos deuses. Seu martelo afasta o mal e abençoa casamentos e casas."
+              },
+              {
+                "nome": "Frigga",
+                "simbolo": "🧶",
+                "dominio": "lar, destino e maternidade",
+                "simbolos": "a roca, as chaves e as nuvens",
+                "oferendas": "pão, linho e velas",
+                "texto": "Esposa de Odin, conhece o destino de todos, mas não conta. Protege o lar e tece as nuvens."
+              },
+              {
+                "nome": "Loki",
+                "simbolo": "🦊",
+                "dominio": "transformação, astúcia e caos",
+                "simbolos": "a raposa, o fogo e as formas que muda",
+                "oferendas": "doces e risadas (com cuidado)",
+                "texto": "Muda de forma e de lado. Lembra que o caos também abre caminhos, e que todo poder tem seu preço."
+              },
+              {
+                "nome": "Hel",
+                "simbolo": "💀",
+                "dominio": "mundo dos mortos e ciclos",
+                "simbolos": "meio rosto vivo, meio caveira",
+                "oferendas": "silêncio, velas e flores secas",
+                "texto": "Senhora do reino dos que morreram em paz. Ensina a aceitar o fim com dignidade."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "celta",
+        "nome": "Celta",
+        "emoji": "☘️",
+        "intro": "Para os celtas, o sagrado estava nos rios, nos poços, nas árvores e nos animais. A Roda do Ano bebe muito dessa fonte.",
+        "grupos": [
+          {
+            "titulo": "",
+            "deuses": [
+              {
+                "nome": "Brigid",
+                "simbolo": "🕯️",
+                "dominio": "fogo, poesia, cura e forja",
+                "simbolos": "a cruz de palha, o poço e a chama",
+                "oferendas": "leite, pão, velas brancas e poesia",
+                "texto": "Tríplice deusa da inspiração. Sua chama foi mantida acesa por séculos em Kildare. Celebrada em Imbolc."
+              },
+              {
+                "nome": "Cernunnos",
+                "simbolo": "🦌",
+                "dominio": "natureza, fertilidade e animais",
+                "simbolos": "os chifres de cervo, o torque e a serpente",
+                "oferendas": "vinho, grãos, frutos da floresta",
+                "texto": "O deus de chifres, senhor dos bichos e da floresta. Lembra que somos parte da natureza, não seus donos."
+              },
+              {
+                "nome": "Morrighan",
+                "simbolo": "🐦‍⬛",
+                "dominio": "destino, soberania e transformação",
+                "simbolos": "o corvo, a lança e o rio",
+                "oferendas": "vinho tinto, água e penas pretas",
+                "texto": "Grande rainha que vê o destino nas batalhas. Ensina a enfrentar o medo e a reivindicar o próprio poder."
+              },
+              {
+                "nome": "Cerridwen",
+                "simbolo": "🫕",
+                "dominio": "caldeirão, sabedoria e renascimento",
+                "simbolos": "o caldeirão, a porca branca e a lua",
+                "oferendas": "grãos, ervas e água",
+                "texto": "Guardiã do caldeirão da inspiração. Suas três gotas de sabedoria criaram o grande bardo Taliesin."
+              },
+              {
+                "nome": "Danu",
+                "simbolo": "🌊",
+                "dominio": "mãe dos deuses, rios e abundância",
+                "simbolos": "os rios e as águas correntes",
+                "oferendas": "água, flores e leite",
+                "texto": "Mãe dos Tuatha Dé Danann, o povo mágico da Irlanda. É a fonte de onde tudo flui."
+              },
+              {
+                "nome": "Lugh",
+                "simbolo": "🌞",
+                "dominio": "luz, talentos e colheita",
+                "simbolos": "a lança, a funda e o Sol",
+                "oferendas": "pão, grãos e cerveja",
+                "texto": "O deus de muitos talentos. Seu festival, Lughnasadh, celebra a primeira colheita."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "hindu",
+        "nome": "Hindu",
+        "emoji": "🪷",
+        "intro": "O hinduísmo é uma das religiões vivas mais antigas do mundo. Seus deuses são faces de um mesmo sagrado.",
+        "grupos": [
+          {
+            "titulo": "",
+            "deuses": [
+              {
+                "nome": "Ganesha",
+                "simbolo": "🐘",
+                "dominio": "remove obstáculos e abençoa começos",
+                "simbolos": "a cabeça de elefante, o rato e os doces",
+                "oferendas": "doces (modak), flores amarelas e incenso",
+                "texto": "Saudado antes de qualquer começo. Abre caminhos, traz sabedoria e protege viajantes e estudantes."
+              },
+              {
+                "nome": "Lakshmi",
+                "simbolo": "🪷",
+                "dominio": "prosperidade, beleza e sorte",
+                "simbolos": "a flor de lótus, as moedas de ouro e a coruja",
+                "oferendas": "flores de lótus, arroz, doces e lamparinas",
+                "texto": "Deusa da abundância em todas as formas. Celebrada no Diwali, a festa das luzes."
+              },
+              {
+                "nome": "Shiva",
+                "simbolo": "🔱",
+                "dominio": "transformação, meditação e a dança cósmica",
+                "simbolos": "o tridente, a lua crescente e a serpente",
+                "oferendas": "água, leite, folhas de bel e cinzas",
+                "texto": "O que destrói para renovar. Sua dança cria e desfaz o universo."
+              },
+              {
+                "nome": "Durga",
+                "simbolo": "🐅",
+                "dominio": "proteção, força e coragem",
+                "simbolos": "o tigre ou leão, as muitas armas e o lótus",
+                "oferendas": "flores vermelhas, frutas e lamparinas",
+                "texto": "A guerreira invencível que derrotou o demônio búfalo. Protege quem enfrenta grandes batalhas."
+              },
+              {
+                "nome": "Saraswati",
+                "simbolo": "🎶",
+                "dominio": "sabedoria, artes e música",
+                "simbolos": "a vina, o cisne e os livros",
+                "oferendas": "flores brancas, frutas e instrumentos",
+                "texto": "Patrona dos estudos, da música e da fala. Invocada por artistas, professores e estudantes."
+              },
+              {
+                "nome": "Kali",
+                "simbolo": "🌑",
+                "dominio": "tempo, libertação e transformação",
+                "simbolos": "a espada, o colar de crânios e a língua de fora",
+                "oferendas": "flores vermelhas, doces e incenso",
+                "texto": "A mãe feroz que corta ilusões e o ego. Por trás do medo, é amor que liberta."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "oriental",
+        "nome": "Oriental",
+        "emoji": "⛩️",
+        "intro": "Da China ao Japão, deusas e espíritos guardam a compaixão, o Sol, a Lua e a prosperidade.",
+        "grupos": [
+          {
+            "titulo": "",
+            "deuses": [
+              {
+                "nome": "Kuan Yin",
+                "simbolo": "🪷",
+                "dominio": "compaixão e misericórdia (China)",
+                "simbolos": "o vaso de água, o salgueiro e o lótus",
+                "oferendas": "flores, frutas, chá e incenso",
+                "texto": "Aquela que ouve os lamentos do mundo. Acolhe quem sofre e ensina a bondade com todos os seres."
+              },
+              {
+                "nome": "Amaterasu",
+                "simbolo": "☀️",
+                "dominio": "Sol e luz (Japão)",
+                "simbolos": "o espelho sagrado e o Sol nascente",
+                "oferendas": "arroz, saquê e sal",
+                "texto": "A deusa do Sol do xintoísmo. Quando se escondeu numa caverna, o mundo ficou escuro até que a alegria a trouxe de volta."
+              },
+              {
+                "nome": "Inari",
+                "simbolo": "🦊",
+                "dominio": "prosperidade, arroz e negócios (Japão)",
+                "simbolos": "as raposas brancas e os portais vermelhos",
+                "oferendas": "arroz, saquê e tofu frito",
+                "texto": "Seus milhares de portais vermelhos sobem a montanha em Kyoto. Abençoa colheitas e comércio."
+              },
+              {
+                "nome": "Benzaiten",
+                "simbolo": "🎵",
+                "dominio": "artes, água e fortuna (Japão)",
+                "simbolos": "o alaúde biwa, a serpente e a água",
+                "oferendas": "música, flores e moedas",
+                "texto": "Deusa de tudo que flui: água, palavras, música e dinheiro. Uma das Sete Divindades da Sorte."
+              },
+              {
+                "nome": "Chang'e",
+                "simbolo": "🌕",
+                "dominio": "a Lua (China)",
+                "simbolos": "o coelho de jade e a lua cheia",
+                "oferendas": "bolos lunares, frutas redondas e chá",
+                "texto": "Mora na Lua com o coelho de jade. É celebrada no Festival do Meio do Outono."
+              },
+              {
+                "nome": "Xi Wangmu",
+                "simbolo": "🍑",
+                "dominio": "imortalidade e sabedoria (China)",
+                "simbolos": "os pêssegos da imortalidade e a montanha Kunlun",
+                "oferendas": "pêssegos, chá e incenso",
+                "texto": "A Rainha Mãe do Oeste guarda os pêssegos que dão vida eterna. Protege mulheres e iniciadas."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "brasileiro",
+        "nome": "Brasileiro",
+        "emoji": "🌿",
+        "intro": "No Brasil, o sagrado tem duas raízes fortes: os povos originários, com seus encantados da mata, e as religiões de matriz africana, com os orixás.",
+        "grupos": [
+          {
+            "titulo": "Povos originários (tupi-guarani)",
+            "deuses": [
+              {
+                "nome": "Tupã",
+                "simbolo": "⚡",
+                "dominio": "trovão, criação e força",
+                "simbolos": "o raio, o trovão e as tempestades",
+                "oferendas": "respeito à natureza, cantos e silêncio",
+                "texto": "Manifestação do trovão e do grande poder criador para os povos tupi-guarani."
+              },
+              {
+                "nome": "Jaci",
+                "simbolo": "🌙",
+                "dominio": "a Lua, a saudade e o amor",
+                "simbolos": "a lua e as plantas que florescem à noite",
+                "oferendas": "flores brancas, cantos e água",
+                "texto": "A mãe-lua que protege os amantes e faz crescer as plantas. Irmã e companheira de Guaraci."
+              },
+              {
+                "nome": "Guaraci",
+                "simbolo": "☀️",
+                "dominio": "o Sol, a vida e o calor",
+                "simbolos": "o Sol e o dia",
+                "oferendas": "frutas e cantos ao amanhecer",
+                "texto": "O Sol que dá vida a todas as criaturas e ilumina os caminhos."
+              },
+              {
+                "nome": "Iara",
+                "simbolo": "🧜‍♀️",
+                "dominio": "as águas doces e o encanto",
+                "simbolos": "os rios, o canto e os cabelos longos",
+                "oferendas": "flores e espelhos jogados no rio",
+                "texto": "A mãe-d’água dos rios amazônicos, que encanta com seu canto. Guardiã das águas doces."
+              },
+              {
+                "nome": "Curupira",
+                "simbolo": "👣",
+                "dominio": "proteção das matas e dos bichos",
+                "simbolos": "os pés virados para trás e o cabelo de fogo",
+                "oferendas": "fumo, mel e cachaça deixados na mata",
+                "texto": "Protetor da floresta, confunde caçadores e quem desmata. Ensina a pedir licença antes de entrar na mata."
+              },
+              {
+                "nome": "Rudá",
+                "simbolo": "💘",
+                "dominio": "o amor",
+                "simbolos": "as nuvens e o entardecer",
+                "oferendas": "flores e cantos",
+                "texto": "Deus guerreiro do amor, que mora nas nuvens e desperta a saudade nos corações."
+              }
+            ]
+          },
+          {
+            "titulo": "Orixás (matriz africana)",
+            "deuses": [
+              {
+                "nome": "Iemanjá",
+                "simbolo": "🌊",
+                "dominio": "mar, maternidade e proteção",
+                "simbolos": "o mar, as conchas e o espelho",
+                "oferendas": "flores brancas, perfume e espelhos, entregues no mar",
+                "texto": "A grande mãe das águas salgadas, celebrada no Ano Novo e em 2 de fevereiro. Acolhe e protege seus filhos."
+              },
+              {
+                "nome": "Oxum",
+                "simbolo": "💛",
+                "dominio": "águas doces, amor e prosperidade",
+                "simbolos": "o espelho, o leque e o ouro",
+                "oferendas": "flores amarelas, mel e perfume",
+                "texto": "Senhora dos rios e cachoeiras, da fertilidade e da riqueza. Doce e poderosa."
+              },
+              {
+                "nome": "Iansã",
+                "simbolo": "🌪️",
+                "dominio": "ventos, tempestades e coragem",
+                "simbolos": "a espada, o eruexim e os raios",
+                "oferendas": "acarajé e flores vermelhas",
+                "texto": "A guerreira dos ventos que conduz os eguns. Senhora da transformação e da paixão."
+              },
+              {
+                "nome": "Xangô",
+                "simbolo": "⚖️",
+                "dominio": "justiça, trovão e fogo",
+                "simbolos": "o machado de duas lâminas (oxé) e as pedreiras",
+                "oferendas": "amalá e quiabo",
+                "texto": "O rei justo do trovão. Protege quem busca equilíbrio e justiça."
+              },
+              {
+                "nome": "Ogum",
+                "simbolo": "⚔️",
+                "dominio": "caminhos, trabalho e tecnologia",
+                "simbolos": "a espada, as ferramentas e o ferro",
+                "oferendas": "feijoada, inhame e cerveja",
+                "texto": "O desbravador que abre caminhos com sua espada. Senhor do ferro e das batalhas do dia a dia."
+              },
+              {
+                "nome": "Oxóssi",
+                "simbolo": "🏹",
+                "dominio": "caça, fartura e conhecimento",
+                "simbolos": "o arco e flecha (ofá) e a mata",
+                "oferendas": "milho, frutas e coco",
+                "texto": "O caçador de uma flecha só, que nunca erra. Traz fartura, sabedoria e o alimento para a casa."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "consultas": {
+    "chamada": "Consultas e terapias",
+    "titulo": "Qual magia você procura?",
+    "intro": "Conheça as terapias e marque uma conversa para entender em que momento você está e qual caminho pode te ajudar.",
+    "servicos": [
+      {
+        "icone": "cartas",
+        "titulo": "Tarô e Oráculos",
+        "texto": "Leitura de 30, 60 ou 90 minutos, com vários baralhos à escolha. Remota, por videochamada ou foto e áudio, ou presencial com hora marcada.",
+        "etiquetas": [
+          "30 min",
+          "60 min",
+          "90 min"
+        ],
+        "botao": "Quero essa leitura",
+        "mensagem": "Olá, Tryv! Quero agendar uma Consulta ao Tarô e Oráculos ✨"
+      },
+      {
+        "icone": "bussola",
+        "titulo": "Mentoria Pessoal",
+        "texto": "Um programa feito para você conquistar seus objetivos, pelo método exclusivo dos 4 elementos da natureza. Ligações semanais e tarefas para realizar.",
+        "etiquetas": [
+          "Terra",
+          "Água",
+          "Fogo",
+          "Ar"
+        ],
+        "botao": "Quero a mentoria",
+        "mensagem": "Olá, Tryv! Quero saber mais sobre a Mentoria Pessoal dos 4 elementos ✨"
+      },
+      {
+        "icone": "vela",
+        "titulo": "Ritual",
+        "texto": "Ritual presencial ou remoto para alcançar um objetivo, através da conexão com os 4 elementos da natureza.",
+        "etiquetas": [
+          "Amor",
+          "Prosperidade",
+          "Espiritual",
+          "Limpeza energética",
+          "Empoderamento",
+          "Despertar"
+        ],
+        "botao": "Quero um ritual",
+        "mensagem": "Olá, Tryv! Quero saber mais sobre os Rituais ✨"
+      },
+      {
+        "icone": "espiral",
+        "titulo": "A Viagem da Alma",
+        "texto": "Terapia de regressão a vidas passadas, realizada em 10 dias.",
+        "etiquetas": [
+          "10 dias"
+        ],
+        "botao": "Quero viajar",
+        "mensagem": "Olá, Tryv! Quero saber mais sobre A Viagem da Alma (regressão) ✨"
+      },
+      {
+        "icone": "mao",
+        "titulo": "Sessão de Reiki",
+        "texto": "Envio e tratamento com Reiki, remoto ou presencial, com Mestre Reiki.",
+        "etiquetas": [
+          "Remoto",
+          "Presencial"
+        ],
+        "botao": "Quero Reiki",
+        "mensagem": "Olá, Tryv! Quero agendar uma Sessão de Reiki ✨"
+      },
+      {
+        "icone": "livro",
+        "titulo": "Cursos",
+        "texto": "Cursos presenciais e remotos para quem quer aprender a caminhar com as próprias mãos. Pergunte quais estão abertos.",
+        "etiquetas": [
+          "Presencial",
+          "Remoto"
+        ],
+        "botao": "Ver cursos",
+        "mensagem": "Olá, Tryv! Quais cursos estão abertos? ✨"
+      }
+    ]
+  },
+  "tryv": {
+    "botaoEspelho": "Espelho, espelho meu ✨",
+    "chamada": "Quem lê as cartas",
+    "titulo": "Tryv Tuath",
+    "destaque": "“Definir Tryv Tuath é como tentar traduzir a magia. Tryv é uma proposta, não uma pessoa. Um pulsar de ideias e sentimentos.”",
+    "texto": "Ser a Tryv é vestir-se de estrelas no berço das nebulosas, numa casinha na floresta. Na essência wiccana, pés xamânicos, mente hermética, vibração cósmica entre todos os sagrados.",
+    "fecho": "Todas essas mulheres alimentam a ideia de quem é essa essência. Nenhuma definição seria possível se usada separadamente.",
+    "personas": [
+      "mãe",
+      "escritora",
+      "artista",
+      "artesã",
+      "bruxa",
+      "professora",
+      "terapeuta",
+      "amiga",
+      "Master Reiki",
+      "líder de egrégoras",
+      "aprendiz",
+      "apaixonada pela natureza"
+    ],
+    "fotos": [
+      {
+        "foto": "assets/tryv-chapeu.webp",
+        "alt": "Tryv sorrindo com chapéu de bruxa roxo, vassouras e uma vela acesa",
+        "largura": 1077,
+        "altura": 1100
+      },
+      {
+        "foto": "assets/tryv-segredo.webp",
+        "alt": "Tryv com o dedo nos lábios, pedindo segredo",
+        "largura": 788,
+        "altura": 788,
+        "posicao": "50% 30%"
+      },
+      {
+        "foto": "assets/tryv-pintura.webp",
+        "alt": "Tryv com pintura ritual azul e rosa no rosto",
+        "largura": 682,
+        "altura": 1100
+      },
+      {
+        "foto": "assets/tryv-fogo.webp",
+        "alt": "Tryv de braços abertos diante de uma fogueira, à noite",
+        "largura": 959,
+        "altura": 960
+      },
+      {
+        "foto": "assets/tryv-natureza.webp",
+        "alt": "Tryv em preto e branco, apontando para a mata",
+        "largura": 720,
+        "altura": 540,
+        "posicao": "40% 50%"
+      }
+    ],
+    "videosTitulo": "Vídeos da Tryv",
+    "videos": []
+  },
+  "citacao": {
+    "texto": "Quando você toca uma coisa com consciência profunda, você toca em tudo.",
+    "autor": "Lao Tzu"
+  },
+  "livro": {
+    "chamada": "O livro",
+    "titulo": "O Multiverso",
+    "subtitulo": "Desmistificando seu poder espiritual.",
+    "texto": "Um guia prático, com técnicas simples para levar ao dia a dia. Convida você a olhar para as próprias crenças, refletir e se descobrir, com linguagem clara e inspiradora, para aprofundar sua conexão espiritual e chegar a um estado de bem-estar.",
+    "dica": "Toque na capa para abrir o livro.",
+    "botao": "Quero o meu exemplar",
+    "contracapa": "O livro oferece um guia prático para desmistificar o poder espiritual, apresentando técnicas simples que podem ser incorporadas ao cotidiano. Ele convida o leitor a explorar suas crenças pessoais sobre espiritualidade, incentivando a reflexão e a autodescoberta. Através de práticas acessíveis, o autor busca motivar a adoção de abordagens alternativas e saudáveis, revelando a verdadeira capacidade de realização e transformação na vida do leitor. Com uma linguagem clara e inspiradora, o livro se torna uma ferramenta valiosa para quem deseja aprofundar sua conexão espiritual e alcançar um estado de bem-estar.",
+    "orelhaFrase": "“Everything is possible.”",
+    "orelha": "Em um universo onde as fronteiras entre a ciência e a espiritualidade se entrelaçam, surge a figura iluminada de Tryv Tuath. Escritora, mentora e mestre das energias sutis, ela nos convida a percorrer os meandros do autoconhecimento e da cura através de suas experiências transformadoras. Com um olhar perspicaz que une a física e a filosofia, Tryv nos apresenta uma narrativa envolvente e acessível, onde os fenômenos energéticos são desmistificados e traduzidos em práticas que podem ser incorporadas ao cotidiano.",
+    "mensagem": "Olá, Tryv! Quero o livro O Multiverso 📖✨",
+    "ajuda": {
+      "titulo": "O livro virtual",
+      "passos": [],
+      "nota": "Toque na capa para abrir o livro e ler, nas duas páginas, o texto da contracapa. Toque de novo para fechar."
+    },
+    "capa": "assets/livro-capa.webp"
+  },
+  "contato": {
+    "chamada": "Seja tocado",
+    "titulo": "Vamos conversar?",
+    "intro": "Atendimento remoto para qualquer lugar, ou presencial com hora marcada.",
+    "whatsapp": "5551996489944",
+    "passos": [
+      {
+        "titulo": "Chame no WhatsApp",
+        "texto": "Conte o que está buscando e escolha a leitura ou a terapia."
+      },
+      {
+        "titulo": "Escolha o horário",
+        "texto": "Por videochamada, por foto e áudio, ou presencial."
+      },
+      {
+        "titulo": "Envie o comprovante",
+        "texto": "Os atendimentos são confirmados com o pagamento: depósito, transferência ou cartão de crédito."
+      },
+      {
+        "titulo": "Receba sua leitura",
+        "texto": "E leve com você o que as cartas têm a dizer."
+      }
+    ],
+    "telefone": "(51) 99648-9944",
+    "mensagem": "Olá, Tryv! Vim pelo site Bem Dito Tarot ✨",
+    "email": "tryvtuath@gmail.com",
+    "instagram": "https://www.instagram.com/tryvtuath/",
+    "facebook": "https://www.facebook.com/tryvtuath/",
+    "youtube": "https://www.youtube.com/channel/UCKb-fBxO-9cGA5U49_9CIww",
+    "spotify": "https://open.spotify.com/user/21tyvaoezzny5ykubpgamm26q"
+  },
+  "rodape": {
+    "frase": "Mude-se e descobrirá novos outros para refletir-se."
+  },
+  "musica": {
+    "titulo": "Trilha da Tryv ♪",
+    "texto": "As músicas que a Tryv escolheu para acompanhar a sua visita.",
+    "playlist": ""
+  },
+  "ingles": {
+    "Era uma vez uma pergunta…": "Once upon a time, there was a question…",
+    "Entrar ✨": "Enter ✨",
+    "Cartas": "Cards",
+    "Descubra-se": "Discover yourself",
+    "Roda do Ano": "Wheel of the Year",
+    "Casinha": "Cottage",
+    "Panteões": "Pantheons",
+    "Consultas": "Readings",
+    "Livro": "Book",
+    "Contato": "Contact",
+    "Do macro ao micro · **espiritualidade** · **autoconhecimento** · **empoderamento**": "From macro to micro · **spirituality** · **self-knowledge** · **empowerment**",
+    "Você é o *oráculo*.": "You are the *oracle*.",
+    "Tarô, oráculos e terapias com Tryv Tuath. Com amor, verdade e um pouco de magia.": "Tarot, oracles and therapies with Tryv Tuath. With love, truth and a little magic.",
+    "✦ Tirar minha carta": "✦ Draw my card",
+    "Agendar consulta": "Book a reading",
+    "Oráculo encantado": "Enchanted oracle",
+    "Escolha a sua carta": "Choose your card",
+    "Respire, pense na sua pergunta e deixe a mão escolher. O baralho sabe o caminho.": "Breathe, think of your question and let your hand choose. The deck knows the way.",
+    "A mesa encantada é um carinho para o seu dia. A leitura completa, feita com atenção à sua história, é com a Tryv.": "The enchanted table is a little gift for your day. A full reading, attentive to your own story, is with Tryv.",
+    "O Louco": "The Fool",
+    "O Mago": "The Magician",
+    "A Sacerdotisa": "The High Priestess",
+    "A Imperatriz": "The Empress",
+    "O Imperador": "The Emperor",
+    "O Hierofante": "The Hierophant",
+    "Os Enamorados": "The Lovers",
+    "O Carro": "The Chariot",
+    "A Força": "Strength",
+    "O Eremita": "The Hermit",
+    "A Roda da Fortuna": "Wheel of Fortune",
+    "A Justiça": "Justice",
+    "O Enforcado": "The Hanged Man",
+    "A Morte": "Death",
+    "A Temperança": "Temperance",
+    "O Diabo": "The Devil",
+    "A Torre": "The Tower",
+    "A Estrela": "The Star",
+    "A Lua": "The Moon",
+    "O Sol": "The Sun",
+    "O Julgamento": "Judgement",
+    "O Mundo": "The World",
+    "Vamos explorar mais sobre você?": "Shall we explore more about you?",
+    "Seis portais se abrem a partir da sua data de nascimento. É só um gostinho: cada um deles a Tryv aprofunda em consulta.": "Six portals open from your date of birth. It is just a taste: Tryv explores each one in depth in a reading.",
+    "Mapa astral": "Birth chart",
+    "gratuito": "free",
+    "Kin maia": "Mayan Kin",
+    "Anjo cabalístico": "Kabbalistic angel",
+    "os 72 nomes": "the 72 names",
+    "Horóscopo chinês": "Chinese horoscope",
+    "animal e elemento": "animal and element",
+    "Arcano de nascimento": "Birth arcana",
+    "tarô": "tarot",
+    "Animal de poder": "Power animal",
+    "Terra": "Earth",
+    "Fogo": "Fire",
+    "Água": "Water",
+    "Paganismo e natureza": "Paganism and nature",
+    "A Roda do Ano": "The Wheel of the Year",
+    "Festa do fogo": "Fire festival",
+    "Solstício de inverno": "Winter solstice",
+    "Equinócio de primavera": "Spring equinox",
+    "Solstício de verão": "Summer solstice",
+    "Equinócio de outono": "Autumn equinox",
+    "Era uma vez, na floresta": "Once upon a time, in the forest",
+    "A casinha da Tryv": "Tryv’s cottage",
+    "Uma casinha de bruxa escondida no bosque. Passe a varinha na porta e entre: tem ervas, chás, cristais, magias leves e um caldeirão fervendo.": "A little witch’s cottage hidden in the woods. Wave your wand over the door and step inside: there are herbs, teas, crystals, gentle spells and a bubbling cauldron.",
+    "Deuses e deusas": "Gods and goddesses",
+    "Os panteões": "The pantheons",
+    "Consultas e terapias": "Readings and therapies",
+    "Qual magia você procura?": "What magic are you looking for?",
+    "Conheça as terapias e marque uma conversa para entender em que momento você está e qual caminho pode te ajudar.": "Explore the therapies and book a talk to understand where you are right now and which path can help you.",
+    "Tarô e Oráculos": "Tarot and Oracles",
+    "Leitura de 30, 60 ou 90 minutos, com vários baralhos à escolha. Remota, por videochamada ou foto e áudio, ou presencial com hora marcada.": "30, 60 or 90 minute readings, with several decks to choose from. Online, by video call or photo and audio, or in person by appointment.",
+    "Quero essa leitura": "I want this reading",
+    "Mentoria Pessoal": "Personal Mentoring",
+    "Um programa feito para você conquistar seus objetivos, pelo método exclusivo dos 4 elementos da natureza. Ligações semanais e tarefas para realizar.": "A program made for you to reach your goals, through the exclusive method of the 4 elements of nature. Weekly calls and tasks to carry out.",
+    "Ar": "Air",
+    "Quero a mentoria": "I want the mentoring",
+    "Ritual presencial ou remoto para alcançar um objetivo, através da conexão com os 4 elementos da natureza.": "An in-person or online ritual to reach a goal, through connection with the 4 elements of nature.",
+    "Amor": "Love",
+    "Prosperidade": "Prosperity",
+    "Espiritual": "Spiritual",
+    "Limpeza energética": "Energy cleansing",
+    "Empoderamento": "Empowerment",
+    "Despertar": "Awakening",
+    "Quero um ritual": "I want a ritual",
+    "A Viagem da Alma": "The Soul’s Journey",
+    "Terapia de regressão a vidas passadas, realizada em 10 dias.": "Past life regression therapy, carried out over 10 days.",
+    "10 dias": "10 days",
+    "Quero viajar": "I want to travel",
+    "Sessão de Reiki": "Reiki Session",
+    "Envio e tratamento com Reiki, remoto ou presencial, com Mestre Reiki.": "Distance or in-person Reiki treatment with a Reiki Master.",
+    "Remoto": "Online",
+    "Presencial": "In person",
+    "Quero Reiki": "I want Reiki",
+    "Cursos": "Courses",
+    "Cursos presenciais e remotos para quem quer aprender a caminhar com as próprias mãos. Pergunte quais estão abertos.": "In-person and online courses for those who want to learn to walk their own path. Ask which ones are open.",
+    "Ver cursos": "See courses",
+    "Espelho, espelho meu ✨": "Mirror, mirror on the wall ✨",
+    "Quem lê as cartas": "Who reads the cards",
+    "“Definir Tryv Tuath é como tentar traduzir a magia. Tryv é uma proposta, não uma pessoa. Um pulsar de ideias e sentimentos.”": "“Defining Tryv Tuath is like trying to translate magic. Tryv is a proposal, not a person. A pulse of ideas and feelings.”",
+    "Ser a Tryv é vestir-se de estrelas no berço das nebulosas, numa casinha na floresta. Na essência wiccana, pés xamânicos, mente hermética, vibração cósmica entre todos os sagrados.": "Being Tryv is dressing in stars in the cradle of nebulae, in a little cottage in the forest. Wiccan at heart, shamanic feet, hermetic mind, cosmic vibration among all that is sacred.",
+    "Todas essas mulheres alimentam a ideia de quem é essa essência. Nenhuma definição seria possível se usada separadamente.": "All these women feed the idea of who this essence is. No single definition would be possible on its own.",
+    "mãe": "mother",
+    "escritora": "writer",
+    "artista": "artist",
+    "artesã": "artisan",
+    "bruxa": "witch",
+    "professora": "teacher",
+    "terapeuta": "therapist",
+    "amiga": "friend",
+    "líder de egrégoras": "leader of egregores",
+    "aprendiz": "apprentice",
+    "apaixonada pela natureza": "in love with nature",
+    "O livro": "The book",
+    "O Multiverso": "The Multiverse",
+    "Desmistificando seu poder espiritual.": "Demystifying your spiritual power.",
+    "Um guia prático, com técnicas simples para levar ao dia a dia. Convida você a olhar para as próprias crenças, refletir e se descobrir, com linguagem clara e inspiradora, para aprofundar sua conexão espiritual e chegar a um estado de bem-estar.": "A practical guide with simple techniques for everyday life. It invites you to look at your own beliefs, reflect and discover yourself, in clear and inspiring language, to deepen your spiritual connection and reach a state of well-being.",
+    "Toque na capa para abrir o livro.": "Tap the cover to open the book.",
+    "Quero o meu exemplar": "I want my copy",
+    "Seja tocado": "Be touched",
+    "Vamos conversar?": "Shall we talk?",
+    "Atendimento remoto para qualquer lugar, ou presencial com hora marcada.": "Online sessions anywhere in the world, or in person by appointment.",
+    "Chame no WhatsApp": "Message on WhatsApp",
+    "Conte o que está buscando e escolha a leitura ou a terapia.": "Tell what you are looking for and choose the reading or therapy.",
+    "Escolha o horário": "Choose the time",
+    "Por videochamada, por foto e áudio, ou presencial.": "By video call, by photo and audio, or in person.",
+    "Envie o comprovante": "Send the receipt",
+    "Os atendimentos são confirmados com o pagamento: depósito, transferência ou cartão de crédito.": "Sessions are confirmed upon payment: bank deposit, transfer or credit card.",
+    "Receba sua leitura": "Receive your reading",
+    "E leve com você o que as cartas têm a dizer.": "And take with you what the cards have to say.",
+    "Mude-se e descobrirá novos outros para refletir-se.": "Change yourself and you will find new others to reflect you.",
+    "Trilha da Tryv ♪": "Tryv’s soundtrack ♪",
+    "Quando você toca uma coisa com consciência profunda, você toca em tudo.": "When you touch one thing with deep awareness, you touch everything."
+  }
+}
