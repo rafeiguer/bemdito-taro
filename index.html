@@ -4111,34 +4111,6 @@ As cartas revelam os segredos da estrada e a dança da liberdade.`
       duracao: "02:55",
       letra: `Todas essas mulheres alimentam a ideia de quem é essa essência.
 Um pulsar de ideias, estrelas e sentimentos.`
-    },
-    {
-      ordem: 1,
-      titulo: "Dança das Nebulosas (Videoclipe Místico)",
-      subtitulo: "Cinema Místico · Visualização Cósmica & Magia Sonora",
-      categoria: "clipes",
-      tipo: "video",
-      arquivo: "assets/videos/clipe-nebulosas.mp4",
-      capa: "assets/tryv-fogo.webp",
-      duracao: "00:36",
-      letra: `Visto-me de estrelas no berço das nebulosas,
-Pés na floresta antiga, mente entre as rosas.
-Quando o tambor ressoa na pedra do altar,
-O véu entre os mundos começa a dançar.`
-    },
-    {
-      ordem: 1,
-      titulo: "O Chamado dos Arcanos (Tarot em Vídeo)",
-      subtitulo: "Oráculos & Tarot · Imersão Visual nos 22 Caminhos",
-      categoria: "tarot",
-      tipo: "video",
-      arquivo: "assets/videos/chamado-arcanos.mp4",
-      capa: "assets/tryv-chapeu.webp",
-      duracao: "00:36",
-      letra: `O Louco dá o passo na beira do vento,
-A Sacerdotisa guarda o firmamento.
-A Estrela derrama sua água de luz,
-E o Mundo revela o que a alma conduz.`
     }
   ];
 
@@ -4148,7 +4120,7 @@ E o Mundo revela o que a alma conduz.`
       if (!v || !v.url) return;
       const ehYT = /youtu\.?be/.test(v.url);
       acervoCavernaDeEco.push({
-        ordem: 10 + i,
+        ordem: 100 + i,
         titulo: v.titulo || "Vídeo da Tryv",
         subtitulo: "Acervo Tryv Tuath",
         categoria: "tarot",
@@ -4164,7 +4136,7 @@ E o Mundo revela o que a alma conduz.`
   // Ordena inicialmente pelo campo `ordem` (mantendo "Odô Iyá" sempre como #1 por padrão)
   acervoCavernaDeEco.sort((a, b) => (a.ordem ?? 999) - (b.ordem ?? 999));
   const ordemOriginalTitulos = acervoCavernaDeEco.map(x => x.titulo);
-  const CHAVE_ORDEM_ECO = "tryv-caverna-ordem-v1";
+  const CHAVE_ORDEM_ECO = "tryv-caverna-ordem-v2";
 
   function aplicarOrdemSalva() {
     try {
