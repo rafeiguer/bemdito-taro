@@ -1,6 +1,6 @@
 # Bem Dito Tarot (Tryv Tuath)
 
-Site publicado em https://rafeiguer.github.io/bemdito-taro/
+Site publicado em https://tryvtuath.github.io/tryvtuath/
 
 ## Estrutura
 
@@ -29,7 +29,7 @@ dependem da posição.
 Chave de acesso (uma por pessoa, você gera):
 
 1. GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token.
-2. Repository access: **Only select repositories** → `bemdito-taro`.
+2. Repository access: **Only select repositories** → `tryvtuath`.
 3. Permissions → Repository permissions → **Contents: Read and write** (o resto fica sem acesso).
 4. Escolha a validade (ex.: 1 ano), gere e mande o token para a Tryv colar na tela de entrada.
 

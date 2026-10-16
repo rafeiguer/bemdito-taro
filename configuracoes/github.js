@@ -1,7 +1,7 @@
 /* Conversa com a API do GitHub usando a chave (token fine-grained, só deste repositório, com
    permissão Contents: leitura e escrita). Publicar = um commit na main com o conteudo.json e as
    fotos novas juntos; o GitHub Pages republica o site em cerca de um minuto. */
-export const REPO = "rafeiguer/bemdito-taro", RAMO = "main", ARQUIVO = "conteudo.json", PASTA_FOTOS = "assets/fotos";
+export const REPO = "tryvtuath/tryvtuath", RAMO = "main", ARQUIVO = "conteudo.json", PASTA_FOTOS = "assets/fotos";
 const API = `https://api.github.com/repos/${REPO}`;
 
 export class ErroGitHub extends Error {
