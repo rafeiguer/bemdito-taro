@@ -1062,28 +1062,26 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   width: min(1140px, calc(100% - 28px)); margin: 12px auto 0; pointer-events: none;
 }
 .caverna-topo > * { pointer-events: auto; }
-.caverna-topo .botao {
-  min-height: 44px; padding: .7rem 1.2rem;
-  background: rgba(14, 9, 38, .85); box-shadow: 0 0 0 1.5px rgba(242, 193, 78, .6) inset, 0 8px 24px rgba(0, 0, 0, .55);
+.caverna-sair {
+  min-height: 44px; padding: .65rem 1.25rem; border-radius: 999px; border: 0; cursor: pointer;
+  font: 600 .9rem/1 var(--corpo); color: var(--ouro-claro);
+  background: rgba(14, 9, 38, .88); box-shadow: 0 0 0 1.5px rgba(242, 193, 78, .65) inset, 0 8px 24px rgba(0, 0, 0, .55);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: transform .2s, box-shadow .2s, background .2s;
 }
-.caverna-topo__titulo {
+.caverna-sair:hover { transform: translateY(-1px); background: rgba(242, 193, 78, .22); box-shadow: 0 0 0 1.5px #fff6d2 inset, 0 0 20px rgba(242, 193, 78, .55); }
+.caverna-titulo-int {
   padding: .5rem 1.1rem; border-radius: 999px;
   background: rgba(14, 9, 38, .78); box-shadow: 0 0 0 1px rgba(185, 163, 255, .38) inset;
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   font: italic 500 1.02rem/1.2 var(--livro); color: #e2d6ff;
 }
 
-.caverna-conteudo {
-  position: relative; z-index: 2; width: min(1120px, calc(100% - 28px));
-  margin: .9rem auto calc(2.4rem + env(safe-area-inset-bottom, 0px));
-  display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .95fr); gap: clamp(1rem, 2.6vw, 1.8rem); align-items: start;
-}
-@media (max-width: 900px) { .caverna-conteudo { grid-template-columns: 1fr; } }
-
 /* Palco Central Híbrido (Áudio + Ondas Místicas / Vídeo + Moldura de Rocha) */
 .caverna-palco-central {
-  position: relative; border-radius: 26px; padding: clamp(1rem, 2.5vw, 1.5rem);
+  position: relative; z-index: 3; width: min(980px, calc(100% - 28px));
+  margin: 1rem auto calc(2.6rem + env(safe-area-inset-bottom, 0px));
+  border-radius: 26px; padding: clamp(1rem, 2.5vw, 1.6rem);
   background:
     radial-gradient(90% 70% at 50% 20%, rgba(127, 209, 255, .12), transparent 65%),
     linear-gradient(180deg, rgba(22, 14, 52, .88) 0%, rgba(10, 7, 28, .94) 100%);
@@ -1091,117 +1089,114 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
 .caverna-visor {
-  position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden;
+  position: relative; width: 100%; aspect-ratio: 16 / 8.2; min-height: 230px; border-radius: 18px; overflow: hidden;
   background: radial-gradient(circle at 50% 50%, #1a1042 0%, #09051d 75%, #04020c 100%);
   box-shadow: 0 0 0 1.5px rgba(242, 193, 78, .45), 0 16px 40px rgba(0, 0, 0, .6);
   display: grid; place-items: center;
 }
+@media (max-width: 640px) { .caverna-visor { aspect-ratio: 16 / 10.5; min-height: 205px; } }
 .caverna-visor canvas {
   position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
 }
 .caverna-visor__arte {
-  position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .65rem;
-  text-align: center; padding: 1rem; pointer-events: none;
+  position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .45rem;
+  text-align: center; padding: 1rem; pointer-events: none; max-width: 92%;
 }
 .caverna-visor__orbe {
-  width: clamp(86px, 16vw, 118px); height: clamp(86px, 16vw, 118px); border-radius: 50%;
-  display: grid; place-items: center;
+  width: clamp(78px, 14vw, 108px); height: clamp(78px, 14vw, 108px); border-radius: 50%;
+  display: grid; place-items: center; font-size: 2.2rem; color: #241004;
   background: radial-gradient(circle at 35% 30%, #fff8df 0%, #f2c14e 35%, #9b6bd6 72%, #241052 100%);
   box-shadow: 0 0 0 2px rgba(255, 246, 210, .75) inset, 0 0 36px rgba(127, 209, 255, .65), 0 0 70px rgba(185, 163, 255, .45);
-  transition: transform .35s ease;
+  transition: transform .35s ease; overflow: hidden;
 }
-.caverna-visor.tocando .caverna-visor__orbe { animation: orbeEco 2.2s ease-in-out infinite alternate; }
-@keyframes orbeEco { from { transform: scale(.96); box-shadow: 0 0 0 2px #fff inset, 0 0 32px rgba(242, 193, 78, .7), 0 0 65px rgba(127, 209, 255, .55); } to { transform: scale(1.06); box-shadow: 0 0 0 3px #fff inset, 0 0 50px rgba(127, 209, 255, .95), 0 0 95px rgba(255, 45, 135, .55); } }
+.caverna-visor__orbe.tocando { animation: orbeEco 2.2s ease-in-out infinite alternate; }
+@keyframes orbeEco { from { transform: scale(.96); box-shadow: 0 0 0 2px #fff inset, 0 0 32px rgba(242, 193, 78, .7), 0 0 65px rgba(127, 209, 255, .55); } to { transform: scale(1.07); box-shadow: 0 0 0 3px #fff inset, 0 0 50px rgba(127, 209, 255, .95), 0 0 95px rgba(255, 45, 135, .55); } }
 .caverna-visor__orbe img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.caverna-visor__orbe span { font-size: 2.5rem; color: #1b0f04; filter: drop-shadow(0 2px 6px rgba(255, 255, 255, .8)); }
+.caverna-visor__cat {
+  margin-top: .2rem; padding: .2rem .7rem; border-radius: 999px;
+  background: rgba(12, 8, 34, .75); box-shadow: 0 0 0 1px rgba(127, 209, 255, .4) inset;
+  font: 600 .7rem/1.2 var(--corpo); letter-spacing: .16em; text-transform: uppercase; color: #8cf0ff;
+}
+.caverna-visor__nome {
+  margin: .15rem 0 0; font: 600 clamp(1.18rem, 2.8vw, 1.65rem)/1.2 var(--titulo); color: var(--ouro-claro);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .85);
+}
+.caverna-visor__sub {
+  margin: 0; font-size: .9rem; color: #ddd2ff; text-shadow: 0 2px 10px rgba(0, 0, 0, .85);
+}
 .caverna-visor video, .caverna-visor iframe {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; border: 0; z-index: 3;
 }
 .caverna-visor video[hidden], .caverna-visor iframe[hidden], .caverna-visor__arte[hidden] { display: none !important; }
 
-/* Informações da Faixa Atual */
-.caverna-info {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem;
-  margin-top: 1rem;
-}
-.caverna-info__textos { min-width: 0; flex: 1; }
-.caverna-info__cat { font: 600 .72rem/1.2 var(--corpo); letter-spacing: .2em; text-transform: uppercase; color: #7fd1ff; }
-.caverna-info__titulo { margin: .2rem 0 0; font: 600 clamp(1.2rem, 2.6vw, 1.55rem)/1.2 var(--titulo); color: var(--ouro-claro); }
-.caverna-info__sub { margin: .15rem 0 0; font-size: .92rem; color: var(--texto-2); }
-
 /* Controles Cinematográficos Customizados */
 .caverna-controles {
-  margin-top: .95rem; padding: .9rem 1rem; border-radius: 18px;
-  background: rgba(8, 5, 24, .75); box-shadow: 0 0 0 1px rgba(242, 193, 78, .22) inset;
+  margin-top: .95rem; padding: .9rem 1.05rem; border-radius: 18px;
+  background: rgba(8, 5, 24, .78); box-shadow: 0 0 0 1px rgba(242, 193, 78, .24) inset;
 }
-.caverna-barra-linha { display: flex; align-items: center; gap: .65rem; }
-.caverna-tempo { font: 500 .8rem/1 var(--corpo); font-variant-numeric: tabular-nums; color: var(--texto-2); min-width: 3.1rem; }
+.caverna-progresso-linha { display: flex; align-items: center; gap: .7rem; }
+.caverna-tempo { font: 500 .82rem/1 var(--corpo); font-variant-numeric: tabular-nums; color: var(--texto-2); min-width: 3.1rem; }
 .caverna-tempo:last-child { text-align: right; }
-.caverna-progresso {
+.caverna-barra {
   flex: 1; height: 8px; -webkit-appearance: none; appearance: none; border-radius: 999px;
-  background: rgba(255, 255, 255, .15); cursor: pointer; accent-color: var(--ouro);
+  background: rgba(255, 255, 255, .16); cursor: pointer; accent-color: var(--ouro);
 }
-.caverna-progresso::-webkit-slider-thumb {
+.caverna-barra::-webkit-slider-thumb {
   -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
   background: var(--ouro-claro); box-shadow: 0 0 10px rgba(242, 193, 78, .9); cursor: pointer;
 }
 .caverna-botoes {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem; margin-top: .85rem;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .65rem; margin-top: .85rem;
 }
-.caverna-botoes__esq, .caverna-botoes__dir { display: flex; align-items: center; gap: .45rem; flex-wrap: wrap; }
-.caverna-btn {
-  min-width: 44px; min-height: 44px; padding: 0 .75rem; border: 0; border-radius: 999px;
+.caverna-botoes__esq, .caverna-botoes__dir { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.caverna-btn, .caverna-btn-pilula {
+  min-width: 44px; min-height: 44px; padding: 0 .85rem; border: 0; border-radius: 999px; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
-  background: rgba(255, 255, 255, .07); color: var(--ouro-claro);
-  box-shadow: 0 0 0 1px rgba(242, 193, 78, .3) inset; font: 600 .84rem/1 var(--corpo);
+  background: rgba(255, 255, 255, .08); color: var(--ouro-claro);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .32) inset; font: 600 .84rem/1 var(--corpo);
   transition: transform .2s, background .2s, box-shadow .2s;
 }
-.caverna-btn:hover, .caverna-btn:focus-visible { background: rgba(242, 193, 78, .2); box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 14px rgba(242, 193, 78, .4); transform: translateY(-1px); }
+.caverna-btn:hover, .caverna-btn-pilula:hover {
+  background: rgba(242, 193, 78, .22); box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 14px rgba(242, 193, 78, .4); transform: translateY(-1px);
+}
 .caverna-btn--play {
   width: 52px; height: 52px; padding: 0; color: #2a1606; background: var(--dourado);
   box-shadow: 0 0 0 1.5px #fff6d2 inset, 0 6px 20px rgba(242, 193, 78, .45); font-size: 1.2rem;
 }
-.caverna-btn--play:hover { box-shadow: 0 0 0 2px #fff inset, 0 8px 26px rgba(242, 193, 78, .75); }
-.caverna-btn[aria-pressed="true"] { background: rgba(127, 209, 255, .22); color: #fff; box-shadow: 0 0 0 1.5px #7fd1ff inset, 0 0 16px rgba(127, 209, 255, .45); }
-.caverna-vol-caixa { display: inline-flex; align-items: center; gap: .35rem; }
-.caverna-vol { width: 72px; height: 6px; accent-color: var(--ouro); cursor: pointer; }
-@media (max-width: 560px) { .caverna-vol { width: 54px; } }
+.caverna-btn-pilula[aria-expanded="true"] {
+  background: rgba(127, 209, 255, .22); color: #fff; box-shadow: 0 0 0 1.5px #7fd1ff inset, 0 0 16px rgba(127, 209, 255, .45);
+}
+.caverna-vol { display: inline-flex; align-items: center; gap: .35rem; }
+.caverna-vol input[type="range"] { width: 74px; height: 6px; accent-color: var(--ouro); cursor: pointer; }
+@media (max-width: 560px) { .caverna-vol input[type="range"] { width: 54px; } }
 
 /* Pergaminho / Cristal de Letra da Música */
 .caverna-letra-caixa {
-  margin-top: 1rem; padding: 1.2rem 1.3rem; border-radius: 20px; max-height: 280px; overflow-y: auto; overscroll-behavior: contain;
+  display: none; margin-top: 1rem; padding: 1.2rem 1.35rem; border-radius: 20px; max-height: 290px; overflow-y: auto; overscroll-behavior: contain;
   background:
-    radial-gradient(90% 50% at 50% 0%, rgba(185, 163, 255, .16), transparent 70%),
-    rgba(10, 6, 30, .88);
-  box-shadow: 0 0 0 1px rgba(185, 163, 255, .4) inset, 0 14px 34px rgba(0, 0, 0, .5);
+    radial-gradient(90% 50% at 50% 0%, rgba(185, 163, 255, .18), transparent 70%),
+    rgba(10, 6, 30, .9);
+  box-shadow: 0 0 0 1px rgba(185, 163, 255, .42) inset, 0 14px 34px rgba(0, 0, 0, .5);
 }
-.caverna-letra-caixa[hidden] { display: none; }
-.caverna-letra__topo {
-  position: sticky; top: -6px; z-index: 5; display: flex; align-items: center; justify-content: space-between;
-  padding-bottom: .5rem; margin-bottom: .6rem; border-bottom: 1px solid rgba(242, 193, 78, .2);
-  background: rgba(10, 6, 30, .92); backdrop-filter: blur(6px);
+.caverna-letra-caixa.aberta { display: block; }
+.caverna-letra-caixa__titulo {
+  margin: 0 0 .65rem; padding-bottom: .5rem; border-bottom: 1px solid rgba(242, 193, 78, .22);
+  font: 600 1.05rem/1.2 var(--titulo); color: var(--ouro-claro); text-align: center;
 }
-.caverna-letra__topo h4 { margin: 0; font: 600 1rem/1.2 var(--titulo); color: var(--ouro-claro); }
-.caverna-letra__fechar {
-  width: 36px; height: 36px; border: 0; border-radius: 50%; display: grid; place-items: center;
-  background: rgba(255, 255, 255, .1); color: var(--ouro-claro); font-weight: 700;
-  box-shadow: 0 0 0 1px rgba(242, 193, 78, .4) inset;
-}
-.caverna-letra__texto {
-  margin: 0; white-space: pre-line; font: italic 500 clamp(1.08rem, 2.2vw, 1.24rem)/1.65 var(--livro);
+.caverna-letra-caixa__texto {
+  margin: 0; white-space: pre-line; font: italic 500 clamp(1.08rem, 2.2vw, 1.24rem)/1.68 var(--livro);
   color: #f3ecff; text-align: center;
 }
 
-/* Coluna Direita: Abas de Categorias (Cristais de Eco) e Lista de Faixas */
+/* Abas de Categorias (Cristais de Eco), Seletor de Ordem e Lista de Faixas */
 .caverna-playlist {
-  border-radius: 26px; padding: clamp(1rem, 2.5vw, 1.4rem);
-  background: linear-gradient(180deg, rgba(22, 14, 52, .86) 0%, rgba(10, 7, 28, .92) 100%);
-  box-shadow: 0 0 0 1px rgba(242, 193, 78, .28) inset, 0 24px 60px rgba(0, 0, 0, .6);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  margin-top: 1.1rem; border-radius: 22px; padding: clamp(.95rem, 2.2vw, 1.3rem);
+  background: linear-gradient(180deg, rgba(16, 10, 40, .82) 0%, rgba(8, 5, 22, .92) 100%);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .25) inset;
 }
-.caverna-abas { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1rem; }
+.caverna-abas { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .8rem; }
 .caverna-aba {
-  flex: 1 1 auto; min-height: 44px; padding: .55rem .85rem; border: 0; border-radius: 14px;
+  flex: 1 1 auto; min-height: 44px; padding: .55rem .85rem; border: 0; border-radius: 14px; cursor: pointer;
   background: rgba(255, 255, 255, .05); color: var(--texto-2);
   box-shadow: 0 0 0 1px rgba(185, 163, 255, .25) inset;
   font: 600 .82rem/1.2 var(--corpo); text-align: center; transition: background .25s, color .25s, box-shadow .25s;
@@ -1210,12 +1205,31 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   background: var(--dourado); color: #2a1606;
   box-shadow: 0 0 0 1px #fff6d2 inset, 0 6px 18px rgba(242, 193, 78, .35);
 }
+.caverna-ordem-barra {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem;
+  margin-bottom: .7rem; padding: .4rem .6rem; border-radius: 12px;
+  background: rgba(255, 255, 255, .03); border: 1px solid rgba(185, 163, 255, .16);
+}
+.caverna-ordem-dica { font-size: .82rem; color: var(--texto-2); }
+.caverna-ordem-acoes { display: flex; flex-wrap: wrap; gap: .4rem; }
+.caverna-btn-ordem {
+  min-height: 36px; padding: .35rem .75rem; border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(185, 163, 255, .14); color: var(--ouro-claro);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .35) inset; font: 600 .78rem/1 var(--corpo);
+  transition: background .2s, box-shadow .2s;
+}
+.caverna-btn-ordem:hover, .caverna-btn-ordem[aria-pressed="true"] {
+  background: rgba(242, 193, 78, .26); color: #fff; box-shadow: 0 0 0 1.5px var(--ouro) inset;
+}
 .caverna-lista {
-  display: flex; flex-direction: column; gap: .55rem; max-height: 360px; overflow-y: auto; overscroll-behavior: contain; padding-right: .2rem;
+  display: flex; flex-direction: column; gap: .5rem; max-height: 360px; overflow-y: auto; overscroll-behavior: contain; padding-right: .2rem;
+}
+.caverna-item-linha {
+  display: flex; align-items: center; gap: .45rem;
 }
 .caverna-item {
-  width: 100%; min-height: 58px; padding: .7rem .9rem; border: 0; border-radius: 16px; text-align: left;
-  display: flex; align-items: center; gap: .8rem;
+  flex: 1; min-width: 0; min-height: 58px; padding: .65rem .85rem; border: 0; border-radius: 16px; text-align: left; cursor: pointer;
+  display: flex; align-items: center; gap: .75rem;
   background: rgba(255, 255, 255, .04); color: var(--texto);
   box-shadow: 0 0 0 1px rgba(242, 193, 78, .16) inset;
   transition: transform .22s, background .22s, box-shadow .22s;
@@ -1224,24 +1238,37 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   transform: translateX(3px); background: rgba(185, 163, 255, .12);
   box-shadow: 0 0 0 1px rgba(242, 193, 78, .5) inset;
 }
-.caverna-item.ativo {
-  background: radial-gradient(90% 100% at 0% 50%, rgba(127, 209, 255, .24), rgba(242, 193, 78, .14));
+.caverna-item[aria-current="true"] {
+  background: radial-gradient(90% 100% at 0% 50%, rgba(127, 209, 255, .24), rgba(242, 193, 78, .15));
   box-shadow: 0 0 0 1.5px var(--ouro) inset, 0 0 20px rgba(127, 209, 255, .25);
 }
+.caverna-item__num {
+  flex: none; min-width: 26px; font: 700 .78rem/1 var(--titulo); color: var(--ouro); text-align: center; opacity: .85;
+}
 .caverna-item__icone {
-  flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
-  background: radial-gradient(circle at 35% 30%, #fff7dc, #e5b242); color: #241004; font-size: 1.05rem;
+  flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, #fff7dc, #e5b242); color: #241004; font-size: 1rem;
   box-shadow: 0 0 12px rgba(242, 193, 78, .45);
 }
-.caverna-item__textos { min-width: 0; flex: 1; }
+.caverna-item__info { min-width: 0; flex: 1; }
 .caverna-item__titulo { display: block; font: 600 .96rem/1.25 var(--titulo); color: var(--ouro-claro); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.caverna-item__sub { display: block; margin-top: .15rem; font-size: .82rem; color: var(--texto-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.caverna-item__tag {
-  flex: none; padding: .22rem .55rem; border-radius: 999px; font: 600 .68rem/1 var(--corpo);
-  letter-spacing: .08em; text-transform: uppercase; color: #7fd1ff; background: rgba(127, 209, 255, .12);
+.caverna-item__sub { display: block; margin-top: .15rem; font-size: .8rem; color: var(--texto-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.caverna-item__tipo {
+  flex: none; padding: .24rem .6rem; border-radius: 999px; font: 600 .72rem/1 var(--corpo);
+  letter-spacing: .06em; color: #8cf0ff; background: rgba(127, 209, 255, .12);
   box-shadow: 0 0 0 1px rgba(127, 209, 255, .3) inset;
 }
-.caverna-spotify-extra { margin-top: 1rem; padding-top: .9rem; border-top: 1px solid rgba(242, 193, 78, .16); text-align: center; }
+.caverna-item__setas {
+  display: none; flex-direction: column; gap: 4px; flex: none;
+}
+.caverna-lista.ordenando .caverna-item__setas { display: flex; }
+.caverna-seta {
+  width: 36px; height: 28px; border: 0; border-radius: 8px; cursor: pointer;
+  display: grid; place-items: center; background: rgba(242, 193, 78, .16); color: var(--ouro-claro);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .4) inset; font-size: .82rem; font-weight: 700;
+}
+.caverna-seta:hover:not(:disabled) { background: var(--dourado); color: #241004; }
+.caverna-seta:disabled { opacity: .3; cursor: default; }
 
 /* ---------- Gatos pretos ---------- */
 /* Gato de verdade (assets/gatos): sentado, ele respira; tocado, mia e dá um pulinho */
@@ -1784,6 +1811,13 @@ html, body { max-width: 100%; overflow-x: clip; }
         <button class="caverna-aba" type="button" role="tab" data-cat-eco="musicas" aria-selected="true">✦ Trilha da Tryv (Músicas Exclusivas)</button>
         <button class="caverna-aba" type="button" role="tab" data-cat-eco="clipes" aria-selected="false">🎬 Videoclipes Místicos</button>
         <button class="caverna-aba" type="button" role="tab" data-cat-eco="tarot" aria-selected="false">🔮 Oráculos &amp; Tarot em Vídeo</button>
+      </div>
+      <div class="caverna-ordem-barra">
+        <span class="caverna-ordem-dica" id="caverna-ordem-dica">✦ Toque numa faixa para ouvir ou organize a sequência:</span>
+        <div class="caverna-ordem-acoes">
+          <button class="caverna-btn-ordem" id="caverna-btn-ordenar" type="button" aria-pressed="false">⇅ Escolher Ordem</button>
+          <button class="caverna-btn-ordem" id="caverna-btn-padrao" type="button" hidden title="Voltar para a ordem original (Odô Iyá em 1º)">↺ Ordem Padrão</button>
+        </div>
       </div>
       <div class="caverna-lista" id="caverna-lista" role="tabpanel"></div>
       <div id="caverna-spotify-extra" style="margin-top:1.1rem;text-align:center"></div>
@@ -3960,79 +3994,161 @@ function iniciar(C, fotosPrevia = {}) {
      FASE 4: A "CAVERNA DE ECO" & "TRILHA DA TRYV"
      (Santuário Sonoro, Áudios Exclusivos, Letras das Músicas e Cinema Místico)
      =====================================================================
-     COMO ADICIONAR SUAS MÚSICAS, LETRAS E VÍDEOS:
+     COMO ADICIONAR E ESCOLHER A ORDEM DAS SUAS MÚSICAS, LETRAS E VÍDEOS:
      1. Coloque seus arquivos de áudio (.mp3) na pasta: assets/audios/
      2. Coloque seus arquivos de vídeo (.mp4 H.264) na pasta: assets/videos/
-     3. Copie e cole um bloco abaixo dentro de `acervoCavernaDeEco` preenchendo:
-        - titulo: Nome da música ou vídeo
-        - subtitulo: Descrição curta ou frequência/álbum
-        - categoria: 'musicas' (Trilha da Tryv), 'clipes' (Videoclipes Místicos) ou 'tarot' (Oráculos & Tarot em Vídeo)
-        - tipo: 'audio' (para .mp3), 'video' (para .mp4/.webm) ou 'youtube' (link ou ID do YouTube)
-        - arquivo: Caminho do arquivo (ex: 'assets/audios/minha-musica.mp3' ou 'assets/videos/meu-clipe.mp4')
-        - capa: (Opcional) Caminho da imagem de capa (ex: 'assets/logo-tryv-icone.webp')
-        - duracao: (Opcional) Tempo exibido na lista (ex: '03:45')
-        - letra: Letra completa da música (use \n ou quebras de linha normais entre os versos)
+     3. Para definir a ORDEM das músicas:
+        - Basta usar o campo `ordem: 1`, `ordem: 2`, `ordem: 3`... (ou mudar a posição do bloco na lista abaixo),
+        - OU clicar no botão "⇅ Escolher Ordem" diretamente dentro do player na Caverna de Eco e usar as setas ↑ e ↓!
      ===================================================================== */
   const acervoCavernaDeEco = [
     {
-      titulo: "Ecos de Tuath (Cântico das Águas)",
-      subtitulo: "Trilha Exclusiva da Tryv · Ressonância Mística 432Hz",
+      ordem: 1,
+      titulo: "Odô Iyá",
+      subtitulo: "Trilha Exclusiva da Tryv · Canto às Águas Sagradas",
       categoria: "musicas",
       tipo: "audio",
-      arquivo: "assets/audios/ecos-de-tuath.mp3",
+      arquivo: "assets/audios/Odô Iyá.mp3",
       capa: "assets/logo-tryv-icone.webp",
-      duracao: "00:36",
-      letra: `Nas águas profundas da gruta estrelada,
-O eco desperta a memória sagrada.
-Cristais de ametista sussurram no véu,
-O que está na Terra reflete o que é Céu.
+      duracao: "04:16",
+      letra: `Odô Iyá! Saudação às águas profundas e sagradas.
+Que as ondas de luz lavem os caminhos e tragam serenidade, proteção e encantamento ao seu espírito.
 
-Respire o silêncio, escute o sinal,
-A chama violeta no espelho abissal.
-Mude-se por dentro e o mundo abrirá
-Novos horizontes onde a alma é seu lar.
-
-✦ Tryv Tuath · Cântico Exclusivo da Caverna de Eco ✦`
+✦ Tryv Tuath · Trilha Exclusiva da Caverna de Eco ✦`
     },
     {
+      ordem: 2,
+      titulo: "Oxum Diva das Águas Claras",
+      subtitulo: "Trilha Exclusiva da Tryv · Doçura, Ouro e Cachoeiras",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/Oxum Diva das águas claras.mp3",
+      capa: "assets/tryv-natureza.webp",
+      duracao: "03:30",
+      letra: `Nas águas claras que refletem o ouro do sol,
+A força do amor, da beleza e da prosperidade corre suave como o rio sagrado.`
+    },
+    {
+      ordem: 3,
+      titulo: "Iansã Dona da Tempestade",
+      subtitulo: "Trilha Exclusiva da Tryv · Força dos Ventos e Raios",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/Iansã dona da tempestade.mp3",
+      capa: "assets/tryv-fogo.webp",
+      duracao: "02:05",
+      letra: `Eparrey! Quando o vento sopra e o céu se ilumina,
+Iansã abre os caminhos, varre o que já passou e desperta a coragem de transformar.`
+    },
+    {
+      ordem: 4,
+      titulo: "Despertar da Bruxa",
+      subtitulo: "Trilha Exclusiva da Tryv · Magia Ancestral",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/Despertar da Bruxa.mp3",
+      capa: "assets/tryv-chapeu.webp",
+      duracao: "02:50",
+      letra: `Acorda a memória antiga guardada na floresta e nas estrelas.
+A intuição se acende como chama no altar.`
+    },
+    {
+      ordem: 5,
+      titulo: "A Dança dos Elementais",
+      subtitulo: "Trilha Exclusiva da Tryv · Terra, Água, Fogo e Ar",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/A Dança dos Elementais.mp3",
+      capa: "assets/tryv-natureza.webp",
+      duracao: "02:35",
+      letra: `Gnomos da terra, ondinas das águas, salamandras do fogo e silfos do ar
+Giram na roda encantada da natureza.`
+    },
+    {
+      ordem: 6,
+      titulo: "Magia do Amor",
+      subtitulo: "Trilha Exclusiva da Tryv · Encantamento e Afeto",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/Magia do Amor.mp3",
+      capa: "assets/tryv-pintura.webp",
+      duracao: "02:28",
+      letra: `O amor é o feitiço mais antigo do universo.
+Quando vibramos na frequência do coração, tudo floresce.`
+    },
+    {
+      ordem: 7,
+      titulo: "Magia em Mim",
+      subtitulo: "Trilha Exclusiva da Tryv · Poder Interior",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/magia em mim.mp3",
+      capa: "assets/tryv-segredo.webp",
+      duracao: "03:20",
+      letra: `Você é o próprio oráculo e o próprio templo.
+Reconheça a centelha divina e a magia que habitam em você.`
+    },
+    {
+      ordem: 8,
+      titulo: "Gitana",
+      subtitulo: "Trilha Exclusiva da Tryv · Liberdade, Cartas e Estrelas",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/gitana.mp3",
+      capa: "assets/tryv-fogo.webp",
+      duracao: "02:30",
+      letra: `Ao redor da fogueira sob a lua prateada,
+As cartas revelam os segredos da estrada e a dança da liberdade.`
+    },
+    {
+      ordem: 9,
+      titulo: "Ela",
+      subtitulo: "Trilha Exclusiva da Tryv · Essência Sagrada",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/Ela.mp3",
+      capa: "assets/logo-tryv-icone.webp",
+      duracao: "02:55",
+      letra: `Todas essas mulheres alimentam a ideia de quem é essa essência.
+Um pulsar de ideias, estrelas e sentimentos.`
+    },
+    {
+      ordem: 1,
       titulo: "Dança das Nebulosas (Videoclipe Místico)",
       subtitulo: "Cinema Místico · Visualização Cósmica & Magia Sonora",
       categoria: "clipes",
       tipo: "video",
       arquivo: "assets/videos/clipe-nebulosas.mp4",
       capa: "assets/tryv-fogo.webp",
-      duracao: "00:30",
+      duracao: "00:36",
       letra: `Visto-me de estrelas no berço das nebulosas,
 Pés na floresta antiga, mente entre as rosas.
 Quando o tambor ressoa na pedra do altar,
-O véu entre os mundos começa a dançar.
-
-Olhe para o espelho da água encantada:
-A bruxa, a estrela e a estrada sagrada.`
+O véu entre os mundos começa a dançar.`
     },
     {
+      ordem: 1,
       titulo: "O Chamado dos Arcanos (Tarot em Vídeo)",
       subtitulo: "Oráculos & Tarot · Imersão Visual nos 22 Caminhos",
       categoria: "tarot",
       tipo: "video",
       arquivo: "assets/videos/chamado-arcanos.mp4",
       capa: "assets/tryv-chapeu.webp",
-      duracao: "00:30",
+      duracao: "00:36",
       letra: `O Louco dá o passo na beira do vento,
 A Sacerdotisa guarda o firmamento.
 A Estrela derrama sua água de luz,
-E o Mundo revela o que a alma conduz.
-
-Pense na sua pergunta enquanto contempla os símbolos.`
+E o Mundo revela o que a alma conduz.`
     }
   ];
 
   // Se houver vídeos adicionais cadastrados no conteudo.json (tryv.videos), integra automaticamente na aba Tarot
   if (Array.isArray(C.tryv && C.tryv.videos)) {
-    C.tryv.videos.forEach(v => {
+    C.tryv.videos.forEach((v, i) => {
       if (!v || !v.url) return;
       const ehYT = /youtu\.?be/.test(v.url);
       acervoCavernaDeEco.push({
+        ordem: 10 + i,
         titulo: v.titulo || "Vídeo da Tryv",
         subtitulo: "Acervo Tryv Tuath",
         categoria: "tarot",
@@ -4045,8 +4161,27 @@ Pense na sua pergunta enquanto contempla os símbolos.`
     });
   }
 
-  /* Gerador de áudio harmônico místico em memória (WAV 432Hz/528Hz) para que a demonstração toque imediatamente
-     mesmo antes de a usuária colocar os arquivos .mp3 físicos na pasta assets/audios/ */
+  // Ordena inicialmente pelo campo `ordem` (mantendo "Odô Iyá" sempre como #1 por padrão)
+  acervoCavernaDeEco.sort((a, b) => (a.ordem ?? 999) - (b.ordem ?? 999));
+  const ordemOriginalTitulos = acervoCavernaDeEco.map(x => x.titulo);
+  const CHAVE_ORDEM_ECO = "tryv-caverna-ordem-v1";
+
+  function aplicarOrdemSalva() {
+    try {
+      const salva = JSON.parse(localStorage.getItem(CHAVE_ORDEM_ECO) || "null");
+      if (Array.isArray(salva) && salva.length) {
+        acervoCavernaDeEco.sort((a, b) => {
+          const ia = salva.indexOf(a.titulo), ib = salva.indexOf(b.titulo);
+          return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+        });
+        const btnPad = $("#caverna-btn-padrao");
+        if (btnPad) btnPad.hidden = false;
+      }
+    } catch {}
+  }
+  aplicarOrdemSalva();
+
+  /* Gerador de áudio harmônico místico em memória (WAV 432Hz/528Hz) para demonstrações sem arquivo físico */
   let urlAudioDemo = null;
   function obterAudioDemo() {
     if (urlAudioDemo) return urlAudioDemo;
@@ -4058,10 +4193,10 @@ Pense na sua pergunta enquanto contempla os símbolos.`
     v.setUint32(24, sr, true); v.setUint32(28, sr * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true);
     escStr(36, "data"); v.setUint32(40, total * 2, true);
     const acordes = [
-      [216, 324, 432, 648],     // Lá místico 432Hz
-      [172.8, 259.2, 432, 518.4], // Fá celestial
-      [194.4, 291.6, 388.8, 583.2], // Sol astral
-      [216, 270, 324, 540]      // Retorno cristalino
+      [216, 324, 432, 648],
+      [172.8, 259.2, 432, 518.4],
+      [194.4, 291.6, 388.8, 583.2],
+      [216, 270, 324, 540]
     ];
     for (let i = 0; i < total; i++) {
       const t = i / sr;
@@ -4069,7 +4204,6 @@ Pense na sua pergunta enquanto contempla os símbolos.`
       const tAc = t % 9;
       const envAc = Math.sin(Math.min(1, tAc / 1.8) * Math.PI * 0.5) * Math.sin(Math.min(1, (9 - tAc) / 1.8) * Math.PI * 0.5);
       const [f1a, f2a, f3a, f4a] = acordes[idxAc];
-      // Harpejo cristalino suave a cada 1.5s
       const notaHarp = acordes[idxAc][Math.floor((t % 6) / 1.5)];
       const tNota = t % 1.5;
       const envNota = Math.exp(-tNota * 2.6) * Math.min(1, tNota * 35);
@@ -4119,18 +4253,13 @@ Pense na sua pergunta enquanto contempla os símbolos.`
         </linearGradient>
       </defs>
       <rect width="1344" height="720" fill="url(#cv-abismo)"/>
-      <!-- Paredes externas de rocha abissal com veios de ouro velho e ametista -->
       <path d="M0,0 H1344 V560 L1180,550 L1080,410 L960,230 L810,130 L672,105 L530,130 L380,230 L260,410 L160,550 L0,560 Z" fill="#070414" stroke="rgba(210,175,255,.18)" stroke-width="2"/>
       <path d="M0,0 H420 L310,190 L210,390 L130,555 H0 Z" fill="#04020b"/>
       <path d="M1344,0 H920 L1030,190 L1130,390 L1210,555 H1344 Z" fill="#04020b"/>
-      <!-- Brilho místico saindo do interior da gruta -->
       <ellipse cx="672" cy="395" rx="370" ry="250" fill="url(#cv-luz-portal)"/>
-      <!-- Arcos internos de pedra em profundidade -->
       <path d="M295,548 L365,275 L515,168 L672,142 L829,168 L979,275 L1049,548 Z" fill="#0b0620" stroke="rgba(140,235,255,.22)" stroke-width="1.5"/>
       <path d="M395,548 L450,320 L565,220 L672,198 L779,220 L894,320 L949,548 Z" fill="#120930" stroke="rgba(255,215,120,.25)" stroke-width="1.2"/>
-      <!-- Veios minerais luminosos na rocha -->
       <path d="M190,460 Q260,340 350,260 M1150,460 Q1080,340 990,260 M480,150 Q672,115 860,150" fill="none" stroke="rgba(255,212,115,.28)" stroke-width="1.8" stroke-dasharray="6 10"/>
-      <!-- Cristais Bioluminescentes nas paredes da gruta -->
       <g class="tremeluz">
         <polygon points="250,490 278,415 296,495" fill="url(#cv-cristal-v)"/>
         <polygon points="274,495 312,435 320,502" fill="url(#cv-cristal-c)"/>
@@ -4142,12 +4271,10 @@ Pense na sua pergunta enquanto contempla os símbolos.`
         <polygon points="365,535 390,465 412,538" fill="url(#cv-cristal-o)"/>
         <polygon points="932,538 954,465 979,535" fill="url(#cv-cristal-o)"/>
       </g>
-      <!-- Símbolo sonoro central levitando sobre a água -->
       <circle cx="672" cy="375" r="56" fill="rgba(126,242,255,.12)" stroke="rgba(255,218,130,.55)" stroke-width="1.5"/>
       <circle cx="672" cy="375" r="82" fill="none" stroke="rgba(196,122,255,.32)" stroke-dasharray="4 8"/>
       <path d="M660,392 V352 L692,344 V384" fill="none" stroke="#ffe7a6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="654" cy="392" r="7" fill="#ffe7a6"/><circle cx="686" cy="384" r="7" fill="#ffe7a6"/>
-      <!-- Espelho d'água subterrâneo na base com ondas de eco -->
       <rect x="0" y="545" width="1344" height="175" fill="url(#cv-agua-grad)"/>
       <ellipse cx="672" cy="575" rx="340" ry="26" fill="rgba(126,242,255,.16)"/>
       <ellipse cx="672" cy="590" rx="220" ry="12" fill="none" stroke="rgba(255,220,140,.4)" stroke-width="1.4"/>
@@ -4166,7 +4293,6 @@ Pense na sua pergunta enquanto contempla os símbolos.`
         </radialGradient>
       </defs>
       <rect width="1440" height="900" fill="url(#cvi-luz)"/>
-      <!-- Estalactites e paredes de rocha cristalina nas bordas -->
       <path d="M0,0 H1440 V140 L1320,90 L1210,165 L1120,75 L980,120 L840,55 L720,95 L600,55 L460,120 L320,75 L230,165 L120,90 L0,140 Z" fill="#05020e" opacity=".9"/>
       <polygon points="85,0 115,195 145,0" fill="rgba(180,120,255,.22)"/>
       <polygon points="1295,0 1325,195 1355,0" fill="rgba(120,235,255,.22)"/>
@@ -4195,10 +4321,10 @@ Pense na sua pergunta enquanto contempla os símbolos.`
   let catEcoAtual = "musicas";
   let indiceEcoAtual = 0;
   let tocandoEco = false;
-  let demoVideoTimer = null, demoVideoTempo = 0;
+  let modoOrdenarEco = false;
+  let demoVideoTimer = null;
   const audioEco = new Audio();
   audioEco.preload = "metadata";
-  audioEco.crossOrigin = "anonymous";
   const videoEco = $("#caverna-video");
   const ytEco = $("#caverna-yt");
   const visorEco = $("#caverna-visor"), visorArte = $("#caverna-visor-arte"), orbeEco = $("#caverna-orbe");
@@ -4208,6 +4334,7 @@ Pense na sua pergunta enquanto contempla os símbolos.`
   const volEco = $("#caverna-volume"), btnMudoEco = $("#caverna-mudo");
   const btnLetraEco = $("#caverna-btn-letra"), caixaLetraEco = $("#caverna-letra-caixa"), titLetraEco = $("#caverna-letra-titulo"), txtLetraEco = $("#caverna-letra-texto");
   const btnTelaEco = $("#caverna-btn-tela"), listaEcoEl = $("#caverna-lista");
+  const btnOrdenarEco = $("#caverna-btn-ordenar"), btnPadraoEco = $("#caverna-btn-padrao"), dicaOrdemEco = $("#caverna-ordem-dica");
 
   const fmtTempo = seg => {
     if (!isFinite(seg) || seg < 0) return "00:00";
@@ -4227,21 +4354,74 @@ Pense na sua pergunta enquanto contempla os símbolos.`
 
   function renderizarListaEco() {
     const filtrados = itensDaCategoria(catEcoAtual);
+    listaEcoEl.classList.toggle("ordenando", modoOrdenarEco);
     if (!filtrados.length) {
       listaEcoEl.innerHTML = `<p style="color:#c9bfe6;padding:.6rem">Em breve novas obras nesta categoria.</p>`;
       return;
     }
-    listaEcoEl.innerHTML = filtrados.map(({ item, idx }) => {
+    listaEcoEl.innerHTML = filtrados.map(({ item, idx }, pos) => {
       const icone = item.tipo === "audio" ? "♪" : item.tipo === "youtube" ? "▶" : "🎬";
-      return `<button class="caverna-item" type="button" data-idx-eco="${idx}" aria-current="${idx === indiceEcoAtual}">
-        <span class="caverna-item__icone" aria-hidden="true">${icone}</span>
-        <span class="caverna-item__info">
-          <span class="caverna-item__titulo">${escHTML(item.titulo)}</span>
-          <span class="caverna-item__sub">${escHTML(item.subtitulo || "")}</span>
-        </span>
-        <span class="caverna-item__tipo">${escHTML(item.duracao || (item.tipo === "audio" ? "Áudio" : "Vídeo"))}</span>
-      </button>`;
+      return `<div class="caverna-item-linha">
+        <button class="caverna-item" type="button" data-idx-eco="${idx}" aria-current="${idx === indiceEcoAtual}">
+          <span class="caverna-item__num" translate="no">${pos + 1}º</span>
+          <span class="caverna-item__icone" aria-hidden="true">${icone}</span>
+          <span class="caverna-item__info">
+            <span class="caverna-item__titulo">${escHTML(item.titulo)}</span>
+            <span class="caverna-item__sub">${escHTML(item.subtitulo || "")}</span>
+          </span>
+          <span class="caverna-item__tipo" translate="no">${escHTML(item.duracao || (item.tipo === "audio" ? "Áudio" : "Vídeo"))}</span>
+        </button>
+        <div class="caverna-item__setas">
+          <button class="caverna-seta" type="button" data-mover-eco="${idx}" data-dir="-1" ${pos === 0 ? "disabled" : ""} aria-label="Subir ${escHTML(item.titulo)} na lista" title="Subir posição">↑</button>
+          <button class="caverna-seta" type="button" data-mover-eco="${idx}" data-dir="1" ${pos === filtrados.length - 1 ? "disabled" : ""} aria-label="Descer ${escHTML(item.titulo)} na lista" title="Descer posição">↓</button>
+        </div>
+      </div>`;
     }).join("");
+  }
+
+  function moverFaixaEco(idxOriginal, direcao) {
+    const filtrados = itensDaCategoria(catEcoAtual);
+    const posNaCat = filtrados.findIndex(x => x.idx === idxOriginal);
+    const novaPosNaCat = posNaCat + direcao;
+    if (posNaCat < 0 || novaPosNaCat < 0 || novaPosNaCat >= filtrados.length) return;
+    const idxDestino = filtrados[novaPosNaCat].idx;
+    const faixaAtualObj = acervoCavernaDeEco[indiceEcoAtual];
+    const temp = acervoCavernaDeEco[idxOriginal];
+    acervoCavernaDeEco[idxOriginal] = acervoCavernaDeEco[idxDestino];
+    acervoCavernaDeEco[idxDestino] = temp;
+    indiceEcoAtual = acervoCavernaDeEco.indexOf(faixaAtualObj);
+    try {
+      localStorage.setItem(CHAVE_ORDEM_ECO, JSON.stringify(acervoCavernaDeEco.map(x => x.titulo)));
+    } catch {}
+    if (btnPadraoEco) btnPadraoEco.hidden = false;
+    renderizarListaEco();
+    sino(2);
+  }
+
+  if (btnOrdenarEco) {
+    btnOrdenarEco.addEventListener("click", () => {
+      modoOrdenarEco = !modoOrdenarEco;
+      btnOrdenarEco.setAttribute("aria-pressed", modoOrdenarEco);
+      btnOrdenarEco.textContent = modoOrdenarEco ? "✓ Concluir Ordem" : "⇅ Escolher Ordem";
+      if (dicaOrdemEco) {
+        dicaOrdemEco.textContent = modoOrdenarEco
+          ? "✦ Use as setas ↑ e ↓ ao lado de cada música para escolher a ordem:"
+          : "✦ Toque numa faixa para ouvir ou organize a sequência:";
+      }
+      renderizarListaEco();
+      sino(1);
+    });
+  }
+  if (btnPadraoEco) {
+    btnPadraoEco.addEventListener("click", () => {
+      const faixaAtualObj = acervoCavernaDeEco[indiceEcoAtual];
+      acervoCavernaDeEco.sort((a, b) => ordemOriginalTitulos.indexOf(a.titulo) - ordemOriginalTitulos.indexOf(b.titulo));
+      indiceEcoAtual = Math.max(0, acervoCavernaDeEco.indexOf(faixaAtualObj));
+      try { localStorage.removeItem(CHAVE_ORDEM_ECO); } catch {}
+      btnPadraoEco.hidden = true;
+      renderizarListaEco();
+      sino(2);
+    });
   }
 
   function pararMidiaEco() {
@@ -4288,6 +4468,8 @@ Pense na sua pergunta enquanto contempla os símbolos.`
       btnLetraEco.setAttribute("aria-expanded", "false");
     }
 
+    const urlArquivo = encodeURI(item.arquivo);
+
     // Configura o palco central conforme o tipo ('audio', 'video' ou 'youtube')
     if (item.tipo === "youtube") {
       visorArte.hidden = true;
@@ -4299,10 +4481,9 @@ Pense na sua pergunta enquanto contempla os símbolos.`
     } else if (item.tipo === "video") {
       visorArte.hidden = false;
       orbeEco.innerHTML = item.capa ? `<img src="${foto(item.capa)}" alt="">` : "🎬";
-      videoEco.src = item.arquivo;
+      videoEco.src = urlArquivo;
       videoEco.volume = +volEco.value;
       videoEco.onerror = () => {
-        // Caso o arquivo .mp4 ainda não tenha sido colocado em assets/videos/, usa o espetáculo visual em Canvas + trilha mística
         videoEco.hidden = true;
         visorArte.hidden = false;
         audioEco.src = obterAudioDemo();
@@ -4319,10 +4500,9 @@ Pense na sua pergunta enquanto contempla os símbolos.`
       // Modo Áudio Exclusivo + Ondas Sonoras na Água
       visorArte.hidden = false;
       orbeEco.innerHTML = item.capa ? `<img src="${foto(item.capa)}" alt="">` : "♪";
-      audioEco.src = item.arquivo;
+      audioEco.src = urlArquivo;
       audioEco.volume = +volEco.value;
       audioEco.onerror = () => {
-        // Se o arquivo .mp3 ainda não estiver na pasta assets/audios/, usa a melodia mística gerada em 432Hz
         if (audioEco.src !== obterAudioDemo()) {
           audioEco.src = obterAudioDemo();
           if (autoPlay) audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
@@ -4376,7 +4556,14 @@ Pense na sua pergunta enquanto contempla os símbolos.`
   [audioEco, videoEco].forEach(m => {
     if (!m) return;
     m.addEventListener("loadedmetadata", () => {
-      if (m === midiaAtiva() && isFinite(m.duration)) tTotalEco.textContent = fmtTempo(m.duration);
+      if (m === midiaAtiva() && isFinite(m.duration)) {
+        const fmt = fmtTempo(m.duration);
+        tTotalEco.textContent = fmt;
+        if (acervoCavernaDeEco[indiceEcoAtual] && m.src !== obterAudioDemo()) {
+          acervoCavernaDeEco[indiceEcoAtual].duracao = fmt;
+          renderizarListaEco();
+        }
+      }
     });
     m.addEventListener("timeupdate", () => {
       if (m !== midiaAtiva()) return;
@@ -4452,6 +4639,12 @@ Pense na sua pergunta enquanto contempla os símbolos.`
   }));
 
   listaEcoEl.addEventListener("click", e => {
+    const seta = e.target.closest("[data-mover-eco]");
+    if (seta) {
+      e.stopPropagation();
+      moverFaixaEco(+seta.dataset.moverEco, +seta.dataset.dir);
+      return;
+    }
     const btn = e.target.closest("[data-idx-eco]");
     if (!btn) return;
     carregarFaixaEco(+btn.dataset.idxEco, true);
