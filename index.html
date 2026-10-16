@@ -695,19 +695,33 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 /* Pergaminho com o conteúdo de cada canto */
 .pergaminho {
   /* cartão translúcido no canto: a casinha continua aparecendo atrás */
-  position: absolute; z-index: 6; top: 76px; right: 14px; bottom: 14px; width: min(380px, calc(100% - 28px)); overflow-y: auto; overscroll-behavior: contain;
-  padding: 3.4rem clamp(1.2rem, 3vw, 1.8rem) 1.6rem; border-radius: 22px;
-  background: radial-gradient(120% 50% at 50% 0%, rgba(255, 250, 240, .9), transparent 70%), linear-gradient(180deg, rgba(248, 237, 211, .86), rgba(236, 220, 180, .86));
-  backdrop-filter: blur(5px);
-  color: #3a2510; box-shadow: 0 20px 50px rgba(0, 0, 0, .5), inset 0 0 0 8px rgba(236, 220, 180, .6), inset 0 0 0 9px rgba(122, 62, 16, .4);
+  position: absolute; z-index: 6; top: 76px; right: 14px; bottom: 14px; width: min(410px, calc(100% - 28px)); overflow-y: auto; overscroll-behavior: contain;
+  padding: 1rem clamp(1.2rem, 3vw, 1.8rem) 1.8rem; border-radius: 22px;
+  background: radial-gradient(120% 50% at 50% 0%, rgba(255, 250, 240, .94), transparent 70%), linear-gradient(180deg, rgba(248, 237, 211, .92), rgba(236, 220, 180, .92));
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: #3a2510; box-shadow: 0 20px 50px rgba(0, 0, 0, .55), inset 0 0 0 8px rgba(236, 220, 180, .6), inset 0 0 0 9px rgba(122, 62, 16, .4);
   transform: translateX(calc(100% + 40px)); transition: transform .6s cubic-bezier(.2, .7, .2, 1);
 }
 .pergaminho.aberto { transform: none; }
 @media (max-width: 700px) {
-  .pergaminho { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; max-height: 50dvh; border-radius: 22px; transform: translateY(110%); padding-top: 3rem; }
+  .pergaminho { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; max-height: 62dvh; border-radius: 22px; transform: translateY(110%); padding-top: .8rem; }
 }
-.pergaminho__fechar { position: absolute; top: .9rem; right: .9rem; width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(122, 62, 16, .12); color: #7a3e10; font-size: 1.2rem; }
-.pergaminho h3 { font: 600 1.7rem/1.15 var(--titulo); color: #7a3e10; }
+/* FASE 1.2: Botão X de fechar sempre fixo e visível ao rolar o pergaminho */
+.pergaminho__fechar {
+  position: sticky; top: 10px; float: right; z-index: 9999;
+  width: 44px; height: 44px; margin: 0 0 .4rem .6rem;
+  display: grid; place-items: center; border: 0; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 252, 240, .96), rgba(238, 214, 168, .92));
+  color: #5a2b0c; font-size: 1.25rem; font-weight: 700;
+  box-shadow: 0 0 0 1.5px rgba(122, 62, 16, .55) inset, 0 6px 18px rgba(0, 0, 0, .28), 0 0 14px rgba(242, 193, 78, .55);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  transition: transform .25s, box-shadow .25s;
+}
+.pergaminho__fechar:hover, .pergaminho__fechar:focus-visible {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 2px #7a3e10 inset, 0 8px 22px rgba(0, 0, 0, .35), 0 0 20px rgba(242, 193, 78, .85);
+}
+.pergaminho h3 { font: 600 1.7rem/1.15 var(--titulo); color: #7a3e10; padding-right: 3rem; }
 .pergaminho .sub { margin: .4rem 0 0; font: italic 500 1.15rem/1.4 var(--livro); color: #6b4a2a; }
 .item-casa { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px dashed rgba(122, 62, 16, .35); }
 .item-casa h4 { margin: 0; font: 600 1.12rem/1.2 var(--titulo); color: #5a2b0c; }
@@ -717,13 +731,101 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .pergaminho .botao--rosa { margin-top: 1.4rem; }
 .pocao-titulo { display: flex; align-items: center; gap: .9rem; }
 .pocao-frasco { width: 64px; height: 80px; flex: none; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .3)); }
-.gemas { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: 1.2rem; }
-.gema { padding: .6rem .3rem .5rem; border: 0; border-radius: 14px; background: rgba(255, 255, 255, .4); box-shadow: 0 0 0 1px rgba(122, 62, 16, .2) inset; font: 600 .8rem/1.2 var(--corpo); color: #5a2b0c; transition: transform .3s, background .3s; }
-.gema svg { display: block; width: 46px; height: 46px; margin: 0 auto .3rem; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .25)); }
-.gema[aria-pressed="true"] { background: #fff7e0; box-shadow: 0 0 0 2px #d39a2c inset; transform: translateY(-3px); }
-.gema-detalhe { margin-top: 1rem; padding: 1rem; border-radius: 14px; background: rgba(255, 255, 255, .55); box-shadow: 0 0 0 1px rgba(122, 62, 16, .2) inset; }
-.gema-detalhe h4 { margin: 0; font: 600 1.15rem/1.2 var(--titulo); color: #5a2b0c; }
-.gema-detalhe p { margin: .35rem 0 0; color: #4a3220; }
+
+/* FASE 2: Cristais Brutos Hiper-Realistas 8K e Modal Centralizado Instantâneo */
+.gemas { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; margin-top: 1.2rem; }
+@media (max-width: 380px) { .gemas { grid-template-columns: repeat(2, 1fr); } }
+.gema {
+  position: relative; min-height: 98px; padding: .65rem .35rem .55rem; border: 0; border-radius: 16px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, .82), rgba(242, 226, 192, .52));
+  box-shadow: 0 0 0 1px rgba(122, 62, 16, .24) inset, 0 6px 14px rgba(58, 37, 16, .12);
+  font: 600 .8rem/1.2 var(--corpo); color: #4a2208;
+  transition: transform .3s cubic-bezier(.2, .7, .2, 1), background .3s, box-shadow .3s;
+  will-change: transform; overflow: hidden;
+}
+.gema::after {
+  content: ""; position: absolute; inset: -40%; pointer-events: none;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .65) 50%, transparent 62%);
+  transform: translateX(-120%) rotate(15deg); transition: transform .75s ease;
+}
+.gema:hover::after, .gema:focus-visible::after { transform: translateX(120%) rotate(15deg); }
+.gema svg {
+  display: block; width: 62px; height: 62px; margin: 0 auto; overflow: visible;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .32));
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1), filter .35s;
+}
+.gema:hover, .gema:focus-visible {
+  transform: translateY(-4px) scale(1.03);
+  background: radial-gradient(circle at 50% 35%, #fffdf7, rgba(255, 238, 195, .85));
+  box-shadow: 0 0 0 1.5px #c88a22 inset, 0 10px 22px rgba(58, 37, 16, .22), 0 0 18px rgba(242, 193, 78, .45);
+}
+.gema:hover svg { transform: scale(1.1) rotate(-3deg); filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .38)) drop-shadow(0 0 12px rgba(255, 230, 163, .65)); }
+.gema[aria-pressed="true"] {
+  background: radial-gradient(circle at 50% 35%, #fffdf5, #ffeab3);
+  box-shadow: 0 0 0 2px #b87914 inset, 0 0 22px rgba(242, 193, 78, .65);
+  transform: translateY(-3px);
+}
+
+/* Modal / Overlay Centralizado de Explicação do Cristal (Sem precisar rolar) */
+.cristal-modal {
+  position: fixed; inset: 0; z-index: 9990;
+  display: grid; place-items: center; padding: 1.2rem;
+  background: radial-gradient(circle at 50% 45%, rgba(28, 16, 62, .78), rgba(6, 4, 18, .9));
+  backdrop-filter: blur(12px) saturate(1.3); -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s ease;
+}
+.cristal-modal.aberto { opacity: 1; visibility: visible; }
+.cristal-modal__card {
+  position: relative; width: min(460px, calc(100vw - 28px)); max-height: min(86dvh, 620px); overflow-y: auto;
+  padding: 2rem 1.6rem 1.8rem; border-radius: 26px; text-align: center;
+  background:
+    radial-gradient(90% 60% at 50% 18%, rgba(255, 230, 163, .22), transparent 70%),
+    linear-gradient(180deg, rgba(34, 20, 74, .96) 0%, rgba(18, 11, 44, .98) 100%);
+  color: var(--texto);
+  box-shadow: 0 0 0 1.5px rgba(242, 193, 78, .65) inset, 0 0 0 6px rgba(18, 11, 44, .85) inset, 0 0 0 7px rgba(242, 193, 78, .28) inset, 0 28px 80px rgba(0, 0, 0, .8), 0 0 60px var(--cristal-brilho, rgba(242, 193, 78, .35));
+  transform: translate3d(0, 18px, 0) scale(.94); transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+  will-change: transform;
+}
+.cristal-modal.aberto .cristal-modal__card { transform: translate3d(0, 0, 0) scale(1); }
+.cristal-modal__fechar {
+  position: sticky; top: 0; float: right; z-index: 9999;
+  width: 44px; height: 44px; margin: -.6rem -.4rem 0 0;
+  display: grid; place-items: center; border: 0; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 246, 210, .28), rgba(43, 26, 94, .88));
+  color: var(--ouro-claro); font-size: 1.25rem; font-weight: 700;
+  box-shadow: 0 0 0 1.5px var(--ouro) inset, 0 0 18px rgba(242, 193, 78, .55);
+  transition: transform .25s, box-shadow .25s;
+}
+.cristal-modal__fechar:hover, .cristal-modal__fechar:focus-visible {
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 0 0 2px #fff6d2 inset, 0 0 26px rgba(242, 193, 78, .9);
+}
+.cristal-modal__arte {
+  position: relative; width: 138px; height: 138px; margin: .2rem auto 1rem;
+  display: grid; place-items: center;
+}
+.cristal-modal__arte::before {
+  content: ""; position: absolute; inset: -12px; border-radius: 50%;
+  background: radial-gradient(circle, var(--cristal-brilho, rgba(255, 220, 140, .55)) 0%, transparent 70%);
+  filter: blur(10px); animation: pulsar 3.2s ease-in-out infinite;
+}
+.cristal-modal__arte svg {
+  position: relative; width: 124px; height: 124px; overflow: visible;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, .65)) drop-shadow(0 0 22px var(--cristal-brilho, rgba(255, 230, 163, .6)));
+  animation: flutuar 5s ease-in-out infinite;
+}
+.cristal-modal__tag {
+  display: inline-block; padding: .35rem .95rem; border-radius: 999px;
+  font: 600 .76rem/1.2 var(--corpo); letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ouro-claro); background: rgba(242, 193, 78, .15); box-shadow: 0 0 0 1px rgba(242, 193, 78, .45) inset;
+}
+.cristal-modal__titulo {
+  margin: .7rem 0 .4rem; font: 600 clamp(1.55rem, 4vw, 2rem)/1.15 var(--titulo);
+  background: var(--dourado); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.cristal-modal__texto { margin: .6rem auto 0; max-width: 36ch; font: 400 1.08rem/1.6 var(--corpo); color: var(--texto); }
+.cristal-modal__acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.4rem; }
 
 /* O que já caiu no caldeirão */
 .caldeirao-hud {
@@ -733,7 +835,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   backdrop-filter: blur(6px); transition: transform .5s cubic-bezier(.2, .7, .2, 1);
 }
 .caldeirao-hud.visivel { transform: translate(-50%, 0); }
-.caldeirao-hud .botao { padding: .6rem 1rem; font-size: .9rem; }
+.caldeirao-hud .botao { padding: .6rem 1rem; font-size: .9rem; min-height: 44px; }
 .chip-ing { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .7rem; border-radius: 999px; font-size: .85rem; color: #fff; background: rgba(255, 255, 255, .1); }
 .chip-ing i { width: 10px; height: 10px; border-radius: 50%; }
 .botao[disabled] { opacity: .45; pointer-events: none; }
@@ -780,24 +882,31 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .animal-leitura p { color: var(--texto-2); }
 .animal-leitura .rev__acoes { margin-top: 1.2rem; }
 
-/* ---------- Botão de ajuda (?) e explicação ---------- */
+/* ---------- Botão de ajuda (?) e explicação (FASE 1.2: X sempre fixo e visível) ---------- */
 .ajuda {
-  display: inline-grid; place-items: center; width: 30px; height: 30px; margin-left: .5rem; vertical-align: middle; border: 0; border-radius: 50%;
+  display: inline-grid; place-items: center; width: 34px; height: 34px; margin-left: .5rem; vertical-align: middle; border: 0; border-radius: 50%;
   background: rgba(242, 193, 78, .14); box-shadow: 0 0 0 1px rgba(242, 193, 78, .55) inset; color: var(--ouro-claro); font: 700 .95rem/1 var(--corpo);
   transition: background .3s, box-shadow .3s;
 }
 .ajuda:hover, .ajuda:focus-visible { background: rgba(242, 193, 78, .3); box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 14px rgba(242, 193, 78, .45); outline: none; }
 .ajuda__caixa {
   position: fixed; inset: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(440px, calc(100vw - 32px)); max-height: min(80vh, 560px); overflow-y: auto;
-  margin: 0; padding: 1.4rem 1.4rem 1.2rem; border: 0; border-radius: 22px; text-align: left;
+  margin: 0; padding: 1.1rem 1.4rem 1.3rem; border: 0; border-radius: 22px; text-align: left;
   background: rgba(18, 12, 44, .96); color: var(--texto-2); box-shadow: 0 0 0 1px var(--linha) inset, 0 24px 60px rgba(0, 0, 0, .6);
 }
 .ajuda__caixa::backdrop { background: rgba(5, 3, 15, .55); backdrop-filter: blur(2px); }
-.ajuda__caixa h4 { margin: 0 2rem .6rem 0; font: 600 1.2rem/1.2 var(--titulo); color: var(--ouro-claro); }
+.ajuda__caixa h4 { margin: .2rem 2.8rem .6rem 0; font: 600 1.2rem/1.2 var(--titulo); color: var(--ouro-claro); }
 .ajuda__caixa p, .ajuda__caixa li { font-size: .97rem; line-height: 1.55; }
 .ajuda__caixa ol { padding-left: 1.2rem; margin: .4rem 0 0; }
 .ajuda__caixa li { margin-top: .35rem; }
-.ajuda__fechar { position: absolute; top: .7rem; right: .7rem; width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .08); color: var(--texto-2); font-size: 1.1rem; }
+.ajuda__fechar {
+  position: sticky; top: 6px; float: right; z-index: 9999;
+  width: 42px; height: 42px; margin: 0 0 .3rem .5rem; border: 0; border-radius: 50%;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 246, 210, .25), rgba(32, 20, 74, .92));
+  color: var(--ouro-claro); font-size: 1.15rem; font-weight: 700;
+  box-shadow: 0 0 0 1px var(--ouro) inset, 0 4px 14px rgba(0, 0, 0, .4), 0 0 12px rgba(242, 193, 78, .35);
+}
 
 /* ---------- Roda do Ano ---------- */
 .roda-ano { text-align: center; }
@@ -827,47 +936,312 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 @media (max-width: 560px) { .so-largo { display: none; } .roda-ano .gato-sentado { width: 54px; top: -88px !important; } }
 @media (max-width: 860px) { .roda-ano__grade { grid-template-columns: 1fr; } .roda-ano__visual { position: static; max-width: 460px; margin: 0 auto; width: 100%; } }
 
-/* ---------- Panteões ---------- */
+/* ---------- Panteões (FASE 3: Destaque Circular Iluminado de Alto Contraste) ---------- */
 .abas { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
-.abas button { border: 0; padding: .6rem 1.1rem; border-radius: 999px; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; color: var(--texto-2); font-weight: 500; transition: background .3s, color .3s; }
+.abas button { min-height: 44px; border: 0; padding: .6rem 1.15rem; border-radius: 999px; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; color: var(--texto-2); font-weight: 500; transition: background .3s, color .3s; }
 .abas button[aria-selected="true"] { background: var(--dourado); color: #2a1606; box-shadow: none; }
 .panteao__intro { max-width: 62ch; margin: 1.6rem auto 0; text-align: center; color: var(--texto-2); }
 .panteao__grupo { margin: 2rem 0 .8rem; text-align: center; font: 600 1.15rem/1.2 var(--titulo); color: var(--rosa-claro); letter-spacing: .06em; }
-.deuses { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .9rem; margin-top: 1.4rem; align-items: start; }
+.deuses { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: .9rem; margin-top: 1.4rem; align-items: start; }
 .deus { border-radius: 20px; background: var(--vidro); box-shadow: 0 0 0 1px var(--linha) inset; transition: box-shadow .3s, transform .3s; }
 .deus:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--ouro) inset, 0 12px 30px rgba(0, 0, 0, .35); }
 .deus[open] { box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 26px rgba(242, 193, 78, .22); }
-.deus summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: .9rem; padding: 1rem 1.1rem; }
+.deus summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: .95rem; padding: 1rem 1.1rem; }
 .deus summary::-webkit-details-marker { display: none; }
-.deus__simbolo { flex: none; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; font-size: 1.5rem; background: rgba(242, 193, 78, .12); box-shadow: 0 0 0 1px rgba(242, 193, 78, .35) inset; }
+.deus__simbolo {
+  flex: none; width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%;
+  font-size: 1.65rem; color: #1b0f04;
+  background:
+    radial-gradient(circle at 36% 32%, #ffffff 0%, #fff7dc 36%, #f9d97e 72%, #d89b2b 100%);
+  box-shadow:
+    0 0 0 1.5px #fff8e2 inset,
+    0 0 0 2.5px rgba(242, 193, 78, .88),
+    0 0 18px rgba(255, 224, 130, .65),
+    0 6px 14px rgba(0, 0, 0, .45);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, .85), 0 2px 6px rgba(90, 45, 0, .25);
+  filter: saturate(1.18) contrast(1.12);
+  transition: transform .3s cubic-bezier(.2, .7, .2, 1), box-shadow .3s;
+}
+.deus:hover .deus__simbolo, .deus[open] .deus__simbolo {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 0 2px #ffffff inset,
+    0 0 0 3px var(--ouro-claro),
+    0 0 26px rgba(255, 230, 150, .95),
+    0 8px 18px rgba(0, 0, 0, .5);
+}
 .deus__nome { display: block; font: 600 1.15rem/1.15 var(--titulo); color: var(--ouro-claro); }
 .deus__dom { display: block; margin-top: .2rem; font-size: .9rem; color: var(--texto-2); }
 .deus__corpo { padding: 0 1.1rem 1.1rem; font-size: .95rem; color: var(--texto-2); }
 .deus__corpo p { margin: .55rem 0 0; }
 .deus__corpo strong { color: var(--ouro-claro); font-weight: 500; }
 
-/* ---------- Player de música ---------- */
+/* =========================================================================
+   FASE 4: A CAVERNA DE ECO & TRILHA DA TRYV (Santuário Sonoro & Cinema Místico 8K)
+   ========================================================================= */
 .musica-botao {
   position: fixed; left: max(1rem, env(safe-area-inset-left)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 40;
-  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; border: 0; color: #2a1606;
-  background: var(--dourado); box-shadow: 0 0 0 3px rgba(255, 45, 135, .45), 0 10px 26px rgba(0, 0, 0, .45); transition: transform .3s;
+  display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; border: 0; color: #2a1606;
+  background: var(--dourado);
+  box-shadow: 0 0 0 3px rgba(155, 107, 214, .65), 0 0 22px rgba(242, 193, 78, .55), 0 10px 26px rgba(0, 0, 0, .5);
+  transition: transform .3s, box-shadow .3s;
 }
-.musica-botao:hover { transform: scale(1.08); }
-.musica-botao svg { width: 24px; height: 24px; }
+.musica-botao:hover { transform: scale(1.08); box-shadow: 0 0 0 3px var(--ouro-claro), 0 0 32px rgba(185, 163, 255, .85), 0 12px 30px rgba(0, 0, 0, .6); }
+.musica-botao svg { width: 25px; height: 25px; }
+.musica-botao.tocando { box-shadow: 0 0 0 3px #7fd1ff, 0 0 28px rgba(127, 209, 255, .85), 0 10px 26px rgba(0, 0, 0, .5); }
 .musica-botao.tocando svg { animation: notaPula 1s ease-in-out infinite alternate; }
 @keyframes notaPula { to { transform: translateY(-3px) rotate(-6deg); } }
-.musica-painel {
-  position: fixed; left: max(1rem, env(safe-area-inset-left)); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 66px); z-index: 41;
-  width: min(360px, calc(100vw - 2rem)); padding: 1rem; border-radius: 22px; background: rgba(18, 12, 44, .94); backdrop-filter: blur(10px);
-  box-shadow: 0 0 0 1px var(--linha) inset, 0 20px 50px rgba(0, 0, 0, .55);
-  opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .35s, visibility .35s, transform .35s;
+
+/* Portal Exterior da Caverna de Eco */
+.caverna-palco {
+  position: relative; max-width: 1100px; margin: 0 auto; aspect-ratio: 16 / 9.5; border-radius: 28px; overflow: hidden; isolation: isolate;
+  background: #060414; cursor: pointer; touch-action: pan-y;
+  box-shadow: 0 0 0 1px rgba(185, 163, 255, .35), 0 30px 80px rgba(0, 0, 0, .7), 0 0 90px rgba(127, 209, 255, .15);
 }
-.musica-painel.aberto { opacity: 1; visibility: visible; transform: none; }
-.musica-painel h3 { margin: 0; font: 600 1.05rem/1.2 var(--titulo); color: var(--ouro-claro); }
-.musica-painel p { margin: .4rem 0 .8rem; font-size: .9rem; color: var(--texto-2); }
-.musica-painel iframe { display: block; width: 100%; height: 352px; border: 0; border-radius: 14px; }
-.musica-painel .botao { width: 100%; justify-content: center; }
-.musica-fechar { position: absolute; top: .6rem; right: .6rem; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .08); color: var(--texto-2); font-size: 1.1rem; }
+@media (max-width: 700px) { .caverna-palco { aspect-ratio: 4 / 4.8; border-radius: 22px; } }
+.caverna-zoom {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transition: transform 1.55s cubic-bezier(.7, 0, .85, .35), filter 1.55s;
+  will-change: transform;
+}
+.caverna-zoom svg { width: 100%; height: 100%; display: block; }
+.caverna-palco.entrando .caverna-zoom { transform: scale(9.5); filter: brightness(1.85) saturate(1.35); }
+.caverna-palco.saindo .caverna-zoom { transition: transform 1.4s cubic-bezier(.15, .65, .3, 1), filter 1.4s; }
+.caverna-nevoa {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  background:
+    radial-gradient(60% 35% at 50% 78%, rgba(127, 209, 255, .22), transparent 70%),
+    radial-gradient(45% 40% at 50% 54%, rgba(185, 163, 255, .26), transparent 68%);
+  animation: nevoaFlutua 6s ease-in-out infinite alternate;
+}
+@keyframes nevoaFlutua { from { transform: translate3d(-1.5%, 0, 0) scale(1); opacity: .75; } to { transform: translate3d(1.5%, -2%, 0) scale(1.06); opacity: 1; } }
+.caverna-chamada {
+  position: absolute; left: 50%; bottom: 3.5%; z-index: 3; transform: translateX(-50%); width: max-content; max-width: 90%; text-align: center;
+  min-height: 46px; padding: .65rem 1.35rem; border-radius: 999px;
+  background: rgba(12, 8, 34, .82); box-shadow: 0 0 0 1px rgba(185, 163, 255, .55) inset, 0 0 24px rgba(127, 209, 255, .3);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font: italic 500 1.1rem/1.25 var(--livro); color: #e5dcff; border: 0; cursor: pointer;
+  transition: transform .3s, box-shadow .3s, opacity .4s;
+  animation: chamarCaverna 2.6s ease-in-out infinite;
+}
+.caverna-chamada:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 0 0 1.5px #7fd1ff inset, 0 0 30px rgba(127, 209, 255, .65); }
+@keyframes chamarCaverna { 50% { box-shadow: 0 0 0 1px #b9a3ff inset, 0 0 26px rgba(185, 163, 255, .55); } }
+.caverna-palco.entrando .caverna-chamada { opacity: 0; }
+.cristal-bio { animation: bioPulso 3.2s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+@keyframes bioPulso { from { filter: brightness(.85) drop-shadow(0 0 4px rgba(127, 209, 255, .4)); } to { filter: brightness(1.35) drop-shadow(0 0 14px rgba(185, 163, 255, .95)); } }
+
+/* Clarão místico bioluminescente da Caverna */
+.clarao--caverna {
+  background: radial-gradient(circle at 50% 52%, #e8f7ff 0%, #b9a3ff 38%, #3c1e78 72%, #09051d 100%);
+}
+
+/* Interior da Caverna de Eco (Tela Cheia Imersiva 8K) */
+.caverna-interior {
+  position: fixed; inset: 0; z-index: 62; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
+  background:
+    radial-gradient(75% 55% at 50% 32%, rgba(92, 52, 178, .32), transparent 70%),
+    radial-gradient(60% 40% at 50% 88%, rgba(64, 165, 224, .22), transparent 65%),
+    linear-gradient(180deg, #050312 0%, #0d0826 42%, #130b33 74%, #06091e 100%);
+  opacity: 0; visibility: hidden; transition: opacity .55s ease, visibility .55s ease;
+}
+.caverna-interior.aberto { opacity: 1; visibility: visible; }
+.caverna-interior:not(.aberto) * { animation-play-state: paused !important; }
+.caverna-bg-svg {
+  position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; object-fit: cover;
+}
+.caverna-agua {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 22vh; pointer-events: none; z-index: 1;
+  background:
+    radial-gradient(65% 85% at 50% 0%, rgba(127, 209, 255, .2), rgba(155, 107, 214, .12) 45%, rgba(5, 4, 18, .92) 100%),
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, .035) 0 2px, transparent 2px 9px);
+  box-shadow: 0 -12px 40px rgba(127, 209, 255, .12);
+}
+.caverna-topo {
+  position: sticky; top: max(12px, env(safe-area-inset-top)); z-index: 9999;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem;
+  width: min(1140px, calc(100% - 28px)); margin: 12px auto 0; pointer-events: none;
+}
+.caverna-topo > * { pointer-events: auto; }
+.caverna-topo .botao {
+  min-height: 44px; padding: .7rem 1.2rem;
+  background: rgba(14, 9, 38, .85); box-shadow: 0 0 0 1.5px rgba(242, 193, 78, .6) inset, 0 8px 24px rgba(0, 0, 0, .55);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.caverna-topo__titulo {
+  padding: .5rem 1.1rem; border-radius: 999px;
+  background: rgba(14, 9, 38, .78); box-shadow: 0 0 0 1px rgba(185, 163, 255, .38) inset;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font: italic 500 1.02rem/1.2 var(--livro); color: #e2d6ff;
+}
+
+.caverna-conteudo {
+  position: relative; z-index: 2; width: min(1120px, calc(100% - 28px));
+  margin: .9rem auto calc(2.4rem + env(safe-area-inset-bottom, 0px));
+  display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .95fr); gap: clamp(1rem, 2.6vw, 1.8rem); align-items: start;
+}
+@media (max-width: 900px) { .caverna-conteudo { grid-template-columns: 1fr; } }
+
+/* Palco Central Híbrido (Áudio + Ondas Místicas / Vídeo + Moldura de Rocha) */
+.caverna-palco-central {
+  position: relative; border-radius: 26px; padding: clamp(1rem, 2.5vw, 1.5rem);
+  background:
+    radial-gradient(90% 70% at 50% 20%, rgba(127, 209, 255, .12), transparent 65%),
+    linear-gradient(180deg, rgba(22, 14, 52, .88) 0%, rgba(10, 7, 28, .94) 100%);
+  box-shadow: 0 0 0 1px rgba(185, 163, 255, .35) inset, 0 0 0 4px rgba(10, 7, 28, .9) inset, 0 0 0 5px rgba(242, 193, 78, .22) inset, 0 24px 60px rgba(0, 0, 0, .65);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.caverna-visor {
+  position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #1a1042 0%, #09051d 75%, #04020c 100%);
+  box-shadow: 0 0 0 1.5px rgba(242, 193, 78, .45), 0 16px 40px rgba(0, 0, 0, .6);
+  display: grid; place-items: center;
+}
+.caverna-visor canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+}
+.caverna-visor__arte {
+  position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .65rem;
+  text-align: center; padding: 1rem; pointer-events: none;
+}
+.caverna-visor__orbe {
+  width: clamp(86px, 16vw, 118px); height: clamp(86px, 16vw, 118px); border-radius: 50%;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, #fff8df 0%, #f2c14e 35%, #9b6bd6 72%, #241052 100%);
+  box-shadow: 0 0 0 2px rgba(255, 246, 210, .75) inset, 0 0 36px rgba(127, 209, 255, .65), 0 0 70px rgba(185, 163, 255, .45);
+  transition: transform .35s ease;
+}
+.caverna-visor.tocando .caverna-visor__orbe { animation: orbeEco 2.2s ease-in-out infinite alternate; }
+@keyframes orbeEco { from { transform: scale(.96); box-shadow: 0 0 0 2px #fff inset, 0 0 32px rgba(242, 193, 78, .7), 0 0 65px rgba(127, 209, 255, .55); } to { transform: scale(1.06); box-shadow: 0 0 0 3px #fff inset, 0 0 50px rgba(127, 209, 255, .95), 0 0 95px rgba(255, 45, 135, .55); } }
+.caverna-visor__orbe img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.caverna-visor__orbe span { font-size: 2.5rem; color: #1b0f04; filter: drop-shadow(0 2px 6px rgba(255, 255, 255, .8)); }
+.caverna-visor video, .caverna-visor iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; border: 0; z-index: 3;
+}
+.caverna-visor video[hidden], .caverna-visor iframe[hidden], .caverna-visor__arte[hidden] { display: none !important; }
+
+/* Informações da Faixa Atual */
+.caverna-info {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem;
+  margin-top: 1rem;
+}
+.caverna-info__textos { min-width: 0; flex: 1; }
+.caverna-info__cat { font: 600 .72rem/1.2 var(--corpo); letter-spacing: .2em; text-transform: uppercase; color: #7fd1ff; }
+.caverna-info__titulo { margin: .2rem 0 0; font: 600 clamp(1.2rem, 2.6vw, 1.55rem)/1.2 var(--titulo); color: var(--ouro-claro); }
+.caverna-info__sub { margin: .15rem 0 0; font-size: .92rem; color: var(--texto-2); }
+
+/* Controles Cinematográficos Customizados */
+.caverna-controles {
+  margin-top: .95rem; padding: .9rem 1rem; border-radius: 18px;
+  background: rgba(8, 5, 24, .75); box-shadow: 0 0 0 1px rgba(242, 193, 78, .22) inset;
+}
+.caverna-barra-linha { display: flex; align-items: center; gap: .65rem; }
+.caverna-tempo { font: 500 .8rem/1 var(--corpo); font-variant-numeric: tabular-nums; color: var(--texto-2); min-width: 3.1rem; }
+.caverna-tempo:last-child { text-align: right; }
+.caverna-progresso {
+  flex: 1; height: 8px; -webkit-appearance: none; appearance: none; border-radius: 999px;
+  background: rgba(255, 255, 255, .15); cursor: pointer; accent-color: var(--ouro);
+}
+.caverna-progresso::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--ouro-claro); box-shadow: 0 0 10px rgba(242, 193, 78, .9); cursor: pointer;
+}
+.caverna-botoes {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem; margin-top: .85rem;
+}
+.caverna-botoes__esq, .caverna-botoes__dir { display: flex; align-items: center; gap: .45rem; flex-wrap: wrap; }
+.caverna-btn {
+  min-width: 44px; min-height: 44px; padding: 0 .75rem; border: 0; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  background: rgba(255, 255, 255, .07); color: var(--ouro-claro);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .3) inset; font: 600 .84rem/1 var(--corpo);
+  transition: transform .2s, background .2s, box-shadow .2s;
+}
+.caverna-btn:hover, .caverna-btn:focus-visible { background: rgba(242, 193, 78, .2); box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 14px rgba(242, 193, 78, .4); transform: translateY(-1px); }
+.caverna-btn--play {
+  width: 52px; height: 52px; padding: 0; color: #2a1606; background: var(--dourado);
+  box-shadow: 0 0 0 1.5px #fff6d2 inset, 0 6px 20px rgba(242, 193, 78, .45); font-size: 1.2rem;
+}
+.caverna-btn--play:hover { box-shadow: 0 0 0 2px #fff inset, 0 8px 26px rgba(242, 193, 78, .75); }
+.caverna-btn[aria-pressed="true"] { background: rgba(127, 209, 255, .22); color: #fff; box-shadow: 0 0 0 1.5px #7fd1ff inset, 0 0 16px rgba(127, 209, 255, .45); }
+.caverna-vol-caixa { display: inline-flex; align-items: center; gap: .35rem; }
+.caverna-vol { width: 72px; height: 6px; accent-color: var(--ouro); cursor: pointer; }
+@media (max-width: 560px) { .caverna-vol { width: 54px; } }
+
+/* Pergaminho / Cristal de Letra da Música */
+.caverna-letra-caixa {
+  margin-top: 1rem; padding: 1.2rem 1.3rem; border-radius: 20px; max-height: 280px; overflow-y: auto; overscroll-behavior: contain;
+  background:
+    radial-gradient(90% 50% at 50% 0%, rgba(185, 163, 255, .16), transparent 70%),
+    rgba(10, 6, 30, .88);
+  box-shadow: 0 0 0 1px rgba(185, 163, 255, .4) inset, 0 14px 34px rgba(0, 0, 0, .5);
+}
+.caverna-letra-caixa[hidden] { display: none; }
+.caverna-letra__topo {
+  position: sticky; top: -6px; z-index: 5; display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: .5rem; margin-bottom: .6rem; border-bottom: 1px solid rgba(242, 193, 78, .2);
+  background: rgba(10, 6, 30, .92); backdrop-filter: blur(6px);
+}
+.caverna-letra__topo h4 { margin: 0; font: 600 1rem/1.2 var(--titulo); color: var(--ouro-claro); }
+.caverna-letra__fechar {
+  width: 36px; height: 36px; border: 0; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(255, 255, 255, .1); color: var(--ouro-claro); font-weight: 700;
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .4) inset;
+}
+.caverna-letra__texto {
+  margin: 0; white-space: pre-line; font: italic 500 clamp(1.08rem, 2.2vw, 1.24rem)/1.65 var(--livro);
+  color: #f3ecff; text-align: center;
+}
+
+/* Coluna Direita: Abas de Categorias (Cristais de Eco) e Lista de Faixas */
+.caverna-playlist {
+  border-radius: 26px; padding: clamp(1rem, 2.5vw, 1.4rem);
+  background: linear-gradient(180deg, rgba(22, 14, 52, .86) 0%, rgba(10, 7, 28, .92) 100%);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .28) inset, 0 24px 60px rgba(0, 0, 0, .6);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.caverna-abas { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1rem; }
+.caverna-aba {
+  flex: 1 1 auto; min-height: 44px; padding: .55rem .85rem; border: 0; border-radius: 14px;
+  background: rgba(255, 255, 255, .05); color: var(--texto-2);
+  box-shadow: 0 0 0 1px rgba(185, 163, 255, .25) inset;
+  font: 600 .82rem/1.2 var(--corpo); text-align: center; transition: background .25s, color .25s, box-shadow .25s;
+}
+.caverna-aba[aria-selected="true"] {
+  background: var(--dourado); color: #2a1606;
+  box-shadow: 0 0 0 1px #fff6d2 inset, 0 6px 18px rgba(242, 193, 78, .35);
+}
+.caverna-lista {
+  display: flex; flex-direction: column; gap: .55rem; max-height: 360px; overflow-y: auto; overscroll-behavior: contain; padding-right: .2rem;
+}
+.caverna-item {
+  width: 100%; min-height: 58px; padding: .7rem .9rem; border: 0; border-radius: 16px; text-align: left;
+  display: flex; align-items: center; gap: .8rem;
+  background: rgba(255, 255, 255, .04); color: var(--texto);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .16) inset;
+  transition: transform .22s, background .22s, box-shadow .22s;
+}
+.caverna-item:hover, .caverna-item:focus-visible {
+  transform: translateX(3px); background: rgba(185, 163, 255, .12);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, .5) inset;
+}
+.caverna-item.ativo {
+  background: radial-gradient(90% 100% at 0% 50%, rgba(127, 209, 255, .24), rgba(242, 193, 78, .14));
+  box-shadow: 0 0 0 1.5px var(--ouro) inset, 0 0 20px rgba(127, 209, 255, .25);
+}
+.caverna-item__icone {
+  flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, #fff7dc, #e5b242); color: #241004; font-size: 1.05rem;
+  box-shadow: 0 0 12px rgba(242, 193, 78, .45);
+}
+.caverna-item__textos { min-width: 0; flex: 1; }
+.caverna-item__titulo { display: block; font: 600 .96rem/1.25 var(--titulo); color: var(--ouro-claro); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.caverna-item__sub { display: block; margin-top: .15rem; font-size: .82rem; color: var(--texto-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.caverna-item__tag {
+  flex: none; padding: .22rem .55rem; border-radius: 999px; font: 600 .68rem/1 var(--corpo);
+  letter-spacing: .08em; text-transform: uppercase; color: #7fd1ff; background: rgba(127, 209, 255, .12);
+  box-shadow: 0 0 0 1px rgba(127, 209, 255, .3) inset;
+}
+.caverna-spotify-extra { margin-top: 1rem; padding-top: .9rem; border-top: 1px solid rgba(242, 193, 78, .16); text-align: center; }
 
 /* ---------- Gatos pretos ---------- */
 /* Gato de verdade (assets/gatos): sentado, ele respira; tocado, mia e dá um pulinho */
@@ -914,7 +1288,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 /* Tela Configurações: atalho "Editar" (só no aparelho de quem tem a chave) e aviso da prévia */
 .botao-editar, .faixa-previa {
   /* entre o botão da música (à esquerda) e o do WhatsApp (à direita) */
-  position: fixed; left: calc(max(1rem, env(safe-area-inset-left)) + 66px); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 6px); z-index: 42;
+  position: fixed; left: calc(max(1rem, env(safe-area-inset-left)) + 68px); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 6px); z-index: 42;
   background: var(--veludo); color: #fff; border: 2px solid var(--ouro); border-radius: 999px;
   font: 600 .95rem/1.3 var(--corpo); box-shadow: 0 10px 24px rgba(0, 0, 0, .45);
 }
@@ -923,6 +1297,21 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .faixa-previa a { color: var(--noite); margin-left: .4rem; font-weight: 700; }
 .rodape__config { margin-top: 1.2rem; font-size: .85rem; }
 .rodape__config a { color: var(--texto-2); }
+
+/* FASE 1.1: Ajustes finos de Responsividade Mobile/Tablet (iOS/Android) e Áreas de Toque >= 44x44px */
+html, body { max-width: 100%; overflow-x: clip; }
+.modos button, .icone-botao { min-height: 44px; min-width: 44px; }
+.espelho__pontos button { width: 14px; height: 14px; position: relative; }
+.espelho__pontos button::after { content: ""; position: absolute; inset: -10px; }
+@media (max-width: 760px) {
+  .revelacao, .roda-ano__painel, .animal-leitura { position: relative; }
+  .rev__acoes .botao { min-height: 46px; flex: 1 1 auto; justify-content: center; }
+  .livro3d.aberto { transform: translateX(24%) rotateY(0) rotateX(0) scale(.92); }
+}
+@media (max-width: 480px) {
+  .envelope { width: min(100% - 1.5rem, var(--largura)); }
+  .livro3d.aberto { transform: translateX(0) rotateY(0) rotateX(0) scale(.88); }
+}
 </style>
 </head>
 <body>
@@ -957,6 +1346,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
       <a href="#descubra" data-c="menu.descubra">Descubra-se</a>
       <a href="#roda" data-c="menu.roda">Roda do Ano</a>
       <a href="#casinha" data-c="menu.casinha">Casinha</a>
+      <a href="#caverna">Caverna de Eco</a>
       <a href="#panteoes" data-c="menu.panteoes">Panteões</a>
       <a href="#consultas" data-c="menu.consultas">Consultas</a>
       <a href="#tryv" data-c="menu.tryv">Tryv</a>
@@ -1155,6 +1545,22 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     </div>
   </section>
 
+  <!-- ================= CAVERNA DE ECO (TRILHA DA TRYV & CINEMA MÍSTICO) ================= -->
+  <section class="secao" id="caverna">
+    <div class="envelope">
+      <div class="cabeca surge">
+        <span class="chamada">Santuário sonoro e cinema místico</span>
+        <h2 class="titulo">A Caverna de Eco<button class="ajuda" type="button" popovertarget="aj-caverna" aria-label="Como funciona?">?</button></h2>
+        <p class="intro">Adentre a gruta iluminada por cristais bioluminescentes para ouvir as músicas exclusivas da Trilha da Tryv, acompanhar as letras dos cânticos e assistir aos videoclipes e leituras de Tarot.</p>
+      </div>
+      <div class="caverna-palco surge" id="caverna-palco" role="button" tabindex="0" aria-label="Entrar na Caverna de Eco">
+        <div class="caverna-zoom" id="caverna-zoom"></div>
+        <div class="caverna-nevoa" aria-hidden="true"></div>
+        <button class="caverna-chamada" id="caverna-chamada" type="button">✦ Adentrar a Caverna de Eco…</button>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= PANTEÕES ================= -->
   <section class="secao" id="panteoes">
     <div class="envelope">
@@ -1290,16 +1696,10 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   <img class="gato-andando__frente" src="assets/gatos/andando.webp" alt="" loading="lazy">
 </div></div>
 
-<!-- Player de música (playlist da Tryv no Spotify) -->
-<button class="musica-botao" id="musica-botao" type="button" aria-expanded="false" aria-controls="musica-painel" aria-label="Músicas da Tryv">
+<!-- Botão flutuante unificado: Trilha da Tryv & Caverna de Eco -->
+<button class="musica-botao" id="musica-botao" type="button" aria-expanded="false" aria-controls="caverna-interior" aria-label="Trilha da Tryv · Caverna de Eco" title="Trilha da Tryv · Caverna de Eco">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="18" cy="16" r="3" fill="currentColor"/></svg>
 </button>
-<div class="musica-painel" id="musica-painel" role="dialog" aria-label="Músicas da Tryv">
-  <button class="musica-fechar" id="musica-fechar" type="button" aria-label="Fechar">×</button>
-  <h3 data-c="musica.titulo">Trilha da Tryv ♪</h3>
-  <p data-c="musica.texto">As músicas que a Tryv escolheu para acompanhar a sua visita.</p>
-  <div id="musica-conteudo"></div>
-</div>
 
 <!-- Dentro da casinha: cena em tela cheia, montada pelo script -->
 <div class="interior" id="interior" role="dialog" aria-modal="true" aria-label="Dentro da casinha" aria-hidden="true">
@@ -1320,6 +1720,77 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
     <div id="pergaminho-conteudo"></div>
   </aside>
 </div>
+
+<!-- Modal flutuante centralizado de Cristal 8K (abre imediatamente na tela sem rolagem) -->
+<div class="cristal-modal" id="cristal-modal" role="dialog" aria-modal="true" aria-labelledby="cristal-modal-titulo" aria-hidden="true">
+  <div class="cristal-modal__card">
+    <button class="cristal-modal__fechar" id="cristal-modal-fechar" type="button" aria-label="Fechar">✕</button>
+    <div id="cristal-modal-corpo"></div>
+  </div>
+</div>
+
+<!-- Interior 8K da Caverna de Eco (Santuário Sonoro, Letras e Cinema Místico) -->
+<div class="caverna-interior" id="caverna-interior" role="dialog" aria-modal="true" aria-label="Caverna de Eco" aria-hidden="true">
+  <div id="caverna-fundo-svg" aria-hidden="true"></div>
+  <div class="caverna-agua" aria-hidden="true"></div>
+  <canvas id="caverna-particulas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:2" aria-hidden="true"></canvas>
+  <div class="caverna-topo">
+    <button class="caverna-sair" id="sair-caverna" type="button">← Sair da Caverna</button>
+    <span class="caverna-titulo-int">✦ Caverna de Eco · Trilha da Tryv ✦</span>
+  </div>
+  <div class="caverna-palco-central">
+    <div class="caverna-visor" id="caverna-visor" oncontextmenu="return false;">
+      <canvas id="caverna-ondas" aria-hidden="true"></canvas>
+      <div class="caverna-visor__arte" id="caverna-visor-arte">
+        <div class="caverna-visor__orbe" id="caverna-orbe">♪</div>
+        <span class="caverna-visor__cat" id="caverna-cat-badge">Trilha da Tryv</span>
+        <h3 class="caverna-visor__nome" id="caverna-faixa-titulo">Selecione uma obra mística</h3>
+        <p class="caverna-visor__sub" id="caverna-faixa-sub">Áudios exclusivos, letras e cinema místico</p>
+      </div>
+      <video id="caverna-video" playsinline preload="metadata" controlsList="nodownload" oncontextmenu="return false;" hidden></video>
+      <iframe id="caverna-yt" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen hidden title="Vídeo da Caverna de Eco"></iframe>
+    </div>
+
+    <div class="caverna-controles" oncontextmenu="return false;">
+      <div class="caverna-progresso-linha">
+        <span class="caverna-tempo" id="caverna-tempo-atual" translate="no">00:00</span>
+        <input type="range" class="caverna-barra" id="caverna-barra" min="0" max="100" value="0" step="0.1" aria-label="Progresso da faixa">
+        <span class="caverna-tempo" id="caverna-tempo-total" translate="no">00:00</span>
+      </div>
+      <div class="caverna-botoes">
+        <div class="caverna-botoes__esq">
+          <button class="caverna-btn" id="caverna-ant" type="button" aria-label="Faixa anterior" title="Anterior">⏮</button>
+          <button class="caverna-btn caverna-btn--play" id="caverna-play" type="button" aria-label="Tocar ou pausar" title="Play / Pause">▶</button>
+          <button class="caverna-btn" id="caverna-prox" type="button" aria-label="Próxima faixa" title="Próxima">⏭</button>
+          <div class="caverna-vol">
+            <button class="caverna-btn" id="caverna-mudo" type="button" aria-label="Silenciar" title="Volume">🔊</button>
+            <input type="range" id="caverna-volume" min="0" max="1" step="0.02" value="0.85" aria-label="Volume">
+          </div>
+        </div>
+        <div class="caverna-botoes__dir">
+          <button class="caverna-btn-pilula" id="caverna-btn-letra" type="button" aria-expanded="false">📜 Ver Letra da Música</button>
+          <button class="caverna-btn-pilula" id="caverna-btn-tela" type="button" aria-label="Tela cheia">⛶ Tela Cheia</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="caverna-letra-caixa" id="caverna-letra-caixa">
+      <h4 class="caverna-letra-caixa__titulo" id="caverna-letra-titulo">Letra do Cântico</h4>
+      <div class="caverna-letra-caixa__texto" id="caverna-letra-texto"></div>
+    </div>
+
+    <div class="caverna-playlist">
+      <div class="caverna-abas" role="tablist" aria-label="Categorias da Caverna de Eco">
+        <button class="caverna-aba" type="button" role="tab" data-cat-eco="musicas" aria-selected="true">✦ Trilha da Tryv (Músicas Exclusivas)</button>
+        <button class="caverna-aba" type="button" role="tab" data-cat-eco="clipes" aria-selected="false">🎬 Videoclipes Místicos</button>
+        <button class="caverna-aba" type="button" role="tab" data-cat-eco="tarot" aria-selected="false">🔮 Oráculos &amp; Tarot em Vídeo</button>
+      </div>
+      <div class="caverna-lista" id="caverna-lista" role="tabpanel"></div>
+      <div id="caverna-spotify-extra" style="margin-top:1.1rem;text-align:center"></div>
+    </div>
+  </div>
+</div>
+
 <div class="clarao" id="clarao" aria-hidden="true"></div>
 
 <a class="zap-flutuante" data-zap="Olá, Tryv! Vim pelo site Bem Dito Tarot ✨" data-zap-c="contato.mensagem" href="https://wa.me/5516991420112" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
@@ -1356,6 +1827,10 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 </div>
 <div class="ajuda__caixa" id="aj-livro" popover data-ajuda="livro.ajuda">
   <button class="ajuda__fechar" type="button" popovertarget="aj-livro" popovertargetaction="hide" aria-label="Fechar">✕</button>
+</div>
+<div class="ajuda__caixa" id="aj-caverna" popover>
+  <button class="ajuda__fechar" type="button" popovertarget="aj-caverna" popovertargetaction="hide" aria-label="Fechar">✕</button>
+  <p>Na <b>Caverna de Eco</b> você escuta as músicas autorais e exclusivas da Tryv (que não estão no Spotify), lê as letras completas dos cânticos no pergaminho místico e assiste aos videoclipes e leituras de Tarot em tela cheia.</p>
 </div>
 
 <script>
@@ -2965,8 +3440,18 @@ function iniciar(C, fotosPrevia = {}) {
     }, parado ? 0 : 500);
   }
   $("#sair-casa").addEventListener("click", sair);
+  const cristalModal = $("#cristal-modal"), cristalModalCorpo = $("#cristal-modal-corpo");
+  function fecharModalCristal() {
+    if (!cristalModal) return;
+    cristalModal.classList.remove("aberto");
+    cristalModal.setAttribute("aria-hidden", "true");
+  }
+  $("#cristal-modal-fechar").addEventListener("click", fecharModalCristal);
+  cristalModal.addEventListener("click", e => { if (e.target === cristalModal) fecharModalCristal(); });
   addEventListener("keydown", e => {
-    if (e.key !== "Escape" || !dentro) return;
+    if (e.key !== "Escape") return;
+    if (cristalModal.classList.contains("aberto")) { e.stopPropagation(); fecharModalCristal(); return; }
+    if (!dentro) return;
     if (pergaminho.classList.contains("aberto")) fecharPergaminho(); else sair();
   });
 
@@ -2979,7 +3464,118 @@ function iniciar(C, fotosPrevia = {}) {
   }
   function fecharPergaminho() { pergaminho.classList.remove("aberto"); }
   $("#fechar-pergaminho").addEventListener("click", fecharPergaminho);
-  const gemaSVG = cor => `<svg viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,2 44,14 44,34 24,46 4,34 4,14" fill="${cor}" stroke="rgba(0,0,0,.25)"/><polygon points="24,2 44,14 24,20 4,14" fill="#fff" opacity=".35"/><polygon points="24,20 44,14 44,34 24,46" fill="#000" opacity=".12"/><line x1="24" y1="20" x2="24" y2="46" stroke="#fff" stroke-opacity=".3"/></svg>`;
+
+  /* Gerador SVG 8K hiper-realista de pedras brutas e drusas naturais (uma geometria mineral única por cristal) */
+  function cristalBrutoSVG(cor, i = 0, sfx = "g") {
+    const id = `${sfx}-${i}`;
+    const modelos = [
+      // 0: Quartzo Rosa (bloco bruto orgânico multifacetado com veios leitosos e refração rosada)
+      `<polygon points="22,12 58,8 88,24 94,60 74,90 34,94 10,70 8,34" fill="url(#cr-b-${id})" stroke="rgba(255,220,238,.65)" stroke-width="1"/>
+       <polygon points="22,12 58,8 64,42 36,48 8,34" fill="url(#cr-l-${id})" opacity=".85"/>
+       <polygon points="58,8 88,24 64,42" fill="#fff" opacity=".48"/>
+       <polygon points="64,42 88,24 94,60 74,90 48,66" fill="rgba(120,25,65,.32)"/>
+       <polygon points="36,48 64,42 48,66 34,94 10,70" fill="url(#cr-b-${id})" opacity=".75"/>
+       <path d="M26 28 L46 40 L40 68 M58 18 L62 42 L80 54 M20 56 L48 64" fill="none" stroke="rgba(255,255,255,.62)" stroke-width="1.3" stroke-linecap="round"/>`,
+      // 1: Ametista (drusa hexagonal de pontas cristalinas em violeta profundo)
+      `<polygon points="48,4 68,18 64,86 34,86 30,20" fill="url(#cr-b-${id})" stroke="rgba(235,205,255,.65)" stroke-width="1"/>
+       <polygon points="48,4 68,18 50,28 30,20" fill="#fff" opacity=".52"/>
+       <polygon points="30,20 50,28 46,86 34,86" fill="url(#cr-l-${id})" opacity=".78"/>
+       <polygon points="16,28 34,22 40,88 18,86 10,44" fill="url(#cr-b-${id})" stroke="rgba(225,190,255,.55)" stroke-width=".9"/>
+       <polygon points="16,28 34,22 26,38 10,44" fill="#fff" opacity=".45"/>
+       <polygon points="78,24 92,38 82,88 60,86 64,34" fill="url(#cr-b-${id})" stroke="rgba(225,190,255,.55)" stroke-width=".9"/>
+       <polygon points="78,24 92,38 74,44 64,34" fill="#fff" opacity=".42"/>
+       <ellipse cx="50" cy="86" rx="38" ry="8" fill="#230b3b" stroke="rgba(210,165,255,.45)"/>`,
+      // 2: Citrino (ponta solar dourada biterminada com cristal lateral)
+      `<polygon points="50,5 72,22 68,78 50,94 30,78 28,22" fill="url(#cr-b-${id})" stroke="rgba(255,242,190,.75)" stroke-width="1.1"/>
+       <polygon points="50,5 72,22 50,32 28,22" fill="#fff" opacity=".58"/>
+       <polygon points="28,22 50,32 50,94 30,78" fill="url(#cr-l-${id})" opacity=".82"/>
+       <polygon points="72,38 92,46 84,88 64,84" fill="url(#cr-b-${id})" stroke="rgba(255,235,175,.6)"/>
+       <path d="M36 36 L64 46 M34 56 L62 66" stroke="rgba(255,255,255,.55)" stroke-width="1.1"/>`,
+      // 3: Cristal de Quartzo Transparente (gerador mestre translúcido de alta refração)
+      `<polygon points="50,4 74,20 70,84 50,95 30,84 26,20" fill="url(#cr-b-${id})" stroke="rgba(255,255,255,.85)" stroke-width="1.2"/>
+       <polygon points="50,4 74,20 52,34 26,20" fill="#fff" opacity=".75"/>
+       <polygon points="26,20 52,34 50,95 30,84" fill="url(#cr-l-${id})" opacity=".88"/>
+       <polygon points="14,42 30,34 34,88 18,86 8,56" fill="url(#cr-b-${id})" opacity=".9" stroke="rgba(255,255,255,.7)"/>
+       <polygon points="84,36 94,50 84,88 68,86 70,44" fill="url(#cr-b-${id})" opacity=".9" stroke="rgba(255,255,255,.7)"/>
+       <path d="M32 38h36M31 52h38M32 68h35" stroke="rgba(255,255,255,.5)" stroke-width=".9"/>`,
+      // 4: Turmalina Negra (coluna estriada vertical de schorl bruto com reflexo mineral)
+      `<polygon points="26,10 44,6 62,10 76,16 74,90 54,95 28,92 20,84" fill="#181722" stroke="rgba(180,175,210,.55)" stroke-width="1"/>
+       <polygon points="26,10 44,6 62,10 76,16 56,22 34,20" fill="rgba(255,255,255,.32)"/>
+       <path d="M30 16v74M37 12v80M45 10v83M53 12v81M61 14v77M68 18v70" stroke="rgba(230,225,255,.34)" stroke-width="1.6"/>
+       <path d="M34 14v76M50 11v82M64 16v72" stroke="#07060c" stroke-width="2.2"/>`,
+      // 5: Pedra da Lua (pedra bruta leitosa com adularescência azul-prateada)
+      `<path d="M24,16 C52,4 84,18 90,48 C94,76 70,94 42,92 C16,90 6,66 10,40 C12,26 16,20 24,16 Z" fill="url(#cr-b-${id})" stroke="rgba(235,244,255,.75)" stroke-width="1.1"/>
+       <ellipse cx="46" cy="44" rx="28" ry="22" transform="rotate(-18 46 44)" fill="rgba(130,190,255,.48)"/>
+       <ellipse cx="40" cy="36" rx="18" ry="11" transform="rotate(-18 40 36)" fill="#fff" opacity=".62"/>
+       <path d="M22 52 Q48 38 76 56 M28 68 Q52 58 72 72" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.1"/>`,
+      // 6: Olho de Tigre (bloco lapidado/bruto com bandas de chatoyance dourado-âmbar)
+      `<polygon points="18,20 56,8 88,26 84,74 52,92 14,76 10,42" fill="#3d220a" stroke="rgba(255,210,125,.65)" stroke-width="1.1"/>
+       <polygon points="18,20 56,8 88,26 62,44 24,38" fill="url(#cr-b-${id})" opacity=".9"/>
+       <path d="M14 44 L84 28 M12 56 L86 40 M16 68 L82 52 M24 80 L78 66" stroke="#ffcf68" stroke-width="4.5" stroke-linecap="round" opacity=".75"/>
+       <path d="M16 40 L82 24 M14 62 L84 46" stroke="#fff3c4" stroke-width="1.6" opacity=".65"/>`,
+      // 7: Selenita (bastão acetinado translúcido de gipsita fibrosa luminosa)
+      `<polygon points="36,6 66,10 74,88 30,94 24,16" fill="url(#cr-b-${id})" stroke="rgba(255,255,255,.82)" stroke-width="1.1"/>
+       <polygon points="36,6 66,10 54,20 24,16" fill="#fff" opacity=".75"/>
+       <path d="M32 14 L36 92 M40 10 L44 92 M48 10 L52 91 M56 12 L60 90 M64 14 L68 88" stroke="rgba(255,255,255,.68)" stroke-width="1.4"/>`,
+      // 8: Aventurina (quartzo verde esmeralda bruto com pontos de mica cintilante)
+      `<polygon points="24,14 62,8 88,30 86,68 60,92 22,86 8,54" fill="url(#cr-b-${id})" stroke="rgba(185,255,210,.65)" stroke-width="1.1"/>
+       <polygon points="24,14 62,8 56,44 22,46 8,54" fill="url(#cr-l-${id})" opacity=".8"/>
+       <polygon points="62,8 88,30 56,44" fill="#fff" opacity=".42"/>
+       <circle cx="38" cy="34" r="1.8" fill="#fff"/><circle cx="62" cy="48" r="1.5" fill="#d8ffe6"/><circle cx="44" cy="66" r="2" fill="#fff"/><circle cx="68" cy="64" r="1.4" fill="#ffe999"/>`,
+      // 9: Lápis-Lazúli (rocha celeste azul-ultramar profundo com constelações de pirita dourada)
+      `<polygon points="20,16 58,8 88,24 90,64 66,92 26,88 10,56" fill="url(#cr-b-${id})" stroke="rgba(160,195,255,.65)" stroke-width="1.1"/>
+       <polygon points="20,16 58,8 60,44 24,48" fill="url(#cr-l-${id})" opacity=".72"/>
+       <path d="M18 58 Q48 44 84 54" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2"/>
+       <circle cx="34" cy="28" r="2" fill="#ffd86b"/><circle cx="52" cy="24" r="1.5" fill="#ffd86b"/><circle cx="70" cy="38" r="2.2" fill="#ffe89e"/><circle cx="40" cy="52" r="1.6" fill="#ffd86b"/><circle cx="64" cy="68" r="2.1" fill="#ffd86b"/><circle cx="32" cy="72" r="1.7" fill="#ffe89e"/>`,
+      // 10: Cornalina (calcedônia vulcânica laranja-fogo translúcida com zonamento)
+      `<path d="M28,10 L68,12 L90,38 L82,78 L50,94 L16,78 L10,38 Z" fill="url(#cr-b-${id})" stroke="rgba(255,210,175,.7)" stroke-width="1.1"/>
+       <polygon points="28,10 68,12 58,42 24,38 10,38" fill="url(#cr-l-${id})" opacity=".82"/>
+       <polygon points="68,12 90,38 58,42" fill="#fff" opacity=".46"/>
+       <path d="M22 48 Q50 32 78 52 M24 66 Q50 52 74 70" fill="none" stroke="rgba(255,235,190,.55)" stroke-width="1.6"/>`,
+      // 11: Obsidiana (lâmina de vidro vulcânico negro com fratura concoidal espelhada)
+      `<polygon points="48,6 78,22 88,58 68,92 28,90 12,56 22,20" fill="#120d1a" stroke="rgba(210,190,255,.55)" stroke-width="1.1"/>
+       <polygon points="48,6 78,22 52,46 22,20" fill="rgba(255,255,255,.32)"/>
+       <path d="M22,20 Q48,46 28,90 L12,56 Z" fill="rgba(165,130,235,.26)"/>
+       <path d="M48 8 L52 46 L68 90 M24 38 Q52 48 82 54" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2"/>`
+    ];
+    return `<svg viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <radialGradient id="cr-b-${id}" cx="35%" cy="28%" r="72%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity=".92"/>
+          <stop offset="28%" stop-color="${cor}" stop-opacity=".96"/>
+          <stop offset="78%" stop-color="${cor}" stop-opacity=".88"/>
+          <stop offset="100%" stop-color="#0b0618" stop-opacity=".92"/>
+        </radialGradient>
+        <linearGradient id="cr-l-${id}" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity=".68"/>
+          <stop offset="50%" stop-color="${cor}" stop-opacity=".45"/>
+          <stop offset="100%" stop-color="#120824" stop-opacity=".5"/>
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="52" r="44" fill="${cor}" opacity=".22"/>
+      ${modelos[i % modelos.length]}
+      <circle cx="38" cy="26" r="3" fill="#fff" opacity=".85"/>
+    </svg>`;
+  }
+
+  function abrirModalCristal(idx) {
+    const c = CASA.cristais;
+    const item = c.itens[idx];
+    if (!item) return;
+    const [n, cor, palavras, texto] = item;
+    cristalModalCorpo.innerHTML = `
+      <div class="cristal-modal__arte">${cristalBrutoSVG(cor, idx, "m")}</div>
+      <h3 class="cristal-modal__nome" id="cristal-modal-titulo">${n}</h3>
+      <span class="cristal-modal__sub">✦ ${palavras}</span>
+      <p class="cristal-modal__texto">${texto}</p>
+      <div class="cristal-modal__acoes">
+        <a class="botao botao--rosa" href="${zap(`Olá, Tryv! Escolhi o cristal ${n} na casinha do site e quero saber mais ✨`)}" target="_blank" rel="noopener">${ICONE_ZAP} Conversar com a Tryv</a>
+      </div>`;
+    cristalModal.classList.add("aberto");
+    cristalModal.setAttribute("aria-hidden", "false");
+    setTimeout(() => $("#cristal-modal-fechar").focus({ preventScroll: true }), 60);
+  }
+
   function abrirArea(area) {
     if (area === "caldeirao") {
       fecharPergaminho();
@@ -2991,7 +3587,7 @@ function iniciar(C, fotosPrevia = {}) {
     const c = CASA[area];
     let corpo = "";
     if (area === "cristais") {
-      corpo = `<div class="gemas">${c.itens.map(([n, cor], i) => `<button class="gema" type="button" data-i="${i}" aria-pressed="false">${gemaSVG(cor)}${n}</button>`).join("")}</div><div class="gema-detalhe" id="gema-detalhe" hidden></div>`;
+      corpo = `<div class="gemas">${c.itens.map(([n, cor], i) => `<button class="gema" type="button" data-i="${i}" aria-pressed="false">${cristalBrutoSVG(cor, i, "p")}<span>${n}</span></button>`).join("")}</div><div class="gema-detalhe" id="gema-detalhe" hidden></div>`;
     } else {
       corpo = c.itens.map(([n, a, b]) => `<div class="item-casa"><h4>${n}</h4>${area === "magias"
         ? `<span class="rotulo-casa">Você vai precisar de</span><p>${a}</p><span class="rotulo-casa">Como fazer</span><p>${b}</p>`
@@ -3002,12 +3598,16 @@ function iniciar(C, fotosPrevia = {}) {
       <a class="botao botao--rosa" href="${zap(`Olá, Tryv! Entrei na casinha do site e quero saber mais sobre ${c.titulo.toLowerCase()} ✨`)}" target="_blank" rel="noopener">${ICONE_ZAP} Conversar com a Tryv</a>`);
     if (area === "cristais") $$(".gema", pergConteudo).forEach(b => b.addEventListener("click", () => {
       $$(".gema", pergConteudo).forEach(x => x.setAttribute("aria-pressed", x === b));
-      const [n, cor, palavras, texto] = c.itens[+b.dataset.i];
+      const idx = +b.dataset.i;
+      const [n, cor, palavras, texto] = c.itens[idx];
       const det = $("#gema-detalhe");
-      det.hidden = false;
-      det.innerHTML = `<h4>${n}</h4><span class="rotulo-casa">${palavras}</span><p>${texto}</p>`;
+      if (det) {
+        det.hidden = false;
+        det.innerHTML = `<h4>${n}</h4><span class="rotulo-casa">${palavras}</span><p>${texto}</p>`;
+      }
+      abrirModalCristal(idx);
       const r = b.getBoundingClientRect();
-      soltar(r.left + r.width / 2, r.top + r.height / 2, 18, { forca: 2, curta: true, cores: [cor.match(/\w\w/g).map(h => parseInt(h, 16)).join(",")] });
+      soltar(r.left + r.width / 2, r.top + r.height / 2, 22, { forca: 2.4, curta: true, cores: [cor.match(/\w\w/g).map(h => parseInt(h, 16)).join(",")] });
       sino(2);
     }));
   }
@@ -3356,26 +3956,649 @@ function iniciar(C, fotosPrevia = {}) {
   });
   mostrarPanteao(PANTEOES[0].id);
 
-  /* ---------- Player: playlist da Tryv no Spotify (musica.playlist; sem playlist, link para o perfil) ----------
-     As músicas que ela acrescentar na playlist aparecem sozinhas. */
-  const PLAYLIST_SPOTIFY = C.musica.playlist || "";
-  const PERFIL_SPOTIFY = C.contato.spotify;
-  const musicaBotao = $("#musica-botao"), musicaPainel = $("#musica-painel"), musicaConteudo = $("#musica-conteudo");
-  let musicaCarregada = false;
-  function abrirMusica(abrir) {
-    musicaPainel.classList.toggle("aberto", abrir);
-    musicaBotao.setAttribute("aria-expanded", abrir);
-    if (abrir && !musicaCarregada) {
-      musicaCarregada = true;
-      const id = (PLAYLIST_SPOTIFY.match(/playlist\/([A-Za-z0-9]+)/) || [])[1];
-      musicaConteudo.innerHTML = id
-        ? `<iframe src="https://open.spotify.com/embed/playlist/${id}?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Playlist da Tryv no Spotify"></iframe>`
-        : `<a class="botao botao--ouro" href="${PERFIL_SPOTIFY}" target="_blank" rel="noopener">♪ Ouvir a Tryv no Spotify</a>`;
-      if (id) musicaBotao.classList.add("tocando");
+  /* =====================================================================
+     FASE 4: A "CAVERNA DE ECO" & "TRILHA DA TRYV"
+     (Santuário Sonoro, Áudios Exclusivos, Letras das Músicas e Cinema Místico)
+     =====================================================================
+     COMO ADICIONAR SUAS MÚSICAS, LETRAS E VÍDEOS:
+     1. Coloque seus arquivos de áudio (.mp3) na pasta: assets/audios/
+     2. Coloque seus arquivos de vídeo (.mp4 H.264) na pasta: assets/videos/
+     3. Copie e cole um bloco abaixo dentro de `acervoCavernaDeEco` preenchendo:
+        - titulo: Nome da música ou vídeo
+        - subtitulo: Descrição curta ou frequência/álbum
+        - categoria: 'musicas' (Trilha da Tryv), 'clipes' (Videoclipes Místicos) ou 'tarot' (Oráculos & Tarot em Vídeo)
+        - tipo: 'audio' (para .mp3), 'video' (para .mp4/.webm) ou 'youtube' (link ou ID do YouTube)
+        - arquivo: Caminho do arquivo (ex: 'assets/audios/minha-musica.mp3' ou 'assets/videos/meu-clipe.mp4')
+        - capa: (Opcional) Caminho da imagem de capa (ex: 'assets/logo-tryv-icone.webp')
+        - duracao: (Opcional) Tempo exibido na lista (ex: '03:45')
+        - letra: Letra completa da música (use \n ou quebras de linha normais entre os versos)
+     ===================================================================== */
+  const acervoCavernaDeEco = [
+    {
+      titulo: "Ecos de Tuath (Cântico das Águas)",
+      subtitulo: "Trilha Exclusiva da Tryv · Ressonância Mística 432Hz",
+      categoria: "musicas",
+      tipo: "audio",
+      arquivo: "assets/audios/ecos-de-tuath.mp3",
+      capa: "assets/logo-tryv-icone.webp",
+      duracao: "00:36",
+      letra: `Nas águas profundas da gruta estrelada,
+O eco desperta a memória sagrada.
+Cristais de ametista sussurram no véu,
+O que está na Terra reflete o que é Céu.
+
+Respire o silêncio, escute o sinal,
+A chama violeta no espelho abissal.
+Mude-se por dentro e o mundo abrirá
+Novos horizontes onde a alma é seu lar.
+
+✦ Tryv Tuath · Cântico Exclusivo da Caverna de Eco ✦`
+    },
+    {
+      titulo: "Dança das Nebulosas (Videoclipe Místico)",
+      subtitulo: "Cinema Místico · Visualização Cósmica & Magia Sonora",
+      categoria: "clipes",
+      tipo: "video",
+      arquivo: "assets/videos/clipe-nebulosas.mp4",
+      capa: "assets/tryv-fogo.webp",
+      duracao: "00:30",
+      letra: `Visto-me de estrelas no berço das nebulosas,
+Pés na floresta antiga, mente entre as rosas.
+Quando o tambor ressoa na pedra do altar,
+O véu entre os mundos começa a dançar.
+
+Olhe para o espelho da água encantada:
+A bruxa, a estrela e a estrada sagrada.`
+    },
+    {
+      titulo: "O Chamado dos Arcanos (Tarot em Vídeo)",
+      subtitulo: "Oráculos & Tarot · Imersão Visual nos 22 Caminhos",
+      categoria: "tarot",
+      tipo: "video",
+      arquivo: "assets/videos/chamado-arcanos.mp4",
+      capa: "assets/tryv-chapeu.webp",
+      duracao: "00:30",
+      letra: `O Louco dá o passo na beira do vento,
+A Sacerdotisa guarda o firmamento.
+A Estrela derrama sua água de luz,
+E o Mundo revela o que a alma conduz.
+
+Pense na sua pergunta enquanto contempla os símbolos.`
+    }
+  ];
+
+  // Se houver vídeos adicionais cadastrados no conteudo.json (tryv.videos), integra automaticamente na aba Tarot
+  if (Array.isArray(C.tryv && C.tryv.videos)) {
+    C.tryv.videos.forEach(v => {
+      if (!v || !v.url) return;
+      const ehYT = /youtu\.?be/.test(v.url);
+      acervoCavernaDeEco.push({
+        titulo: v.titulo || "Vídeo da Tryv",
+        subtitulo: "Acervo Tryv Tuath",
+        categoria: "tarot",
+        tipo: ehYT ? "youtube" : "video",
+        arquivo: v.url,
+        capa: "assets/logo-tryv-icone.webp",
+        duracao: "Vídeo",
+        letra: v.descricao || ""
+      });
+    });
+  }
+
+  /* Gerador de áudio harmônico místico em memória (WAV 432Hz/528Hz) para que a demonstração toque imediatamente
+     mesmo antes de a usuária colocar os arquivos .mp3 físicos na pasta assets/audios/ */
+  let urlAudioDemo = null;
+  function obterAudioDemo() {
+    if (urlAudioDemo) return urlAudioDemo;
+    const sr = 22050, seg = 36, total = sr * seg;
+    const buf = new ArrayBuffer(44 + total * 2), v = new DataView(buf);
+    const escStr = (off, s) => { for (let i = 0; i < s.length; i++) v.setUint8(off + i, s.charCodeAt(i)); };
+    escStr(0, "RIFF"); v.setUint32(4, 36 + total * 2, true); escStr(8, "WAVE");
+    escStr(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, sr, true); v.setUint32(28, sr * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+    escStr(36, "data"); v.setUint32(40, total * 2, true);
+    const acordes = [
+      [216, 324, 432, 648],     // Lá místico 432Hz
+      [172.8, 259.2, 432, 518.4], // Fá celestial
+      [194.4, 291.6, 388.8, 583.2], // Sol astral
+      [216, 270, 324, 540]      // Retorno cristalino
+    ];
+    for (let i = 0; i < total; i++) {
+      const t = i / sr;
+      const idxAc = Math.floor(t / 9) % acordes.length;
+      const tAc = t % 9;
+      const envAc = Math.sin(Math.min(1, tAc / 1.8) * Math.PI * 0.5) * Math.sin(Math.min(1, (9 - tAc) / 1.8) * Math.PI * 0.5);
+      const [f1a, f2a, f3a, f4a] = acordes[idxAc];
+      // Harpejo cristalino suave a cada 1.5s
+      const notaHarp = acordes[idxAc][Math.floor((t % 6) / 1.5)];
+      const tNota = t % 1.5;
+      const envNota = Math.exp(-tNota * 2.6) * Math.min(1, tNota * 35);
+      const pad = (Math.sin(6.28318 * f1a * t) * 0.32 + Math.sin(6.28318 * f2a * t) * 0.24 + Math.sin(6.28318 * f3a * t * (1 + 0.0015 * Math.sin(t * 2))) * 0.22 + Math.sin(6.28318 * f4a * t) * 0.12) * envAc;
+      const sinoEco = Math.sin(6.28318 * notaHarp * 2 * t) * 0.22 * envNota;
+      const amostra = Math.max(-0.95, Math.min(0.95, (pad + sinoEco) * 0.55));
+      v.setInt16(44 + i * 2, amostra * 32767, true);
+    }
+    urlAudioDemo = URL.createObjectURL(new Blob([buf], { type: "audio/wav" }));
+    return urlAudioDemo;
+  }
+
+  /* Cena 8K Externa e Interna da Caverna de Eco (SVG hiper-detalhado com cristais bioluminescentes e espelho d'água) */
+  function cenaCavernaFora() {
+    return `<svg viewBox="0 0 1344 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="cv-abismo" cx="50%" cy="54%" r="58%">
+          <stop offset="0%" stop-color="#2e1860" stop-opacity=".95"/>
+          <stop offset="38%" stop-color="#13092c" stop-opacity=".98"/>
+          <stop offset="75%" stop-color="#060312"/>
+          <stop offset="100%" stop-color="#020108"/>
+        </radialGradient>
+        <radialGradient id="cv-luz-portal" cx="50%" cy="56%" r="36%">
+          <stop offset="0%" stop-color="#8cf0ff" stop-opacity=".55"/>
+          <stop offset="45%" stop-color="#b478ff" stop-opacity=".28"/>
+          <stop offset="100%" stop-color="#14082c" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="cv-agua-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1d1142" stop-opacity=".85"/>
+          <stop offset="45%" stop-color="#0c1838" stop-opacity=".95"/>
+          <stop offset="100%" stop-color="#04020c"/>
+        </linearGradient>
+        <linearGradient id="cv-cristal-c" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="35%" stop-color="#7ef2ff"/>
+          <stop offset="100%" stop-color="#2b66c8"/>
+        </linearGradient>
+        <linearGradient id="cv-cristal-v" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffe8ff"/>
+          <stop offset="40%" stop-color="#c47aff"/>
+          <stop offset="100%" stop-color="#4b1982"/>
+        </linearGradient>
+        <linearGradient id="cv-cristal-o" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fff9db"/>
+          <stop offset="45%" stop-color="#ffd269"/>
+          <stop offset="100%" stop-color="#8c540d"/>
+        </linearGradient>
+      </defs>
+      <rect width="1344" height="720" fill="url(#cv-abismo)"/>
+      <!-- Paredes externas de rocha abissal com veios de ouro velho e ametista -->
+      <path d="M0,0 H1344 V560 L1180,550 L1080,410 L960,230 L810,130 L672,105 L530,130 L380,230 L260,410 L160,550 L0,560 Z" fill="#070414" stroke="rgba(210,175,255,.18)" stroke-width="2"/>
+      <path d="M0,0 H420 L310,190 L210,390 L130,555 H0 Z" fill="#04020b"/>
+      <path d="M1344,0 H920 L1030,190 L1130,390 L1210,555 H1344 Z" fill="#04020b"/>
+      <!-- Brilho místico saindo do interior da gruta -->
+      <ellipse cx="672" cy="395" rx="370" ry="250" fill="url(#cv-luz-portal)"/>
+      <!-- Arcos internos de pedra em profundidade -->
+      <path d="M295,548 L365,275 L515,168 L672,142 L829,168 L979,275 L1049,548 Z" fill="#0b0620" stroke="rgba(140,235,255,.22)" stroke-width="1.5"/>
+      <path d="M395,548 L450,320 L565,220 L672,198 L779,220 L894,320 L949,548 Z" fill="#120930" stroke="rgba(255,215,120,.25)" stroke-width="1.2"/>
+      <!-- Veios minerais luminosos na rocha -->
+      <path d="M190,460 Q260,340 350,260 M1150,460 Q1080,340 990,260 M480,150 Q672,115 860,150" fill="none" stroke="rgba(255,212,115,.28)" stroke-width="1.8" stroke-dasharray="6 10"/>
+      <!-- Cristais Bioluminescentes nas paredes da gruta -->
+      <g class="tremeluz">
+        <polygon points="250,490 278,415 296,495" fill="url(#cv-cristal-v)"/>
+        <polygon points="274,495 312,435 320,502" fill="url(#cv-cristal-c)"/>
+        <polygon points="1065,495 1090,410 1115,492" fill="url(#cv-cristal-v)"/>
+        <polygon points="1038,500 1058,438 1078,502" fill="url(#cv-cristal-c)"/>
+        <polygon points="430,270 448,335 462,265" fill="url(#cv-cristal-c)"/>
+        <polygon points="880,265 896,335 914,270" fill="url(#cv-cristal-v)"/>
+        <polygon points="658,142 672,208 686,142" fill="url(#cv-cristal-o)"/>
+        <polygon points="365,535 390,465 412,538" fill="url(#cv-cristal-o)"/>
+        <polygon points="932,538 954,465 979,535" fill="url(#cv-cristal-o)"/>
+      </g>
+      <!-- Símbolo sonoro central levitando sobre a água -->
+      <circle cx="672" cy="375" r="56" fill="rgba(126,242,255,.12)" stroke="rgba(255,218,130,.55)" stroke-width="1.5"/>
+      <circle cx="672" cy="375" r="82" fill="none" stroke="rgba(196,122,255,.32)" stroke-dasharray="4 8"/>
+      <path d="M660,392 V352 L692,344 V384" fill="none" stroke="#ffe7a6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="654" cy="392" r="7" fill="#ffe7a6"/><circle cx="686" cy="384" r="7" fill="#ffe7a6"/>
+      <!-- Espelho d'água subterrâneo na base com ondas de eco -->
+      <rect x="0" y="545" width="1344" height="175" fill="url(#cv-agua-grad)"/>
+      <ellipse cx="672" cy="575" rx="340" ry="26" fill="rgba(126,242,255,.16)"/>
+      <ellipse cx="672" cy="590" rx="220" ry="12" fill="none" stroke="rgba(255,220,140,.4)" stroke-width="1.4"/>
+      <ellipse cx="672" cy="612" rx="310" ry="16" fill="none" stroke="rgba(140,235,255,.28)" stroke-width="1.1"/>
+      <ellipse cx="672" cy="640" rx="420" ry="20" fill="none" stroke="rgba(196,122,255,.2)" stroke-width="1"/>
+    </svg>`;
+  }
+
+  function cenaCavernaDentro() {
+    return `<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="cvi-luz" cx="50%" cy="38%" r="60%">
+          <stop offset="0%" stop-color="#2a1658" stop-opacity=".65"/>
+          <stop offset="55%" stop-color="#0d0722" stop-opacity=".85"/>
+          <stop offset="100%" stop-color="#03010a"/>
+        </radialGradient>
+      </defs>
+      <rect width="1440" height="900" fill="url(#cvi-luz)"/>
+      <!-- Estalactites e paredes de rocha cristalina nas bordas -->
+      <path d="M0,0 H1440 V140 L1320,90 L1210,165 L1120,75 L980,120 L840,55 L720,95 L600,55 L460,120 L320,75 L230,165 L120,90 L0,140 Z" fill="#05020e" opacity=".9"/>
+      <polygon points="85,0 115,195 145,0" fill="rgba(180,120,255,.22)"/>
+      <polygon points="1295,0 1325,195 1355,0" fill="rgba(120,235,255,.22)"/>
+      <polygon points="42,680 88,520 124,690" fill="rgba(180,120,255,.25)"/>
+      <polygon points="1316,690 1352,520 1398,680" fill="rgba(120,235,255,.25)"/>
+    </svg>`;
+  }
+
+  const cavernaPalco = $("#caverna-palco"), cavernaZoom = $("#caverna-zoom"), cavernaChamada = $("#caverna-chamada");
+  const cavernaInt = $("#caverna-interior"), cavernaFundoSvg = $("#caverna-fundo-svg");
+  const musicaBotao = $("#musica-botao");
+  if (cavernaZoom) cavernaZoom.innerHTML = cenaCavernaFora();
+  if (cavernaFundoSvg) cavernaFundoSvg.innerHTML = cenaCavernaDentro();
+  if (toque && cavernaChamada) cavernaChamada.textContent = "✦ Toque para adentrar a Caverna de Eco";
+
+  // Link opcional para o Spotify da Tryv no rodapé da Caverna de Eco
+  const PLAYLIST_SPOTIFY = (C.musica && C.musica.playlist) || "";
+  const PERFIL_SPOTIFY = (C.contato && C.contato.spotify) || "";
+  const spExtra = $("#caverna-spotify-extra");
+  if (spExtra && (PLAYLIST_SPOTIFY || PERFIL_SPOTIFY)) {
+    spExtra.innerHTML = `<a class="botao botao--vidro" href="${PLAYLIST_SPOTIFY || PERFIL_SPOTIFY}" target="_blank" rel="noopener" style="font-size:.86rem">♪ Ouvir também a playlist pública da Tryv no Spotify</a>`;
+  }
+
+  /* Estado e Player Híbrido da Caverna de Eco */
+  let naCaverna = false, entrandoCaverna = false;
+  let catEcoAtual = "musicas";
+  let indiceEcoAtual = 0;
+  let tocandoEco = false;
+  let demoVideoTimer = null, demoVideoTempo = 0;
+  const audioEco = new Audio();
+  audioEco.preload = "metadata";
+  audioEco.crossOrigin = "anonymous";
+  const videoEco = $("#caverna-video");
+  const ytEco = $("#caverna-yt");
+  const visorEco = $("#caverna-visor"), visorArte = $("#caverna-visor-arte"), orbeEco = $("#caverna-orbe");
+  const badgeCat = $("#caverna-cat-badge"), titFaixa = $("#caverna-faixa-titulo"), subFaixa = $("#caverna-faixa-sub");
+  const btnPlayEco = $("#caverna-play"), btnAntEco = $("#caverna-ant"), btnProxEco = $("#caverna-prox");
+  const barraEco = $("#caverna-barra"), tAtualEco = $("#caverna-tempo-atual"), tTotalEco = $("#caverna-tempo-total");
+  const volEco = $("#caverna-volume"), btnMudoEco = $("#caverna-mudo");
+  const btnLetraEco = $("#caverna-btn-letra"), caixaLetraEco = $("#caverna-letra-caixa"), titLetraEco = $("#caverna-letra-titulo"), txtLetraEco = $("#caverna-letra-texto");
+  const btnTelaEco = $("#caverna-btn-tela"), listaEcoEl = $("#caverna-lista");
+
+  const fmtTempo = seg => {
+    if (!isFinite(seg) || seg < 0) return "00:00";
+    const m = Math.floor(seg / 60), s = Math.floor(seg % 60);
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  };
+
+  const ROTULOS_CAT = {
+    musicas: "Trilha da Tryv · Música Exclusiva",
+    clipes: "Videoclipe Místico",
+    tarot: "Oráculo & Tarot em Vídeo"
+  };
+
+  function itensDaCategoria(cat) {
+    return acervoCavernaDeEco.map((item, idx) => ({ item, idx })).filter(x => x.item.categoria === cat);
+  }
+
+  function renderizarListaEco() {
+    const filtrados = itensDaCategoria(catEcoAtual);
+    if (!filtrados.length) {
+      listaEcoEl.innerHTML = `<p style="color:#c9bfe6;padding:.6rem">Em breve novas obras nesta categoria.</p>`;
+      return;
+    }
+    listaEcoEl.innerHTML = filtrados.map(({ item, idx }) => {
+      const icone = item.tipo === "audio" ? "♪" : item.tipo === "youtube" ? "▶" : "🎬";
+      return `<button class="caverna-item" type="button" data-idx-eco="${idx}" aria-current="${idx === indiceEcoAtual}">
+        <span class="caverna-item__icone" aria-hidden="true">${icone}</span>
+        <span class="caverna-item__info">
+          <span class="caverna-item__titulo">${escHTML(item.titulo)}</span>
+          <span class="caverna-item__sub">${escHTML(item.subtitulo || "")}</span>
+        </span>
+        <span class="caverna-item__tipo">${escHTML(item.duracao || (item.tipo === "audio" ? "Áudio" : "Vídeo"))}</span>
+      </button>`;
+    }).join("");
+  }
+
+  function pararMidiaEco() {
+    audioEco.pause();
+    if (videoEco) { videoEco.pause(); videoEco.removeAttribute("src"); videoEco.load(); videoEco.hidden = true; }
+    if (ytEco) { ytEco.src = ""; ytEco.hidden = true; }
+    if (demoVideoTimer) { clearInterval(demoVideoTimer); demoVideoTimer = null; }
+    tocandoEco = false;
+    atualizarUIPlay();
+  }
+
+  function atualizarUIPlay() {
+    if (btnPlayEco) btnPlayEco.textContent = tocandoEco ? "⏸" : "▶";
+    if (orbeEco) orbeEco.classList.toggle("tocando", tocandoEco);
+    if (musicaBotao) musicaBotao.classList.toggle("tocando", tocandoEco);
+  }
+
+  function carregarFaixaEco(idx, autoPlay = false) {
+    const item = acervoCavernaDeEco[idx];
+    if (!item) return;
+    pararMidiaEco();
+    indiceEcoAtual = idx;
+    if (item.categoria !== catEcoAtual) {
+      catEcoAtual = item.categoria;
+      $$("[data-cat-eco]").forEach(b => b.setAttribute("aria-selected", b.dataset.catEco === catEcoAtual));
+    }
+    renderizarListaEco();
+
+    badgeCat.textContent = ROTULOS_CAT[item.categoria] || "Caverna de Eco";
+    titFaixa.textContent = item.titulo;
+    subFaixa.textContent = item.subtitulo || "";
+    barraEco.value = 0;
+    tAtualEco.textContent = "00:00";
+    tTotalEco.textContent = item.duracao || "00:00";
+
+    // Atualiza letra da música / cântico
+    if (item.letra && item.letra.trim()) {
+      btnLetraEco.hidden = false;
+      titLetraEco.textContent = `📜 ${item.titulo}`;
+      txtLetraEco.textContent = item.letra.trim();
+    } else {
+      btnLetraEco.hidden = true;
+      caixaLetraEco.classList.remove("aberta");
+      btnLetraEco.setAttribute("aria-expanded", "false");
+    }
+
+    // Configura o palco central conforme o tipo ('audio', 'video' ou 'youtube')
+    if (item.tipo === "youtube") {
+      visorArte.hidden = true;
+      const ytId = (item.arquivo.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/) || [])[1] || item.arquivo;
+      ytEco.src = `https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1${autoPlay ? "&autoplay=1" : ""}`;
+      ytEco.hidden = false;
+      tocandoEco = !!autoPlay;
+      atualizarUIPlay();
+    } else if (item.tipo === "video") {
+      visorArte.hidden = false;
+      orbeEco.innerHTML = item.capa ? `<img src="${foto(item.capa)}" alt="">` : "🎬";
+      videoEco.src = item.arquivo;
+      videoEco.volume = +volEco.value;
+      videoEco.onerror = () => {
+        // Caso o arquivo .mp4 ainda não tenha sido colocado em assets/videos/, usa o espetáculo visual em Canvas + trilha mística
+        videoEco.hidden = true;
+        visorArte.hidden = false;
+        audioEco.src = obterAudioDemo();
+        audioEco.volume = +volEco.value;
+        if (autoPlay) audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+      };
+      videoEco.onloadeddata = () => {
+        videoEco.hidden = false;
+        visorArte.hidden = true;
+        tTotalEco.textContent = fmtTempo(videoEco.duration);
+        if (autoPlay) videoEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+      };
+    } else {
+      // Modo Áudio Exclusivo + Ondas Sonoras na Água
+      visorArte.hidden = false;
+      orbeEco.innerHTML = item.capa ? `<img src="${foto(item.capa)}" alt="">` : "♪";
+      audioEco.src = item.arquivo;
+      audioEco.volume = +volEco.value;
+      audioEco.onerror = () => {
+        // Se o arquivo .mp3 ainda não estiver na pasta assets/audios/, usa a melodia mística gerada em 432Hz
+        if (audioEco.src !== obterAudioDemo()) {
+          audioEco.src = obterAudioDemo();
+          if (autoPlay) audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+        }
+      };
+      if (autoPlay) {
+        audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+      }
     }
   }
-  musicaBotao.addEventListener("click", () => abrirMusica(!musicaPainel.classList.contains("aberto")));
-  $("#musica-fechar").addEventListener("click", () => abrirMusica(false));
+
+  function midiaAtiva() {
+    const item = acervoCavernaDeEco[indiceEcoAtual];
+    if (item && item.tipo === "video" && !videoEco.hidden) return videoEco;
+    return audioEco;
+  }
+
+  function alternarPlayEco() {
+    const item = acervoCavernaDeEco[indiceEcoAtual];
+    if (!item) return;
+    if (item.tipo === "youtube") return;
+    const m = midiaAtiva();
+    if (m.paused) {
+      m.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {
+        audioEco.src = obterAudioDemo();
+        audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+      });
+    } else {
+      m.pause();
+      tocandoEco = false;
+      atualizarUIPlay();
+    }
+  }
+
+  function proximaFaixaEco(auto = false) {
+    const filtrados = itensDaCategoria(catEcoAtual);
+    if (!filtrados.length) return;
+    const pos = filtrados.findIndex(x => x.idx === indiceEcoAtual);
+    const prox = filtrados[(pos + 1) % filtrados.length];
+    carregarFaixaEco(prox.idx, auto || tocandoEco);
+  }
+
+  function faixaAnteriorEco() {
+    const filtrados = itensDaCategoria(catEcoAtual);
+    if (!filtrados.length) return;
+    const pos = filtrados.findIndex(x => x.idx === indiceEcoAtual);
+    const ant = filtrados[(pos - 1 + filtrados.length) % filtrados.length];
+    carregarFaixaEco(ant.idx, tocandoEco);
+  }
+
+  [audioEco, videoEco].forEach(m => {
+    if (!m) return;
+    m.addEventListener("loadedmetadata", () => {
+      if (m === midiaAtiva() && isFinite(m.duration)) tTotalEco.textContent = fmtTempo(m.duration);
+    });
+    m.addEventListener("timeupdate", () => {
+      if (m !== midiaAtiva()) return;
+      tAtualEco.textContent = fmtTempo(m.currentTime);
+      if (isFinite(m.duration) && m.duration > 0) {
+        barraEco.value = ((m.currentTime / m.duration) * 100).toFixed(2);
+      }
+    });
+    m.addEventListener("ended", () => {
+      if (m === midiaAtiva()) proximaFaixaEco(true); // Auto-next para a próxima faixa
+    });
+  });
+
+  barraEco.addEventListener("input", () => {
+    const m = midiaAtiva();
+    if (m && isFinite(m.duration) && m.duration > 0) {
+      m.currentTime = (barraEco.value / 100) * m.duration;
+    }
+  });
+  volEco.addEventListener("input", () => {
+    const v = +volEco.value;
+    audioEco.volume = v;
+    if (videoEco) videoEco.volume = v;
+    btnMudoEco.textContent = v === 0 ? "🔇" : v < 0.45 ? "🔉" : "🔊";
+  });
+  btnMudoEco.addEventListener("click", () => {
+    const mudo = audioEco.volume > 0;
+    const novo = mudo ? 0 : 0.85;
+    volEco.value = novo;
+    audioEco.volume = novo;
+    if (videoEco) videoEco.volume = novo;
+    btnMudoEco.textContent = novo === 0 ? "🔇" : "🔊";
+  });
+  btnPlayEco.addEventListener("click", alternarPlayEco);
+  btnProxEco.addEventListener("click", () => proximaFaixaEco(true));
+  btnAntEco.addEventListener("click", faixaAnteriorEco);
+
+  // Botão "Ver Letra da Música" (Pergaminho/Cristal de Letra)
+  btnLetraEco.addEventListener("click", () => {
+    const aberta = caixaLetraEco.classList.toggle("aberta");
+    btnLetraEco.setAttribute("aria-expanded", aberta);
+    if (aberta) caixaLetraEco.scrollIntoView({ behavior: parado ? "auto" : "smooth", block: "nearest" });
+    sino(2);
+  });
+
+  // Botão "Tela Cheia" com suporte nativo Desktop, Android e iOS (webkitEnterFullscreen)
+  btnTelaEco.addEventListener("click", () => {
+    const alvo = !videoEco.hidden ? videoEco : !ytEco.hidden ? ytEco : visorEco;
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    } else if (alvo.requestFullscreen) {
+      alvo.requestFullscreen().catch(() => {});
+    } else if (alvo.webkitRequestFullscreen) {
+      alvo.webkitRequestFullscreen();
+    } else if (videoEco && typeof videoEco.webkitEnterFullscreen === "function") {
+      videoEco.webkitEnterFullscreen();
+    } else if (visorEco.requestFullscreen) {
+      visorEco.requestFullscreen().catch(() => {});
+    }
+  });
+
+  // Abas de Categorias (Cristais de Eco)
+  $$("[data-cat-eco]").forEach(aba => aba.addEventListener("click", () => {
+    catEcoAtual = aba.dataset.catEco;
+    $$("[data-cat-eco]").forEach(b => b.setAttribute("aria-selected", b === aba));
+    const lista = itensDaCategoria(catEcoAtual);
+    renderizarListaEco();
+    if (lista.length && acervoCavernaDeEco[indiceEcoAtual]?.categoria !== catEcoAtual) {
+      carregarFaixaEco(lista[0].idx, false);
+    }
+    sino(2);
+  }));
+
+  listaEcoEl.addEventListener("click", e => {
+    const btn = e.target.closest("[data-idx-eco]");
+    if (!btn) return;
+    carregarFaixaEco(+btn.dataset.idxEco, true);
+    sino(3);
+  });
+
+  /* Visualizador 60fps de Ondas Sonoras Místicas (Ecos Circulares na Água) + Partículas Bioluminescentes */
+  const cvOndas = $("#caverna-ondas"), ctxOndas = cvOndas ? cvOndas.getContext("2d") : null;
+  const cvPart = $("#caverna-particulas"), ctxPart = cvPart ? cvPart.getContext("2d") : null;
+  let vagalumesCaverna = [];
+  function medirCavernaCanvas() {
+    if (!naCaverna) return;
+    const d = Math.min(devicePixelRatio || 1, 2);
+    if (cvOndas && visorEco) {
+      const r = visorEco.getBoundingClientRect();
+      cvOndas.width = Math.max(1, r.width * d);
+      cvOndas.height = Math.max(1, r.height * d);
+      ctxOndas.setTransform(d, 0, 0, d, 0, 0);
+    }
+    if (cvPart) {
+      cvPart.width = innerWidth * d;
+      cvPart.height = innerHeight * d;
+      ctxPart.setTransform(d, 0, 0, d, 0, 0);
+      vagalumesCaverna = Array.from({ length: 38 }, () => ({
+        x: Math.random() * innerWidth,
+        y: Math.random() * innerHeight,
+        r: 1 + Math.random() * 2.4,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: -0.15 - Math.random() * 0.45,
+        cor: Math.random() > 0.45 ? "126,242,255" : Math.random() > 0.5 ? "196,122,255" : "255,216,120",
+        f: Math.random() * 6.28
+      }));
+    }
+  }
+  addEventListener("resize", medirCavernaCanvas);
+
+  function animarCaverna(t) {
+    if (naCaverna && !parado) {
+      // 1. Vagalumes e poeira estelar bioluminescente na caverna
+      if (ctxPart && cvPart) {
+        const d = Math.min(devicePixelRatio || 1, 2);
+        const w = cvPart.width / d, h = cvPart.height / d;
+        ctxPart.clearRect(0, 0, w, h);
+        for (const p of vagalumesCaverna) {
+          p.x += p.vx + Math.sin(t * 0.001 + p.f) * 0.25;
+          p.y += p.vy;
+          if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+          if (p.x < -10) p.x = w + 10; else if (p.x > w + 10) p.x = -10;
+          const a = 0.25 + 0.65 * Math.abs(Math.sin(t * 0.0022 + p.f));
+          ctxPart.fillStyle = `rgba(${p.cor},${a.toFixed(2)})`;
+          ctxPart.beginPath();
+          ctxPart.arc(p.x, p.y, p.r, 0, 6.283);
+          ctxPart.fill();
+        }
+      }
+      // 2. Visualizador de Ecos Circulares na Água & Ondas Sonoras no palco central
+      if (ctxOndas && cvOndas && !visorArte.hidden) {
+        const d = Math.min(devicePixelRatio || 1, 2);
+        const w = cvOndas.width / d, h = cvOndas.height / d;
+        ctxOndas.clearRect(0, 0, w, h);
+        const cx = w / 2, cy = h / 2;
+        const pulso = tocandoEco ? (1 + 0.22 * Math.sin(t * 0.006) + 0.12 * Math.cos(t * 0.015)) : 1;
+        // Ecos concêntricos de água mística
+        for (let i = 0; i < 5; i++) {
+          const fase = ((t * (tocandoEco ? 0.00055 : 0.00018)) + i * 0.2) % 1;
+          const raio = 36 + fase * Math.min(w, h) * 0.46;
+          const alfa = (1 - fase) * (tocandoEco ? 0.52 : 0.2);
+          ctxOndas.strokeStyle = i % 2 === 0 ? `rgba(126,242,255,${alfa.toFixed(3)})` : `rgba(255,214,125,${alfa.toFixed(3)})`;
+          ctxOndas.lineWidth = tocandoEco ? 2.2 : 1.2;
+          ctxOndas.beginPath();
+          ctxOndas.arc(cx, cy, raio, 0, 6.283);
+          ctxOndas.stroke();
+        }
+        // Barras harmônicas radiais e ondas na base quando a música está tocando
+        const numBarras = 48;
+        const rBase = 58 * pulso;
+        for (let i = 0; i < numBarras; i++) {
+          const ang = (i / numBarras) * Math.PI * 2;
+          const amp = tocandoEco
+            ? (10 + 28 * Math.abs(Math.sin(t * 0.007 + i * 0.45) * Math.cos(t * 0.004 - i * 0.2)))
+            : (4 + 3 * Math.sin(t * 0.002 + i * 0.3));
+          const x1 = cx + Math.cos(ang) * rBase;
+          const y1 = cy + Math.sin(ang) * rBase;
+          const x2 = cx + Math.cos(ang) * (rBase + amp);
+          const y2 = cy + Math.sin(ang) * (rBase + amp);
+          ctxOndas.strokeStyle = i % 3 === 0 ? "rgba(255,222,138,.55)" : "rgba(155,235,255,.45)";
+          ctxOndas.lineWidth = 2;
+          ctxOndas.beginPath();
+          ctxOndas.moveTo(x1, y1);
+          ctxOndas.lineTo(x2, y2);
+          ctxOndas.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animarCaverna);
+  }
+  carregarFaixaEco(0, false);
+  if (!parado) requestAnimationFrame(animarCaverna);
+
+  /* Transição Cinematográfica de Entrada e Saída da Caverna de Eco */
+  function entrarCaverna() {
+    if (entrandoCaverna || naCaverna) return;
+    entrandoCaverna = true;
+    if (cavernaPalco) cavernaPalco.classList.add("entrando");
+    sino(4);
+    setTimeout(() => clarao.classList.add("aceso"), parado ? 0 : 750);
+    setTimeout(() => {
+      naCaverna = true;
+      entrandoCaverna = false;
+      if (cavernaPalco) cavernaPalco.classList.remove("entrando");
+      cavernaInt.classList.add("aberto");
+      cavernaInt.setAttribute("aria-hidden", "false");
+      musicaBotao.setAttribute("aria-expanded", "true");
+      document.body.classList.add("travado");
+      medirCavernaCanvas();
+      clarao.classList.remove("aceso");
+      setTimeout(() => $("#sair-caverna").focus({ preventScroll: true }), 120);
+    }, parado ? 40 : 1200);
+  }
+
+  function sairCaverna() {
+    if (!naCaverna) return;
+    pararMidiaEco();
+    clarao.classList.add("aceso");
+    setTimeout(() => {
+      naCaverna = false;
+      cavernaInt.classList.remove("aberto");
+      cavernaInt.setAttribute("aria-hidden", "true");
+      musicaBotao.setAttribute("aria-expanded", "false");
+      if (!dentro) document.body.classList.remove("travado");
+      clarao.classList.remove("aceso");
+    }, parado ? 0 : 420);
+  }
+
+  if (cavernaPalco) {
+    cavernaPalco.addEventListener("click", entrarCaverna);
+    cavernaPalco.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); entrarCaverna(); }
+    });
+  }
+  musicaBotao.addEventListener("click", () => {
+    if (naCaverna) sairCaverna(); else entrarCaverna();
+  });
+  $("#sair-caverna").addEventListener("click", sairCaverna);
+  addEventListener("keydown", e => {
+    if (e.key === "Escape" && naCaverna) sairCaverna();
+  });
 
   /* ---------- Gatos pretos: os sentados miam ao toque; um atravessa a tela de vez em quando ---------- */
   $$(".gato-sentado").forEach(g => {
@@ -3559,8 +4782,25 @@ function ligarIdioma(C) {
     "Vídeos da Tryv": "Tryv's Videos",
     "As músicas que a Tryv escolheu para acompanhar a sua visita.": "The music Tryv chose to accompany your visit.",
     "♪ Ouvir a Tryv no Spotify": "♪ Listen to Tryv on Spotify",
+    "♪ Ouvir também a playlist pública da Tryv no Spotify": "♪ Also listen to Tryv's public playlist on Spotify",
     "Psicanalista": "psychoanalyst",
     "Master Reiki": "Reiki Master",
+    "Caverna de Eco": "Echo Cavern",
+    "Santuário sonoro e cinema místico": "Sound sanctuary and mystical cinema",
+    "A Caverna de Eco": "The Echo Cavern",
+    "Adentre a gruta iluminada por cristais bioluminescentes para ouvir as músicas exclusivas da Trilha da Tryv, acompanhar as letras dos cânticos e assistir aos videoclipes e leituras de Tarot.": "Step into the grotto lit by bioluminescent crystals to hear exclusive songs from Tryv's Soundtrack, read the chant lyrics, and watch mystical music videos and Tarot readings.",
+    "✦ Adentrar a Caverna de Eco…": "✦ Enter the Echo Cavern…",
+    "✦ Toque para adentrar a Caverna de Eco": "✦ Tap to enter the Echo Cavern",
+    "← Sair da Caverna": "← Leave the Cavern",
+    "✦ Caverna de Eco · Trilha da Tryv ✦": "✦ Echo Cavern · Tryv's Soundtrack ✦",
+    "📜 Ver Letra da Música": "📜 View Song Lyrics",
+    "⛶ Tela Cheia": "⛶ Fullscreen",
+    "✦ Trilha da Tryv (Músicas Exclusivas)": "✦ Tryv's Soundtrack (Exclusive Songs)",
+    "🎬 Videoclipes Místicos": "🎬 Mystical Music Videos",
+    "🔮 Oráculos & Tarot em Vídeo": "🔮 Video Oracles & Tarot",
+    "Trilha da Tryv · Música Exclusiva": "Tryv's Soundtrack · Exclusive Song",
+    "Videoclipe Místico": "Mystical Music Video",
+    "Oráculo & Tarot em Vídeo": "Video Oracle & Tarot",
   };
   // Cada texto do conteúdo com **negrito** ou *itálico* vira vários trechos na página: casa trecho a trecho
   // (só quando o inglês tem a mesma formatação; senão o Google traduz).
