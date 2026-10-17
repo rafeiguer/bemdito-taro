@@ -465,8 +465,10 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 
 /* ---------- Rodapé e botão flutuante ---------- */
 .rodape { padding: 3rem 0 calc(3rem + env(safe-area-inset-bottom, 0px)); text-align: center; color: var(--texto-2); font-size: .9rem; border-top: 1px solid rgba(242, 193, 78, .15); }
-.rodape p { margin: .3rem 0; }
-.rodape__assinatura { font: italic 500 1.15rem/1.4 var(--livro); color: var(--lilas); }
+.rodape p { margin: .35rem 0; }
+.rodape__assinatura { font: italic 500 1.15rem/1.4 var(--livro); color: var(--lilas); margin-bottom: .65rem !important; }
+.rodape__marca { font-weight: 500; color: var(--texto); letter-spacing: .02em; }
+.rodape__legal { max-width: 72ch; margin: .4rem auto 0 !important; font-size: .78rem; line-height: 1.55; color: var(--texto-2); opacity: .82; }
 .zap-flutuante {
   position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 40;
   display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; color: #fff;
@@ -1727,8 +1729,8 @@ html, body { max-width: 100%; overflow-x: clip; }
   <div class="envelope" style="position:relative">
     <span class="gato-sentado" style="left:6%;top:-122px;width:62px" role="button" tabindex="0" aria-label="Gato preto"><img src="assets/gatos/sentado.webp" alt="" width="300" height="369" loading="lazy" style="transform:scaleX(-1)"></span>
     <p class="rodape__assinatura" data-c="rodape.frase">Mude-se e descobrirá novos outros para refletir-se.</p>
-    <p translate="no">© 2016 Tryv Tuath®</p>
-    <p>Todos os direitos reservados. Tryv Tuath® - Every Thing is Possible | Tryv Tuath® (Marca registrada no INPI e músicas com direitos autorais reservados).</p>
+    <p class="rodape__marca"><span translate="no">© 2016 Tryv Tuath® · Everything is Possible</span> — Todos os direitos reservados.</p>
+    <p class="rodape__legal"><span translate="no">Tryv Tuath®</span> é marca registrada junto ao INPI (Instituto Nacional da Propriedade Industrial). Obras musicais, letras, fonogramas e demais conteúdos deste site são protegidos pela Lei de Direitos Autorais (Lei nº 9.610/98), sendo vedada sua reprodução ou utilização sem autorização prévia.</p>
     <p class="rodape__config" translate="no"><a href="configuracoes.html">Configurações</a></p>
   </div>
 </footer>
