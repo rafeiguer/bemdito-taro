@@ -4069,7 +4069,7 @@ function iniciar(C, fotosPrevia = {}) {
       subtitulo: "Afrobrasileiras (Umbanda / Candomblé) - Deusas · Canto às Águas Sagradas",
       categoria: "afrobrasileiras",
       tipo: "audio",
-      arquivo: "assets/audios/Odô Iyá.mp3",
+      arquivo: "assets/odo-iya.mp3",
       capa: "assets/logo-tryv-icone.webp",
       duracao: "04:16",
       letra: `Odô Iyá! Saudação às águas profundas e sagradas.
@@ -4083,7 +4083,7 @@ Que as ondas de luz lavem os caminhos e tragam serenidade, proteção e encantam
       subtitulo: "Afrobrasileiras (Umbanda / Candomblé) - Deusas · Dona da Tempestade",
       categoria: "afrobrasileiras",
       tipo: "audio",
-      arquivo: "assets/audios/Iansã dona da tempestade.mp3",
+      arquivo: "assets/iansa.mp3",
       capa: "assets/tryv-fogo.webp",
       duracao: "02:05",
       letra: `Eparrey! Quando o vento sopra e o céu se ilumina,
@@ -4097,7 +4097,7 @@ Iansã abre os caminhos, varre o que já passou e desperta a coragem de transfor
       subtitulo: "Afrobrasileiras (Umbanda / Candomblé) - Deusas · Liberdade, Cartas e Estrelas",
       categoria: "afrobrasileiras",
       tipo: "audio",
-      arquivo: "assets/audios/gitana.mp3",
+      arquivo: "assets/gitana.mp3",
       capa: "assets/tryv-fogo.webp",
       duracao: "02:30",
       letra: `Ao redor da fogueira sob a lua prateada,
@@ -4111,7 +4111,7 @@ As cartas revelam os segredos da estrada e a dança da liberdade.
       subtitulo: "Afrobrasileiras (Umbanda / Candomblé) - Deusas · Diva das Águas Claras",
       categoria: "afrobrasileiras",
       tipo: "audio",
-      arquivo: "assets/audios/Oxum Diva das águas claras.mp3",
+      arquivo: "assets/oxum.mp3",
       capa: "assets/tryv-natureza.webp",
       duracao: "03:30",
       letra: `Nas águas claras que refletem o ouro do sol,
@@ -4127,7 +4127,7 @@ A força do amor, da beleza e da prosperidade corre suave como o rio sagrado.
       subtitulo: "Bruxas / Sagrado Feminino · Terra, Água, Fogo e Ar",
       categoria: "bruxas",
       tipo: "audio",
-      arquivo: "assets/audios/A Dança dos Elementais.mp3",
+      arquivo: "assets/a-danca-dos-elementais.mp3",
       capa: "assets/tryv-natureza.webp",
       duracao: "02:35",
       letra: `Gnomos da terra, ondinas das águas, salamandras do fogo e silfos do ar
@@ -4141,7 +4141,7 @@ Giram na roda encantada da natureza.
       subtitulo: "Bruxas / Sagrado Feminino · Magia Ancestral",
       categoria: "bruxas",
       tipo: "audio",
-      arquivo: "assets/audios/Despertar da Bruxa.mp3",
+      arquivo: "assets/despertar-da-bruxa.mp3",
       capa: "assets/tryv-chapeu.webp",
       duracao: "02:50",
       letra: `Acorda a memória antiga guardada na floresta e nas estrelas.
@@ -4155,7 +4155,7 @@ A intuição se acende como chama no altar.
       subtitulo: "Bruxas / Sagrado Feminino · Encantamento e Afeto",
       categoria: "bruxas",
       tipo: "audio",
-      arquivo: "assets/audios/Magia do Amor.mp3",
+      arquivo: "assets/magia-do-amor.mp3",
       capa: "assets/tryv-pintura.webp",
       duracao: "02:28",
       letra: `O amor é o feitiço mais antigo do universo.
@@ -4169,7 +4169,7 @@ Quando vibramos na frequência do coração, tudo floresce.
       subtitulo: "Bruxas / Sagrado Feminino · Essência Sagrada",
       categoria: "bruxas",
       tipo: "audio",
-      arquivo: "assets/audios/Ela.mp3",
+      arquivo: "assets/ela.mp3",
       capa: "assets/logo-tryv-icone.webp",
       duracao: "02:55",
       letra: `Todas essas mulheres alimentam a ideia de quem é essa essência.
@@ -4183,7 +4183,7 @@ Um pulsar de ideias, estrelas e sentimentos.
       subtitulo: "Bruxas / Sagrado Feminino · Poder Interior",
       categoria: "bruxas",
       tipo: "audio",
-      arquivo: "assets/audios/magia em mim.mp3",
+      arquivo: "assets/magia-em-mim.mp3",
       capa: "assets/tryv-segredo.webp",
       duracao: "03:20",
       letra: `Você é o próprio oráculo e o próprio templo.
@@ -4336,6 +4336,19 @@ Reconheça a centelha divina e a magia que habitam em você.
         </div>
       </div>`;
     }).join("");
+    $$(".caverna-item[data-idx-eco]", listaEcoEl).forEach(btn => {
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        carregarFaixaEco(+btn.dataset.idxEco, true);
+        sino(3);
+      });
+    });
+    $$(".caverna-seta[data-mover-eco]", listaEcoEl).forEach(seta => {
+      seta.addEventListener("click", e => {
+        e.stopPropagation();
+        moverFaixaEco(+seta.dataset.moverEco, +seta.dataset.dir);
+      });
+    });
   }
 
   function moverFaixaEco(idxOriginal, direcao) {
@@ -4454,21 +4467,25 @@ Reconheça a centelha divina e a magia que habitam em você.
       orbeEco.innerHTML = item.capa ? `<img src="${foto(item.capa)}" alt="">` : "♪";
       delete audioPlayer.dataset.tentouRemoto;
       audioPlayer.onerror = () => {
+        console.error("[Caverna de Eco] MediaError ao carregar:", item.titulo, audioPlayer.src, audioPlayer.error);
         if (!audioPlayer.dataset.tentouRemoto) {
           audioPlayer.dataset.tentouRemoto = "1";
           audioPlayer.src = "https://tryvtuath.github.io/tryvtuath/" + urlArquivo;
           audioPlayer.load();
           if (autoPlay) {
-            audioPlayer.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+            audioPlayer.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(err => {
+              console.error("[Caverna de Eco] Erro ao reproduzir fallback:", item.titulo, err, audioPlayer.error);
+            });
           }
         }
       };
-      audioPlayer.currentTime = 0;
-      audioPlayer.src = urlArquivo;
+      audioPlayer.src = encodeURI(item.arquivo);
       audioPlayer.volume = +volEco.value;
       audioPlayer.load();
       if (autoPlay) {
-        audioPlayer.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+        audioPlayer.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(err => {
+          console.error("[Caverna de Eco] Erro ao iniciar reprodução (play):", item.titulo, err, audioPlayer.error);
+        });
       }
     }
   }
@@ -4521,7 +4538,8 @@ Reconheça a centelha divina e a magia que habitam em você.
         tTotalEco.textContent = fmt;
         if (acervoCavernaDeEco[indiceEcoAtual]) {
           acervoCavernaDeEco[indiceEcoAtual].duracao = fmt;
-          renderizarListaEco();
+          const durEl = listaEcoEl.querySelector(`[data-idx-eco="${indiceEcoAtual}"] .caverna-item__tipo`);
+          if (durEl) durEl.textContent = fmt;
         }
       }
     });
