@@ -1010,70 +1010,111 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 .musica-botao.tocando svg { animation: notaPula 1s ease-in-out infinite alternate; }
 @keyframes notaPula { to { transform: translateY(-3px) rotate(-6deg); } }
 
-/* Portal Exterior da Caverna de Eco */
+/* Portal Exterior da Caverna de Eco (Mesmo sistema de transição cinematográfica da Casinha da Tryv) */
 .caverna-palco {
-  position: relative; max-width: 1100px; margin: 0 auto; aspect-ratio: 16 / 9.5; border-radius: 28px; overflow: hidden; isolation: isolate;
+  position: relative; max-width: 1100px; margin: 0 auto; aspect-ratio: 16 / 9; border-radius: 28px; overflow: hidden; isolation: isolate;
   background: #060414; cursor: pointer; touch-action: pan-y;
-  box-shadow: 0 0 0 1px rgba(185, 163, 255, .35), 0 30px 80px rgba(0, 0, 0, .7), 0 0 90px rgba(127, 209, 255, .15);
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, .35), 0 30px 80px rgba(0, 0, 0, .7), 0 0 90px rgba(185, 163, 255, .18);
 }
-@media (max-width: 700px) { .caverna-palco { aspect-ratio: 4 / 4.8; border-radius: 22px; } }
+@media (max-width: 700px) { .caverna-palco { aspect-ratio: 4 / 4.6; border-radius: 22px; } }
 .caverna-zoom {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  transition: transform 1.55s cubic-bezier(.7, 0, .85, .35), filter 1.55s;
+  transition: transform 1.5s cubic-bezier(.7, 0, .85, .35), filter 1.5s;
   will-change: transform;
 }
 .caverna-zoom svg { width: 100%; height: 100%; display: block; }
-.caverna-palco.entrando .caverna-zoom { transform: scale(9.5); filter: brightness(1.85) saturate(1.35); }
+.caverna-palco.entrando .caverna-zoom { transform: scale(9.5); filter: brightness(1.75) saturate(1.25); }
 .caverna-palco.saindo .caverna-zoom { transition: transform 1.4s cubic-bezier(.15, .65, .3, 1), filter 1.4s; }
+#caverna-entrada-portal { cursor: pointer; }
+#arco-luz-caverna { opacity: 0; transition: opacity .9s; }
+#caverna-entrada-portal:hover #arco-luz-caverna, #caverna-entrada-portal.acordada #arco-luz-caverna { opacity: .75; }
+.caverna-palco.entrando #arco-luz-caverna { opacity: 1; }
+#anel-caverna { transition: stroke-dashoffset .3s; }
+#caverna-entrada-portal.acordada #anel-caverna { stroke-dashoffset: 0; transition: stroke-dashoffset 1.3s linear; }
 .caverna-nevoa {
   position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
   background:
-    radial-gradient(60% 35% at 50% 78%, rgba(127, 209, 255, .22), transparent 70%),
-    radial-gradient(45% 40% at 50% 54%, rgba(185, 163, 255, .26), transparent 68%);
-  animation: nevoaFlutua 6s ease-in-out infinite alternate;
+    radial-gradient(65% 32% at 50% 80%, rgba(160, 220, 255, .2), transparent 72%),
+    radial-gradient(45% 38% at 50% 50%, rgba(196, 130, 255, .22), transparent 68%);
+  animation: nevoaFlutua 7s ease-in-out infinite alternate;
 }
-@keyframes nevoaFlutua { from { transform: translate3d(-1.5%, 0, 0) scale(1); opacity: .75; } to { transform: translate3d(1.5%, -2%, 0) scale(1.06); opacity: 1; } }
+@keyframes nevoaFlutua { from { transform: translate3d(-2%, 0, 0) scale(1); opacity: .7; } to { transform: translate3d(2%, -1.5%, 0) scale(1.05); opacity: 1; } }
 .caverna-chamada {
-  position: absolute; left: 50%; bottom: 3.5%; z-index: 3; transform: translateX(-50%); width: max-content; max-width: 90%; text-align: center;
-  min-height: 46px; padding: .65rem 1.35rem; border-radius: 999px;
-  background: rgba(12, 8, 34, .82); box-shadow: 0 0 0 1px rgba(185, 163, 255, .55) inset, 0 0 24px rgba(127, 209, 255, .3);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  font: italic 500 1.1rem/1.25 var(--livro); color: #e5dcff; border: 0; cursor: pointer;
+  position: absolute; left: 50%; bottom: 3%; z-index: 3; transform: translateX(-50%); width: max-content; max-width: 90%; text-align: center;
+  min-height: 46px; padding: .6rem 1.3rem; border-radius: 999px;
+  background: rgba(12, 8, 24, .68); box-shadow: 0 0 0 1px rgba(212, 175, 55, .45) inset, 0 0 24px rgba(185, 163, 255, .28);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  font: italic 500 1.1rem/1.25 var(--livro); color: var(--ouro-claro); border: 0; cursor: pointer;
   transition: transform .3s, box-shadow .3s, opacity .4s;
   animation: chamarCaverna 2.6s ease-in-out infinite;
 }
-.caverna-chamada:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 0 0 1.5px #7fd1ff inset, 0 0 30px rgba(127, 209, 255, .65); }
-@keyframes chamarCaverna { 50% { box-shadow: 0 0 0 1px #b9a3ff inset, 0 0 26px rgba(185, 163, 255, .55); } }
+.caverna-chamada:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 0 0 1.5px var(--ouro) inset, 0 0 28px rgba(242, 193, 78, .55); }
+@keyframes chamarCaverna { 50% { box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 24px rgba(242, 193, 78, .45); } }
 .caverna-palco.entrando .caverna-chamada { opacity: 0; }
-.cristal-bio { animation: bioPulso 3.2s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
-@keyframes bioPulso { from { filter: brightness(.85) drop-shadow(0 0 4px rgba(127, 209, 255, .4)); } to { filter: brightness(1.35) drop-shadow(0 0 14px rgba(185, 163, 255, .95)); } }
 
 /* Clarão místico bioluminescente da Caverna */
 .clarao--caverna {
-  background: radial-gradient(circle at 50% 52%, #e8f7ff 0%, #b9a3ff 38%, #3c1e78 72%, #09051d 100%);
+  background: radial-gradient(circle at 50% 52%, #fff8e6 0%, #d4af37 32%, #7c4dff 68%, #09051d 100%);
 }
 
-/* Interior da Caverna de Eco (Tela Cheia Imersiva 8K) */
+/* Interior da Caverna de Eco (Plano de fundo fotorealista completo + transição cinematográfica) */
 .caverna-interior {
   position: fixed; inset: 0; z-index: 62; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
-  background:
-    radial-gradient(75% 55% at 50% 32%, rgba(92, 52, 178, .32), transparent 70%),
-    radial-gradient(60% 40% at 50% 88%, rgba(64, 165, 224, .22), transparent 65%),
-    linear-gradient(180deg, #050312 0%, #0d0826 42%, #130b33 74%, #06091e 100%);
-  opacity: 0; visibility: hidden; transition: opacity .55s ease, visibility .55s ease;
+  background: #060412;
+  opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility .6s ease;
 }
 .caverna-interior.aberto { opacity: 1; visibility: visible; }
 .caverna-interior:not(.aberto) * { animation-play-state: paused !important; }
-.caverna-bg-svg {
-  position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; object-fit: cover;
+.caverna-bg-cena {
+  position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden;
+  background: url("assets/caverna-interior.webp") center center / cover no-repeat #060412;
+  will-change: transform;
 }
-.caverna-agua {
-  position: fixed; left: 0; right: 0; bottom: 0; height: 22vh; pointer-events: none; z-index: 1;
+.caverna-interior.aberto .caverna-bg-cena {
+  animation: chegarCaverna 1.9s cubic-bezier(.2, .7, .2, 1);
+}
+@keyframes chegarCaverna {
+  from { transform: scale(1.36); filter: blur(8px) brightness(1.85); }
+  to { transform: scale(1); filter: none; }
+}
+
+/* Névoa rasteira e difusa (opacity 0.15 a 0.25 com blur dinâmico) sobre o lago subterrâneo */
+.caverna-nevoa-int {
+  position: fixed; left: -12%; right: -12%; bottom: 0; height: 46vh; pointer-events: none; z-index: 1;
   background:
-    radial-gradient(65% 85% at 50% 0%, rgba(127, 209, 255, .2), rgba(155, 107, 214, .12) 45%, rgba(5, 4, 18, .92) 100%),
-    repeating-linear-gradient(180deg, rgba(255, 255, 255, .035) 0 2px, transparent 2px 9px);
-  box-shadow: 0 -12px 40px rgba(127, 209, 255, .12);
+    radial-gradient(55% 70% at 35% 75%, rgba(210, 225, 255, .85), transparent 72%),
+    radial-gradient(60% 65% at 68% 82%, rgba(195, 165, 255, .75), transparent 74%),
+    linear-gradient(180deg, transparent 0%, rgba(180, 210, 245, .38) 65%, rgba(12, 8, 24, .55) 100%);
+  opacity: .2; filter: blur(22px);
+  animation: nevoaRasteira 16s ease-in-out infinite alternate;
+  will-change: transform, opacity, filter;
 }
+@keyframes nevoaRasteira {
+  0% { transform: translate3d(-4%, 2%, 0) scaleX(1.02); opacity: .15; filter: blur(18px); }
+  50% { opacity: .25; filter: blur(26px); }
+  100% { transform: translate3d(4%, -1.5%, 0) scaleX(1.08); opacity: .18; filter: blur(20px); }
+}
+
+/* Partículas sutis e translúcidas em CSS (faíscas douradas e violetas em movimento lento) */
+.caverna-faiscas {
+  position: fixed; inset: 0; pointer-events: none; z-index: 2; overflow: hidden;
+}
+.faisca-eco {
+  position: absolute; border-radius: 50%; pointer-events: none;
+  width: var(--t, 4px); height: var(--t, 4px);
+  left: var(--x, 50%); top: var(--y, 50%);
+  background: var(--cor, #ffd878);
+  box-shadow: 0 0 10px 2px var(--cor, #ffd878);
+  opacity: 0;
+  animation: flutuarFaisca var(--d, 11s) ease-in-out var(--atraso, 0s) infinite;
+}
+@keyframes flutuarFaisca {
+  0% { transform: translate3d(0, 18px, 0) scale(.6); opacity: 0; }
+  25% { opacity: var(--op, .65); }
+  75% { opacity: var(--op, .55); }
+  100% { transform: translate3d(var(--dx, 22px), -65px, 0) scale(1.15); opacity: 0; }
+}
+
 .caverna-topo {
   position: sticky; top: max(12px, env(safe-area-inset-top)); z-index: 9999;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem;
@@ -1081,38 +1122,41 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 }
 .caverna-topo > * { pointer-events: auto; }
 .caverna-sair {
-  min-height: 44px; padding: .65rem 1.25rem; border-radius: 999px; border: 0; cursor: pointer;
+  min-height: 44px; padding: .65rem 1.25rem; border-radius: 999px; cursor: pointer;
   font: 600 .9rem/1 var(--corpo); color: var(--ouro-claro);
-  background: rgba(14, 9, 38, .88); box-shadow: 0 0 0 1.5px rgba(242, 193, 78, .65) inset, 0 8px 24px rgba(0, 0, 0, .55);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  background: rgba(12, 8, 24, .5);
+  border: 1px solid rgba(212, 175, 55, .45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   transition: transform .2s, box-shadow .2s, background .2s;
 }
-.caverna-sair:hover { transform: translateY(-1px); background: rgba(242, 193, 78, .22); box-shadow: 0 0 0 1.5px #fff6d2 inset, 0 0 20px rgba(242, 193, 78, .55); }
+.caverna-sair:hover { transform: translateY(-1px); background: rgba(212, 175, 55, .22); box-shadow: 0 0 20px rgba(242, 193, 78, .45); }
 .caverna-titulo-int {
   padding: .5rem 1.1rem; border-radius: 999px;
-  background: rgba(14, 9, 38, .78); box-shadow: 0 0 0 1px rgba(185, 163, 255, .38) inset;
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  font: italic 500 1.02rem/1.2 var(--livro); color: #e2d6ff;
+  background: rgba(12, 8, 24, .45);
+  border: 1px solid rgba(212, 175, 55, .32);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  font: italic 500 1.02rem/1.2 var(--livro); color: #f3e9ff;
 }
 
-/* Palco Central Híbrido (Áudio + Ondas Místicas / Vídeo + Moldura de Rocha) */
+/* Palco Central em Glassmorphism Místico Translúcido */
 .caverna-palco-central {
   position: relative; z-index: 3; width: min(980px, calc(100% - 28px));
   margin: 1rem auto calc(2.6rem + env(safe-area-inset-bottom, 0px));
   border-radius: 26px; padding: clamp(1rem, 2.5vw, 1.6rem);
-  background:
-    radial-gradient(90% 70% at 50% 20%, rgba(127, 209, 255, .12), transparent 65%),
-    linear-gradient(180deg, rgba(22, 14, 52, .88) 0%, rgba(10, 7, 28, .94) 100%);
-  box-shadow: 0 0 0 1px rgba(185, 163, 255, .35) inset, 0 0 0 4px rgba(10, 7, 28, .9) inset, 0 0 0 5px rgba(242, 193, 78, .22) inset, 0 24px 60px rgba(0, 0, 0, .65);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: rgba(12, 8, 24, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .45), 0 0 32px rgba(185, 163, 255, .1);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
 .caverna-visor {
-  position: relative; width: 100%; aspect-ratio: 16 / 8.2; min-height: 230px; border-radius: 18px; overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, #1a1042 0%, #09051d 75%, #04020c 100%);
-  box-shadow: 0 0 0 1.5px rgba(242, 193, 78, .45), 0 16px 40px rgba(0, 0, 0, .6);
+  position: relative; width: 100%; aspect-ratio: 16 / 7.8; min-height: 220px; border-radius: 18px; overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, rgba(28, 16, 58, 0.32) 0%, rgba(12, 8, 24, 0.42) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .38);
   display: grid; place-items: center;
 }
-@media (max-width: 640px) { .caverna-visor { aspect-ratio: 16 / 10.5; min-height: 205px; } }
+@media (max-width: 640px) { .caverna-visor { aspect-ratio: 16 / 10.2; min-height: 200px; } }
 .caverna-visor canvas {
   position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
 }
@@ -1131,33 +1175,35 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 @keyframes orbeEco { from { transform: scale(.96); box-shadow: 0 0 0 2px #fff inset, 0 0 32px rgba(242, 193, 78, .7), 0 0 65px rgba(127, 209, 255, .55); } to { transform: scale(1.07); box-shadow: 0 0 0 3px #fff inset, 0 0 50px rgba(127, 209, 255, .95), 0 0 95px rgba(255, 45, 135, .55); } }
 .caverna-visor__orbe img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .caverna-visor__cat {
-  margin-top: .2rem; padding: .2rem .7rem; border-radius: 999px;
-  background: rgba(12, 8, 34, .75); box-shadow: 0 0 0 1px rgba(127, 209, 255, .4) inset;
-  font: 600 .7rem/1.2 var(--corpo); letter-spacing: .16em; text-transform: uppercase; color: #8cf0ff;
+  margin-top: .2rem; padding: .2rem .75rem; border-radius: 999px;
+  background: rgba(12, 8, 24, .55); border: 1px solid rgba(212, 175, 55, .35);
+  font: 600 .7rem/1.2 var(--corpo); letter-spacing: .16em; text-transform: uppercase; color: var(--ouro-claro);
 }
 .caverna-visor__nome {
   margin: .15rem 0 0; font: 600 clamp(1.18rem, 2.8vw, 1.65rem)/1.2 var(--titulo); color: var(--ouro-claro);
-  text-shadow: 0 2px 14px rgba(0, 0, 0, .85);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .9);
 }
 .caverna-visor__sub {
-  margin: 0; font-size: .9rem; color: #ddd2ff; text-shadow: 0 2px 10px rgba(0, 0, 0, .85);
+  margin: 0; font-size: .9rem; color: #efe6ff; text-shadow: 0 2px 10px rgba(0, 0, 0, .9);
 }
 .caverna-visor video, .caverna-visor iframe {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; border: 0; z-index: 3;
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: rgba(0, 0, 0, .65); border: 0; z-index: 3;
 }
 .caverna-visor video[hidden], .caverna-visor iframe[hidden], .caverna-visor__arte[hidden] { display: none !important; }
 
-/* Controles Cinematográficos Customizados */
+/* Controles Cinematográficos em Vidro Translúcido */
 .caverna-controles {
   margin-top: .95rem; padding: .9rem 1.05rem; border-radius: 18px;
-  background: rgba(8, 5, 24, .78); box-shadow: 0 0 0 1px rgba(242, 193, 78, .24) inset;
+  background: rgba(12, 8, 24, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
 .caverna-progresso-linha { display: flex; align-items: center; gap: .7rem; }
-.caverna-tempo { font: 500 .82rem/1 var(--corpo); font-variant-numeric: tabular-nums; color: var(--texto-2); min-width: 3.1rem; }
+.caverna-tempo { font: 500 .82rem/1 var(--corpo); font-variant-numeric: tabular-nums; color: #f0e8ff; min-width: 3.1rem; }
 .caverna-tempo:last-child { text-align: right; }
 .caverna-barra {
   flex: 1; height: 8px; -webkit-appearance: none; appearance: none; border-radius: 999px;
-  background: rgba(255, 255, 255, .16); cursor: pointer; accent-color: var(--ouro);
+  background: rgba(255, 255, 255, .22); cursor: pointer; accent-color: var(--ouro);
 }
 .caverna-barra::-webkit-slider-thumb {
   -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
@@ -1168,76 +1214,77 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
 }
 .caverna-botoes__esq, .caverna-botoes__dir { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .caverna-btn, .caverna-btn-pilula {
-  min-width: 44px; min-height: 44px; padding: 0 .85rem; border: 0; border-radius: 999px; cursor: pointer;
+  min-width: 44px; min-height: 44px; padding: 0 .85rem; border-radius: 999px; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
-  background: rgba(255, 255, 255, .08); color: var(--ouro-claro);
-  box-shadow: 0 0 0 1px rgba(242, 193, 78, .32) inset; font: 600 .84rem/1 var(--corpo);
+  background: rgba(12, 8, 24, 0.45); color: var(--ouro-claro);
+  border: 1px solid rgba(212, 175, 55, 0.35); font: 600 .84rem/1 var(--corpo);
   transition: transform .2s, background .2s, box-shadow .2s;
 }
 .caverna-btn:hover, .caverna-btn-pilula:hover {
-  background: rgba(242, 193, 78, .22); box-shadow: 0 0 0 1px var(--ouro) inset, 0 0 14px rgba(242, 193, 78, .4); transform: translateY(-1px);
+  background: rgba(212, 175, 55, .24); border-color: var(--ouro); box-shadow: 0 0 14px rgba(242, 193, 78, .4); transform: translateY(-1px);
 }
 .caverna-btn--play {
-  width: 52px; height: 52px; padding: 0; color: #2a1606; background: var(--dourado);
+  width: 52px; height: 52px; padding: 0; color: #2a1606; background: var(--dourado); border: 0;
   box-shadow: 0 0 0 1.5px #fff6d2 inset, 0 6px 20px rgba(242, 193, 78, .45); font-size: 1.2rem;
 }
 .caverna-btn-pilula[aria-expanded="true"] {
-  background: rgba(127, 209, 255, .22); color: #fff; box-shadow: 0 0 0 1.5px #7fd1ff inset, 0 0 16px rgba(127, 209, 255, .45);
+  background: rgba(185, 163, 255, .28); color: #fff; border-color: #d4af37; box-shadow: 0 0 16px rgba(212, 175, 55, .4);
 }
 .caverna-vol { display: inline-flex; align-items: center; gap: .35rem; }
 .caverna-vol input[type="range"] { width: 74px; height: 6px; accent-color: var(--ouro); cursor: pointer; }
 @media (max-width: 560px) { .caverna-vol input[type="range"] { width: 54px; } }
 
-/* Pergaminho / Cristal de Letra da Música */
+/* Pergaminho / Cristal de Letra da Música em Vidro Translúcido */
 .caverna-letra-caixa {
   display: none; margin-top: 1rem; padding: 1.2rem 1.35rem; border-radius: 20px; max-height: 290px; overflow-y: auto; overscroll-behavior: contain;
-  background:
-    radial-gradient(90% 50% at 50% 0%, rgba(185, 163, 255, .18), transparent 70%),
-    rgba(10, 6, 30, .9);
-  box-shadow: 0 0 0 1px rgba(185, 163, 255, .42) inset, 0 14px 34px rgba(0, 0, 0, .5);
+  background: rgba(12, 8, 24, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .4);
 }
 .caverna-letra-caixa.aberta { display: block; }
 .caverna-letra-caixa__titulo {
-  margin: 0 0 .65rem; padding-bottom: .5rem; border-bottom: 1px solid rgba(242, 193, 78, .22);
+  margin: 0 0 .65rem; padding-bottom: .5rem; border-bottom: 1px solid rgba(212, 175, 55, .28);
   font: 600 1.05rem/1.2 var(--titulo); color: var(--ouro-claro); text-align: center;
 }
 .caverna-letra-caixa__texto {
   margin: 0; white-space: pre-line; font: italic 500 clamp(1.08rem, 2.2vw, 1.24rem)/1.68 var(--livro);
-  color: #f3ecff; text-align: center;
+  color: #f7f2ff; text-align: center; text-shadow: 0 1px 8px rgba(0, 0, 0, .85);
 }
 
-/* Abas de Categorias (Cristais de Eco), Seletor de Ordem e Lista de Faixas */
+/* Abas de Categorias e Playlist em Glassmorphism Translúcido */
 .caverna-playlist {
   margin-top: 1.1rem; border-radius: 22px; padding: clamp(.95rem, 2.2vw, 1.3rem);
-  background: linear-gradient(180deg, rgba(16, 10, 40, .82) 0%, rgba(8, 5, 22, .92) 100%);
-  box-shadow: 0 0 0 1px rgba(242, 193, 78, .25) inset;
+  background: rgba(12, 8, 24, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
 .caverna-abas { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .8rem; }
 .caverna-aba {
-  flex: 1 1 auto; min-height: 44px; padding: .55rem .85rem; border: 0; border-radius: 14px; cursor: pointer;
-  background: rgba(255, 255, 255, .05); color: var(--texto-2);
-  box-shadow: 0 0 0 1px rgba(185, 163, 255, .25) inset;
+  flex: 1 1 auto; min-height: 44px; padding: .55rem .85rem; border-radius: 14px; cursor: pointer;
+  background: rgba(12, 8, 24, 0.45); color: #e8dfff;
+  border: 1px solid rgba(212, 175, 55, 0.28);
   font: 600 .82rem/1.2 var(--corpo); text-align: center; transition: background .25s, color .25s, box-shadow .25s;
 }
 .caverna-aba[aria-selected="true"] {
-  background: var(--dourado); color: #2a1606;
+  background: var(--dourado); color: #2a1606; border-color: #fff6d2;
   box-shadow: 0 0 0 1px #fff6d2 inset, 0 6px 18px rgba(242, 193, 78, .35);
 }
 .caverna-ordem-barra {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem;
   margin-bottom: .7rem; padding: .4rem .6rem; border-radius: 12px;
-  background: rgba(255, 255, 255, .03); border: 1px solid rgba(185, 163, 255, .16);
+  background: rgba(12, 8, 24, 0.32); border: 1px solid rgba(212, 175, 55, 0.22);
 }
-.caverna-ordem-dica { font-size: .82rem; color: var(--texto-2); }
+.caverna-ordem-dica { font-size: .82rem; color: #e6dcff; }
 .caverna-ordem-acoes { display: flex; flex-wrap: wrap; gap: .4rem; }
 .caverna-btn-ordem {
-  min-height: 36px; padding: .35rem .75rem; border: 0; border-radius: 999px; cursor: pointer;
-  background: rgba(185, 163, 255, .14); color: var(--ouro-claro);
-  box-shadow: 0 0 0 1px rgba(242, 193, 78, .35) inset; font: 600 .78rem/1 var(--corpo);
+  min-height: 36px; padding: .35rem .75rem; border-radius: 999px; cursor: pointer;
+  background: rgba(12, 8, 24, 0.5); color: var(--ouro-claro);
+  border: 1px solid rgba(212, 175, 55, 0.35); font: 600 .78rem/1 var(--corpo);
   transition: background .2s, box-shadow .2s;
 }
 .caverna-btn-ordem:hover, .caverna-btn-ordem[aria-pressed="true"] {
-  background: rgba(242, 193, 78, .26); color: #fff; box-shadow: 0 0 0 1.5px var(--ouro) inset;
+  background: rgba(212, 175, 55, .28); color: #fff; border-color: var(--ouro);
 }
 .caverna-lista {
   display: flex; flex-direction: column; gap: .5rem; max-height: 360px; overflow-y: auto; overscroll-behavior: contain; padding-right: .2rem;
@@ -1246,19 +1293,21 @@ h1, h2, h3 { margin: 0; font-weight: 600; }
   display: flex; align-items: center; gap: .45rem;
 }
 .caverna-item {
-  flex: 1; min-width: 0; min-height: 58px; padding: .65rem .85rem; border: 0; border-radius: 16px; text-align: left; cursor: pointer;
+  flex: 1; min-width: 0; min-height: 58px; padding: .65rem .85rem; border-radius: 16px; text-align: left; cursor: pointer;
   display: flex; align-items: center; gap: .75rem;
-  background: rgba(255, 255, 255, .04); color: var(--texto);
-  box-shadow: 0 0 0 1px rgba(242, 193, 78, .16) inset;
-  transition: transform .22s, background .22s, box-shadow .22s;
+  background: rgba(12, 8, 24, 0.38); color: var(--texto);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: transform .22s, background .22s, border-color .22s, box-shadow .22s;
 }
 .caverna-item:hover, .caverna-item:focus-visible {
-  transform: translateX(3px); background: rgba(185, 163, 255, .12);
-  box-shadow: 0 0 0 1px rgba(242, 193, 78, .5) inset;
+  transform: translateX(3px); background: rgba(28, 18, 56, 0.52);
+  border-color: rgba(212, 175, 55, 0.55);
 }
 .caverna-item[aria-current="true"] {
-  background: radial-gradient(90% 100% at 0% 50%, rgba(127, 209, 255, .24), rgba(242, 193, 78, .15));
-  box-shadow: 0 0 0 1.5px var(--ouro) inset, 0 0 20px rgba(127, 209, 255, .25);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.24), rgba(140, 95, 225, 0.22));
+  border-color: var(--ouro);
+  box-shadow: 0 0 20px rgba(212, 175, 55, .22);
 }
 .caverna-item__num {
   flex: none; min-width: 26px; font: 700 .78rem/1 var(--titulo); color: var(--ouro); text-align: center; opacity: .85;
@@ -1777,8 +1826,9 @@ html, body { max-width: 100%; overflow-x: clip; }
 
 <!-- Interior 8K da Caverna de Eco (Santuário Sonoro, Letras e Cinema Místico) -->
 <div class="caverna-interior" id="caverna-interior" role="dialog" aria-modal="true" aria-label="Caverna de Eco" aria-hidden="true">
-  <div id="caverna-fundo-svg" aria-hidden="true"></div>
-  <div class="caverna-agua" aria-hidden="true"></div>
+  <div class="caverna-bg-cena" id="caverna-fundo-svg" aria-hidden="true"></div>
+  <div class="caverna-nevoa-int" aria-hidden="true"></div>
+  <div class="caverna-faiscas" id="caverna-faiscas" aria-hidden="true"></div>
   <canvas id="caverna-particulas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:2" aria-hidden="true"></canvas>
   <div class="caverna-topo">
     <button class="caverna-sair" id="sair-caverna" type="button">← Sair da Caverna</button>
@@ -4162,97 +4212,60 @@ Reconheça a centelha divina e a magia que habitam em você.
     } catch {}
   }
   aplicarOrdemSalva();
-
-  /* Cena 8K Externa e Interna da Caverna de Eco (SVG hiper-detalhado com cristais bioluminescentes e espelho d'água) */
+  /* Fachada externa fotorealista (assets/caverna-entrada.webp, 1600 x 900) com cristais bioluminescentes e portal de entrada */
   function cenaCavernaFora() {
-    return `<svg viewBox="0 0 1344 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <radialGradient id="cv-abismo" cx="50%" cy="54%" r="58%">
-          <stop offset="0%" stop-color="#2e1860" stop-opacity=".95"/>
-          <stop offset="38%" stop-color="#13092c" stop-opacity=".98"/>
-          <stop offset="75%" stop-color="#060312"/>
-          <stop offset="100%" stop-color="#020108"/>
-        </radialGradient>
-        <radialGradient id="cv-luz-portal" cx="50%" cy="56%" r="36%">
-          <stop offset="0%" stop-color="#8cf0ff" stop-opacity=".55"/>
-          <stop offset="45%" stop-color="#b478ff" stop-opacity=".28"/>
-          <stop offset="100%" stop-color="#14082c" stop-opacity="0"/>
-        </radialGradient>
-        <linearGradient id="cv-agua-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1d1142" stop-opacity=".85"/>
-          <stop offset="45%" stop-color="#0c1838" stop-opacity=".95"/>
-          <stop offset="100%" stop-color="#04020c"/>
-        </linearGradient>
-        <linearGradient id="cv-cristal-c" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="35%" stop-color="#7ef2ff"/>
-          <stop offset="100%" stop-color="#2b66c8"/>
-        </linearGradient>
-        <linearGradient id="cv-cristal-v" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#ffe8ff"/>
-          <stop offset="40%" stop-color="#c47aff"/>
-          <stop offset="100%" stop-color="#4b1982"/>
-        </linearGradient>
-        <linearGradient id="cv-cristal-o" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#fff9db"/>
-          <stop offset="45%" stop-color="#ffd269"/>
-          <stop offset="100%" stop-color="#8c540d"/>
-        </linearGradient>
-      </defs>
-      <rect width="1344" height="720" fill="url(#cv-abismo)"/>
-      <path d="M0,0 H1344 V560 L1180,550 L1080,410 L960,230 L810,130 L672,105 L530,130 L380,230 L260,410 L160,550 L0,560 Z" fill="#070414" stroke="rgba(210,175,255,.18)" stroke-width="2"/>
-      <path d="M0,0 H420 L310,190 L210,390 L130,555 H0 Z" fill="#04020b"/>
-      <path d="M1344,0 H920 L1030,190 L1130,390 L1210,555 H1344 Z" fill="#04020b"/>
-      <ellipse cx="672" cy="395" rx="370" ry="250" fill="url(#cv-luz-portal)"/>
-      <path d="M295,548 L365,275 L515,168 L672,142 L829,168 L979,275 L1049,548 Z" fill="#0b0620" stroke="rgba(140,235,255,.22)" stroke-width="1.5"/>
-      <path d="M395,548 L450,320 L565,220 L672,198 L779,220 L894,320 L949,548 Z" fill="#120930" stroke="rgba(255,215,120,.25)" stroke-width="1.2"/>
-      <path d="M190,460 Q260,340 350,260 M1150,460 Q1080,340 990,260 M480,150 Q672,115 860,150" fill="none" stroke="rgba(255,212,115,.28)" stroke-width="1.8" stroke-dasharray="6 10"/>
-      <g class="tremeluz">
-        <polygon points="250,490 278,415 296,495" fill="url(#cv-cristal-v)"/>
-        <polygon points="274,495 312,435 320,502" fill="url(#cv-cristal-c)"/>
-        <polygon points="1065,495 1090,410 1115,492" fill="url(#cv-cristal-v)"/>
-        <polygon points="1038,500 1058,438 1078,502" fill="url(#cv-cristal-c)"/>
-        <polygon points="430,270 448,335 462,265" fill="url(#cv-cristal-c)"/>
-        <polygon points="880,265 896,335 914,270" fill="url(#cv-cristal-v)"/>
-        <polygon points="658,142 672,208 686,142" fill="url(#cv-cristal-o)"/>
-        <polygon points="365,535 390,465 412,538" fill="url(#cv-cristal-o)"/>
-        <polygon points="932,538 954,465 979,535" fill="url(#cv-cristal-o)"/>
-      </g>
-      <circle cx="672" cy="375" r="56" fill="rgba(126,242,255,.12)" stroke="rgba(255,218,130,.55)" stroke-width="1.5"/>
-      <circle cx="672" cy="375" r="82" fill="none" stroke="rgba(196,122,255,.32)" stroke-dasharray="4 8"/>
-      <path d="M660,392 V352 L692,344 V384" fill="none" stroke="#ffe7a6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="654" cy="392" r="7" fill="#ffe7a6"/><circle cx="686" cy="384" r="7" fill="#ffe7a6"/>
-      <rect x="0" y="545" width="1344" height="175" fill="url(#cv-agua-grad)"/>
-      <ellipse cx="672" cy="575" rx="340" ry="26" fill="rgba(126,242,255,.16)"/>
-      <ellipse cx="672" cy="590" rx="220" ry="12" fill="none" stroke="rgba(255,220,140,.4)" stroke-width="1.4"/>
-      <ellipse cx="672" cy="612" rx="310" ry="16" fill="none" stroke="rgba(140,235,255,.28)" stroke-width="1.1"/>
-      <ellipse cx="672" cy="640" rx="420" ry="20" fill="none" stroke="rgba(196,122,255,.2)" stroke-width="1"/>
-    </svg>`;
+    const R = gerador(41), VB = "0 0 1600 900";
+    const defs = `<defs>
+      <radialGradient id="cv-luz-ouro"><stop offset="0" stop-color="#ffe6a3" stop-opacity=".85"/><stop offset=".5" stop-color="#d4af37" stop-opacity=".28"/><stop offset="1" stop-color="#d4af37" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cv-luz-violeta"><stop offset="0" stop-color="#e5c4ff" stop-opacity=".8"/><stop offset=".5" stop-color="#9b6bd6" stop-opacity=".3"/><stop offset="1" stop-color="#9b6bd6" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cv-arco-portal"><stop offset="0" stop-color="#fff6d8" stop-opacity=".85"/><stop offset=".5" stop-color="#c490ff" stop-opacity=".42"/><stop offset="1" stop-color="#7c4dff" stop-opacity="0"/></radialGradient>
+    </defs>`;
+    let vagalumes = "";
+    for (let i = 0; i < 28; i++) {
+      const cor = i % 2 === 0 ? "#ffe6a3" : "#d8b4ff";
+      vagalumes += `<circle class="vagalume" cx="${f1(140 + R() * 1320)}" cy="${f1(180 + R() * 640)}" r="${f1(1.5 + R() * 2.3)}" fill="${cor}" style="animation-delay:-${(R() * 3).toFixed(1)}s"/>`;
+    }
+    const fundo = `<image href="${foto("assets/caverna-entrada.webp")}" width="1600" height="900" preserveAspectRatio="xMidYMid slice"/>`;
+    const brilhosCristais = `<g class="tremeluz" style="mix-blend-mode:screen">
+      <circle cx="195" cy="640" r="95" fill="url(#cv-luz-violeta)"/>
+      <circle cx="520" cy="610" r="70" fill="url(#cv-luz-ouro)"/>
+      <circle cx="1365" cy="590" r="95" fill="url(#cv-luz-ouro)"/>
+      <circle cx="1290" cy="675" r="85" fill="url(#cv-luz-violeta)"/>
+      <circle cx="810" cy="390" r="130" fill="url(#cv-luz-violeta)"/>
+    </g>`;
+    const portal = `<g id="caverna-entrada-portal" role="button" tabindex="0" aria-label="Entrar na Caverna de Eco">
+      <path d="M510 210 Q800 130 1090 210 L1120 740 L480 740 Z" fill="transparent"/>
+      <ellipse id="arco-luz-caverna" cx="800" cy="435" rx="165" ry="195" fill="url(#cv-arco-portal)" style="mix-blend-mode:screen"/>
+      <circle id="anel-caverna" cx="800" cy="435" r="150" fill="none" stroke="#ffe6a3" stroke-width="3" stroke-dasharray="945" stroke-dashoffset="945" transform="rotate(-90 800 435)" style="filter:drop-shadow(0 0 8px #ffd27a)"/>
+    </g>`;
+    return `<svg viewBox="${VB}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${defs}${fundo}${brilhosCristais}${portal}${vagalumes}</svg>`;
   }
 
-  function cenaCavernaDentro() {
-    return `<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <radialGradient id="cvi-luz" cx="50%" cy="38%" r="60%">
-          <stop offset="0%" stop-color="#2a1658" stop-opacity=".65"/>
-          <stop offset="55%" stop-color="#0d0722" stop-opacity=".85"/>
-          <stop offset="100%" stop-color="#03010a"/>
-        </radialGradient>
-      </defs>
-      <rect width="1440" height="900" fill="url(#cvi-luz)"/>
-      <path d="M0,0 H1440 V140 L1320,90 L1210,165 L1120,75 L980,120 L840,55 L720,95 L600,55 L460,120 L320,75 L230,165 L120,90 L0,140 Z" fill="#05020e" opacity=".9"/>
-      <polygon points="85,0 115,195 145,0" fill="rgba(180,120,255,.22)"/>
-      <polygon points="1295,0 1325,195 1355,0" fill="rgba(120,235,255,.22)"/>
-      <polygon points="42,680 88,520 124,690" fill="rgba(180,120,255,.25)"/>
-      <polygon points="1316,690 1352,520 1398,680" fill="rgba(120,235,255,.25)"/>
-    </svg>`;
+  function popularFaiscasCaverna() {
+    const el = $("#caverna-faiscas");
+    if (!el) return;
+    const R = gerador(88);
+    let html = "";
+    for (let i = 0; i < 32; i++) {
+      const x = (4 + R() * 92).toFixed(1) + "%";
+      const y = (10 + R() * 84).toFixed(1) + "%";
+      const t = (2.2 + R() * 3.2).toFixed(1) + "px";
+      const d = (9 + R() * 10).toFixed(1) + "s";
+      const atraso = (-R() * 14).toFixed(1) + "s";
+      const dx = ((R() - 0.5) * 56).toFixed(0) + "px";
+      const op = (0.35 + R() * 0.45).toFixed(2);
+      const cor = i % 2 === 0 ? "rgba(255, 216, 120, 0.85)" : "rgba(196, 130, 255, 0.85)";
+      html += `<span class="faisca-eco" style="--x:${x};--y:${y};--t:${t};--d:${d};--atraso:${atraso};--dx:${dx};--op:${op};--cor:${cor}"></span>`;
+    }
+    el.innerHTML = html;
   }
 
   const cavernaPalco = $("#caverna-palco"), cavernaZoom = $("#caverna-zoom"), cavernaChamada = $("#caverna-chamada");
   const cavernaInt = $("#caverna-interior"), cavernaFundoSvg = $("#caverna-fundo-svg");
   const musicaBotao = $("#musica-botao");
   if (cavernaZoom) cavernaZoom.innerHTML = cenaCavernaFora();
-  if (cavernaFundoSvg) cavernaFundoSvg.innerHTML = cenaCavernaDentro();
+  popularFaiscasCaverna();
+  const portalCavernaEl = $("#caverna-entrada-portal");
   if (toque && cavernaChamada) cavernaChamada.textContent = "✦ Toque para adentrar a Caverna de Eco";
 
   // Link opcional para o Spotify da Tryv no rodapé da Caverna de Eco
@@ -4691,39 +4704,74 @@ Reconheça a centelha divina e a magia que habitam em você.
   carregarFaixaEco(0, false);
   if (!parado) requestAnimationFrame(animarCaverna);
 
-  /* Transição Cinematográfica de Entrada e Saída da Caverna de Eco */
+  /* Transição Cinematográfica de Entrada e Saída da Caverna de Eco (Mesmo sistema da Casinha da Tryv) */
+  let timerCaverna;
+  const acordarCaverna = () => { if (entrandoCaverna || naCaverna || !portalCavernaEl) return; portalCavernaEl.classList.add("acordada"); };
+  const dormirCaverna = () => { if (portalCavernaEl) portalCavernaEl.classList.remove("acordada"); clearTimeout(timerCaverna); };
+  if (portalCavernaEl) {
+    portalCavernaEl.addEventListener("pointerenter", e => {
+      acordarCaverna();
+      if (e.pointerType === "mouse") { clearTimeout(timerCaverna); timerCaverna = setTimeout(entrarCaverna, 1300); }
+    });
+    portalCavernaEl.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") dormirCaverna(); });
+  }
+
   function entrarCaverna() {
     if (entrandoCaverna || naCaverna) return;
-    entrandoCaverna = true;
-    if (cavernaPalco) cavernaPalco.classList.add("entrando");
-    sino(4);
-    setTimeout(() => clarao.classList.add("aceso"), parado ? 0 : 750);
+    entrandoCaverna = true; clearTimeout(timerCaverna);
+    acordarCaverna();
+    const arcoEl = $("#arco-luz-caverna");
+    if (arcoEl && cavernaZoom) {
+      const pr = arcoEl.getBoundingClientRect(), zr = cavernaZoom.getBoundingClientRect();
+      if (zr.width > 0 && zr.height > 0) {
+        cavernaZoom.style.transformOrigin = `${pr.left + pr.width / 2 - zr.left}px ${pr.top + pr.height * .52 - zr.top}px`;
+      }
+      soltar(pr.left + pr.width / 2, pr.top + pr.height / 2, 50, { forca: 4, anel: true, curta: true });
+    }
+    if (cavernaPalco) {
+      cavernaPalco.classList.remove("saindo");
+      cavernaPalco.classList.add("entrando");
+    }
+    sino(5);
+    const rastro = setInterval(() => soltar(innerWidth / 2 + (Math.random() - .5) * innerWidth, innerHeight / 2 + (Math.random() - .5) * innerHeight, 6, { forca: 5, curta: true }), 60);
+    setTimeout(() => clarao.classList.add("clarao--caverna", "aceso"), parado ? 0 : 950);
     setTimeout(() => {
+      clearInterval(rastro);
       naCaverna = true;
       entrandoCaverna = false;
       if (cavernaPalco) cavernaPalco.classList.remove("entrando");
+      dormirCaverna();
       cavernaInt.classList.add("aberto");
       cavernaInt.setAttribute("aria-hidden", "false");
       musicaBotao.setAttribute("aria-expanded", "true");
       document.body.classList.add("travado");
       medirCavernaCanvas();
-      clarao.classList.remove("aceso");
+      clarao.classList.remove("aceso", "clarao--caverna");
       setTimeout(() => $("#sair-caverna").focus({ preventScroll: true }), 120);
-    }, parado ? 40 : 1200);
+    }, parado ? 60 : 1550);
   }
 
   function sairCaverna() {
     if (!naCaverna) return;
     pararMidiaEco();
-    clarao.classList.add("aceso");
+    clarao.classList.add("clarao--caverna", "aceso");
     setTimeout(() => {
       naCaverna = false;
       cavernaInt.classList.remove("aberto");
       cavernaInt.setAttribute("aria-hidden", "true");
       musicaBotao.setAttribute("aria-expanded", "false");
       if (!dentro) document.body.classList.remove("travado");
-      clarao.classList.remove("aceso");
-    }, parado ? 0 : 420);
+      if (cavernaPalco && cavernaZoom) {
+        cavernaPalco.scrollIntoView({ block: "center" });
+        cavernaZoom.style.transition = "none";
+        cavernaPalco.classList.add("entrando");
+        void cavernaZoom.offsetWidth;
+        cavernaZoom.style.transition = "";
+        cavernaPalco.classList.add("saindo");
+        cavernaPalco.classList.remove("entrando");
+      }
+      clarao.classList.remove("aceso", "clarao--caverna");
+    }, parado ? 0 : 480);
   }
 
   if (cavernaPalco) {
