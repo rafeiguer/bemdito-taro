@@ -16,6 +16,22 @@
 <meta property="og:image" content="https://tryvtuath.github.io/tryvtuath/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preload" as="image" href="assets/logo-tryv.webp" type="image/webp">
+<script>
+window.addEventListener("error", function(e) {
+  var t = e.target;
+  if (t && t.tagName === "IMG") {
+    var attr = t.getAttribute("src") || "";
+    if (!t.dataset.fallbackLocal && attr.indexOf("logo-tryv.webp") !== -1) {
+      t.dataset.fallbackLocal = "1";
+      t.src = "assets/logo.webp";
+    } else if (!t.dataset.fallbackRemoto && attr && !/^https?:|^data:/i.test(attr)) {
+      t.dataset.fallbackRemoto = "1";
+      t.src = "https://tryvtuath.github.io/tryvtuath/" + attr.replace(/^\.?\//, "").split("?")[0];
+    }
+  }
+}, true);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1359,7 +1375,7 @@ html, body { max-width: 100%; overflow-x: clip; }
       </defs>
       <path id="arco" d="M30 300 C 120 40, 480 40, 570 300"/>
     </svg>
-    <img class="abertura__logo" src="assets/logo-tryv.webp" alt="Tryv Tuath: everything is possible" width="516" height="678">
+    <img class="abertura__logo" src="assets/logo-tryv.webp" alt="Tryv Tuath: everything is possible" width="516" height="678" fetchpriority="high" decoding="sync" loading="eager" onerror="this.onerror=null;this.src='https://tryvtuath.github.io/tryvtuath/assets/logo-tryv.webp'">
     <p class="abertura__era" data-c="abertura.frase">Era uma vez uma pergunta…</p>
     <div class="abertura__pular"><button class="botao botao--vidro" type="button" data-c="abertura.botao">Entrar ✨</button></div>
   </div>
@@ -1711,7 +1727,8 @@ html, body { max-width: 100%; overflow-x: clip; }
   <div class="envelope" style="position:relative">
     <span class="gato-sentado" style="left:6%;top:-122px;width:62px" role="button" tabindex="0" aria-label="Gato preto"><img src="assets/gatos/sentado.webp" alt="" width="300" height="369" loading="lazy" style="transform:scaleX(-1)"></span>
     <p class="rodape__assinatura" data-c="rodape.frase">Mude-se e descobrirá novos outros para refletir-se.</p>
-    <p>© <span id="ano">2026</span> Bem Dito Tarot · Tryv Tuath</p>
+    <p translate="no">© 2016 Tryv Tuath®</p>
+    <p>Todos os direitos reservados. Tryv Tuath® - Every Thing is Possible | Tryv Tuath® (Marca registrada no INPI e músicas com direitos autorais reservados).</p>
     <p class="rodape__config" translate="no"><a href="configuracoes.html">Configurações</a></p>
   </div>
 </footer>
@@ -1770,9 +1787,9 @@ html, body { max-width: 100%; overflow-x: clip; }
       <canvas id="caverna-ondas" aria-hidden="true"></canvas>
       <div class="caverna-visor__arte" id="caverna-visor-arte">
         <div class="caverna-visor__orbe" id="caverna-orbe">♪</div>
-        <span class="caverna-visor__cat" id="caverna-cat-badge">Trilha da Tryv</span>
+        <span class="caverna-visor__cat" id="caverna-cat-badge">Afrobrasileiras (Umbanda / Candomblé) - Deusas</span>
         <h3 class="caverna-visor__nome" id="caverna-faixa-titulo">Selecione uma obra mística</h3>
-        <p class="caverna-visor__sub" id="caverna-faixa-sub">Áudios exclusivos, letras e cinema místico</p>
+        <p class="caverna-visor__sub" id="caverna-faixa-sub">Áudios exclusivos e letras da Tryv</p>
       </div>
       <video id="caverna-video" playsinline preload="metadata" controlsList="nodownload" oncontextmenu="return false;" hidden></video>
       <iframe id="caverna-yt" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen hidden title="Vídeo da Caverna de Eco"></iframe>
@@ -1808,15 +1825,14 @@ html, body { max-width: 100%; overflow-x: clip; }
 
     <div class="caverna-playlist">
       <div class="caverna-abas" role="tablist" aria-label="Categorias da Caverna de Eco">
-        <button class="caverna-aba" type="button" role="tab" data-cat-eco="musicas" aria-selected="true">✦ Trilha da Tryv (Músicas Exclusivas)</button>
-        <button class="caverna-aba" type="button" role="tab" data-cat-eco="clipes" aria-selected="false">🎬 Videoclipes Místicos</button>
-        <button class="caverna-aba" type="button" role="tab" data-cat-eco="tarot" aria-selected="false">🔮 Oráculos &amp; Tarot em Vídeo</button>
+        <button class="caverna-aba" type="button" role="tab" data-cat-eco="afrobrasileiras" aria-selected="true">Afrobrasileiras (Umbanda / Candomblé) - Deusas</button>
+        <button class="caverna-aba" type="button" role="tab" data-cat-eco="bruxas" aria-selected="false">Bruxas / Sagrado Feminino</button>
       </div>
       <div class="caverna-ordem-barra">
         <span class="caverna-ordem-dica" id="caverna-ordem-dica">✦ Toque numa faixa para ouvir ou organize a sequência:</span>
         <div class="caverna-ordem-acoes">
           <button class="caverna-btn-ordem" id="caverna-btn-ordenar" type="button" aria-pressed="false">⇅ Escolher Ordem</button>
-          <button class="caverna-btn-ordem" id="caverna-btn-padrao" type="button" hidden title="Voltar para a ordem original (Odô Iyá em 1º)">↺ Ordem Padrão</button>
+          <button class="caverna-btn-ordem" id="caverna-btn-padrao" type="button" hidden title="Voltar para a ordem original (Odô Iya em 1º)">↺ Ordem Padrão</button>
         </div>
       </div>
       <div class="caverna-lista" id="caverna-lista" role="tabpanel"></div>
@@ -1954,7 +1970,6 @@ function iniciar(C, fotosPrevia = {}) {
   const zap = msg => `https://wa.me/${WHATS}?text=${encodeURIComponent(msg)}`;
   aplicarConteudo();
   $$("[data-zap]").forEach(a => { a.href = zap(a.dataset.zap); });
-  $("#ano").textContent = new Date().getFullYear();
 
   /* ---------- Som mágico (desligado por padrão) ---------- */
   const botaoSom = $("#som");
@@ -3992,21 +4007,15 @@ function iniciar(C, fotosPrevia = {}) {
 
   /* =====================================================================
      FASE 4: A "CAVERNA DE ECO" & "TRILHA DA TRYV"
-     (Santuário Sonoro, Áudios Exclusivos, Letras das Músicas e Cinema Místico)
-     =====================================================================
-     COMO ADICIONAR E ESCOLHER A ORDEM DAS SUAS MÚSICAS, LETRAS E VÍDEOS:
-     1. Coloque seus arquivos de áudio (.mp3) na pasta: assets/audios/
-     2. Coloque seus arquivos de vídeo (.mp4 H.264) na pasta: assets/videos/
-     3. Para definir a ORDEM das músicas:
-        - Basta usar o campo `ordem: 1`, `ordem: 2`, `ordem: 3`... (ou mudar a posição do bloco na lista abaixo),
-        - OU clicar no botão "⇅ Escolher Ordem" diretamente dentro do player na Caverna de Eco e usar as setas ↑ e ↓!
+     (Santuário Sonoro, Áudios Exclusivos e Letras das Músicas)
      ===================================================================== */
   const acervoCavernaDeEco = [
+    /* Categoria 1: Afrobrasileiras (Umbanda / Candomblé) - Deusas */
     {
       ordem: 1,
-      titulo: "Odô Iyá",
-      subtitulo: "Trilha Exclusiva da Tryv · Canto às Águas Sagradas",
-      categoria: "musicas",
+      titulo: "Odô Iya",
+      subtitulo: "Afrobrasileiras (Umbanda / Candomblé) - Deusas · Canto às Águas Sagradas",
+      categoria: "afrobrasileiras",
       tipo: "audio",
       arquivo: "assets/audios/Odô Iyá.mp3",
       capa: "assets/logo-tryv-icone.webp",
@@ -4014,129 +4023,128 @@ function iniciar(C, fotosPrevia = {}) {
       letra: `Odô Iyá! Saudação às águas profundas e sagradas.
 Que as ondas de luz lavem os caminhos e tragam serenidade, proteção e encantamento ao seu espírito.
 
-✦ Tryv Tuath · Trilha Exclusiva da Caverna de Eco ✦`
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
     },
     {
       ordem: 2,
-      titulo: "Oxum Diva das Águas Claras",
-      subtitulo: "Trilha Exclusiva da Tryv · Doçura, Ouro e Cachoeiras",
-      categoria: "musicas",
-      tipo: "audio",
-      arquivo: "assets/audios/Oxum Diva das águas claras.mp3",
-      capa: "assets/tryv-natureza.webp",
-      duracao: "03:30",
-      letra: `Nas águas claras que refletem o ouro do sol,
-A força do amor, da beleza e da prosperidade corre suave como o rio sagrado.`
-    },
-    {
-      ordem: 3,
-      titulo: "Iansã Dona da Tempestade",
-      subtitulo: "Trilha Exclusiva da Tryv · Força dos Ventos e Raios",
-      categoria: "musicas",
+      titulo: "Iansã",
+      subtitulo: "Afrobrasileiras (Umbanda / Candomblé) - Deusas · Dona da Tempestade",
+      categoria: "afrobrasileiras",
       tipo: "audio",
       arquivo: "assets/audios/Iansã dona da tempestade.mp3",
       capa: "assets/tryv-fogo.webp",
       duracao: "02:05",
       letra: `Eparrey! Quando o vento sopra e o céu se ilumina,
-Iansã abre os caminhos, varre o que já passou e desperta a coragem de transformar.`
+Iansã abre os caminhos, varre o que já passou e desperta a coragem de transformar.
+
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
     },
     {
-      ordem: 4,
-      titulo: "Despertar da Bruxa",
-      subtitulo: "Trilha Exclusiva da Tryv · Magia Ancestral",
-      categoria: "musicas",
-      tipo: "audio",
-      arquivo: "assets/audios/Despertar da Bruxa.mp3",
-      capa: "assets/tryv-chapeu.webp",
-      duracao: "02:50",
-      letra: `Acorda a memória antiga guardada na floresta e nas estrelas.
-A intuição se acende como chama no altar.`
-    },
-    {
-      ordem: 5,
-      titulo: "A Dança dos Elementais",
-      subtitulo: "Trilha Exclusiva da Tryv · Terra, Água, Fogo e Ar",
-      categoria: "musicas",
-      tipo: "audio",
-      arquivo: "assets/audios/A Dança dos Elementais.mp3",
-      capa: "assets/tryv-natureza.webp",
-      duracao: "02:35",
-      letra: `Gnomos da terra, ondinas das águas, salamandras do fogo e silfos do ar
-Giram na roda encantada da natureza.`
-    },
-    {
-      ordem: 6,
-      titulo: "Magia do Amor",
-      subtitulo: "Trilha Exclusiva da Tryv · Encantamento e Afeto",
-      categoria: "musicas",
-      tipo: "audio",
-      arquivo: "assets/audios/Magia do Amor.mp3",
-      capa: "assets/tryv-pintura.webp",
-      duracao: "02:28",
-      letra: `O amor é o feitiço mais antigo do universo.
-Quando vibramos na frequência do coração, tudo floresce.`
-    },
-    {
-      ordem: 7,
-      titulo: "Magia em Mim",
-      subtitulo: "Trilha Exclusiva da Tryv · Poder Interior",
-      categoria: "musicas",
-      tipo: "audio",
-      arquivo: "assets/audios/magia em mim.mp3",
-      capa: "assets/tryv-segredo.webp",
-      duracao: "03:20",
-      letra: `Você é o próprio oráculo e o próprio templo.
-Reconheça a centelha divina e a magia que habitam em você.`
-    },
-    {
-      ordem: 8,
+      ordem: 3,
       titulo: "Gitana",
-      subtitulo: "Trilha Exclusiva da Tryv · Liberdade, Cartas e Estrelas",
-      categoria: "musicas",
+      subtitulo: "Afrobrasileiras (Umbanda / Candomblé) - Deusas · Liberdade, Cartas e Estrelas",
+      categoria: "afrobrasileiras",
       tipo: "audio",
       arquivo: "assets/audios/gitana.mp3",
       capa: "assets/tryv-fogo.webp",
       duracao: "02:30",
       letra: `Ao redor da fogueira sob a lua prateada,
-As cartas revelam os segredos da estrada e a dança da liberdade.`
+As cartas revelam os segredos da estrada e a dança da liberdade.
+
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
     },
     {
-      ordem: 9,
+      ordem: 4,
+      titulo: "Oxum",
+      subtitulo: "Afrobrasileiras (Umbanda / Candomblé) - Deusas · Diva das Águas Claras",
+      categoria: "afrobrasileiras",
+      tipo: "audio",
+      arquivo: "assets/audios/Oxum Diva das águas claras.mp3",
+      capa: "assets/tryv-natureza.webp",
+      duracao: "03:30",
+      letra: `Nas águas claras que refletem o ouro do sol,
+A força do amor, da beleza e da prosperidade corre suave como o rio sagrado.
+
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
+    },
+
+    /* Categoria 2: Bruxas / Sagrado Feminino */
+    {
+      ordem: 5,
+      titulo: "A Dança dos Elementais",
+      subtitulo: "Bruxas / Sagrado Feminino · Terra, Água, Fogo e Ar",
+      categoria: "bruxas",
+      tipo: "audio",
+      arquivo: "assets/audios/A Dança dos Elementais.mp3",
+      capa: "assets/tryv-natureza.webp",
+      duracao: "02:35",
+      letra: `Gnomos da terra, ondinas das águas, salamandras do fogo e silfos do ar
+Giram na roda encantada da natureza.
+
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
+    },
+    {
+      ordem: 6,
+      titulo: "Despertar da Bruxa",
+      subtitulo: "Bruxas / Sagrado Feminino · Magia Ancestral",
+      categoria: "bruxas",
+      tipo: "audio",
+      arquivo: "assets/audios/Despertar da Bruxa.mp3",
+      capa: "assets/tryv-chapeu.webp",
+      duracao: "02:50",
+      letra: `Acorda a memória antiga guardada na floresta e nas estrelas.
+A intuição se acende como chama no altar.
+
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
+    },
+    {
+      ordem: 7,
+      titulo: "Magia do Amor",
+      subtitulo: "Bruxas / Sagrado Feminino · Encantamento e Afeto",
+      categoria: "bruxas",
+      tipo: "audio",
+      arquivo: "assets/audios/Magia do Amor.mp3",
+      capa: "assets/tryv-pintura.webp",
+      duracao: "02:28",
+      letra: `O amor é o feitiço mais antigo do universo.
+Quando vibramos na frequência do coração, tudo floresce.
+
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
+    },
+    {
+      ordem: 8,
       titulo: "Ela",
-      subtitulo: "Trilha Exclusiva da Tryv · Essência Sagrada",
-      categoria: "musicas",
+      subtitulo: "Bruxas / Sagrado Feminino · Essência Sagrada",
+      categoria: "bruxas",
       tipo: "audio",
       arquivo: "assets/audios/Ela.mp3",
       capa: "assets/logo-tryv-icone.webp",
       duracao: "02:55",
       letra: `Todas essas mulheres alimentam a ideia de quem é essa essência.
-Um pulsar de ideias, estrelas e sentimentos.`
+Um pulsar de ideias, estrelas e sentimentos.
+
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
+    },
+    {
+      ordem: 9,
+      titulo: "Magia em Mim",
+      subtitulo: "Bruxas / Sagrado Feminino · Poder Interior",
+      categoria: "bruxas",
+      tipo: "audio",
+      arquivo: "assets/audios/magia em mim.mp3",
+      capa: "assets/tryv-segredo.webp",
+      duracao: "03:20",
+      letra: `Você é o próprio oráculo e o próprio templo.
+Reconheça a centelha divina e a magia que habitam em você.
+
+✦ Tryv Tuath® · Obra Musical com Direitos Autorais Reservados ✦`
     }
   ];
 
-  // Se houver vídeos adicionais cadastrados no conteudo.json (tryv.videos), integra automaticamente na aba Tarot
-  if (Array.isArray(C.tryv && C.tryv.videos)) {
-    C.tryv.videos.forEach((v, i) => {
-      if (!v || !v.url) return;
-      const ehYT = /youtu\.?be/.test(v.url);
-      acervoCavernaDeEco.push({
-        ordem: 100 + i,
-        titulo: v.titulo || "Vídeo da Tryv",
-        subtitulo: "Acervo Tryv Tuath",
-        categoria: "tarot",
-        tipo: ehYT ? "youtube" : "video",
-        arquivo: v.url,
-        capa: "assets/logo-tryv-icone.webp",
-        duracao: "Vídeo",
-        letra: v.descricao || ""
-      });
-    });
-  }
-
-  // Ordena inicialmente pelo campo `ordem` (mantendo "Odô Iyá" sempre como #1 por padrão)
+  // Ordena inicialmente pelo campo `ordem`
   acervoCavernaDeEco.sort((a, b) => (a.ordem ?? 999) - (b.ordem ?? 999));
   const ordemOriginalTitulos = acervoCavernaDeEco.map(x => x.titulo);
-  const CHAVE_ORDEM_ECO = "tryv-caverna-ordem-v2";
+  const CHAVE_ORDEM_ECO = "tryv-caverna-ordem-v3";
 
   function aplicarOrdemSalva() {
     try {
@@ -4152,41 +4160,6 @@ Um pulsar de ideias, estrelas e sentimentos.`
     } catch {}
   }
   aplicarOrdemSalva();
-
-  /* Gerador de áudio harmônico místico em memória (WAV 432Hz/528Hz) para demonstrações sem arquivo físico */
-  let urlAudioDemo = null;
-  function obterAudioDemo() {
-    if (urlAudioDemo) return urlAudioDemo;
-    const sr = 22050, seg = 36, total = sr * seg;
-    const buf = new ArrayBuffer(44 + total * 2), v = new DataView(buf);
-    const escStr = (off, s) => { for (let i = 0; i < s.length; i++) v.setUint8(off + i, s.charCodeAt(i)); };
-    escStr(0, "RIFF"); v.setUint32(4, 36 + total * 2, true); escStr(8, "WAVE");
-    escStr(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
-    v.setUint32(24, sr, true); v.setUint32(28, sr * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true);
-    escStr(36, "data"); v.setUint32(40, total * 2, true);
-    const acordes = [
-      [216, 324, 432, 648],
-      [172.8, 259.2, 432, 518.4],
-      [194.4, 291.6, 388.8, 583.2],
-      [216, 270, 324, 540]
-    ];
-    for (let i = 0; i < total; i++) {
-      const t = i / sr;
-      const idxAc = Math.floor(t / 9) % acordes.length;
-      const tAc = t % 9;
-      const envAc = Math.sin(Math.min(1, tAc / 1.8) * Math.PI * 0.5) * Math.sin(Math.min(1, (9 - tAc) / 1.8) * Math.PI * 0.5);
-      const [f1a, f2a, f3a, f4a] = acordes[idxAc];
-      const notaHarp = acordes[idxAc][Math.floor((t % 6) / 1.5)];
-      const tNota = t % 1.5;
-      const envNota = Math.exp(-tNota * 2.6) * Math.min(1, tNota * 35);
-      const pad = (Math.sin(6.28318 * f1a * t) * 0.32 + Math.sin(6.28318 * f2a * t) * 0.24 + Math.sin(6.28318 * f3a * t * (1 + 0.0015 * Math.sin(t * 2))) * 0.22 + Math.sin(6.28318 * f4a * t) * 0.12) * envAc;
-      const sinoEco = Math.sin(6.28318 * notaHarp * 2 * t) * 0.22 * envNota;
-      const amostra = Math.max(-0.95, Math.min(0.95, (pad + sinoEco) * 0.55));
-      v.setInt16(44 + i * 2, amostra * 32767, true);
-    }
-    urlAudioDemo = URL.createObjectURL(new Blob([buf], { type: "audio/wav" }));
-    return urlAudioDemo;
-  }
 
   /* Cena 8K Externa e Interna da Caverna de Eco (SVG hiper-detalhado com cristais bioluminescentes e espelho d'água) */
   function cenaCavernaFora() {
@@ -4288,15 +4261,15 @@ Um pulsar de ideias, estrelas e sentimentos.`
     spExtra.innerHTML = `<a class="botao botao--vidro" href="${PLAYLIST_SPOTIFY || PERFIL_SPOTIFY}" target="_blank" rel="noopener" style="font-size:.86rem">♪ Ouvir também a playlist pública da Tryv no Spotify</a>`;
   }
 
-  /* Estado e Player Híbrido da Caverna de Eco */
+  /* Estado e Player da Caverna de Eco */
   let naCaverna = false, entrandoCaverna = false;
-  let catEcoAtual = "musicas";
+  let catEcoAtual = "afrobrasileiras";
   let indiceEcoAtual = 0;
   let tocandoEco = false;
   let modoOrdenarEco = false;
-  let demoVideoTimer = null;
-  const audioEco = new Audio();
-  audioEco.preload = "metadata";
+  const audioPlayer = new Audio();
+  audioPlayer.preload = "metadata";
+  const audioEco = audioPlayer;
   const videoEco = $("#caverna-video");
   const ytEco = $("#caverna-yt");
   const visorEco = $("#caverna-visor"), visorArte = $("#caverna-visor-arte"), orbeEco = $("#caverna-orbe");
@@ -4315,9 +4288,8 @@ Um pulsar de ideias, estrelas e sentimentos.`
   };
 
   const ROTULOS_CAT = {
-    musicas: "Trilha da Tryv · Música Exclusiva",
-    clipes: "Videoclipe Místico",
-    tarot: "Oráculo & Tarot em Vídeo"
+    afrobrasileiras: "Afrobrasileiras (Umbanda / Candomblé) - Deusas",
+    bruxas: "Bruxas / Sagrado Feminino"
   };
 
   function itensDaCategoria(cat) {
@@ -4397,10 +4369,9 @@ Um pulsar de ideias, estrelas e sentimentos.`
   }
 
   function pararMidiaEco() {
-    audioEco.pause();
+    audioPlayer.pause();
     if (videoEco) { videoEco.pause(); videoEco.removeAttribute("src"); videoEco.load(); videoEco.hidden = true; }
     if (ytEco) { ytEco.src = ""; ytEco.hidden = true; }
-    if (demoVideoTimer) { clearInterval(demoVideoTimer); demoVideoTimer = null; }
     tocandoEco = false;
     atualizarUIPlay();
   }
@@ -4455,13 +4426,7 @@ Um pulsar de ideias, estrelas e sentimentos.`
       orbeEco.innerHTML = item.capa ? `<img src="${foto(item.capa)}" alt="">` : "🎬";
       videoEco.src = urlArquivo;
       videoEco.volume = +volEco.value;
-      videoEco.onerror = () => {
-        videoEco.hidden = true;
-        visorArte.hidden = false;
-        audioEco.src = obterAudioDemo();
-        audioEco.volume = +volEco.value;
-        if (autoPlay) audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
-      };
+      videoEco.load();
       videoEco.onloadeddata = () => {
         videoEco.hidden = false;
         visorArte.hidden = true;
@@ -4472,16 +4437,23 @@ Um pulsar de ideias, estrelas e sentimentos.`
       // Modo Áudio Exclusivo + Ondas Sonoras na Água
       visorArte.hidden = false;
       orbeEco.innerHTML = item.capa ? `<img src="${foto(item.capa)}" alt="">` : "♪";
-      audioEco.src = urlArquivo;
-      audioEco.volume = +volEco.value;
-      audioEco.onerror = () => {
-        if (audioEco.src !== obterAudioDemo()) {
-          audioEco.src = obterAudioDemo();
-          if (autoPlay) audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+      delete audioPlayer.dataset.tentouRemoto;
+      audioPlayer.onerror = () => {
+        if (!audioPlayer.dataset.tentouRemoto) {
+          audioPlayer.dataset.tentouRemoto = "1";
+          audioPlayer.src = "https://tryvtuath.github.io/tryvtuath/" + urlArquivo;
+          audioPlayer.load();
+          if (autoPlay) {
+            audioPlayer.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+          }
         }
       };
+      audioPlayer.currentTime = 0;
+      audioPlayer.src = urlArquivo;
+      audioPlayer.volume = +volEco.value;
+      audioPlayer.load();
       if (autoPlay) {
-        audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
+        audioPlayer.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
       }
     }
   }
@@ -4489,7 +4461,7 @@ Um pulsar de ideias, estrelas e sentimentos.`
   function midiaAtiva() {
     const item = acervoCavernaDeEco[indiceEcoAtual];
     if (item && item.tipo === "video" && !videoEco.hidden) return videoEco;
-    return audioEco;
+    return audioPlayer;
   }
 
   function alternarPlayEco() {
@@ -4498,10 +4470,11 @@ Um pulsar de ideias, estrelas e sentimentos.`
     if (item.tipo === "youtube") return;
     const m = midiaAtiva();
     if (m.paused) {
-      m.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {
-        audioEco.src = obterAudioDemo();
-        audioEco.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
-      });
+      if (!m.src) {
+        m.src = encodeURI(item.arquivo);
+        m.load();
+      }
+      m.play().then(() => { tocandoEco = true; atualizarUIPlay(); }).catch(() => {});
     } else {
       m.pause();
       tocandoEco = false;
@@ -4525,13 +4498,13 @@ Um pulsar de ideias, estrelas e sentimentos.`
     carregarFaixaEco(ant.idx, tocandoEco);
   }
 
-  [audioEco, videoEco].forEach(m => {
+  [audioPlayer, videoEco].forEach(m => {
     if (!m) return;
     m.addEventListener("loadedmetadata", () => {
       if (m === midiaAtiva() && isFinite(m.duration)) {
         const fmt = fmtTempo(m.duration);
         tTotalEco.textContent = fmt;
-        if (acervoCavernaDeEco[indiceEcoAtual] && m.src !== obterAudioDemo()) {
+        if (acervoCavernaDeEco[indiceEcoAtual]) {
           acervoCavernaDeEco[indiceEcoAtual].duracao = fmt;
           renderizarListaEco();
         }
@@ -4557,15 +4530,15 @@ Um pulsar de ideias, estrelas e sentimentos.`
   });
   volEco.addEventListener("input", () => {
     const v = +volEco.value;
-    audioEco.volume = v;
+    audioPlayer.volume = v;
     if (videoEco) videoEco.volume = v;
     btnMudoEco.textContent = v === 0 ? "🔇" : v < 0.45 ? "🔉" : "🔊";
   });
   btnMudoEco.addEventListener("click", () => {
-    const mudo = audioEco.volume > 0;
+    const mudo = audioPlayer.volume > 0;
     const novo = mudo ? 0 : 0.85;
     volEco.value = novo;
-    audioEco.volume = novo;
+    audioPlayer.volume = novo;
     if (videoEco) videoEco.volume = novo;
     btnMudoEco.textContent = novo === 0 ? "🔇" : "🔊";
   });
